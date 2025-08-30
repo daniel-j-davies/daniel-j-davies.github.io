@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Academic resources for medieval research, manuscript studies, and academic writing">
+    <meta name="keywords" content="academic resources, medieval research, manuscript studies, academic writing, research tools">
+    
+    <title>Resources - Daniel Davies</title>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-900: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--slate-700);
+            background-color: white;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            background: white;
+            border-bottom: 1px solid var(--slate-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-700);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--slate-700);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--slate-200);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+        /* Resources page styles */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 1rem;
+        }
+
+        .page-description {
+            font-size: 1.125rem;
+            color: var(--slate-600);
+            line-height: 1.7;
+        }
+
+        .resources-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .resource-card {
+            border: 1px solid var(--slate-200);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            background: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .resource-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            border-color: var(--primary-blue);
+        }
+
+        .resource-card-icon {
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--slate-100);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .resource-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 1rem;
+        }
+
+        .resource-card-description {
+            color: var(--slate-600);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-card-link {
+            color: var(--primary-blue);
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .resource-card:hover .resource-card-link {
+            color: var(--primary-blue-hover);
+        }
+
+        .arrow-icon {
+            width: 1rem;
+            height: 1rem;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover .arrow-icon {
+            transform: translateX(0.25rem);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--slate-50);
+            border-top: 1px solid var(--slate-200);
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            color: var(--slate-600);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">Daniel Davies</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="bio.html">Bio</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="teaching.html">Teaching</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="resources.html" class="active">Resources</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle navigation menu">
+                ☰
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">Resources</h1>
+            <p class="page-description">
+                A curated collection of resources for medieval research, manuscript studies, and academic writing. These resources have been gathered to support students and scholars working in related fields.
+            </p>
+        </header>
+
+        <!-- Resources Grid -->
+        <div class="resources-grid">
+            <a href="manuscript-research.html" class="resource-card">
+                <div class="resource-card-icon">📜</div>
+                <h2 class="resource-card-title">Manuscript Research</h2>
+                <p class="resource-card-description">
+                    Tools and databases for manuscript research, paleography resources, and digital manuscript collections. Essential resources for scholars working with medieval manuscripts and historical documents.
+                </p>
+                <span class="resource-card-link">
+                    Explore manuscript resources
+                    <svg class="arrow-icon" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </span>
+            </a>
+
+            <a href="academic-writing.html" class="resource-card">
+                <div class="resource-card-icon">✍️</div>
+                <h2 class="resource-card-title">Academic Writing</h2>
+                <p class="resource-card-description">
+                    Strategies, tools, and resources for successful academic writing. From developing writing routines to publishing your first book, these resources support scholars at every career stage.
+                </p>
+                <span class="resource-card-link">
+                    Explore writing resources
+                    <svg class="arrow-icon" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </span>
+            </a>
+
+            <a href="medieval-research.html" class="resource-card">
+                <div class="resource-card-icon">🏰</div>
+                <h2 class="resource-card-title">Medieval Research</h2>
+                <p class="resource-card-description">
+                    Comprehensive collection of resources for medieval literature research, including author-specific resources, digital texts, and pedagogical materials for teaching medieval studies.
+                </p>
+                <span class="resource-card-link">
+                    Explore medieval resources
+                    <svg class="arrow-icon" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Daniel Davies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuButton.textContent = '✕';
+                    mobileMenuButton.setAttribute('aria-label', 'Close navigation menu');
+                } else {
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.nav-content')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

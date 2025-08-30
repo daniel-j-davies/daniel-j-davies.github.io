@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daniel Davies - Curriculum Vitae and Contact Information">
+    <meta name="keywords" content="Daniel Davies, CV, curriculum vitae, contact, University of Houston">
+    
+    <title>CV - Daniel Davies</title>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-900: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--slate-700);
+            background-color: white;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            background: white;
+            border-bottom: 1px solid var(--slate-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-700);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--slate-700);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--slate-200);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+        /* CV page styles */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 2rem;
+        }
+
+        .cv-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        @media (min-width: 480px) {
+            .cv-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .cv-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--slate-300);
+            border-radius: 0.5rem;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--slate-700);
+            background-color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cv-button:hover {
+            background-color: var(--slate-50);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .cv-button:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        .button-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            fill: currentColor;
+        }
+
+        /* CV instructions */
+        .cv-instructions {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--slate-50);
+            border-radius: 0.75rem;
+            text-align: left;
+        }
+
+        .instructions-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 1rem;
+        }
+
+        .instructions-text {
+            color: var(--slate-600);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--slate-50);
+            border-top: 1px solid var(--slate-200);
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            color: var(--slate-600);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">Daniel Davies</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="bio.html">Bio</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="teaching.html">Teaching</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="cv.html" class="active">CV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle navigation menu">
+                ☰
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="page-title">Curriculum Vitae</h1>
+        
+        <div class="cv-buttons">
+            <a href="davies_cv.pdf" class="cv-button" target="_blank">
+                <svg class="button-icon" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+                </svg>
+                View CV (PDF)
+            </a>
+            
+            <a href="davies_cv.pdf" download="Daniel_Davies_CV.pdf" class="cv-button">
+                <svg class="button-icon" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+                Download CV
+            </a>
+        </div>
+
+        <!-- Instructions for updating CV -->
+        <div class="cv-instructions">
+            <h2 class="instructions-title">Note for Website Updates</h2>
+            <p class="instructions-text">
+                <strong>To update your CV:</strong> Save your updated CV as "davies_cv.pdf" and upload it to your website folder, replacing the existing file. The buttons above will automatically link to the new version. Keep the filename exactly the same to ensure the links continue working properly.
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Daniel Davies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuButton.textContent = '✕';
+                    mobileMenuButton.setAttribute('aria-label', 'Close navigation menu');
+                } else {
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.nav-content')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

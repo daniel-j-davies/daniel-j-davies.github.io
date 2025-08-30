@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daniel Davies - Research in late-medieval literature, siege warfare, manuscript studies, and digital humanities">
+    <meta name="keywords" content="Daniel Davies, medieval research, siege warfare, manuscript studies, digital humanities, Chaucer">
+    
+    <title>Research - Daniel Davies</title>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-900: #0f172a;
+            --green-100: #dcfce7;
+            --green-800: #166534;
+            --amber-100: #fef3c7;
+            --amber-800: #92400e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--slate-700);
+            background-color: white;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            background: white;
+            border-bottom: 1px solid var(--slate-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-700);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--slate-700);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--slate-200);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+        /* Research page styles */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .page-header {
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 1rem;
+        }
+
+        .page-description {
+            font-size: 1.125rem;
+            color: var(--slate-600);
+            line-height: 1.7;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--slate-200);
+        }
+
+        /* Research project cards */
+        .research-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .research-grid {
+                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            }
+        }
+
+        .research-card {
+            border: 1px solid var(--slate-200);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            background: white;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .research-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .research-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .research-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--slate-900);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .status-current {
+            background-color: var(--green-100);
+            color: var(--green-800);
+        }
+
+        .status-upcoming {
+            background-color: var(--amber-100);
+            color: var(--amber-800);
+        }
+
+        .status-completed {
+            background-color: var(--slate-100);
+            color: var(--slate-700);
+        }
+
+        .research-card-description {
+            color: var(--slate-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .research-details {
+            list-style: none;
+            color: var(--slate-600);
+            font-size: 0.9rem;
+        }
+
+        .research-details li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .research-details li:before {
+            content: '•';
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Book project section */
+        .book-project {
+            background: linear-gradient(135deg, var(--slate-50) 0%, white 100%);
+            border: 1px solid var(--slate-200);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .book-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .book-description {
+            font-size: 1.1rem;
+            color: var(--slate-700);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-status {
+            font-size: 0.9rem;
+            color: var(--slate-600);
+            font-weight: 500;
+        }
+
+        /* Research interests section */
+        .interests-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .interest-item {
+            padding: 1.5rem;
+            background: var(--slate-50);
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .interest-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .interest-description {
+            color: var(--slate-600);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--slate-50);
+            border-top: 1px solid var(--slate-200);
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            color: var(--slate-600);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">Daniel Davies</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="bio.html">Bio</a></li>
+                <li><a href="research.html" class="active">Research</a></li>
+                <li><a href="teaching.html">Teaching</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle navigation menu">
+                ☰
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1 class="page-title">Research</h1>
+            <p class="page-description">
+                My research focuses on late-medieval literary and historical writing, with particular emphasis on the intersections of warfare, poetics, and manuscript culture. I am especially interested in how medieval texts engage with contemporary political and military realities.
+            </p>
+        </header>
+
+        <!-- Current Book Project -->
+        <section class="section">
+            <div class="book-project">
+                <h2 class="book-title">Under Siege: Perpetual Warfare and Late Medieval Literature</h2>
+                <p class="book-description">
+                    This book examines how late medieval English literature responded to and shaped contemporary understandings of siege warfare. Through close readings of texts by Chaucer, Langland, and their contemporaries, I argue that siege warfare provided medieval authors with a powerful metaphorical framework for exploring questions of political authority, social order, and individual agency. The project traces how the experience of perpetual warfare during the Hundred Years War fundamentally altered literary representations of conflict, community, and belonging.
+                </p>
+                <p class="book-status">
+                    <strong>Status:</strong> Completing as 2024-25 Solmsen Fellow at the Institute for Research in the Humanities, University of Wisconsin-Madison
+                </p>
+            </div>
+        </section>
+
+        <!-- Current Research Projects -->
+        <section class="section">
+            <h2 class="section-title">Current Projects</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title">Digital Manuscript Studies</h3>
+                        <span class="status-badge status-current">In Progress</span>
+                    </div>
+                    <p class="research-card-description">
+                        Developing new computational methods for analyzing medieval manuscript marginalia and reader annotations, with particular focus on political and military commentary.
+                    </p>
+                    <ul class="research-details">
+                        <li>Partnership with digital humanities scholars at UH</li>
+                        <li>Focus on 14th-century historical manuscripts</li>
+                        <li>Machine learning approaches to paleographic analysis</li>
+                    </ul>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title">Medieval Reading Practices</h3>
+                        <span class="status-badge status-upcoming">Upcoming</span>
+                    </div>
+                    <p class="research-card-description">
+                        Investigating reading practices in 14th century monasteries through digital analysis of annotated manuscripts and library catalogues.
+                    </p>
+                    <ul class="research-details">
+                        <li>Collaboration with medieval historians</li>
+                        <li>Database of monastic library holdings</li>
+                        <li>Network analysis of textual circulation</li>
+                    </ul>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title">Scottish-English Literary Networks</h3>
+                        <span class="status-badge status-current">In Progress</span>
+                    </div>
+                    <p class="research-card-description">
+                        Examining cross-border literary exchanges during the Wars of Scottish Independence and their influence on later medieval writing.
+                    </p>
+                    <ul class="research-details">
+                        <li>Archival research in Scottish repositories</li>
+                        <li>Collaboration with University of Edinburgh</li>
+                        <li>Focus on historical chronicles and poetry</li>
+                    </ul>
+                </div>
+
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title">Chaucer and Contemporary Politics</h3>
+                        <span class="status-badge status-completed">Recently Completed</span>
+                    </div>
+                    <p class="research-card-description">
+                        Analysis of how Chaucer's poetry engages with the political and military events of his time, particularly the Hundred Years War.
+                    </p>
+                    <ul class="research-details">
+                        <li>Published in <em>New Medieval Literatures</em></li>
+                        <li>Focus on <em>Troilus and Criseyde</em></li>
+                        <li>Historical contextualization approach</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Interests -->
+        <section class="section">
+            <h2 class="section-title">Research Interests</h2>
+            <div class="interests-grid">
+                <div class="interest-item">
+                    <h3 class="interest-title">Medieval Literature & History</h3>
+                    <p class="interest-description">
+                        Intersection of literary and historical writing in late medieval England, with emphasis on chronicles, poetry, and historical narratives.
+                    </p>
+                </div>
+                
+                <div class="interest-item">
+                    <h3 class="interest-title">Warfare & Representation</h3>
+                    <p class="interest-description">
+                        How medieval literature represents warfare, siege tactics, and military culture, particularly during the Hundred Years War period.
+                    </p>
+                </div>
+                
+                <div class="interest-item">
+                    <h3 class="interest-title">Manuscript Studies</h3>
+                    <p class="interest-description">
+                        Material culture of medieval books, scribal practices, and reader responses as evidenced in manuscript marginalia and annotations.
+                    </p>
+                </div>
+                
+                <div class="interest-item">
+                    <h3 class="interest-title">Digital Humanities</h3>
+                    <p class="interest-description">
+                        Computational approaches to medieval studies, including digital paleography, network analysis, and text mining of historical corpora.
+                    </p>
+                </div>
+                
+                <div class="interest-item">
+                    <h3 class="interest-title">Classical Reception</h3>
+                    <p class="interest-description">
+                        How medieval authors engaged with classical texts and traditions, particularly in the context of historical writing and political thought.
+                    </p>
+                </div>
+                
+                <div class="interest-item">
+                    <h3 class="interest-title">Medieval Scotland</h3>
+                    <p class="interest-description">
+                        Scottish literary and historical writing, with particular interest in cross-border cultural exchanges and national identity formation.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Daniel Davies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuButton.textContent = '✕';
+                    mobileMenuButton.setAttribute('aria-label', 'Close navigation menu');
+                } else {
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.nav-content')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daniel Davies - Biography and academic background, Assistant Professor of English at University of Houston">
+    <meta name="keywords" content="Daniel Davies, biography, medieval literature, English professor, academic background">
+    
+    <title>Bio - Daniel Davies</title>
+    
+    <!-- CSS Styles -->
+    <style>
+        /* Import shared styles from homepage */
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-900: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--slate-700);
+            background-color: white;
+        }
+
+        /* Navigation styles - shared across all pages */
+        .nav-container {
+            background: white;
+            border-bottom: 1px solid var(--slate-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-700);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--slate-700);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--slate-200);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+        /* Bio page specific styles */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .bio-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .bio-content {
+                flex-direction: row;
+                gap: 3rem;
+            }
+        }
+
+        .bio-image-section {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .bio-image {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .bio-text-section {
+            flex: 2;
+        }
+
+        .bio-paragraph {
+            font-size: 1.125rem;
+            color: var(--slate-700);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .bio-paragraph:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Link styles */
+        .bio-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .bio-link:hover {
+            color: var(--primary-blue-hover);
+            text-decoration: underline;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        /* Footer styles */
+        .footer {
+            background-color: var(--slate-50);
+            border-top: 1px solid var(--slate-200);
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            color: var(--slate-600);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">Daniel Davies</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="bio.html" class="active">Bio</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="teaching.html">Teaching</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle navigation menu">
+                ☰
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="bio-content">
+            <!-- Profile Image Section -->
+            <div class="bio-image-section">
+                <!-- 
+                    IMPORTANT: You'll need to add your profile image to the website folder
+                    Save your profile photo as "dd-profile.jpg" in the same folder as this HTML file
+                    The image should be high quality, professional, and ideally square or portrait orientation
+                    Recommended size: 800x800 pixels or larger for crisp display on all devices
+                -->
+                <img
+                    src="dd-profile.jpg"
+                    alt="Daniel Davies - Assistant Professor of English"
+                    class="bio-image"
+                    loading="lazy"
+                />
+            </div>
+            
+            <!-- Biography Text Section -->
+            <div class="bio-text-section">
+                <p class="bio-paragraph">
+                    Daniel Davies is an Assistant Professor of English at the University of Houston, where he specializes in late-medieval literary and historical writing, with particular emphasis on poetry, poetics, and the cultural afterlives of medieval literature.
+                </p>
+                
+                <p class="bio-paragraph">
+                    As a 2024-25 Solmsen Fellow at the Institute for Research in the Humanities (University of Wisconsin-Madison), he is completing his first book, <span class="italic">Under Siege: Perpetual Warfare and Late Medieval Literature</span>. His research has been supported by the National Endowment for the Humanities, the Huntington Library, Folger Shakespeare Library, and the Strathmatine Trust.
+                </p>
+                
+                <p class="bio-paragraph">
+                    Daniel recently co-edited <a href="https://www.manchesterhive.com/display/9781526142153/9781526142153.xml" class="bio-link">Literatures of the Hundred Years War</a> with R.D. Perry, available open access from Manchester University Press. His scholarship on medieval literary history, siege warfare, and manuscript studies appears in <span class="italic">Modern Language Quarterly</span>, <span class="italic">The Chaucer Review</span>, <span class="italic">New Medieval Literatures</span>. His public-facing writing features in <span class="italic">The Millions</span>, <span class="italic">Full Stop</span>, <span class="italic">Avidly</span>, <span class="italic">Public Seminar</span>, and the Folger Shakespeare Library's <span class="italic">Collation</span> blog.
+                </p>
+                
+                <p class="bio-paragraph">
+                    Originally from Manchester, England, Daniel studied in Edinburgh and Berlin before receiving a Thouron Award to study in the United States. He completed his Ph.D. in English at the University of Pennsylvania in 2021.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Daniel Davies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Shared navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuButton.textContent = '✕';
+                    mobileMenuButton.setAttribute('aria-label', 'Close navigation menu');
+                } else {
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.nav-content')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

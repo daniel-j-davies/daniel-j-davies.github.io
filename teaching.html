@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daniel Davies - Teaching courses in medieval literature, Chaucer, war literature, and historical writing">
+    <meta name="keywords" content="Daniel Davies, teaching, medieval literature, Chaucer, English courses, University of Houston">
+    
+    <title>Teaching - Daniel Davies</title>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-900: #0f172a;
+            --green-100: #dcfce7;
+            --green-800: #166534;
+            --blue-100: #dbeafe;
+            --blue-800: #1e40af;
+            --purple-100: #ede9fe;
+            --purple-800: #5b21b6;
+            --amber-100: #fef3c7;
+            --amber-800: #92400e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--slate-700);
+            background-color: white;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            background: white;
+            border-bottom: 1px solid var(--slate-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-700);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--slate-700);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--slate-200);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+        /* Teaching page styles */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .page-intro {
+            margin-bottom: 3rem;
+        }
+
+        .intro-text {
+            font-size: 1.125rem;
+            color: var(--slate-600);
+            line-height: 1.7;
+        }
+
+        /* Course cards */
+        .course-card {
+            border: 1px solid var(--slate-200);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .course-header {
+            margin-bottom: 1rem;
+        }
+
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 0.5rem;
+        }
+
+        .course-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .category-graduate {
+            background-color: var(--blue-100);
+            color: var(--blue-800);
+        }
+
+        .category-senior-seminar {
+            background-color: var(--purple-100);
+            color: var(--purple-800);
+        }
+
+        .category-introduction {
+            background-color: var(--green-100);
+            color: var(--green-800);
+        }
+
+        .category-writing-seminar {
+            background-color: var(--amber-100);
+            color: var(--amber-800);
+        }
+
+        .course-description {
+            color: var(--slate-600);
+            line-height: 1.7;
+            margin-top: 1rem;
+        }
+
+        /* Teaching philosophy section */
+        .philosophy-section {
+            background: linear-gradient(135deg, var(--slate-50) 0%, white 100%);
+            border: 1px solid var(--slate-200);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .philosophy-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 1.5rem;
+        }
+
+        .philosophy-text {
+            font-size: 1.1rem;
+            color: var(--slate-700);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .philosophy-text:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Course level sections */
+        .level-section {
+            margin-bottom: 3rem;
+        }
+
+        .level-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--slate-200);
+        }
+
+        /* Italic text for book/course titles */
+        .italic {
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--slate-50);
+            border-top: 1px solid var(--slate-200);
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            color: var(--slate-600);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">Daniel Davies</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="bio.html">Bio</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="teaching.html" class="active">Teaching</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle navigation menu">
+                ☰
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Page Introduction -->
+        <div class="page-intro">
+            <p class="intro-text">
+                I teach courses focusing on late-medieval literature, classical reception, war literature, and the intersection of historical and literary studies. My teaching emphasizes close reading, historical contextualization, and the development of critical writing skills.
+            </p>
+        </div>
+
+        <!-- Teaching Philosophy -->
+        <section class="philosophy-section">
+            <h2 class="philosophy-title">Teaching Philosophy</h2>
+            <p class="philosophy-text">
+                My approach to teaching medieval literature is grounded in the belief that these texts speak powerfully to contemporary concerns about community, authority, violence, and belonging. Rather than treating medieval texts as historical curiosities, I encourage students to engage with them as living documents that continue to shape our understanding of literature, politics, and human experience.
+            </p>
+            <p class="philosophy-text">
+                In my courses, students develop skills in close reading, historical contextualization, and critical analysis while exploring how medieval authors grappled with questions that remain urgent today. I emphasize the importance of understanding texts within their historical contexts while also encouraging students to make connections between medieval and contemporary literary and cultural practices.
+            </p>
+        </section>
+
+        <!-- Graduate Courses -->
+        <section class="level-section">
+            <h2 class="level-title">Graduate Courses</h2>
+            
+            <div class="course-card">
+                <div class="course-header">
+                    <h3 class="course-title">Postclassicisms</h3>
+                    <span class="course-category category-graduate">Graduate</span>
+                </div>
+                <p class="course-description">
+                    This course explores the history of poetry and poetics through the lens of reception. Specifically, we examine how ideas about poetry rooted in Latin antiquity have been taken up, adapted, and transformed by postclassical authors. Rather than tracing the history of Classical Reception, we will instead pursue itineraries along different routes of reception. Our major terrain will be the European Middle Ages, a period spanning a millennium when ideas about poetry that we take for granted today—the relationship of form to content, the capacity to write poetry in the vernacular, the transmission of meaning beyond the surface—emerged from an intense dialogue with antiquity. Our central interest will be literary history: how ideas about literature change across time.
+                </p>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3 class="course-title">Chaucer</h3>
+                    <span class="course-category category-graduate">Graduate</span>
+                </div>
+                <p class="course-description">
+                    Geoffrey Chaucer has been known as the 'father of English poetry' since shortly after his death over six hundred years ago. In this class we will put pressure on all the words in that grandiose claim: what does it mean for a literary tradition to have a 'father'? At a time when England was a trilingual nation — French was the language of the aristocracy and Latin the language of learning; both were far more literary languages than English — what exactly did Chaucer risk by choosing English as the language for his poetry? Finally, in addition to his poetry, Chaucer also translated philosophy and even wrote a scientific treatise on astronomy. Why, then, does literary history think of him as only a poet? We will answer these questions by reading Chaucer's work in a variety of historical and literary contexts.
+                </p>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3 class="course-title">Premodern Poetics</h3>
+                    <span class="course-category category-graduate">Graduate</span>
+                </div>
+                <p class="course-description">
+                    This course provides an overview of the traditions, contexts, and debates that shaped poetic practice in medieval Europe. We will anchor our class in the pedagogical contexts that generated and transmitted philosophical, theological, and literary-critical ideas about poetry. This is a multilingual and transnational endeavor: much of our material was generated by intellectuals writing in Latin or Arabic before it entered vernacular culture. Our investigations encompass some of the earliest poetry in English, Biblical interpretation, Latin arts of poetry and compositional manuals, and late-medieval vernacular poetry, in particular the Middle English writings of Geoffrey Chaucer, William Langland, and Thomas Hoccleve. Questions common to all the literary traditions will be the social, ethical, and epistemological roles of poetry.
+                </p>
+            </div>
+        </section>
+
+        <!-- Undergraduate Courses -->
+        <section class="level-section">
+            <h2 class="level-title">Undergraduate Courses</h2>
+            
+            <div class="course-card">
+                <div class="course-header">
+                    <h3 class="course-title">War and Representation</h3>
+                    <span class="course-category category-senior-seminar">Senior Seminar</span>
+                </div>
+                <p class="course-description">
+                    War has been a subject of artistic creation for as long as humans have made art. While technologies of war and the media of representation have changed, however, the same questions recur: Can art capture what Carl von Clausewitz deemed the "fog of war," or is every attempt at representation doomed to fail? What are the ethics of representing war? Can—or should—war be beautiful? In this course, we explore the close rapport between war and art in a series of literary works, encompassing poetry, memoir, and novel, concerning wars from the twentieth- and twenty-first centuries. Questions we will discuss include: What ethical demands does art about war make on the reader? In what ways do the wars of the present look like the wars of the past? How do memories of past wars haunt the present? Is a world without war imaginable? Assignments for this course develop the scholarly skills of close reading and analytical reading in order to lay the foundation for a final research project.
+                </p>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3 class="course-title">The Fates and the Furious</h3>
+                    <span class="course-category category-introduction">Introduction to the Major</span>
+                </div>
+                <p class="course-description">
+                    This course introduces students to the reading skills, research methods, and contemporary scholarly debates necessary for flourishing within the English major and beyond. Students will develop and hone the skills of close reading and literary interpretation through individual reading, group discussion, and written assignments. The focus of our course will be on the Trojan War, a source of inspiration for poets and artists since at least the time of Homer's <span class="italic">Iliad</span> (c. 760 – 710 BC). The course begins with Homer's epic, the single most important source for representations of the war, before engaging with modern poetic responses to the poem: Alice Oswald's <span class="italic">Memorial</span> (2011) and Derek Walcott's <span class="italic">Omeros</span> (1990). We will investigate how exactly the story of Troy is written into the time and place of ancient Greece and modern St. Lucia, what strategies each author deploys to represent the valiance and horror of warfare, and how elements of Homer's story withdraw and return across time. The central questions we will ask include: how do you represent the unrepresentable violence of war? How do these strategies change over time? Why has the Trojan War remained such an enduring topic? Given the broad scope of our course, no previous experience with any of the material is required.
+                </p>
+            </div>
+
+            <div class="course-card">
+                <div class="course-header">
+                    <h3 class="course-title">Poetry and War</h3>
+                    <span class="course-category category-writing-seminar">Writing Seminar</span>
+                </div>
+                <p class="course-description">
+                    This course gives students advanced instruction and practice in writing and reading essays within an academic discipline and makes students aware of how disciplinary conventions and rhetorical situations call for different choices in language, structure, format, tone, citation, and documentation. Students conduct investigations into writing and reading conventions in their fields and receive advanced instruction in planning, drafting, arranging, revising, and editing discipline-specific essays. Through our focus on poetry and war, students develop expertise in close reading, historical contextualization, and academic argumentation while exploring how poets across different time periods have grappled with the representation of conflict.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Daniel Davies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuButton.textContent = '✕';
+                    mobileMenuButton.setAttribute('aria-label', 'Close navigation menu');
+                } else {
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.nav-content')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

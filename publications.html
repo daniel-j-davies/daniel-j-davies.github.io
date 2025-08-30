@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daniel Davies - Publications including books, journal articles, and public writing on medieval literature">
+    <meta name="keywords" content="Daniel Davies, publications, medieval literature, academic writing, Chaucer, manuscript studies">
+    
+    <title>Publications - Daniel Davies</title>
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-hover: #1d4ed8;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-900: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--slate-700);
+            background-color: white;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            background: white;
+            border-bottom: 1px solid var(--slate-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--slate-900);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-700);
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-blue);
+        }
+
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--slate-700);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                border-top: 1px solid var(--slate-200);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+        }
+
+        /* Publications page styles */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--slate-200);
+        }
+
+        /* Publication cards */
+        .publication-card {
+            border: 1px solid var(--slate-200);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .publication-card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .publication-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--slate-900);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .publication-details {
+            color: var(--slate-600);
+            margin-bottom: 1rem;
+        }
+
+        .publication-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .publication-link:hover {
+            color: var(--primary-blue-hover);
+            text-decoration: underline;
+        }
+
+        .external-link-icon {
+            width: 1rem;
+            height: 1rem;
+            fill: currentColor;
+        }
+
+        /* Special styling for books section */
+        .book-card {
+            background: linear-gradient(135deg, var(--slate-50) 0%, white 100%);
+            border: 2px solid var(--slate-200);
+            padding: 2rem;
+        }
+
+        .book-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .book-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* Italic text for journal and publication names */
+        .italic {
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--slate-50);
+            border-top: 1px solid var(--slate-200);
+            margin-top: 4rem;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+            color: var(--slate-600);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">Daniel Davies</a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="bio.html">Bio</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="teaching.html">Teaching</a></li>
+                <li><a href="publications.html" class="active">Publications</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="cv.html">CV</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle navigation menu">
+                ☰
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Books Section -->
+        <section class="section">
+            <h2 class="section-title">Books</h2>
+            
+            <div class="publication-card book-card">
+                <h3 class="publication-title book-title">Literatures of the Hundred Years War (co-edited with R.D. Perry)</h3>
+                <p class="publication-details">Manchester University Press, 2024</p>
+                <a href="https://www.manchesterhive.com/display/9781526142153/9781526142153.xml" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Journal Articles Section -->
+        <section class="section">
+            <h2 class="section-title">Journal Articles</h2>
+            
+            <div class="publication-card">
+                <h3 class="publication-title">Adam Pinkhurst Goes to Berwick? A Life-Record for Adam Pynkherst, Archer</h3>
+                <p class="publication-details"><span class="italic">The Chaucer Review</span>, 60.1 (2025)</p>
+                <a href="https://muse.jhu.edu/pub/2/article/949776" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">Medieval Scottish Historians and the Context for Britain</h3>
+                <p class="publication-details"><span class="italic">Modern Language Quarterly</span>, 82.2 (2021): 149-175</p>
+                <a href="https://read.dukeupress.edu/modern-language-quarterly/article-abstract/82/2/149/173517/Medieval-Scottish-Historians-and-the-Contest-for" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">'Wereyed on every side': Geoffrey Chaucer's Troilus and Criseyde and the Logic of Siege Warfare</h3>
+                <p class="publication-details"><span class="italic">New Medieval Literatures</span>, 20 (2020): 74-106</p>
+                <a href="https://www.english.upenn.edu/sites/www.english.upenn.edu/files/articles/Davies.%20Troilus%20and%20Siege.pdf" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Book Chapters Section -->
+        <section class="section">
+            <h2 class="section-title">Book Chapters</h2>
+            
+            <div class="publication-card">
+                <h3 class="publication-title">Scotland</h3>
+                <p class="publication-details"><span class="italic">A Global History of Medieval Travel Writing: European Perspectives</span>, ed. Sebastian Sobecki. Cambridge University Press, forthcoming</p>
+                <a href="https://globalmedievaltravel.com/" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Project</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">Alliance, Antagonism, and Resistance: Scotland in the Hundred Years War</h3>
+                <p class="publication-details"><span class="italic">Literatures of the Hundred Years War</span> (Manchester University Press, 2024), 78-101</p>
+                <a href="https://www.manchesterhive.com/display/9781526142153/9781526142153.00012.xml" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Notes and Encyclopedia Entries Section -->
+        <section class="section">
+            <h2 class="section-title">Notes and Encyclopedia Entries</h2>
+            
+            <div class="publication-card">
+                <h3 class="publication-title">The Hundred Years War</h3>
+                <p class="publication-details"><span class="italic">The Chaucer Encyclopedia</span>, gen. ed. Richard Newhauser (Wiley-Blackwell, 2023) 919-921</p>
+                <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781119086130" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">The Yeoman</h3>
+                <p class="publication-details"><span class="italic">The Chaucer Encyclopedia</span>, gen. ed. Richard Newhauser (Wiley-Blackwell, 2023), 1987-1989</p>
+                <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781119086130" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">A New Manuscript of Knyghthode and Bataile</h3>
+                <p class="publication-details"><span class="italic">Medium Ævum</span>, 87.1 (2018): 137-141</p>
+                <a href="https://www.english.upenn.edu/publications/2018/daniel-davies/new-manuscript-knyghthode-and-bataile" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Public Writing Section -->
+        <section class="section">
+            <h2 class="section-title">Public Writing</h2>
+            
+            <div class="publication-card">
+                <h3 class="publication-title">The Social Life of the Riverside Chaucer</h3>
+                <p class="publication-details"><span class="italic">Avidly</span></p>
+                <a href="https://avidly.lareviewofbooks.org/2021/06/23/the-social-life-of-the-riverside-chaucer/" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">Papers – Violaine Schwartz</h3>
+                <p class="publication-details"><span class="italic">Full Stop</span></p>
+                <a href="https://www.full-stop.net/2023/04/17/reviews/daniel-davies/papers-violaine-schwartz/" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">Reading the Past and Researching During COVID-19</h3>
+                <p class="publication-details"><span class="italic">The Collation: Research and Exploration at the Folger</span></p>
+                <a href="https://www.folger.edu/blogs/collation/reading-the-past/" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">The Inscrutable Landscape of 'A Line in The World'</h3>
+                <p class="publication-details"><span class="italic">The Millions</span></p>
+                <a href="https://themillions.com/2023/02/the-inscrutable-landscape-of-a-line-in-the-world.html" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">The Fishy Origins of Brexit</h3>
+                <p class="publication-details"><span class="italic">Public Seminar</span></p>
+                <a href="https://publicseminar.org/2021/01/the-fishy-origins-of-brexit/" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="publication-card">
+                <h3 class="publication-title">On Scottish Independence</h3>
+                <p class="publication-details"><span class="italic">n+1</span></p>
+                <a href="https://nplusonemag.com/online-only/online-only/on-scottish-independence/" class="publication-link" target="_blank" rel="noopener noreferrer">
+                    <span>View Publication</span>
+                    <svg class="external-link-icon" viewBox="0 0 20 20">
+                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Daniel Davies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuButton.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                if (navLinks.classList.contains('active')) {
+                    mobileMenuButton.textContent = '✕';
+                    mobileMenuButton.setAttribute('aria-label', 'Close navigation menu');
+                } else {
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.nav-content')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    navLinks.classList.remove('active');
+                    mobileMenuButton.textContent = '☰';
+                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
