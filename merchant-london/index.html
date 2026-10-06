@@ -79,6 +79,7 @@ main{flex:1 1 auto;min-height:0;position:relative}
 .pill.verify{border-color:var(--weld);color:var(--weld)}
 .pill.db{border-color:var(--accent);color:var(--accent)}
 .pill.approx{border-style:dashed}
+.pill.src{border-color:var(--c3);color:var(--ink-2)}
 .note{border:1px dashed var(--rule);border-radius:8px;padding:10px 12px;margin:14px 0;font-size:13.5px;color:var(--ink-2);background:var(--bg)}
 .note b{font-family:var(--f-serif)}
 
@@ -164,9 +165,22 @@ main{flex:1 1 auto;min-height:0;position:relative}
 
 /* ships view */
 #v-ships{grid-template-rows:minmax(0,1fr) auto}
-.shipstage{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);min-height:0;min-width:0}
-.seawrap,.poolwrap{position:relative;min-width:0;min-height:0;overflow:hidden}
-.seawrap{background:var(--sea);border-left:1px solid var(--rule)}
+.shipstage{position:relative;min-height:0;min-width:0;overflow:hidden}
+.seawrap{position:absolute;inset:0;overflow:hidden;background:var(--sea)}
+.poolwrap{position:absolute;left:12px;top:12px;z-index:480;width:min(36%,420px);aspect-ratio:2/1;overflow:hidden;border:1px solid var(--rule);border-radius:10px;box-shadow:0 2px 14px rgba(0,0,0,.25);background:var(--surface)}
+.poolwrap.big{width:min(70%,860px)}
+.poolwrap.off{width:auto;aspect-ratio:auto;height:34px}
+.poolwrap.off #pool,.poolwrap.off canvas,.poolwrap.off .stagecap span{display:none}
+.poolwrap .stagecap{left:6px;top:5px;font-size:13px;padding:1px 6px}
+.poolwrap .stagecap span{font-size:11.5px}
+.poolwrap:not(.big) .leaflet-control-zoom{display:none}
+.poolbtns{position:absolute;left:6px;bottom:6px;z-index:470;display:flex;gap:4px}
+.poolwrap.off .poolbtns{position:static;padding:4px 6px 0 0}
+.poolbtns button{border:1px solid var(--rule);background:var(--surface);color:var(--ink);border-radius:6px;height:24px;padding:0 8px;font-size:12px;cursor:pointer}
+.poolbtns button:hover{color:var(--accent);border-color:var(--accent)}
+.poolwrap.off .stagecap{position:static;display:inline-block;margin:5px 0 0 6px}
+.poolwrap.off{display:flex;align-items:flex-start;gap:6px}
+.seawrap .stagecap{left:auto;right:10px}
 #sea{cursor:grab;touch-action:none}
 #sea:active{cursor:grabbing}
 .zbtns{position:absolute;right:10px;bottom:10px;z-index:470;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
@@ -191,6 +205,19 @@ main{flex:1 1 auto;min-height:0;position:relative}
 .vlist button{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--rule);background:none;padding:6px 2px;cursor:pointer;font-size:13px;color:var(--ink)}
 .vlist button:hover{color:var(--accent)}
 .vlist .y{font-variant-numeric:tabular-nums;color:var(--ink-3);margin-right:6px}
+.vlist button.on{color:var(--accent);font-weight:600}
+.vlist i{font-family:var(--f-serif)}
+.duebtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.duebtns button{border:1px solid var(--rule);background:var(--surface);border-radius:999px;padding:3px 10px;font-size:13px;cursor:pointer;color:var(--ink)}
+.duebtns button:hover{border-color:var(--accent)}
+.plabel.dues{cursor:pointer;text-decoration:underline dotted}
+.excerpt{font-family:var(--f-serif);font-size:13.5px;line-height:1.45;border-left:3px solid var(--weld);padding:4px 0 4px 10px;margin:8px 0;color:var(--ink-2);max-height:230px;overflow:auto}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0}
+table.dues{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+table.dues td{border-top:1px solid var(--rule);padding:3px 4px;vertical-align:top}
+table.dues td.num{text-align:right;white-space:nowrap}
+.linkbtn{border:0;background:none;padding:0;color:var(--accent);cursor:pointer;font:inherit;text-align:left}
+.linkbtn:hover{text-decoration:underline}
 
 /* pages */
 .pagewrap{max-width:1180px;margin:0 auto}
@@ -232,8 +259,10 @@ details.tbl th:first-child,details.tbl td:first-child{text-align:left}
   .timectl{left:10px;right:10px;bottom:22px}
   .basectl{right:10px;top:10px}
   #v-ships{grid-template-rows:auto auto auto}
-  .shipstage{grid-template-columns:1fr;grid-template-rows:44vh 46vh}
-  .seawrap{border-left:0;border-top:1px solid var(--rule)}
+  .shipstage{height:66vh}
+  .poolwrap{width:min(58%,320px);left:8px;top:8px}
+  .poolwrap.big{width:calc(100% - 16px)}
+  .seawrap .stagecap{display:none}
   #v-ships .panel{grid-row:auto;grid-column:auto}
   .clockbar{grid-column:auto}
   .brand span{display:none}
@@ -309,12 +338,13 @@ details.tbl th:first-child,details.tbl td:first-child{text-align:left}
         <div class="poolwrap" id="poolwrap">
           <div id="pool" class="lmap"></div>
           <canvas id="poolCanvas" class="ovl"></canvas>
-          <div class="stagecap">The Pool of London <span>quays on the map of 1270–1300</span></div>
+          <div class="stagecap">The Pool of London <span>quays, map of 1270–1300</span></div>
+          <div class="poolbtns"><button id="poolBig" aria-pressed="false">Enlarge</button><button id="poolOff" aria-pressed="false" aria-label="Hide the Pool of London inset">Hide</button></div>
         </div>
         <div class="seawrap" id="seawrap">
           <svg id="sea" role="img" aria-label="Map of sea routes between London and its trading partners"></svg>
           <canvas id="seaCanvas" class="ovl"></canvas>
-          <div class="stagecap">The sea <span>drag to pan, scroll or pinch to zoom</span></div>
+          <div class="stagecap">Sea routes <span>drag to pan, scroll or pinch to zoom</span></div>
           <div class="zbtns"><button class="pm" data-z="in" aria-label="Zoom in">+</button><button class="pm" data-z="out" aria-label="Zoom out">−</button><button data-z="home">North Sea</button><button data-z="all">All routes</button></div>
         </div>
       </div>
@@ -331,13 +361,24 @@ details.tbl th:first-child,details.tbl td:first-child{text-align:left}
       </div>
       <aside class="panel" id="shipPanel">
         <h2>Ships of the port</h2>
-        <p class="hint">Each ship below is modelled from seasonal patterns described in the secondary literature, except the ones outlined in gold, which are vessels named in the records. Click a ship for details.</p>
+        <p class="hint">Each ship below is modelled from seasonal patterns described in the secondary literature, except the ones outlined in gold, which are vessels named in the records. Click a ship for details; choose an entry from the Patent Rolls or Letter-Books below to mark its quay and route.</p>
         <h3>Cargoes</h3>
         <div class="legend" id="tradeLegend"></div>
         <h3>In port now</h3>
         <div class="inport" id="inport"></div>
-        <h3>Vessels named in the records</h3>
+        <div id="shipDetail"></div>
+        <h3>Vessels named in the Medieval Londoners Database</h3>
         <div class="vlist" id="vlist"></div>
+        <h3>Ships in the Patent Rolls and Letter-Books</h3>
+        <p class="hint" id="docHint"></p>
+        <div class="vlist" id="doclist"></div>
+        <label class="layer"><input type="checkbox" id="docAll"><span>List every entry, 1300–1460</span><span></span></label>
+        <h3>Dues at the quays</h3>
+        <p class="hint">From the Liber Albus. Click an underlined quay on the Pool map, or choose one here.</p>
+        <div class="duebtns" id="dueBtns"></div>
+        <h3>Sailors’ wages from the Pool, 1375</h3>
+        <label class="layer"><input type="checkbox" id="wages"><span>Show on the sea map <small>(Inquisition of Queenborough, Black Book of the Admiralty)</small></span><span></span></label>
+        <div id="wageList" class="small"></div>
         <h3>Londoners going overseas</h3>
         <label class="layer"><input type="checkbox" id="rs"><span>Letters of protection and attorney, this year and the two either side <small>(Medieval Soldier database)</small></span><span></span></label>
         <label class="layer"><input type="checkbox" id="rsMerch" checked><span>Only those described by a merchant craft</span><span></span></label>
@@ -346,7 +387,6 @@ details.tbl th:first-child,details.tbl td:first-child{text-align:left}
         <label class="layer"><input type="checkbox" id="eiOrig"><span>Home towns recorded in England’s Immigrants <small>(mostly assessments of 1449–57)</small></span><span></span></label>
         <div class="rowc" style="margin-left:26px"><label for="eiMode">Show</label><select id="eiMode"><option value="merch">Merchants, clerks, factors and brokers</option><option value="all">All alien residents (towns with three or more entries)</option></select></div>
         <div id="eiOrigList" class="small"></div>
-        <div id="shipDetail"></div>
         <div class="note commentary" data-view="ships" hidden></div>
       </aside>
     </section>
@@ -356,10 +396,11 @@ details.tbl th:first-child,details.tbl td:first-child{text-align:left}
       <div class="pagewrap">
         <h1>Books and manuscripts</h1>
         <p class="lede">Books bequeathed, owned, compiled or destroyed by London merchants and their companies. Entries marked <span class="pill db">Database</span> paraphrase a Medieval Londoners record (person number linked)<span id="ledeVerify">; entries marked <span class="pill verify">To verify</span> are drawn from published scholarship and have not yet been checked against a source</span>.</p>
+        <p class="hint">Entries marked <span class="pill src">Checked in sources</span> have been compared with a printed edition; the page is given.</p>
         <div class="filters">
           <label>Craft <select id="fCraft"><option value="">All</option></select></label>
           <label>Kind <select id="fCat"><option value="">All</option></select></label>
-          <label>Basis <select id="fBasis"><option value="">All</option><option value="mld">Database</option><option value="gk">To verify</option></select></label>
+          <label>Basis <select id="fBasis"><option value="">All</option><option value="mld">Database</option><option value="src">Checked in sources</option><option value="gk">To verify</option></select></label>
           <input id="fText" type="search" placeholder="Search titles and names" aria-label="Search books">
           <span class="muted small" id="bookCount"></span>
         </div>
@@ -381,6 +422,7 @@ details.tbl th:first-child,details.tbl td:first-child{text-align:left}
           <div class="chartcard" id="ch-prot"></div>
           <div class="chartcard" id="ch-mm"></div>
           <div class="chartcard" id="ch-ei" style="grid-column:1/-1"></div>
+          <div class="chartcard" id="ch-cpr" style="grid-column:1/-1"></div>
         </div>
       </div>
     </section>
@@ -654,10 +696,11 @@ $('#feat').innerHTML=FEATURED.map(id=>{const i=P.findIndex(p=>p[0]===id);if(i<0)
 $('#feat').querySelectorAll('button').forEach(b=>b.onclick=()=>selectPerson(+b.dataset.i));
 
 /* books on map */
+function chkHTML(b){return b.chk?`<details class="small" style="margin-top:4px"><summary>Checked in the printed sources</summary><ul style="padding-left:18px;margin:4px 0">${b.chk.map(c=>`<li>${esc(c)}</li>`).join('')}</ul></details>`:''}
 function bookCard(b){
   return `<div class="card"><div class="lab">${esc(b.cat)} · <span class="num">${b.year}</span></div><h4>${esc(b.who)} <span class="muted small">${esc(b.craft)}</span></h4>
   <div class="bk" style="font-family:var(--f-serif);font-style:italic">${esc(b.books)}</div><div class="small" style="margin-top:4px">${esc(b.note)}</div>
-  <div class="small muted" style="margin-top:4px">${b.basis==='mld'?`<span class="pill db">Database</span> ${esc(b.src)}${b.pid?` · <a href="${MLD(b.pid)}" target="_blank" rel="noopener">MLD ${b.pid} ↗</a>`:''}`:'<span class="pill verify">To verify</span> added from general knowledge'}${b.flag?` · <span class="pill approx">${esc(b.flag)}</span>`:''}</div></div>`;
+  <div class="small muted" style="margin-top:4px">${b.basis==='mld'?`<span class="pill db">Database</span> ${esc(b.src)}${b.pid?` · <a href="${MLD(b.pid)}" target="_blank" rel="noopener">MLD ${b.pid} ↗</a>`:''}`:b.basis==='src'?`<span class="pill src">Checked in sources</span> ${esc(b.src)}`:'<span class="pill verify">To verify</span> added from general knowledge'}${b.flag?` · <span class="pill approx">${esc(b.flag)}</span>`:''}</div>${chkHTML(b)}</div>`;
 }
 function renderBooks(){
   groupsLayer.books.clearLayers(); if(!state.layers.books) return;
@@ -768,6 +811,12 @@ const ships=(function(){
   const UP=new Set(['steelyard','dowgate','vintry','threecranes','queenhithe','garlickhithe','timberhithe','pauls_wharf','heywharf']);
   const QNAME={billingsgate:'Billingsgate',woolwharf:'Wool Wharf',galleykey:'Galley Quay',stockfishwharf:'Stockfish Wharf',botolphwharf:'Botolph Wharf',fishwharf:'Fish Wharf',customhouse:'Custom House',tower:'Tower Wharf',stkath:'St Katharine’s',steelyard:'Steelyard',dowgate:'Dowgate',vintry:'Vintry',threecranes:'Three Cranes',queenhithe:'Queenhithe',garlickhithe:'Garlickhithe',timberhithe:'Timberhithe',pauls_wharf:'Paul’s Wharf',heywharf:'Heywharf'};
   const LONDON=[PORTS.london[1],PORTS.london[2]];
+  const DOCS=[...A.cpr.map(c=>({k:'cpr'+c.id,src:'cpr',year:c.year,ships:c.ships,types:c.types,cargo:c.cargo,ref:c.ref,page:c.page,quay:c.quay,port:c.port,text:c.text,toL:c.toL,fromL:c.fromL})),
+              ...A.lb.map(l=>({k:l.id,src:'lb',year:l.year,date:l.date,ships:l.ships,types:l.types,cargo:l.cargo,ref:l.ref,page:l.page,quay:l.quay,port:l.port,note:l.note,toL:l.toL,fromL:l.fromL}))].sort((a,b)=>a.year-b.year);
+  const docBy=Object.fromEntries(DOCS.map(d=>[d.k,d]));
+  const SRCNAME={cpr:'Calendar of Patent Rolls',lb:'Letter-Books of the City'};
+  let docSel=null;
+  const docTitle=d=>d.ships.length?d.ships.join('; '):'Ship not named';
   function pt(k){ if(PORTS[k]) return [PORTS[k][1],PORTS[k][2]]; return WP[k]; }
   function routeLL(port){ const ch=R.routes[port]||['gravesend','nore','foreland',port]; return [LONDON,...ch.map(pt)]; }
   function hav(a,b){const r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r;const h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)**2;return 12742*Math.asin(Math.sqrt(h))}
@@ -799,7 +848,8 @@ const ships=(function(){
   }
 
   /* sea map (d3, zoomable) */
-  const svg=d3.select('#sea'), seaCanvas=$('#seaCanvas'); let proj,W=0,H=0,routesProj={},zt=d3.zoomIdentity,zoomer=null,gWorld=null,gMarks=null,eiLayer=null,homeT=null,lastWH='';
+  const svg=d3.select('#sea'), seaCanvas=$('#seaCanvas'); let proj,W=0,H=0,routesProj={},zt=d3.zoomIdentity,zoomer=null,gWorld=null,gMarks=null,eiLayer=null,wageLayer=null,homeT=null,lastWH='';
+  function routeP(k){ if(!proj) return null; if(!routesProj[k]) routesProj[k]=routeLL(k).map(p=>proj([p[1],p[0]])); return routesProj[k]; }
   const S=p=>zt.apply(p);
   const TIER1=['london','calais','sluys','antwerp','bordeaux','lisbon','venice','genoa','hamburg','lubeck','danzig','bergen','iceland','newcastle'];
   const TIER2=['dordrecht','middelburg','southampton','yarmouth','lynn','seville','larochelle','bayonne','flushing','sandwich','harfleur','caen','cherbourg','brest','berwick','dublin','corunna'];
@@ -817,18 +867,23 @@ const ships=(function(){
     const used=new Set([...A.trades.map(t=>t.origin),...A.ships.filter(s=>s.origin).map(s=>s.origin),'calais','bordeaux','berwick','lisbon','corunna','dublin','brest','cherbourg','caen','jersey','sluys','sea']);
     for(const k of used){ const r=routeLL(k); routesProj[k]=r.map(p=>proj([p[1],p[0]]));
       gWorld.append('path').attr('d',d3.line()(routesProj[k])).attr('fill','none').attr('stroke',css('--route')).attr('stroke-width',1).attr('stroke-dasharray','2 3').attr('vector-effect','non-scaling-stroke'); }
-    rsLayer=svg.append('g'); eiLayer=svg.append('g'); gMarks=svg.append('g');
-    const a=proj([-7,59.5]), b=proj([12.5,46.5]);
+    rsLayer=svg.append('g'); eiLayer=svg.append('g'); wageLayer=svg.append('g'); gMarks=svg.append('g');
+    const a=proj([-11,61]), b=proj([13.5,46.5]);
     const k=Math.min(W/Math.abs(b[0]-a[0]), H/Math.abs(b[1]-a[1]))*0.95, cx=(a[0]+b[0])/2, cy=(a[1]+b[1])/2;
     homeT=d3.zoomIdentity.translate(W/2-k*cx,H/2-k*cy).scale(k);
-    zoomer=d3.zoom().scaleExtent([0.9,30]).translateExtent([[-W*0.3,-H*0.3],[W*1.3,H*1.3]])
-      .on('zoom',e=>{zt=e.transform;gWorld.attr('transform',zt);drawMarks();drawRS();drawEIOrig();if(!playing)frame(true)});
+    zoomer=d3.zoom().scaleExtent([0.6,30]).translateExtent([[-W*0.3,-H*0.3],[W*1.3,H*1.3]])
+      .on('zoom',e=>{zt=e.transform;gWorld.attr('transform',zt);drawMarks();drawRS();drawEIOrig();drawWages();if(!playing)frame(true)});
     svg.call(zoomer).on('dblclick.zoom',null);
     svg.call(zoomer.transform, sameSize?zt:homeT);
     sizeCanvas(seaCanvas,W,H);
   }
   function drawMarks(){
     if(!gMarks||!proj) return; gMarks.selectAll('*').remove();
+    { const pw=$('#poolwrap'), lon=S(proj([PORTS.london[2],PORTS.london[1]])); const r={x:pw.offsetLeft,y:pw.offsetTop,w:pw.offsetWidth,h:pw.offsetHeight};
+      if(!pw.classList.contains('off')&&r.w&&!(lon[0]>=r.x&&lon[0]<=r.x+r.w&&lon[1]>=r.y&&lon[1]<=r.y+r.h)){
+        const cx=Math.max(r.x,Math.min(lon[0],r.x+r.w)), cy=Math.max(r.y,Math.min(lon[1],r.y+r.h));
+        gMarks.append('line').attr('x1',lon[0]).attr('y1',lon[1]).attr('x2',cx).attr('y2',cy).attr('stroke',css('--ink-3')).attr('stroke-width',1.2).attr('stroke-dasharray','4 3');
+        gMarks.append('rect').attr('x',lon[0]-8).attr('y',lon[1]-8).attr('width',16).attr('height',16).attr('rx',3).attr('fill','none').attr('stroke',css('--ink-2')).attr('stroke-width',1.3); } }
     const keys=[...TIER1,...(homeT&&zt.k>=homeT.k*1.5?TIER2:[])];
     for(const k of keys){ const p=PORTS[k]; if(!p) continue; const xy=S(proj([p[2],p[1]])); if(xy[0]<-30||xy[0]>W+30||xy[1]<-30||xy[1]>H+30) continue;
       gMarks.append('circle').attr('cx',xy[0]).attr('cy',xy[1]).attr('r',k==='london'?4.5:2.6).attr('fill',k==='london'?css('--accent'):css('--ink-2'));
@@ -836,7 +891,8 @@ const ships=(function(){
   }
   $$('.zbtns button').forEach(b=>b.onclick=()=>{ if(!zoomer) return; const t=svg.transition().duration(450);
     if(b.dataset.z==='in') t.call(zoomer.scaleBy,1.6); else if(b.dataset.z==='out') t.call(zoomer.scaleBy,1/1.6);
-    else if(b.dataset.z==='home') t.call(zoomer.transform,homeT); else t.call(zoomer.transform,d3.zoomIdentity); });
+    else if(b.dataset.z==='home') t.call(zoomer.transform,homeT);
+    else { const pw=$('#poolwrap'), top=pw.classList.contains('off')?0:pw.offsetTop+pw.offsetHeight+6, k=Math.max(0.5,(H-top)/H); t.call(zoomer.transform,d3.zoomIdentity.translate(W*(1-k)/2,top).scale(k)); } });
   function sizeCanvas(c,w,h){const d=window.devicePixelRatio||1;c.width=Math.round(w*d);c.height=Math.round(h*d);c.style.width=w+'px';c.style.height=h+'px';c.getContext('2d').setTransform(d,0,0,d,0,0)}
   function along(pts,f){ // pts projected; f 0..1 -> [x,y,angle]
     if(!pts||pts.length<2) return null; let tot=0; const seg=[]; for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);tot+=d}
@@ -853,14 +909,22 @@ const ships=(function(){
   }
   /* pool map (Leaflet, 1300 base) */
   let pmap=null, poolCanvas=$('#poolCanvas'), riverLL=null, paths={};
+  const POOLB=()=>L.latLngBounds([ll([(8100-1713)*.75,7050*.75]),ll([(14300-1713)*.75,8450*.75])]);
+  function fitPool(){ if(pmap) pmap.fitBounds(POOLB(),{padding:[6,6],animate:false}); }
+  const poolBig=()=>$('#poolwrap').classList.contains('big');
+  function poolResized(){ if(!pmap) return; pmap.invalidateSize(); fitPool(); drawMarks(); frame(true); }
+  $('#poolBig').onclick=()=>{ const w=$('#poolwrap'); w.classList.remove('off'); $('#poolOff').textContent='Hide'; $('#poolOff').setAttribute('aria-pressed','false');
+    const big=w.classList.toggle('big'); $('#poolBig').textContent=big?'Smaller':'Enlarge'; $('#poolBig').setAttribute('aria-pressed',big); setTimeout(poolResized,30); };
+  $('#poolOff').onclick=()=>{ const w=$('#poolwrap'); const off=w.classList.toggle('off'); w.classList.remove('big'); $('#poolBig').textContent='Enlarge'; $('#poolBig').setAttribute('aria-pressed','false');
+    $('#poolOff').textContent=off?'Show the Pool':'Hide'; $('#poolOff').setAttribute('aria-pressed',off); setTimeout(poolResized,30); };
   function initPool(){
     if(pmap) return;
-    pmap=L.map('pool',{crs:L.CRS.Simple,minZoom:0,maxZoom:6,zoomSnap:0.25,attributionControl:false,zoomControl:false,maxBoundsViscosity:1});
+    pmap=L.map('pool',{crs:L.CRS.Simple,minZoom:0,maxZoom:6,zoomSnap:0.25,attributionControl:false,zoomControl:false,maxBoundsViscosity:1,trackResize:false});
     L.control.zoom({position:'bottomright'}).addTo(pmap);
     tileLayer('m1300').addTo(pmap);
     L.rectangle(boundsOf('m1300').pad(0.5),{className:'veil',interactive:false,stroke:false,fillOpacity:0.18}).addTo(pmap);
     pmap.setMaxBounds(boundsOf('m1300'));
-    pmap.fitBounds(L.latLngBounds([ll([(9400-1713)*.75,7350*.75]),ll([(14200-1713)*.75,8350*.75])]));
+    fitPool();
     const riv=[...A.river.down,...A.river.up].map(p=>p.p13);
     riverLL=riv;
     for(const [k,d] of Object.entries(A.river.docks)){
@@ -872,7 +936,8 @@ const ships=(function(){
     }
     const SHOWQ=new Set(['queenhithe','vintry','steelyard','billingsgate','woolwharf','galleykey','tower']);
     for(const [k,d] of Object.entries(A.river.docks)){ if(!SHOWQ.has(k)) continue;
-      L.marker(ll(d.p13),{icon:L.divIcon({className:'plabel',html:QNAME[k],iconSize:null,iconAnchor:[-6,6]}),interactive:false}).addTo(pmap); }
+      const hasD=!!A.dues[k]; const mk=L.marker(ll(d.p13),{icon:L.divIcon({className:'plabel'+(hasD?' dues':''),html:QNAME[k],iconSize:null,iconAnchor:[-6,6]}),interactive:hasD,keyboard:hasD,title:hasD?'Dues at '+QNAME[k]:''}).addTo(pmap);
+      if(hasD) mk.on('click',()=>showDues(k)); }
     pmap.on('move zoom resize',()=>{ if(!playing) frame(true) });
   }
   /* clock */
@@ -897,7 +962,7 @@ const ships=(function(){
     const now=performance.now();
     if(playing&&!still){ const dt=Math.min(0.25,(now-last)/1000); T+=dt/secPerDay; if(T>(1460-1300+1)*365) T=0; }
     last=now;
-    const y=yearOf(T); if(+$('#year').value!==y){$('#year').value=y;$('#yearOut').textContent=y;store.set('shipYear',y);drawStrip();drawRS();listVessels()}
+    const y=yearOf(T); if(+$('#year').value!==y){$('#year').value=y;$('#yearOut').textContent=y;store.set('shipYear',y);drawStrip();drawRS();listVessels();listDocs()}
     $('#dateOut').textContent=dateStr(T);
     const vs=current(); hits=[];
     // sea
@@ -910,10 +975,13 @@ const ships=(function(){
         const col=v.fam<0?css('--weld'):fcol(v.fam); const laden=(v.laden===s.dir);
         drawShip(sc,xy[0],xy[1],ang,col,laden,v.kind==='rec',v.kind==='rec'?1.3:1);
         hits.push({x:xy[0],y:xy[1],v,s,c:'sea'}); }
+      if(docSel&&docSel.port){ const rp=routeP(docSel.port); if(rp){ const pts=rp.map(S); sc.save(); sc.strokeStyle=css('--weld'); sc.lineWidth=2.5; sc.setLineDash([6,4]); sc.beginPath(); pts.forEach((q,i)=>i?sc.lineTo(q[0],q[1]):sc.moveTo(q[0],q[1])); sc.stroke(); sc.setLineDash([]);
+          const e=pts[pts.length-1]; const lbl=(docSel.ships[0]||'Entry')+', '+docSel.year; sc.font='italic 600 12px '+css('--f-serif'); sc.lineWidth=3; sc.strokeStyle=css('--surface'); sc.strokeText(lbl,e[0]+8,e[1]-8); sc.fillStyle=css('--ink'); sc.fillText(lbl,e[0]+8,e[1]-8); sc.restore(); } }
       for(const v of vs){ if(!v.wreck) continue; const wp=S(proj([v.wreck[1],v.wreck[0]])); if(T>=v.tArr-POOLT&&T<v.tArr+120){ sc.save();sc.strokeStyle=css('--madder');sc.lineWidth=2.5;sc.beginPath();sc.moveTo(wp[0]-6,wp[1]-6);sc.lineTo(wp[0]+6,wp[1]+6);sc.moveTo(wp[0]+6,wp[1]-6);sc.lineTo(wp[0]-6,wp[1]+6);sc.stroke();sc.fillStyle=css('--ink');sc.font='600 12px '+css('--f-sans');sc.fillText('Wrecked at Reculver, 1389',wp[0]+9,wp[1]+16);sc.restore(); hits.push({x:wp[0],y:wp[1],v,s:{where:'wreck'},c:'sea'})} }
     }
     // pool
-    if(pmap){ const pc=poolCanvas.getContext('2d'); const sz=pmap.getSize(); if(poolCanvas.width!==Math.round(sz.x*(window.devicePixelRatio||1))) sizeCanvas(poolCanvas,sz.x,sz.y);
+    if(pmap&&!$('#poolwrap').classList.contains('off')){ const pc=poolCanvas.getContext('2d'); const sz=pmap.getSize(); const dpr=window.devicePixelRatio||1; if(poolCanvas.width!==Math.round(sz.x*dpr)||poolCanvas.height!==Math.round(sz.y*dpr)) sizeCanvas(poolCanvas,sz.x,sz.y);
+      const PS=poolBig()?1.5:1.05, SL=poolBig()?16:11;
       pc.clearRect(0,0,sz.x,sz.y);
       const slots={}; const docked=[];
       for(const v of vs){ const s=statusAt(v); if(!s||s.where==='sea') continue; if(v.wreck) continue;
@@ -921,13 +989,17 @@ const ships=(function(){
         const pts=pth.map(p=>{const q=pmap.latLngToContainerPoint(ll(p));return [q.x,q.y]});
         const col=v.fam<0?css('--weld'):fcol(v.fam);
         if(s.where==='river'){ const ease=s.f<0?0:s.f>1?1:(1-Math.cos(Math.PI*s.f))/2; const a=along(pts,ease); if(!a) continue; const ang=s.dir==='in'?a[2]:a[2]+Math.PI;
-          drawShip(pc,a[0],a[1],ang,col,v.laden===s.dir,v.kind==='rec',1.5); hits.push({x:a[0],y:a[1],v,s,c:'pool'}); }
-        else { const k=slots[v.quay]=(slots[v.quay]||0)+1; const d=pts[pts.length-1]; const x=d[0]+((k%2?1:-1)*Math.ceil((k-1)/2))*16, yy=d[1]+ (k>2?6:0);
-          drawShip(pc,x,yy,Math.PI,col,v.laden==='in'&&T<(v.tArr+v.tLeave)/2||v.laden==='out'&&T>(v.tArr+v.tLeave)/2,v.kind==='rec',1.5); hits.push({x,y:yy,v,s,c:'pool'}); docked.push(v);
-          if(v.kind==='rec'){pc.save();pc.font='italic 600 12px '+css('--f-serif');pc.fillStyle=css('--ink');pc.strokeStyle=css('--surface');pc.lineWidth=3;pc.strokeText(v.ship.name,x+12,yy+18);pc.fillText(v.ship.name,x+12,yy+18);pc.restore()} }
+          drawShip(pc,a[0],a[1],ang,col,v.laden===s.dir,v.kind==='rec',PS); hits.push({x:a[0],y:a[1],v,s,c:'pool'}); }
+        else { const k=slots[v.quay]=(slots[v.quay]||0)+1; const d=pts[pts.length-1]; const x=d[0]+((k%2?1:-1)*Math.ceil((k-1)/2))*SL, yy=d[1]+ (k>2?SL*0.4:0);
+          drawShip(pc,x,yy,Math.PI,col,v.laden==='in'&&T<(v.tArr+v.tLeave)/2||v.laden==='out'&&T>(v.tArr+v.tLeave)/2,v.kind==='rec',PS); hits.push({x,y:yy,v,s,c:'pool'}); docked.push(v);
+          if(v.kind==='rec'&&poolBig()){pc.save();pc.font='italic 600 12px '+css('--f-serif');pc.fillStyle=css('--ink');pc.strokeStyle=css('--surface');pc.lineWidth=3;pc.strokeText(v.ship.name,x+12,yy+18);pc.fillText(v.ship.name,x+12,yy+18);pc.restore()} }
       }
+      if(docSel&&docSel.quay&&paths[docSel.quay]){ const pth=paths[docSel.quay]; const q=pmap.latLngToContainerPoint(ll(pth[pth.length-1])); const x=q.x, yy=q.y-20;
+        drawShip(pc,x,yy,Math.PI,css('--weld'),true,true,PS*1.1); const lbl=(docSel.ships[0]||'Entry')+', '+docSel.year;
+        pc.save();pc.font='italic 600 12px '+css('--f-serif');pc.lineWidth=3;pc.strokeStyle=css('--surface');pc.strokeText(lbl,x+12,yy-10);pc.fillStyle=css('--ink');pc.fillText(lbl,x+12,yy-10);pc.restore();
+        hits.push({x,y:yy,v:{kind:'doc',doc:docSel},s:{where:'dock'},c:'pool'}); }
       if(!still||frame.n++%10===0) inPort(docked);
-    }
+    } else if(pmap){ const docked=[]; for(const v of vs){ const st=statusAt(v); if(st&&st.where==='dock'&&!v.wreck) docked.push(v); } if(!still||frame.n++%10===0) inPort(docked); }
     moveStripMarker();
     if(playing&&active&&!still) raf=requestAnimationFrame(()=>frame());
   }
@@ -997,7 +1069,54 @@ const ships=(function(){
       T=(s.year-1300)*365+(s.id==='dordrecht'?298:s.id==='borromei'?214:s.origin?160:170); frame(true);
       showShip(s)});
   }
-  function showShip(s){$('#shipDetail').innerHTML=`<div class="card"><div class="lab">Named in the records · ${s.year}</div><h4>${esc(s.name)}</h4><dl class="kv"><dt>Owner(s)</dt><dd>${esc(s.owner)}</dd>${s.cargo?`<dt>Cargo</dt><dd>${esc(s.cargo)}</dd>`:''}<dt>Quay shown</dt><dd>${esc(QNAME[s.quay]||s.quay)}</dd></dl><div class="small">${esc(s.note)}</div><div class="small muted" style="margin-top:4px">${esc(s.src)}${s.pid?` · <a href="${MLD(s.pid)}" target="_blank" rel="noopener">MLD ${s.pid} ↗</a>`:''}. The day within the year is not recorded; the animation places it.</div></div>`}
+  function showShip(s){$('#shipDetail').innerHTML=`<div class="card"><div class="lab">Named in the records · ${s.year}</div><h4>${esc(s.name)}</h4><dl class="kv"><dt>Owner(s)</dt><dd>${esc(s.owner)}</dd>${s.cargo?`<dt>Cargo</dt><dd>${esc(s.cargo)}</dd>`:''}<dt>Quay shown</dt><dd>${esc(QNAME[s.quay]||s.quay)}</dd></dl><div class="small">${esc(s.note)}</div><div class="small muted" style="margin-top:4px">${s.checked?'<span class="pill src">Checked in sources</span> ':''}${esc(s.src)}${s.pid?` · <a href="${MLD(s.pid)}" target="_blank" rel="noopener">MLD ${s.pid} ↗</a>`:''}. The day within the year is not recorded; the animation places it.</div></div>`}
+  /* Patent Rolls and Letter-Books */
+  function listDocs(){
+    const y=yearOf(T), all=$('#docAll').checked;
+    const rows=DOCS.filter(d=>all||Math.abs(d.year-y)<=2);
+    $('#docHint').textContent=all?`${DOCS.length} entries naming ships with a tie to London: ${A.cpr.length} from the Patent Rolls, ${A.lb.length} from the Letter-Books.`:`${rows.length} of ${DOCS.length} entries fall in ${y-2}–${y+2}.`;
+    $('#doclist').innerHTML=rows.map(d=>`<button data-k="${d.k}" class="${docSel&&docSel.k===d.k?'on':''}"><span class="y">${d.year}</span><i>${esc(docTitle(d))}</i><span class="muted small"> · ${esc(d.types.join(', ')||'entry')} · ${esc(d.ref)}, p. ${esc(d.page)}</span></button>`).join('')||'<p class="hint">None in these years.</p>';
+    $('#doclist').querySelectorAll('button').forEach(b=>b.onclick=()=>showDoc(docBy[b.dataset.k],true));
+  }
+  $('#docAll').onchange=listDocs;
+  function showDoc(d,jump){
+    if(!d) return; docSel=d;
+    if(jump&&yearOf(T)!==d.year){const dd=T-(yearOf(T)-1300)*365;T=(d.year-1300)*365+dd;}
+    const qn=d.quay?QNAME[d.quay]:'';
+    const lon=d.toL&&d.fromL?'to and from London':d.toL?'bound for London':d.fromL?'from the port of London':'';
+    $('#shipDetail').innerHTML=`<div class="card"><div class="lab">${SRCNAME[d.src]} · <span class="num">${esc(d.date||String(d.year))}</span></div><h4>${esc(docTitle(d))}</h4>
+      <div class="chips">${d.types.map(t=>`<span class="pill">${esc(t)}</span>`).join('')}${d.cargo.map(c=>`<span class="pill approx">${esc(c)}</span>`).join('')}</div>
+      ${d.note?`<div class="small">${esc(d.note)}</div>`:`<div class="excerpt">${esc(d.text)}</div><div class="small muted">The calendar’s English summary, read by machine from the scan; scanning errors remain. Check the printed page before quoting.</div>`}
+      <dl class="kv">${lon?`<dt>London</dt><dd>${lon}</dd>`:''}${qn?`<dt>Quay shown</dt><dd>${esc(qn)} <span class="muted">(chosen from the cargo; the entry names no quay)</span></dd>`:''}${d.port?`<dt>Route shown</dt><dd>${esc(PORTS[d.port]?PORTS[d.port][0]:d.port)}</dd>`:''}</dl>
+      <div class="small muted">${esc(d.ref)}, p. ${esc(d.page)}${d.src==='cpr'?'. Year from the calendar’s running head.':''}</div>
+      <p style="margin:6px 0 0"><button class="btn" id="docClear">Clear from the maps</button></p></div>`;
+    $('#docClear').onclick=()=>{docSel=null;$('#shipDetail').innerHTML='';listDocs();frame(true)};
+    listDocs(); frame(true); $('#shipDetail').scrollIntoView({block:'nearest',behavior:'smooth'});
+  }
+  function wireLinks(root){ root.querySelectorAll('.linkbtn[data-k]').forEach(b=>b.onclick=()=>showDoc(docBy[b.dataset.k],true)); }
+  function evHTML(tr){ const ev=tr.ev; if(!ev) return '';
+    const di=d=>`<li><button class="linkbtn" data-k="${d.k}">${d.year} · <i>${esc(docTitle(d))}</i></button> <span class="muted">${esc(d.ref)}, p. ${esc(d.page)}</span></li>`;
+    const items=[...ev.cpr.map(i=>docBy['cpr'+i]),...ev.lb.map(i=>docBy[i])].filter(Boolean).sort((a,b)=>a.year-b.year).map(di)
+      .concat(ev.other.map(([y,t,r])=>`<li>${y?y+' · ':''}${esc(t)} <span class="muted">${esc(r)}</span></li>`));
+    return `<div style="border-top:1px solid var(--rule);margin-top:8px;padding-top:6px"><div class="lab">In the printed sources</div>${ev.finding?`<p class="small" style="margin:4px 0"><b>${esc(ev.finding)}</b></p>`:''}${items.length?`<ul class="small" style="padding-left:18px;margin:4px 0">${items.join('')}</ul>`:''}</div>`; }
+  /* quay dues (Liber Albus) */
+  function showDues(k){ const q=A.dues[k]; if(!q) return;
+    $('#shipDetail').innerHTML=`<div class="card"><div class="lab">Liber Albus · ${esc(QNAME[k]||k)}</div><h4>${esc(q.title)}</h4>${q.items.length?`<table class="dues">${q.items.map(([a,b])=>`<tr><td>${esc(a)}</td><td class="num">${esc(b)}</td></tr>`).join('')}</table>`:''}${q.rules.length?`<ul class="small" style="padding-left:18px;margin:8px 0 0">${q.rules.map(([r,pg])=>`<li>${esc(r)} <span class="muted">(${esc(pg)})</span></li>`).join('')}</ul>`:''}<div class="small muted" style="margin-top:6px">${esc(q.pages)}, Riley’s translation. The Liber Albus was compiled in 1419 from older records; Riley dates one related list to about 1266.</div></div>`;
+    $('#shipDetail').scrollIntoView({block:'nearest',behavior:'smooth'}); }
+  $('#dueBtns').innerHTML=Object.keys(A.dues).map(k=>`<button data-q="${k}">${esc(QNAME[k]||k)}</button>`).join('');
+  $('#dueBtns').querySelectorAll('button').forEach(b=>b.onclick=()=>showDues(b.dataset.q));
+  /* sailors' wages, 1375 */
+  function drawWages(){
+    if(!wageLayer||!proj) return; wageLayer.selectAll('*').remove(); const on=$('#wages').checked, WG=A.wages;
+    if(!on){$('#wageList').innerHTML='';return}
+    $('#wageList').innerHTML=`<p class="hint">${esc(WG.meta.title)}, ${esc(WG.meta.date)}. ${esc(WG.meta.note)}</p>`+WG.rows.map(r=>`<div style="border-top:1px solid var(--rule);padding:3px 0"><b>${esc(r.dest)}</b>: ${esc(r.wage)}, ${esc(r.extra)} <span class="muted">(p. ${esc(r.page)})</span>${r.flag?` <span class="pill approx">${esc(r.flag)}</span>`:''}</div>`).join('')+`<p class="hint">${esc(WG.meta.ref)}. Ireland is drawn to its south-east coast; the article names only Ireland.</p>`;
+    const col=css('--ink-2');
+    for(const r of WG.rows){ const rp=routeP(r.port); if(!rp) continue; const pts=rp.map(S);
+      wageLayer.append('path').attr('d',d3.line()(pts)).attr('fill','none').attr('stroke',col).attr('stroke-width',1.8).attr('stroke-opacity',.6);
+      const e=pts[pts.length-1]; wageLayer.append('circle').attr('cx',e[0]).attr('cy',e[1]).attr('r',3.2).attr('fill',col);
+      wageLayer.append('text').attr('class','port-label').attr('x',e[0]+6).attr('y',e[1]+14).attr('font-weight',700).attr('fill',css('--ink')).text(r.short); }
+  }
+  $('#wages').onchange=drawWages;
   /* legend */
   $('#tradeLegend').innerHTML=FAM.map((f,i)=>`<svg class="shipsvg" viewBox="-8 -6 16 12" aria-hidden="true"><path d="M7 0 L-5 -3.6 L-3.5 0 L-5 3.6Z" fill="${fcol(i)}"/></svg><span>${esc(f.n)} <span class="muted small">${f.t.map(t=>A.trades.find(x=>x.id===t)?.name).filter(Boolean).join(', ')}</span></span>`).join('')+
     `<svg class="shipsvg" viewBox="-8 -6 16 12" aria-hidden="true"><path d="M7 0 L-5 -3.6 L-3.5 0 L-5 3.6Z" fill="none" stroke="${css('--ink-2')}" stroke-width="1.6"/></svg><span>Hollow: sailing in ballast or with return cargo</span>
@@ -1005,23 +1124,24 @@ const ships=(function(){
   /* hover / click */
   const tip=$('#tip');
   function nearest(e,c){const wrap=c==='sea'?$('#seawrap'):$('#poolwrap');const r=wrap.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;let best=null,bd=14;for(const h of hits){if(h.c!==c)continue;const d=Math.hypot(h.x-x,h.y-y);if(d<bd){bd=d;best=h}}return best}
-  function describe(h){const v=h.v;if(v.kind==='rec')return `<b>${esc(v.ship.name)}</b> <span class="num">${v.ship.year}</span><br>${esc(v.ship.cargo||'')}${v.ship.cargo?'<br>':''}<span class="muted">${esc(QNAME[v.quay]||'')}</span>`;
+  function describe(h){const v=h.v;if(v.kind==='doc')return `<b>${esc(docTitle(v.doc))}</b> <span class="num">${v.doc.year}</span><br><span class="muted">${esc(v.doc.ref)}, p. ${esc(v.doc.page)}</span>`;if(v.kind==='rec')return `<b>${esc(v.ship.name)}</b> <span class="num">${v.ship.year}</span><br>${esc(v.ship.cargo||'')}${v.ship.cargo?'<br>':''}<span class="muted">${esc(QNAME[v.quay]||'')}</span>`;
     const tr=v.trade;const st=h.s.where==='dock'?'At '+(QNAME[v.quay]||v.quay):h.s.dir==='in'?'Inbound from '+PORTS[v.port][0]:'Outbound to '+PORTS[v.port][0];
     return `<b>${esc(tr.name)}</b><br>${esc(st)}<br><span class="muted">${tr.dir===(h.s.dir||'in')?'Laden: '+esc(tr.cargo):'Return leg'}</span><br><span class="muted small">Modelled ship</span>`}
   ['sea','pool'].forEach(c=>{const wrap=c==='sea'?$('#seawrap'):$('#poolwrap');
     wrap.addEventListener('mousemove',e=>{const h=nearest(e,c);if(!h){tip.hidden=true;return}tip.innerHTML=describe(h);tip.hidden=false;tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY+10)+'px'});
     wrap.addEventListener('mouseleave',()=>tip.hidden=true);
-    wrap.addEventListener('click',e=>{const h=nearest(e,c);if(!h)return;if(h.v.kind==='rec')showShip(h.v.ship);else{const tr=h.v.trade;$('#shipDetail').innerHTML=`<div class="card"><div class="lab">Modelled · ${esc(FAM[h.v.fam].n)}</div><h4>${esc(tr.name)}</h4><dl class="kv"><dt>Port</dt><dd>${esc(PORTS[tr.origin][0])}</dd><dt>London quay</dt><dd>${esc(QNAME[tr.quay])}</dd><dt>Laden cargo</dt><dd>${esc(tr.cargo)} (${tr.dir==='in'?'inbound':'outbound'})</dd><dt>Years run</dt><dd class="num">${tr.years[0]}–${tr.years[1]}</dd></dl><div class="small">${esc(tr.basis)}</div><div class="small muted" style="margin-top:4px"><span class="pill verify">Modelled</span> a generalisation from the secondary literature, not yet checked against sources.</div></div>`}},true);
+    wrap.addEventListener('click',e=>{const h=nearest(e,c);if(!h)return;if(h.v.kind==='doc')showDoc(h.v.doc);else if(h.v.kind==='rec')showShip(h.v.ship);else{const tr=h.v.trade;$('#shipDetail').innerHTML=`<div class="card"><div class="lab">Modelled · ${esc(FAM[h.v.fam].n)}</div><h4>${esc(tr.name)}</h4><dl class="kv"><dt>Port</dt><dd>${esc(PORTS[tr.origin][0])}</dd><dt>London quay</dt><dd>${esc(QNAME[tr.quay])}</dd><dt>Laden cargo</dt><dd>${esc(tr.cargo)} (${tr.dir==='in'?'inbound':'outbound'})</dd><dt>Years run</dt><dd class="num">${tr.years[0]}–${tr.years[1]}</dd></dl><div class="small">${esc(tr.basis)}</div><div class="small muted" style="margin-top:4px"><span class="pill verify">Modelled</span> a generalisation from the secondary literature, not yet checked against sources.</div>${evHTML(tr)}</div>`;wireLinks($('#shipDetail'))}},true);
   });
   /* controls */
   function setPlaying(p){playing=p;$('#play').textContent=p?'Pause':'Play';$('#play').setAttribute('aria-pressed',p);if(p&&active){last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>frame())}}
   $('#play').onclick=()=>setPlaying(!playing);
   $$('#speed button').forEach(b=>b.onclick=()=>{secPerDay=+b.dataset.s;$$('#speed button').forEach(x=>x.setAttribute('aria-pressed',x===b))});
-  $('#year').oninput=e=>{const y=+e.target.value;const d=T-(yearOf(T)-1300)*365;T=(y-1300)*365+d;$('#yearOut').textContent=y;store.set('shipYear',y);drawStrip();drawRS();frame(true)};
+  $('#year').oninput=e=>{const y=+e.target.value;const d=T-(yearOf(T)-1300)*365;T=(y-1300)*365+d;$('#yearOut').textContent=y;store.set('shipYear',y);drawStrip();drawRS();listDocs();frame(true)};
   const ro=new ResizeObserver(()=>{if(active){drawSea();drawStrip();pmap&&pmap.invalidateSize();frame(true)}});
   ro.observe($('#seawrap'));
+  let lastPS=''; const ro2=new ResizeObserver(()=>{ const r=$('#poolwrap').getBoundingClientRect(), k=Math.round(r.width)+'x'+Math.round(r.height); if(active&&pmap&&k!==lastPS){ lastPS=k; pmap.invalidateSize({pan:false}); fitPool(); drawMarks(); frame(true); } }); ro2.observe($('#poolwrap'));
   return {
-    activate(){active=true;initPool();setTimeout(()=>{pmap.invalidateSize();drawSea();drawStrip();listVessels();frame(true);if(playing){last=performance.now();raf=requestAnimationFrame(()=>frame())}},0)},
+    activate(){active=true;initPool();setTimeout(()=>{pmap.invalidateSize();fitPool();drawSea();drawStrip();listVessels();listDocs();drawWages();frame(true);if(playing){last=performance.now();raf=requestAnimationFrame(()=>frame())}},0)},
     deactivate(){active=false;cancelAnimationFrame(raf)},
     FAM
   };
@@ -1035,7 +1155,7 @@ const ships=(function(){
     const c=$('#fCraft').value,k=$('#fCat').value,b=($('#fBasis')||{}).value||'',t=$('#fText').value.toLowerCase();
     const rows=A.books.filter(x=>(!c||x.craft===c)&&(!k||x.cat===k)&&(!b||x.basis===b)&&(!t||(x.who+' '+x.books+' '+x.note).toLowerCase().includes(t))).sort((a,b)=>a.year-b.year);
     $('#bookCount').textContent=`${rows.length} of ${A.books.length}`;
-    $('#bookRows').innerHTML=rows.map(x=>{const pl=PL[placeById[x.place]];return `<tr><td class="y">${x.year}</td><td><b>${esc(x.who)}</b><div class="muted small">${esc(x.craft)}</div></td><td class="bk">${esc(x.books)}<div class="muted small" style="font-style:normal;font-family:var(--f-sans)">${esc(x.cat)}</div></td><td class="small">${esc(x.note)}${x.flag?` <span class="pill approx">${esc(x.flag)}</span>`:''}</td><td class="small"><a href="#city" data-pl="${esc(x.place)}">${esc(pl?pl.name:x.place)}</a></td><td class="small">${x.basis==='mld'?`<span class="pill db">Database</span><div>${esc(x.src)}</div>${x.pid?`<a href="${MLD(x.pid)}" target="_blank" rel="noopener">MLD ${x.pid} ↗</a>`:''}`:'<span class="pill verify">To verify</span>'}</td></tr>`}).join('');
+    $('#bookRows').innerHTML=rows.map(x=>{const pl=PL[placeById[x.place]];return `<tr><td class="y">${x.year}</td><td><b>${esc(x.who)}</b><div class="muted small">${esc(x.craft)}</div></td><td class="bk">${esc(x.books)}<div class="muted small" style="font-style:normal;font-family:var(--f-sans)">${esc(x.cat)}</div></td><td class="small">${esc(x.note)}${x.flag?` <span class="pill approx">${esc(x.flag)}</span>`:''}${chkHTML(x)}</td><td class="small"><a href="#city" data-pl="${esc(x.place)}">${esc(pl?pl.name:x.place)}</a></td><td class="small">${x.basis==='mld'?`<span class="pill db">Database</span><div>${esc(x.src)}</div>${x.pid?`<a href="${MLD(x.pid)}" target="_blank" rel="noopener">MLD ${x.pid} ↗</a>`:''}`:x.basis==='src'?`<span class="pill src">Checked in sources</span><div>${esc(x.src)}</div>`:'<span class="pill verify">To verify</span>'}</td></tr>`}).join('');
     $('#bookRows').querySelectorAll('[data-pl]').forEach(a=>a.onclick=e=>{e.preventDefault();show('city');state.layers.books=true;renderBooks();const pl=PL[placeById[a.dataset.pl]];setTimeout(()=>{cmap.flyTo(pos(pl),4.25,{duration:.7});$('#detail').innerHTML=placeHead(placeById[a.dataset.pl])+'<h3>Books</h3>'+A.books.filter(b=>b.place===a.dataset.pl).map(bookCard).join('')},60)});
   }
   ['#fCraft','#fCat','#fBasis','#fText'].forEach(s=>{const el=$(s); if(el) el.addEventListener('input',draw)}); draw();
@@ -1129,6 +1249,15 @@ const figures=(function(){
     const pl=el.querySelector('.plot'); const items=[['Names a merchant or trader',t1,css('--madder')],['Waterfront, no trader named',t2,css('--accent')],['Neither',t3,css('--c0')]];
     const tot=t1+t2+t3; pl.innerHTML=`<div style="display:flex;height:26px;border-radius:4px;overflow:hidden;gap:2px">${items.map(([k,v,c])=>`<div title="${esc(k)}: ${v}" style="flex:${v};background:${c}"></div>`).join('')}</div>`+items.map(([k,v,c])=>`<div class="rowc" style="margin-top:6px"><i style="width:10px;height:10px;border-radius:2px;background:${c};display:inline-block"></i><span style="flex:1">${esc(k)}</span><b class="num">${v}</b><span class="muted num">${Math.round(100*v/tot)}%</span></div>`).join('');
     el.querySelector('.t').innerHTML=`<p class="hint">${tot} cases in all. Open the City view and switch on “Coroners’ rolls” to see them placed.</p>`;
+    // Patent Rolls: ships tied to London
+    el=frame('ch-cpr','Ships tied to London in the Patent Rolls','Entries in the printed Calendar of Patent Rolls that name a ship and tie it to London, by decade and by the kind of entry. Found by searching the calendars’ text, then read one by one. One entry can name several ships, and the calendar for 1338–40 is not in the set searched.');
+    { const KG=[['Royal service',['royal service']],['Seized, wrecked or plundered',['taken at sea','wreck','reprisal']],['Licences and safe-conducts',['licence to ship','safe-conduct']],['Customs and Admiralty appeals',['customs','Admiralty appeal']]];
+      const kind=c=>{for(const t of c.types){const g=KG.find(k=>k[1].includes(t));if(g)return g[0]}return 'Other'};
+      const keys=[...KG.map(k=>k[0]),'Other'], kc=[css('--c1'),css('--c8'),css('--c3'),css('--c4'),css('--c0')];
+      const ser=decs.map(d=>{const o={dec:d};keys.forEach(k=>o[k]=0);A.cpr.filter(c=>Math.floor(c.year/10)*10===d).forEach(c=>o[kind(c)]++);return o});
+      stacked(el,ser,keys,kc,{aria:'Patent Rolls entries naming ships tied to London, per decade, by kind',h:230});
+      el.querySelector('.lgd').innerHTML+=`<span class="muted">${A.cpr.length} entries, 1300–1460; each counted once, under its first kind.</span>`;
+      el.querySelector('.t').innerHTML=`<table><tr><th>Year</th><th>Ship(s)</th><th>Kind</th><th>Reference</th></tr>${A.cpr.map(c=>`<tr><td>${c.year}</td><td>${esc(c.ships.join('; ')||'not named')}</td><td>${esc(kind(c))}</td><td>${esc(c.ref)}, p. ${esc(c.page)}</td></tr>`).join('')}</table>`; }
   }
   return {draw};
 })();
@@ -1159,9 +1288,27 @@ const figures=(function(){
   <p>Mercer · Grocer (with pepperers and spicers) · Draper · Fishmonger (with stockfishmongers) · Goldsmith · Skinner · Vintner · Other merchant (staplers, woolmongers, ironmongers, salters, haberdashers, and people described only as merchants). Taken from the database’s craft and occupation fields; a person with two crafts falls in the first group listed.</p>
   <h2>The port and sea view</h2>
   <p>Two kinds of ship appear. Ships outlined in gold are vessels and cargoes named in Medieval Londoners records; the day within the year is not recorded and the animation supplies one. All other ships are a model: each trade sails in the months the secondary literature associates with it, in numbers that show the season, not the volume. Routes follow the coasts through way-points; durations assume about 140 km a day. Upstream quays (Queenhithe, the Vintry, the Steelyard, Dowgate) are reached through the bridge’s drawspan.</p>
+  <p>Entries from the Patent Rolls and the Letter-Books are listed for the year shown and the two either side. They are not animated: choosing one marks a quay, chosen from the cargo because the entries name none, and the route to any port the entry names. Clicking a modelled ship lists the printed evidence for its trade, where there is any.</p>
+  <h2>Printed calendars and editions</h2>
+  <div class="srcgrid">
+    <div class="card"><div class="lab">Ships in royal letters</div><h4>Calendar of Patent Rolls</h4><p class="small">45 volumes, 1281–1485 and 1547–48 (the volume for 1338–40 is not among them). The text of each volume was searched for entries naming a ship together with London, the port of London or a London citizen. The 895 candidates were read down to ${A.cpr.length} for 1300–1460. Ship names garbled by the scan were corrected from the context; readings still in doubt carry a question mark. The excerpts are the calendar’s English summaries as read by machine, and the year comes from the page heading.</p></div>
+    <div class="card"><div class="lab">The City’s records</div><h4>Calendar of Letter-Books of the City of London</h4><p class="small">Letter-Books B to L, ed. Reginald R. Sharpe. ${A.lb.length} entries on ships and shipping, the “Jubile” book of 1384–87, and the Westminster staple of 1353.</p></div>
+    <div class="card"><div class="lab">Custumals</div><h4>Munimenta Gildhallae Londoniensis</h4><p class="small">Ed. H. T. Riley: the Liber Albus (vol. 1), the Liber Custumarum (vol. 2, pt 1) and Riley’s English translation of the Liber Albus (vol. 3). The quay dues in the port view come from vol. 3; vols 1 and 2 were used to check the entries for Andrew Horn and John Carpenter.</p></div>
+    <div class="card"><div class="lab">Law of the sea</div><h4>The Black Book of the Admiralty</h4><p class="small">Vol. 1, ed. Travers Twiss. The Inquisition of Queenborough (2 April 1375) sets sailors’ wages from the Pool of London to eleven destinations; they can be drawn on the sea map.</p></div>
+    <div class="card"><div class="lab">Searched, not used here</div><h4>Other calendars</h4><p class="small">Calendar of Documents relating to Scotland, vols 3–4, which mention London only in passing; Hardy’s Syllabus of Rymer’s Foedera, vols 1–2, which has few entries on London merchants and no page numbers in the scan; Calendar of Papal Letters, vols 1–4, not yet used.</p></div>
+  </div>
+  ${typeof CONFIG==='undefined'?`<h2>Found while checking</h2><ul class="checklist small">
+    <li><b>Dordrecht cog, 1389.</b> The commission is at CPR 1388–92, p. 205 (4 Nov.); the MLD record cites pp. 207–8. A second entry (p. 273, 1390) concerns a Hanse merchant’s barrel of peltry from the wreck.</li>
+    <li><b>“Jubile” book.</b> LB H, p. 303 dates the order to burn it to March 1387 (10 Richard II); Sharpe’s introduction cites a petition to the Parliament of 1386 saying Extone had already burnt it.</li>
+    <li><b>Wages to Scania, 1375.</b> The French text gives 13s. 4d., the English version 8s. 4d. (Black Book I, pp. 140–41).</li>
+    <li><b>Thomas Flory’s ship, 1324.</b> The calendar names her le Annot of Ditton, laded for London by the sheriff for the king (CPR 1321–24, p. 390). The entry now follows the calendar.</li>
+    <li><b>Wool model.</b> It sends wool to Flanders in 1353–62, when the staple was at Westminster (LB G, p. 16; CPR 1350–54, p. 511). Flagged on the trade; the model has not been changed.</li>
+    <li><b>Grain model.</b> The 1347 licences send wheat from London to Bordeaux; the model has only inbound grain.</li>
+    <li><b>Cokjohan.</b> The admiral’s letter (LB E, p. 298) gives only 12 August; 1336 is the year of the writ entered after it.</li>
+    <li><b>Ship names marked “(?)”</b> in the Patent Rolls list are uncertain readings of the scan.</li></ul>`:''}
   ${CONFIG.showUnverified?`<h2>Entries not yet verified</h2><ul class="checklist small">${verify}</ul>`:`<h2>Modelled elements</h2><ul class="checklist small">${A.trades.map(t=>`<li><b>${esc(t.name)}</b> (port view): ${esc(t.basis)}</li>`).join('')}</ul>`}
   <h2>Credits</h2>
-  <p class="small">Medieval Londoners Database, Fordham University. England’s Immigrants 1330–1550. Medieval Murder Map, Violence Research Centre, University of Cambridge. The Soldier in Later Medieval England Online Database (AHRC). The People of 1381. Glyph Machina and the Anglo-American Legal Tradition. Base maps © Historic Towns Trust. Coastlines from Natural Earth. Map display by Leaflet; charts by D3.</p>
+  <p class="small">Medieval Londoners Database, Fordham University. England’s Immigrants 1330–1550. Medieval Murder Map, Violence Research Centre, University of Cambridge. The Soldier in Later Medieval England Online Database (AHRC). The People of 1381. Glyph Machina and the Anglo-American Legal Tradition. Printed sources: Calendar of Patent Rolls; Calendar of Letter-Books of the City of London, ed. R. R. Sharpe; Munimenta Gildhallae Londoniensis, ed. H. T. Riley; The Black Book of the Admiralty, ed. T. Twiss. Base maps © Historic Towns Trust. Coastlines from Natural Earth. Map display by Leaflet; charts by D3.</p>
   <p class="small">Concept: Daniel Davies. Data compilation, georeferencing and interface prepared with Claude (Anthropic).</p>
   <h2>Not yet included</h2>
   <ul class="small">
