@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Merchant London 1300–1460</title>
+<meta name="description" content="An interactive atlas of London merchants, c.1300–1460: where they are recorded, the books they owned and left, alien merchants, and the ships of the port.">
+<meta name="author" content="Daniel Davies">
+<link rel="canonical" href="https://danieldavies.co/merchant-london/">
+<meta property="og:title" content="Merchant London 1300–1460">
+<meta property="og:description" content="London merchants, their parishes, books and ships, c.1300–1460.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://danieldavies.co/merchant-london/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d4e87'/%3E%3Cpath d='M6 20h20l-3 5H9z' fill='%23fff'/%3E%3Cpath d='M15 6v13h2V6zM17 7l7 9h-7z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IM+Fell+English+SC&display=swap">
+<style>
+/* Layout: one-screen atlas. Top bar with view tabs; each view = working surface (map / ships / table / charts) + a 380px side panel that stacks below on phones. */
+:root{
+  --bg:#eceeea; --surface:#f7f8f5; --surface-2:#e3e6e1; --ink:#1c2228; --ink-2:#47515b; --ink-3:#6b7680; --rule:#cfd5cf;
+  --accent:#2d4e87;           /* woad blue */
+  --accent-ink:#ffffff;
+  --madder:#a23a2b;           /* 1381 layer */
+  --weld:#9a7410;             /* books */
+  --sea:#d7e3ea; --land:#f1efe7; --land-edge:#b9c2c4; --route:#9fb2bf;
+  --veil:#f7f8f5;
+  --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a; --c4:#eda100; --c5:#e87ba4; --c6:#008300; --c7:#4a3aa7; --c8:#e34948; --c0:#9aa1a6;
+  --f-display:"IM Fell English SC", "Alegreya", Georgia, serif;
+  --f-serif:"Alegreya", Georgia, "Times New Roman", serif;
+  --f-sans:"Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+  --bar-h:52px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#11151a; --surface:#171c22; --surface-2:#222932; --ink:#e8ebee; --ink-2:#b3bcc5; --ink-3:#8c96a0; --rule:#2d343d;
+  --accent:#8fb1ea; --accent-ink:#0f1720; --madder:#e0796a; --weld:#d6ad48;
+  --sea:#1b2833; --land:#2a2f33; --land-edge:#46505a; --route:#3f5566; --veil:#11151a;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300; --c7:#9085e9; --c8:#e66767; --c0:#6d757c;
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#11151a; --surface:#171c22; --surface-2:#222932; --ink:#e8ebee; --ink-2:#b3bcc5; --ink-3:#8c96a0; --rule:#2d343d;
+  --accent:#8fb1ea; --accent-ink:#0f1720; --madder:#e0796a; --weld:#d6ad48;
+  --sea:#1b2833; --land:#2a2f33; --land-edge:#46505a; --route:#3f5566; --veil:#11151a;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300; --c7:#9085e9; --c8:#e66767; --c0:#6d757c;
+  color-scheme:dark; }
+html,body{height:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:15px;line-height:1.45}
+*{box-sizing:border-box}
+a{color:var(--accent)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+#app{display:flex;flex-direction:column;height:100%}
+.bar{display:flex;align-items:center;gap:18px;min-height:var(--bar-h);padding-inline:16px;border-bottom:1px solid var(--rule);background:var(--surface);flex:0 0 auto}
+.brand{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.01em}
+.brand span{font-family:var(--f-serif);font-style:italic;color:var(--ink-3);font-size:15px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:none;padding:8px 12px;border-radius:6px;cursor:pointer;color:var(--ink-2);white-space:nowrap;font-weight:500;font-size:14.5px;letter-spacing:.02em}
+.tab:hover{background:var(--surface-2)}
+.home{white-space:nowrap;font-size:13.5px;color:var(--ink-2);text-decoration:none;border-left:1px solid var(--rule);padding-left:14px}
+.home:hover{color:var(--accent)}
+@media (max-width:640px){.home{display:none}}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+main{flex:1 1 auto;min-height:0;position:relative}
+.view{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 380px}
+.view.page{display:block;overflow:auto;padding-block:24px;padding-inline:16px}
+.panel{border-left:1px solid var(--rule);background:var(--surface);overflow:auto;padding:16px 16px 32px;min-width:0}
+.panel h2{font-family:var(--f-serif);font-weight:700;font-size:19px;margin:0 0 4px;text-wrap:balance}
+.panel h3{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:20px 0 8px;font-weight:700}
+.muted{color:var(--ink-3)} .small{font-size:13px}
+.hint{font-size:13px;color:var(--ink-3);margin:6px 0 0}
+.pill{display:inline-block;border:1px solid var(--rule);border-radius:999px;padding:1px 8px;font-size:12px;color:var(--ink-2);white-space:nowrap}
+.pill.verify{border-color:var(--weld);color:var(--weld)}
+.pill.db{border-color:var(--accent);color:var(--accent)}
+.pill.approx{border-style:dashed}
+.note{border:1px dashed var(--rule);border-radius:8px;padding:10px 12px;margin:14px 0;font-size:13.5px;color:var(--ink-2);background:var(--bg)}
+.note b{font-family:var(--f-serif)}
+
+/* map */
+.mapwrap{position:relative;min-width:0;min-height:0}
+.lmap{position:absolute;inset:0;background:var(--surface-2)}
+.floating{position:absolute;z-index:500;background:var(--surface);border:1px solid var(--rule);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:8px 10px}
+.basectl{top:12px;right:12px;display:flex;flex-direction:column;gap:6px;width:min(250px,calc(100% - 80px))}
+.seg{display:flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.seg button{flex:1;border:0;background:none;padding:5px 8px;cursor:pointer;font-size:13px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.rowc{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+.rowc input[type=range]{flex:1;min-width:0}
+.credit{position:absolute;left:8px;bottom:6px;z-index:450;font-size:11px;color:var(--ink-3);background:color-mix(in srgb,var(--surface) 80%,transparent);padding:2px 6px;border-radius:4px;max-width:calc(100% - 16px)}
+.timectl{left:56px;right:270px;bottom:26px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.timectl label{font-size:13px;color:var(--ink-2)}
+.yrs{font-family:var(--f-serif);font-size:18px;font-weight:700;min-width:110px}
+.dual{position:relative;flex:1 1 220px;height:26px}
+.dual input{position:absolute;left:0;right:0;top:4px;width:100%;pointer-events:none;background:none;-webkit-appearance:none;appearance:none;height:18px}
+.dual input::-webkit-slider-thumb{pointer-events:auto;-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);border:2px solid var(--surface);cursor:pointer}
+.dual input::-moz-range-thumb{pointer-events:auto;width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid var(--surface);cursor:pointer}
+.dual .track{position:absolute;left:0;right:0;top:12px;height:3px;background:var(--rule);border-radius:2px}
+.dual .fill{position:absolute;top:12px;height:3px;background:var(--accent);border-radius:2px}
+.presets{display:flex;gap:6px;flex-wrap:wrap}
+.presets button,.btn{border:1px solid var(--rule);background:var(--surface);border-radius:6px;padding:3px 8px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
+.presets button:hover,.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+.layers{display:grid;gap:6px}
+.layer{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:14px}
+.layer small{color:var(--ink-3)}
+.sw{width:14px;height:14px;border-radius:3px;display:inline-block;flex:0 0 auto}
+.crafts{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:999px;padding:3px 10px 3px 6px;cursor:pointer;background:var(--surface);font-size:13px;color:var(--ink-2)}
+.chip[aria-pressed="false"]{opacity:.45}
+.chip .dot{width:11px;height:11px;border-radius:50%}
+.search{position:relative}
+.search input{width:100%;padding:7px 10px;border:1px solid var(--rule);border-radius:8px;background:var(--bg)}
+.sugg{position:absolute;left:0;right:0;top:100%;z-index:20;background:var(--surface);border:1px solid var(--rule);border-radius:8px;margin-top:4px;max-height:280px;overflow:auto;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.sugg button{display:flex;justify-content:space-between;gap:8px;width:100%;text-align:left;border:0;background:none;padding:6px 10px;cursor:pointer;font-size:13.5px}
+.sugg button:hover,.sugg button.on{background:var(--surface-2)}
+.feat{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.feat button{border:0;background:var(--surface-2);border-radius:6px;padding:3px 8px;font-size:12.5px;cursor:pointer;color:var(--ink-2)}
+.feat button:hover{color:var(--accent)}
+
+.detail{margin-top:8px}
+.plist{list-style:none;padding:0;margin:0}
+.plist li{padding:7px 0;border-top:1px solid var(--rule);display:grid;grid-template-columns:12px 1fr;gap:8px;font-size:13.5px}
+.plist li .dot{width:10px;height:10px;border-radius:50%;margin-top:5px}
+.plist .who{font-weight:700;cursor:pointer}
+.plist .who:hover{color:var(--accent);text-decoration:underline}
+.plist .meta{color:var(--ink-3);font-size:12.5px}
+.recs{width:100%;border-collapse:collapse;font-size:13px}
+.recs td,.recs th{border-top:1px solid var(--rule);padding:5px 4px;vertical-align:top;text-align:left}
+.recs th{font-size:11.5px;color:var(--ink-3);font-weight:700;letter-spacing:.04em}
+.recs td.y{font-variant-numeric:tabular-nums;white-space:nowrap}
+.flag{display:inline-block;font-size:10.5px;border-radius:3px;padding:0 4px;margin-left:3px;background:var(--surface-2);color:var(--ink-2)}
+.card{border:1px solid var(--rule);border-radius:10px;padding:10px 12px;margin:8px 0;background:var(--bg)}
+.card h4{margin:0 0 4px;font-family:var(--f-serif);font-size:16px}
+.card .lab{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:13px;margin:6px 0}
+.kv dt{color:var(--ink-3)} .kv dd{margin:0}
+
+/* Leaflet (inlined, trimmed) */
+.leaflet-image-layer,.leaflet-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane,.leaflet-pane>canvas,.leaflet-pane>svg,.leaflet-tile,.leaflet-tile-container,.leaflet-zoom-box{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:0 0}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-bottom,.leaflet-top{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-pan-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-control,.leaflet-popup-pane{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-image-layer,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-image-layer.leaflet-interactive,.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078a8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:#000}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:focus,.leaflet-bar a:hover{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-control-layers{box-shadow:0 1px 5px rgba(0,0,0,.4);background:#fff;border-radius:5px}.leaflet-control-layers-toggle{background-image:url(images/layers.png);width:36px;height:36px}.leaflet-retina .leaflet-control-layers-toggle{background-image:url(images/layers-2x.png);background-size:26px 26px}.leaflet-touch .leaflet-control-layers-toggle{width:44px;height:44px}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle{display:none}.leaflet-control-layers-expanded .leaflet-control-layers-list{display:block;position:relative}.leaflet-control-layers-expanded{padding:6px 10px 6px 6px;color:#333;background:#fff}.leaflet-control-layers-scrollbar{overflow-y:scroll;overflow-x:hidden;padding-right:5px}.leaflet-control-layers-selector{margin-top:2px;position:relative;top:1px}.leaflet-control-layers label{display:block;font-size:13px;font-size:1.08333em}.leaflet-control-layers-separator{height:0;border-top:1px solid #ddd;margin:5px -10px 5px -6px}.leaflet-default-icon-path{background-image:url(images/marker-icon.png)}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:focus,.leaflet-control-attribution a:hover{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers{box-shadow:none}.leaflet-touch .leaflet-bar,.leaflet-touch .leaflet-control-layers{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:0 0}.leaflet-container a.leaflet-popup-close-button:focus,.leaflet-container a.leaflet-popup-close-button:hover{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto}.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before,.leaflet-tooltip-top:before{position:absolute;pointer-events:none;border:6px solid transparent;background:0 0;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}@media print{.leaflet-control{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.leaflet-container{background:var(--surface-2);font-family:var(--f-sans)}
+.leaflet-bar a{background:var(--surface);color:var(--ink);border-bottom-color:var(--rule)}
+.leaflet-bar a:hover{background:var(--surface-2)}
+.leaflet-tooltip{background:var(--surface);color:var(--ink);border:1px solid var(--rule);box-shadow:0 2px 8px rgba(0,0,0,.15);font-size:12.5px;padding:4px 8px;border-radius:6px}
+.leaflet-tooltip-top:before{border-top-color:var(--surface)}
+.veil{fill:var(--veil);stroke:none}
+.donut{background:none;border:0}
+.donut svg{overflow:visible;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35))}
+.donut text{font-family:var(--f-sans);font-weight:700;fill:var(--ink)}
+.pmark{background:none;border:0}
+.pmark .g{display:grid;place-items:center;width:100%;height:100%;font-size:11px;font-weight:700;color:#fff;border-radius:50%;box-shadow:0 1px 3px rgba(0,0,0,.4);border:1.5px solid #fff}
+.plabel{font-family:var(--f-serif);font-size:12px;color:var(--ink);white-space:nowrap;text-shadow:0 0 3px var(--surface),0 0 3px var(--surface),0 0 3px var(--surface)}
+.fp-step{background:none;border:0}
+.fp-on .donut{opacity:.28}
+.eiring{background:none;border:0}
+.fp-on .donut:hover{opacity:1}
+.fp-step div{width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:700;display:grid;place-items:center;border:2px solid var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.4)}
+
+/* ships view */
+#v-ships{grid-template-rows:minmax(0,1fr) auto}
+.shipstage{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);min-height:0;min-width:0}
+.seawrap,.poolwrap{position:relative;min-width:0;min-height:0;overflow:hidden}
+.seawrap{background:var(--sea);border-left:1px solid var(--rule)}
+#sea{cursor:grab;touch-action:none}
+#sea:active{cursor:grabbing}
+.zbtns{position:absolute;right:10px;bottom:10px;z-index:470;display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+.zbtns button{border:1px solid var(--rule);background:var(--surface);color:var(--ink);border-radius:6px;min-width:30px;height:30px;padding:0 8px;cursor:pointer;font-size:13px;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.zbtns button:hover{color:var(--accent);border-color:var(--accent)}
+.zbtns .pm{font-size:17px;font-weight:700;padding:0}
+#sea{position:absolute;inset:0;width:100%;height:100%}
+.ovl{position:absolute;inset:0;pointer-events:none;z-index:460}
+.stagecap{position:absolute;left:10px;top:8px;z-index:470;font-family:var(--f-serif);font-size:15px;font-weight:700;background:color-mix(in srgb,var(--surface) 85%,transparent);padding:2px 8px;border-radius:6px}
+.stagecap span{font-family:var(--f-sans);font-weight:400;color:var(--ink-3);font-size:12.5px;margin-left:6px}
+.clockbar{grid-column:1/2;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:10px 16px;border-top:1px solid var(--rule);background:var(--surface)}
+#v-ships .panel{grid-row:1/3;grid-column:2}
+.date{font-family:var(--f-serif);font-size:20px;font-weight:700;min-width:150px}
+#monthstrip{flex:1 1 300px;height:46px;min-width:0;cursor:pointer}
+.legend{display:grid;grid-template-columns:auto 1fr;gap:4px 8px;font-size:13px;align-items:center}
+.shipsvg{width:16px;height:12px}
+.port-label{font-size:11px;fill:var(--ink-2);font-family:var(--f-sans)}
+.tip{position:absolute;z-index:600;pointer-events:none;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:6px 9px;font-size:12.5px;box-shadow:0 4px 14px rgba(0,0,0,.18);max-width:260px}
+.tip b{font-family:var(--f-serif)}
+.inport{font-size:13px}
+.inport div{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--rule);padding:4px 0}
+.vlist button{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--rule);background:none;padding:6px 2px;cursor:pointer;font-size:13px;color:var(--ink)}
+.vlist button:hover{color:var(--accent)}
+.vlist .y{font-variant-numeric:tabular-nums;color:var(--ink-3);margin-right:6px}
+
+/* pages */
+.pagewrap{max-width:1180px;margin:0 auto}
+.page h1{font-family:var(--f-serif);font-size:30px;margin:0 0 6px;text-wrap:balance}
+.page h2{font-family:var(--f-serif);font-size:22px;margin:28px 0 8px;text-wrap:balance}
+.page p,.page li{max-width:72ch}
+.lede{color:var(--ink-2);font-size:16px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+.filters select,.filters input{border:1px solid var(--rule);border-radius:8px;padding:5px 8px;background:var(--surface)}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table.books{border-collapse:collapse;width:100%;min-width:860px;font-size:14px}
+table.books th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);padding:8px 10px}
+table.books td{border-top:1px solid var(--rule);padding:9px 10px;vertical-align:top}
+table.books td.y{font-variant-numeric:tabular-nums;font-weight:700}
+table.books .bk{font-family:var(--f-serif);font-style:italic}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:20px}
+.chartcard{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;min-width:0}
+.chartcard h3{font-family:var(--f-serif);font-size:18px;margin:0 0 2px}
+.chartcard .sub{font-size:13px;color:var(--ink-3);margin:0 0 10px}
+.chartcard svg{width:100%;height:auto;display:block}
+.axis text{fill:var(--ink-3);font-size:11px;font-family:var(--f-sans)}
+.axis line,.axis path{stroke:var(--rule)}
+.grid line{stroke:var(--rule);stroke-opacity:.7}
+.lgd{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--ink-2);margin:8px 0 0}
+.lgd span{display:inline-flex;align-items:center;gap:5px}
+.lgd i{width:10px;height:10px;border-radius:2px;display:inline-block}
+details.tbl summary{cursor:pointer;font-size:12.5px;color:var(--accent);margin-top:8px}
+details.tbl table{border-collapse:collapse;font-size:12px;margin-top:6px}
+details.tbl td,details.tbl th{padding:2px 6px;border-top:1px solid var(--rule);text-align:right}
+details.tbl th:first-child,details.tbl td:first-child{text-align:left}
+.srcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:14px}
+.srcgrid .card{background:var(--surface)}
+.checklist li{margin:6px 0}
+.loading{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--f-serif);font-size:18px;color:var(--ink-3);z-index:900;background:var(--bg)}
+
+@media (max-width: 900px){
+  .view{grid-template-columns:1fr;grid-template-rows:58vh auto;overflow:auto}
+  .panel{border-left:0;border-top:1px solid var(--rule);overflow:visible}
+  .timectl{left:10px;right:10px;bottom:22px}
+  .basectl{right:10px;top:10px}
+  #v-ships{grid-template-rows:auto auto auto}
+  .shipstage{grid-template-columns:1fr;grid-template-rows:44vh 46vh}
+  .seawrap{border-left:0;border-top:1px solid var(--rule)}
+  #v-ships .panel{grid-row:auto;grid-column:auto}
+  .clockbar{grid-column:auto}
+  .brand span{display:none}
+}
+@media (max-width: 520px){ .presets{display:none} .timectl{padding:6px 10px} .yrs{font-size:16px;min-width:0} }
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="bar">
+    <div class="brand"><b>Merchant London</b><span>c.1300–1460</span></div>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="t-city" aria-selected="true" data-v="city">City</button>
+      <button class="tab" role="tab" id="t-ships" aria-selected="false" data-v="ships">Port &amp; sea</button>
+      <button class="tab" role="tab" id="t-books" aria-selected="false" data-v="books">Books</button>
+      <button class="tab" role="tab" id="t-figures" aria-selected="false" data-v="figures">Figures</button>
+      <button class="tab" role="tab" id="t-sources" aria-selected="false" data-v="sources">Sources &amp; method</button>
+    </nav>
+    <a class="home" href="https://danieldavies.co/">Daniel Davies</a>
+  </header>
+  <main>
+    <div class="loading" id="loading">Loading the City…</div>
+
+    <!-- CITY -->
+    <section class="view" id="v-city" role="tabpanel" aria-labelledby="t-city">
+      <div class="mapwrap">
+        <div id="map" class="lmap"></div>
+        <div class="floating basectl">
+          <div class="seg" role="group" aria-label="Base map">
+            <button id="b1300" aria-pressed="true">Map of 1270–1300</button>
+            <button id="b1520" aria-pressed="false">Map of c.1520</button>
+          </div>
+          <div class="rowc"><label for="veil">Fade map</label><input id="veil" type="range" min="0" max="0.85" step="0.05" value="0.3"></div>
+        </div>
+        <div class="floating timectl">
+          <div class="yrs num" id="yrsOut">1300–1460</div>
+          <div class="dual" aria-label="Years shown">
+            <div class="track"></div><div class="fill" id="yfill"></div>
+            <input type="range" id="y0" min="1300" max="1460" step="1" value="1300" aria-label="From year">
+            <input type="range" id="y1" min="1300" max="1460" step="1" value="1460" aria-label="To year">
+          </div>
+          <div class="presets">
+            <button data-p="1300,1340">1300–40 · coroners’ rolls</button>
+            <button data-p="1370,1400">1370–1400</button>
+            <button data-p="1400,1460">1400–60</button>
+            <button data-p="1300,1460">All</button>
+          </div>
+        </div>
+        <div class="credit" id="credit"></div>
+      </div>
+      <aside class="panel" id="cityPanel">
+        <h2>Merchants in the City</h2>
+        <p class="hint" id="cityCount"></p>
+        <h3>Find a merchant</h3>
+        <div class="search">
+          <input id="q" type="search" placeholder="Name, e.g. Whittington, Walworth, Spinell" autocomplete="off" aria-label="Search merchants">
+          <div class="sugg" id="sugg" hidden></div>
+        </div>
+        <div class="feat" id="feat"></div>
+        <h3>Crafts</h3>
+        <div class="crafts" id="crafts"></div>
+        <h3>Layers</h3>
+        <div class="layers" id="layers"></div>
+        <div id="detail" class="detail"></div>
+        <div class="note commentary" data-view="city" hidden></div>
+      </aside>
+    </section>
+
+    <!-- SHIPS -->
+    <section class="view" id="v-ships" role="tabpanel" aria-labelledby="t-ships" hidden>
+      <div class="shipstage">
+        <div class="poolwrap" id="poolwrap">
+          <div id="pool" class="lmap"></div>
+          <canvas id="poolCanvas" class="ovl"></canvas>
+          <div class="stagecap">The Pool of London <span>quays on the map of 1270–1300</span></div>
+        </div>
+        <div class="seawrap" id="seawrap">
+          <svg id="sea" role="img" aria-label="Map of sea routes between London and its trading partners"></svg>
+          <canvas id="seaCanvas" class="ovl"></canvas>
+          <div class="stagecap">The sea <span>drag to pan, scroll or pinch to zoom</span></div>
+          <div class="zbtns"><button class="pm" data-z="in" aria-label="Zoom in">+</button><button class="pm" data-z="out" aria-label="Zoom out">−</button><button data-z="home">North Sea</button><button data-z="all">All routes</button></div>
+        </div>
+      </div>
+      <div class="clockbar">
+        <button class="btn primary" id="play" aria-pressed="false">Play</button>
+        <div class="seg" role="group" aria-label="Speed" id="speed">
+          <button data-s="3" aria-pressed="false">Slow</button>
+          <button data-s="1.2" aria-pressed="true">Steady</button>
+          <button data-s="0.35" aria-pressed="false">Fast</button>
+        </div>
+        <div class="date num" id="dateOut">1 January 1390</div>
+        <div class="rowc" style="flex:1 1 220px"><label for="year">Year</label><input type="range" id="year" min="1300" max="1460" value="1390"><output id="yearOut" class="num">1390</output></div>
+        <svg id="monthstrip" role="img" aria-label="Season of each trade, January to December"></svg>
+      </div>
+      <aside class="panel" id="shipPanel">
+        <h2>Ships of the port</h2>
+        <p class="hint">Each ship below is modelled from seasonal patterns described in the secondary literature, except the ones outlined in gold, which are vessels named in the records. Click a ship for details.</p>
+        <h3>Cargoes</h3>
+        <div class="legend" id="tradeLegend"></div>
+        <h3>In port now</h3>
+        <div class="inport" id="inport"></div>
+        <h3>Vessels named in the records</h3>
+        <div class="vlist" id="vlist"></div>
+        <h3>Londoners going overseas</h3>
+        <label class="layer"><input type="checkbox" id="rs"><span>Letters of protection and attorney, this year and the two either side <small>(Medieval Soldier database)</small></span><span></span></label>
+        <label class="layer"><input type="checkbox" id="rsMerch" checked><span>Only those described by a merchant craft</span><span></span></label>
+        <div id="rsList" class="small"></div>
+        <h3>Where London’s alien merchants came from</h3>
+        <label class="layer"><input type="checkbox" id="eiOrig"><span>Home towns recorded in England’s Immigrants <small>(mostly assessments of 1449–57)</small></span><span></span></label>
+        <div class="rowc" style="margin-left:26px"><label for="eiMode">Show</label><select id="eiMode"><option value="merch">Merchants, clerks, factors and brokers</option><option value="all">All alien residents (towns with three or more entries)</option></select></div>
+        <div id="eiOrigList" class="small"></div>
+        <div id="shipDetail"></div>
+        <div class="note commentary" data-view="ships" hidden></div>
+      </aside>
+    </section>
+
+    <!-- BOOKS -->
+    <section class="view page" id="v-books" role="tabpanel" aria-labelledby="t-books" hidden>
+      <div class="pagewrap">
+        <h1>Books and manuscripts</h1>
+        <p class="lede">Books bequeathed, owned, compiled or destroyed by London merchants and their companies. Entries marked <span class="pill db">Database</span> paraphrase a Medieval Londoners record (person number linked)<span id="ledeVerify">; entries marked <span class="pill verify">To verify</span> are drawn from published scholarship and have not yet been checked against a source</span>.</p>
+        <div class="filters">
+          <label>Craft <select id="fCraft"><option value="">All</option></select></label>
+          <label>Kind <select id="fCat"><option value="">All</option></select></label>
+          <label>Basis <select id="fBasis"><option value="">All</option><option value="mld">Database</option><option value="gk">To verify</option></select></label>
+          <input id="fText" type="search" placeholder="Search titles and names" aria-label="Search books">
+          <span class="muted small" id="bookCount"></span>
+        </div>
+        <div class="tablewrap"><table class="books"><thead><tr><th>Year</th><th>Merchant</th><th>Book(s)</th><th>Notes</th><th>Place</th><th>Source</th></tr></thead><tbody id="bookRows"></tbody></table></div>
+        <div class="note commentary" data-view="books" hidden></div>
+      </div>
+    </section>
+
+    <!-- FIGURES -->
+    <section class="view page" id="v-figures" role="tabpanel" aria-labelledby="t-figures" hidden>
+      <div class="pagewrap">
+        <h1>Figures</h1>
+        <p class="lede">Counts drawn from the databases. Each chart states what is being counted; none of them is a count of all London merchants.</p>
+        <div class="note commentary" data-view="figures" hidden></div>
+        <div class="charts">
+          <div class="chartcard" id="ch-mayor"></div>
+          <div class="chartcard" id="ch-mld"></div>
+          <div class="chartcard" id="ch-pleas" style="grid-column:1/-1"></div>
+          <div class="chartcard" id="ch-prot"></div>
+          <div class="chartcard" id="ch-mm"></div>
+          <div class="chartcard" id="ch-ei" style="grid-column:1/-1"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOURCES -->
+    <section class="view page" id="v-sources" role="tabpanel" aria-labelledby="t-sources" hidden>
+      <div class="pagewrap" id="sourcesBody"></div>
+    </section>
+  </main>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+(async function(){
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const store={get(k,d){try{const v=localStorage.getItem('ml.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('ml.'+k,JSON.stringify(v))}catch(e){}}};
+
+/* ---- Site settings ----
+   showUnverified: true shows the book entries marked "To verify" (added from general knowledge, not yet checked).
+   mapCredit: the acknowledgement line shown under each base map; add the Historic Towns Trust's permission wording here. */
+const CONFIG={
+  showUnverified:false,
+  mapCredit:{
+    m1300:'Base map: Historic Towns Trust, “London 1270 to 1300” (rev. 2021), after Henry Johns. © Historic Towns Trust.',
+    m1520:'Base map: Historic Towns Trust, “Tudor London” (c.1520), rotated so north is up. © Historic Towns Trust.'
+  }
+};
+let A,M,COAST;
+try{
+  [A,M,COAST]=await Promise.all(['data/atlas.json','data/merchants.json','data/coast.json'].map(u=>fetch(u).then(r=>{if(!r.ok)throw new Error(u);return r.json()})));
+}catch(e){ $('#loading').textContent='The data files did not load ('+e.message+'). Reload the page to try again.'; return; }
+$('#loading').remove();
+if(!CONFIG.showUnverified){ A.books=A.books.filter(b=>b.basis!=='gk'); const lv=$('#ledeVerify'); if(lv) lv.remove(); const ob=document.querySelector('#fBasis'); if(ob) ob.closest('label').remove(); }
+fetch('content/commentary.html').then(r=>r.ok?r.text():'').then(t=>{ if(!t) return; const d=document.createElement('div'); d.innerHTML=t;
+  d.querySelectorAll('section[data-view]').forEach(sec=>{ const html=sec.innerHTML.replace(/<!--[\s\S]*?-->/g,'').trim(); if(!html) return;
+    document.querySelectorAll(`.commentary[data-view="${sec.dataset.view}"]`).forEach(slot=>{slot.innerHTML=html;slot.hidden=false}); }); }).catch(()=>{});
+
+const GROUPS=M.groups;                     // 8 craft groups, fixed order = colour slots 1..8
+const gcol=i=>i<0?css('--c0'):css('--c'+(i+1));
+const P=M.persons, LINKS=M.links, PL=A.places;
+const MLD=id=>`https://mld.ace.fordham.edu/v2/s/mld/person?id=${id}`;
+const placeById={}; PL.forEach((p,i)=>{placeById[p.id]=i});
+const KIND={parish:'Parish church',ward:'Ward (approximate centre)',market:'Market or trading street',quay:'Quay or wharf',hall:'Company hall',house:'Merchant’s house',civic:'Civic building',seld:'Seld (covered market)',landmark:'Landmark',gate:'City gate'};
+const SRCNOTE={ocr:'position of its own label on the 1270–1300 map',tudor:'label on the c.1520 map, carried back to the 1300 map',est:'placed by hand; approximate'};
+const FLAG={P:'Property',W:'Will',O:'Office',S:'Subsidy roll',w:'Ward only'};
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+/* ---------------- tabs ---------------- */
+const views={city:$('#v-city'),ships:$('#v-ships'),books:$('#v-books'),figures:$('#v-figures'),sources:$('#v-sources')};
+let current='city';
+function show(v){
+  if(!views[v]) v='city';
+  current=v;
+  for(const [k,el] of Object.entries(views)) el.hidden=(k!==v);
+  $$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.v===v?'true':'false'));
+  if(v==='city') setTimeout(()=>cmap.invalidateSize(),0);
+  if(v==='ships') ships.activate(); else ships.deactivate();
+  if(v==='figures') figures.draw();
+  store.set('view',v);
+}
+$$('.tab').forEach(t=>t.addEventListener('click',()=>{show(t.dataset.v);history.replaceState(null,'','#'+t.dataset.v)}));
+
+/* ---------------- map frames ---------------- */
+const BASE={
+  m1300:{W:11218,H:7605,url:'tiles/m1300/{z}/{x}/{y}.jpg',credit:CONFIG.mapCredit.m1300},
+  m1520:{W:10150,H:7020,url:'tiles/m1520/{z}/{x}/{y}.jpg',credit:CONFIG.mapCredit.m1520}
+};
+const ll=(p)=>p?L.latLng(-p[1]/32,p[0]/32):null;
+const FWD=A.xform.fwd, INV=A.xform.inv;
+function polyApply(C,x,y){x/=10000;y/=10000;const b=[1,x,y,x*x,x*y,y*y];return [b.reduce((s,v,i)=>s+v*C[i][0],0),b.reduce((s,v,i)=>s+v*C[i][1],0)]}
+function to15(p13){const X=p13[0]/0.75+1713,Y=p13[1]/0.75;return polyApply(FWD,X,Y)}
+function to13(p15){const o=polyApply(INV,p15[0],p15[1]);return [(o[0]-1713)*0.75,o[1]*0.75]}
+function boundsOf(k){const b=BASE[k];return L.latLngBounds([[-b.H/32,0],[0,b.W/32]])}
+function tileLayer(k){return L.tileLayer(BASE[k].url,{tileSize:1024,minZoom:-3,minNativeZoom:1,maxNativeZoom:5,noWrap:true,bounds:boundsOf(k),keepBuffer:2,updateWhenZooming:false})}
+
+/* ---------------- CITY ---------------- */
+const state={base:store.get('base','m1300'),y0:1300,y1:1460,crafts:new Set(GROUPS.map((_,i)=>i)),
+  layers:Object.assign({merch:true,ward:true,books:true,places:true,ei:false,r1381:false,mm:false},store.get('layers',{})),mmFilter:'trade',veil:store.get('veil',0.3)};
+const cmap=L.map('map',{crs:L.CRS.Simple,minZoom:-0.5,maxZoom:6.5,zoomSnap:0.25,zoomDelta:0.5,attributionControl:false,preferCanvas:false,wheelPxPerZoomLevel:90});
+cmap.createPane('veilPane').style.zIndex=250;
+cmap.createPane('linkPane').style.zIndex=420;
+cmap.createPane('stepPane').style.zIndex=650;
+let ctiles=null, veilRect=null;
+const groupsLayer={ei:L.layerGroup(),merch:L.layerGroup(),books:L.layerGroup(),places:L.layerGroup(),r1381:L.layerGroup(),mm:L.layerGroup(),fp:L.layerGroup()};
+Object.values(groupsLayer).forEach(g=>g.addTo(cmap));
+function pos(p){ if(!p) return null; return state.base==='m1300'? ll(p.p13) : ll(p.p15); }
+function setBase(k,keepView){
+  const prevBase=state.base; let c=null,z=null; if(keepView){c=cmap.getCenter();z=cmap.getZoom()}
+  state.base=k; store.set('base',k);
+  if(ctiles) cmap.removeLayer(ctiles);
+  ctiles=tileLayer(k).addTo(cmap);
+  if(veilRect) cmap.removeLayer(veilRect);
+  veilRect=L.rectangle(boundsOf(k).pad(0.5),{pane:'veilPane',className:'veil',interactive:false,stroke:false,fillOpacity:state.veil}).addTo(cmap);
+  cmap.setMaxBounds(boundsOf(k).pad(0.25));
+  $('#b1300').setAttribute('aria-pressed',k==='m1300');$('#b1520').setAttribute('aria-pressed',k==='m1520');
+  $('#credit').textContent=BASE[k].credit;
+  if(keepView && prevBase!==k){
+    const px=[c.lng*32,-c.lat*32];
+    const np= k==='m1520'? to15(px): to13(px);
+    cmap.setView(ll(np), z+(k==='m1520'?-0.25:0.25),{animate:false});
+  }
+  renderAll();
+  if(fpPerson!=null) drawFootprint(fpPerson,false);
+}
+$('#b1300').onclick=()=>setBase('m1300',true);
+$('#b1520').onclick=()=>setBase('m1520',true);
+$('#veil').value=state.veil;
+$('#veil').oninput=e=>{state.veil=+e.target.value;veilRect&&veilRect.setStyle({fillOpacity:state.veil});store.set('veil',state.veil)};
+
+/* years */
+function setYears(a,b){ if(a>b)[a,b]=[b,a]; state.y0=a;state.y1=b; $('#y0').value=a;$('#y1').value=b;
+  $('#yrsOut').textContent=a===b?a:`${a}–${b}`; const lo=(a-1300)/160*100,hi=(b-1300)/160*100;
+  $('#yfill').style.left=lo+'%';$('#yfill').style.width=(hi-lo)+'%'; renderAll(); }
+$('#y0').oninput=()=>setYears(+$('#y0').value,+$('#y1').value);
+$('#y1').oninput=()=>setYears(+$('#y0').value,+$('#y1').value);
+$$('.presets button').forEach(b=>b.onclick=()=>{const [a,c]=b.dataset.p.split(',').map(Number);setYears(a,c)});
+
+/* crafts */
+const craftBox=$('#crafts');
+GROUPS.forEach((g,i)=>{const b=document.createElement('button');b.className='chip';b.setAttribute('aria-pressed','true');b.innerHTML=`<span class="dot" style="background:${gcol(i)}"></span>${esc(g)}`;
+  b.onclick=(ev)=>{ if(ev.altKey||ev.metaKey){state.crafts=new Set([i])} else { state.crafts.has(i)?state.crafts.delete(i):state.crafts.add(i); if(!state.crafts.size) state.crafts=new Set(GROUPS.map((_,j)=>j)); }
+    $$('#crafts .chip').forEach((c,j)=>c.setAttribute('aria-pressed',state.crafts.has(j)));renderMerch();};
+  craftBox.appendChild(b)});
+const onlyBtn=document.createElement('button');onlyBtn.className='btn';onlyBtn.textContent='All crafts';onlyBtn.onclick=()=>{state.crafts=new Set(GROUPS.map((_,j)=>j));$$('#crafts .chip').forEach(c=>c.setAttribute('aria-pressed','true'));renderMerch()};craftBox.appendChild(onlyBtn);
+
+/* layers */
+const LAYERS=[
+  ['merch','Merchants by parish',`<span class="sw" style="background:conic-gradient(var(--c1) 0 25%,var(--c2) 0 50%,var(--c3) 0 75%,var(--c4) 0)"></span>`,'Medieval Londoners'],
+  ['ward','Include ward-only records',`<span class="sw" style="border:2px dashed var(--ink-3)"></span>`,'approximate'],
+  ['books','Books and manuscripts',`<span class="sw" style="background:var(--weld)"></span>`,''],
+  ['places','Markets, quays, halls',`<span class="sw" style="background:var(--ink-2)"></span>`,''],
+  ['ei','Alien residents by ward, 1440s–50s',`<span class="sw" style="border:2px dotted var(--ink);border-radius:50%"></span>`,'England’s Immigrants'],
+  ['r1381','The rising of 1381',`<span class="sw" style="background:var(--madder)"></span>`,'1381 database'],
+  ['mm','Coroners’ rolls, 1300–40',`<span class="sw" style="border:2px solid var(--ink)"></span>`,'Medieval Murder Map'],
+];
+const lb=$('#layers');
+LAYERS.forEach(([k,label,sw,src])=>{const el=document.createElement('label');el.className='layer';
+  el.innerHTML=`<input type="checkbox" ${state.layers[k]?'checked':''} data-k="${k}"><span>${sw} ${esc(label)}</span><small>${esc(src)}</small>`;
+  el.querySelector('input').onchange=e=>{state.layers[k]=e.target.checked;store.set('layers',state.layers);renderAll()};lb.appendChild(el)});
+const mmSel=document.createElement('div');mmSel.className='rowc';mmSel.style.marginLeft='26px';
+mmSel.innerHTML=`<label for="mmf">Show</label><select id="mmf"><option value="trade">Cases naming merchants or the waterfront</option><option value="all">All cases</option></select>`;
+lb.appendChild(mmSel);$('#mmf').onchange=e=>{state.mmFilter=e.target.value;renderMM()};
+
+/* aggregation */
+function linkInWindow(l){const p=P[l[0]];const y=l[2];if(y) return y>=state.y0&&y<=state.y1;return p[4]>=state.y0&&p[3]<=state.y1}
+function aggregate(){
+  const per=new Map();let persons=new Set();
+  for(const l of LINKS){
+    const p=P[l[0]]; if(!state.crafts.has(p[2])) continue;
+    const isWard=l[3].includes('w'); if(isWard&&!state.layers.ward) continue;
+    if(!linkInWindow(l)) continue;
+    let m=per.get(l[1]); if(!m){m=new Map();per.set(l[1],m)} m.set(l[0],p[2]); persons.add(l[0]);
+  }
+  return {per,persons};
+}
+function donut(counts,total,ward){
+  const zf=Math.max(0.55,Math.min(1.1,0.55+0.22*((cmap.getZoom()||1)-0.5)));
+  const r=Math.min(25,6+2.6*Math.sqrt(total))*zf, s=r*2+6;
+  const data=GROUPS.map((_,i)=>({i,v:counts[i]||0})).filter(d=>d.v);
+  const arcs=d3.pie().value(d=>d.v).sort(null).padAngle(data.length>1?0.05:0)(data);
+  const arc=d3.arc().innerRadius(r*0.52).outerRadius(r);
+  const paths=arcs.map(a=>`<path d="${arc(a)}" fill="${gcol(a.data.i)}"/>`).join('');
+  const ring=ward?`<circle r="${r+2.5}" fill="none" stroke="${css('--ink-2')}" stroke-width="1.4" stroke-dasharray="3 2.5"/>`:'';
+  const fs=(total>99?9.5:11)*Math.max(0.8,zf);
+  return {html:`<svg width="${s}" height="${s}" viewBox="${-s/2} ${-s/2} ${s} ${s}"><circle r="${r*0.52}" fill="${css('--surface')}"/>${ring}${paths}<text text-anchor="middle" dy="${fs*0.36}" font-size="${fs}">${total}</text></svg>`,s};
+}
+let lastAgg=null;
+function renderMerch(){
+  groupsLayer.merch.clearLayers();
+  const ag=aggregate(); lastAgg=ag;
+  $('#cityCount').innerHTML=`<b class="num">${ag.persons.size.toLocaleString()}</b> merchants with a located record in ${state.y0===state.y1?state.y0:state.y0+'–'+state.y1}, at <b class="num">${ag.per.size}</b> places, out of ${P.length.toLocaleString()} merchants in the eight craft groups.`;
+  if(!state.layers.merch) return;
+  const order=[...ag.per.entries()].sort((a,b)=>b[1].size-a[1].size);
+  for(const [pi,m] of order){
+    const pl=PL[pi]; const at=pos(pl); if(!at) continue;
+    const counts={}; for(const g of m.values()) counts[g]=(counts[g]||0)+1;
+    const d=donut(counts,m.size,pl.kind==='ward');
+    const mk=L.marker(at,{icon:L.divIcon({className:'donut',html:d.html,iconSize:[d.s,d.s]}),riseOnHover:true,keyboard:true,title:pl.name});
+    mk.bindTooltip(`<b>${esc(pl.name)}</b><br>${m.size} merchant${m.size>1?'s':''}`,{direction:'top',offset:[0,-d.s/2]});
+    mk.on('click',()=>showPlace(pi));
+    groupsLayer.merch.addLayer(mk);
+  }
+}
+function placeHead(pi){
+  const pl=PL[pi];
+  return `<div class="card"><div class="lab">${esc(KIND[pl.kind]||pl.kind)}</div><h4>${esc(pl.name)}</h4>
+  ${pl.label&&pl.label!==pl.name?`<div class="small">On the map as <i>${esc(pl.label)}</i></div>`:''}
+  ${pl.note?`<div class="small" style="margin-top:4px">${esc(pl.note)}</div>`:''}
+  <div class="small muted" style="margin-top:4px">Position: ${esc(SRCNOTE[pl.src]||pl.src)}${pl.p15?'':'. Not shown on the c.1520 map (Westminster inset).'}</div></div>`;
+}
+function showPlace(pi){
+  clearFootprint();
+  const pl=PL[pi]; let html=placeHead(pi);
+  const m=lastAgg&&lastAgg.per.get(pi);
+  if(m&&m.size){
+    const rows=[...m.keys()].map(i=>P[i]).sort((a,b)=>a[2]-b[2]||a[3]-b[3]);
+    html+=`<h3>${m.size} merchant${m.size>1?'s':''}, ${state.y0}–${state.y1}</h3><ul class="plist">`;
+    for(const p of rows.slice(0,400)){
+      const pi2=P.indexOf(p);
+      const fl=new Set(LINKS.filter(l=>l[0]===pi2&&l[1]===pi).flatMap(l=>l[3].split('')));
+      html+=`<li><span class="dot" style="background:${gcol(p[2])}"></span><div><span class="who" data-p="${pi2}" tabindex="0">${esc(p[1].split(';')[0])}</span> <span class="meta">${esc(GROUPS[p[2]])}, ${p[3]}${p[4]!==p[3]?'–'+p[4]:''}</span>
+      ${p[5]?`<div class="meta">${esc(p[5])}</div>`:''}<div>${[...fl].map(f=>`<span class="flag">${FLAG[f]||f}</span>`).join('')}</div></div></li>`;
+    }
+    html+='</ul>'; if(rows.length>400) html+=`<p class="hint">First 400 shown.</p>`;
+  }
+  const bks=A.books.filter(b=>b.place===pl.id);
+  if(bks.length){ html+=`<h3>Books</h3>`+bks.map(bookCard).join(''); }
+  const r=A.r1381.filter(e=>e.place===pl.id); if(r.length) html+=`<h3>1381</h3>`+r.map(revCard).join('');
+  $('#detail').innerHTML=html; wireWho($('#detail'));
+}
+function wireWho(root){root.querySelectorAll('.who').forEach(el=>{const f=()=>selectPerson(+el.dataset.p);el.onclick=f;el.onkeydown=e=>{if(e.key==='Enter')f()}})}
+
+/* footprint of one merchant */
+let fpPerson=null;
+function clearFootprint(){fpPerson=null;groupsLayer.fp.clearLayers();$('#map').classList.remove('fp-on')}
+function personLinks(i){return LINKS.filter(l=>l[0]===i).sort((a,b)=>(a[2]||9999)-(b[2]||9999))}
+function drawFootprint(i,fit=true){
+  groupsLayer.fp.clearLayers(); fpPerson=i;
+  const ls=personLinks(i); const seq=[]; const seen=new Set();
+  for(const l of ls){ if(seen.has(l[1])) continue; seen.add(l[1]); const at=pos(PL[l[1]]); if(at) seq.push([at,l]); }
+  const lineSeq=seq.filter(s=>PL[s[1][1]].p15);
+  if(lineSeq.length>1) L.polyline(lineSeq.map(s=>s[0]),{pane:'linkPane',color:css('--accent'),weight:3,opacity:.85,dashArray:'6 5'}).addTo(groupsLayer.fp);
+  $('#map').classList.toggle('fp-on',true);
+  seq.forEach(([at,l],k)=>{const pl=PL[l[1]];L.marker(at,{pane:'stepPane',icon:L.divIcon({className:'fp-step',html:`<div>${k+1}</div>`,iconSize:[20,20]})})
+    .bindTooltip(`${k+1}. ${esc(pl.name)}${l[2]?' · '+l[2]:''}`,{direction:'top',offset:[0,-10]}).addTo(groupsLayer.fp)});
+  const fitSeq=lineSeq.length?lineSeq:seq;
+  if(fit&&fitSeq.length) cmap.flyToBounds(L.latLngBounds(fitSeq.map(s=>s[0])).pad(0.35),{maxZoom:4.25,duration:.8});
+}
+function selectPerson(i){
+  const p=P[i]; drawFootprint(i);
+  const ls=personLinks(i);
+  const srcs=M.sources;
+  let html=`<div class="card"><div class="lab">${esc(GROUPS[p[2]])}${p[8]&&p[8].toLowerCase()!==GROUPS[p[2]].toLowerCase()?' · '+esc(p[8]):''}</div><h4>${esc(p[1].split(';')[0])}${p[7]?` <span class="muted small">(${esc(p[7])})</span>`:''}</h4>${p[1].includes(';')?`<div class="small muted">Also entered as ${esc(p[1].split(';').slice(1).join(';').trim())}</div>`:''}
+  <dl class="kv"><dt>Recorded</dt><dd class="num">${p[3]}${p[4]!==p[3]?'–'+p[4]:''}</dd>${p[5]?`<dt>Civic office</dt><dd>${esc(p[5])}</dd>`:''}${p[6]?`<dt>Craft office</dt><dd>${esc(p[6])}</dd>`:''}</dl>
+  <div class="rowc" style="justify-content:space-between"><a href="${MLD(p[0])}" target="_blank" rel="noopener">Medieval Londoners record ${p[0]} ↗</a><button class="btn" id="clearfp">Clear trail</button></div></div>`;
+  if(ls.length){
+    html+=`<h3>${ls.length} located record${ls.length>1?'s':''}</h3><p class="hint">Numbered on the map in date order. A record naming several parishes is linked to each.</p><table class="recs"><tr><th>Year</th><th>Place</th><th>Source</th></tr>`;
+    for(const l of ls){const pl=PL[l[1]];html+=`<tr><td class="y">${l[2]||'—'}</td><td><a href="#" data-pl="${l[1]}">${esc(pl.name)}</a>${l[3].split('').map(f=>`<span class="flag">${FLAG[f]||f}</span>`).join('')}${l[5]?`<div class="muted small">${esc(l[5])}</div>`:''}</td><td class="small">${esc(srcs[l[4]])}</td></tr>`}
+    html+='</table>';
+  } else html+=`<p class="hint">No record for this merchant names a parish or ward.</p>`;
+  const bks=A.books.filter(b=>b.pid===p[0]); if(bks.length) html+='<h3>Books</h3>'+bks.map(bookCard).join('');
+  const sh=A.ships.filter(s=>s.pid===p[0]); if(sh.length) html+='<h3>Ships</h3>'+sh.map(s=>`<div class="card"><h4>${esc(s.name)} <span class="muted num">${s.year}</span></h4><div class="small">${esc(s.note)}</div><div class="small muted">${esc(s.src)}</div></div>`).join('');
+  $('#detail').innerHTML=html;
+  $('#clearfp').onclick=()=>{clearFootprint();$('#detail').innerHTML=''};
+  $('#detail').querySelectorAll('[data-pl]').forEach(a=>a.onclick=e=>{e.preventDefault();const at=pos(PL[+a.dataset.pl]);if(at)cmap.flyTo(at,Math.max(cmap.getZoom(),4),{duration:.6})});
+  if(window.innerWidth<900) $('#detail').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* search */
+const names=P.map((p,i)=>({i,n:p[1],k:p[1].toLowerCase()}));
+const q=$('#q'),sg=$('#sugg');let sel=-1,cur=[];
+const eiNames=eiGroups().map(g=>({ei:g,k:g.name.toLowerCase()}));
+function pick(x){ sg.hidden=true; if(x.ei){ q.value=x.ei.name; clearFootprint(); $('#detail').innerHTML=`<div class="card"><div class="lab">England’s Immigrants · alien resident</div><h4>${esc(x.ei.name)}</h4><ul class="plist">${eiItem(x.ei)}</ul><div class="small muted">Not in the Medieval Londoners database; no parish recorded, so the person is not placed on the map.</div></div><p><button class="btn" id="eiAll2">All alien merchants and agents</button></p>`; $('#eiAll2').onclick=()=>showEIList(''); } else { q.value=P[x.i][1].split(';')[0]; selectPerson(x.i); } }
+function suggest(){const t=q.value.trim().toLowerCase();if(t.length<2){sg.hidden=true;return}
+  const a=names.filter(x=>x.k.includes(t)).sort((a,b)=>a.k.indexOf(t)-b.k.indexOf(t)).slice(0,12);
+  const b=eiNames.filter(x=>x.k.includes(t)).sort((a,b)=>a.k.indexOf(t)-b.k.indexOf(t)).slice(0,6);
+  cur=[...a,...b];
+  sg.innerHTML=cur.map((x,k)=>{ if(x.ei){const r=x.ei.recs[0];return `<button data-k="${k}" class="${k===sel?'on':''}"><span>${esc(x.ei.name)}</span><span class="muted small">Alien ${esc(r[6])}${r[2]?', '+esc(r[2]):''}, ${r[4].slice(0,4)}</span></button>`}
+    const p=P[x.i];return `<button data-k="${k}" class="${k===sel?'on':''}"><span>${esc(p[1].split(';')[0])}</span><span class="muted small">${esc(GROUPS[p[2]])}, ${p[3]}</span></button>`}).join('')||`<div class="hint" style="padding:8px">No merchant of that name between 1300 and 1460.</div>`;
+  sg.hidden=false;sg.querySelectorAll('button').forEach(b=>b.onclick=()=>pick(cur[+b.dataset.k]))}
+q.oninput=()=>{sel=-1;suggest()};
+q.onkeydown=e=>{if(sg.hidden)return;if(e.key==='ArrowDown'){sel=Math.min(cur.length-1,sel+1);suggest();e.preventDefault()}else if(e.key==='ArrowUp'){sel=Math.max(0,sel-1);suggest();e.preventDefault()}else if(e.key==='Enter'&&cur.length){pick(cur[Math.max(sel,0)])}else if(e.key==='Escape')sg.hidden=true};
+document.addEventListener('click',e=>{if(!e.target.closest('.search'))sg.hidden=true});
+const FEATURED=[333,441,311,18,572,712,688,545,513,257,316,343,600,142];
+$('#feat').innerHTML=FEATURED.map(id=>{const i=P.findIndex(p=>p[0]===id);if(i<0)return '';return `<button data-i="${i}">${esc(P[i][1].split(';')[0].replace(/\s*\(.*?\)/,''))}</button>`}).join('');
+$('#feat').querySelectorAll('button').forEach(b=>b.onclick=()=>selectPerson(+b.dataset.i));
+
+/* books on map */
+function bookCard(b){
+  return `<div class="card"><div class="lab">${esc(b.cat)} · <span class="num">${b.year}</span></div><h4>${esc(b.who)} <span class="muted small">${esc(b.craft)}</span></h4>
+  <div class="bk" style="font-family:var(--f-serif);font-style:italic">${esc(b.books)}</div><div class="small" style="margin-top:4px">${esc(b.note)}</div>
+  <div class="small muted" style="margin-top:4px">${b.basis==='mld'?`<span class="pill db">Database</span> ${esc(b.src)}${b.pid?` · <a href="${MLD(b.pid)}" target="_blank" rel="noopener">MLD ${b.pid} ↗</a>`:''}`:'<span class="pill verify">To verify</span> added from general knowledge'}${b.flag?` · <span class="pill approx">${esc(b.flag)}</span>`:''}</div></div>`;
+}
+function renderBooks(){
+  groupsLayer.books.clearLayers(); if(!state.layers.books) return;
+  const by={}; A.books.forEach(b=>{ if(b.year<state.y0-10||b.year>state.y1+10) return; (by[b.place]=by[b.place]||[]).push(b)});
+  for(const [k,bs] of Object.entries(by)){
+    const pl=PL[placeById[k]]; const at=pos(pl); if(!at) continue;
+    const ic=L.divIcon({className:'pmark',iconSize:[22,22],html:`<div class="g" style="background:var(--weld);border-radius:4px">${bs.length>1?bs.length:'B'}</div>`});
+    L.marker(at,{icon:ic,zIndexOffset:500,title:'Books at '+pl.name}).bindTooltip(`<b>${esc(pl.name)}</b><br>${bs.map(b=>esc(b.who)+' ('+b.year+')').join('<br>')}`,{direction:'top',offset:[0,-12]})
+      .on('click',()=>{clearFootprint();$('#detail').innerHTML=placeHead(placeById[k])+'<h3>Books</h3>'+bs.map(bookCard).join('')}).addTo(groupsLayer.books);
+  }
+}
+/* places */
+const GLYPH={market:'◆',quay:'⚓',hall:'■',house:'●',civic:'★',seld:'▪',landmark:'▲',gate:'⊓'};
+function renderPlaces(){
+  groupsLayer.places.clearLayers(); if(!state.layers.places) return;
+  for(const [i,pl] of PL.entries()){
+    if(pl.kind==='parish'||pl.kind==='ward') continue;
+    const at=pos(pl); if(!at) continue;
+    const ic=L.divIcon({className:'pmark',iconSize:[16,16],html:`<div class="g" style="background:var(--ink-2);font-size:9px">${GLYPH[pl.kind]||'•'}</div>`});
+    L.marker(at,{icon:ic,title:pl.name}).bindTooltip(`<b>${esc(pl.name)}</b><br><span class="muted">${esc(KIND[pl.kind]||'')}</span>`,{direction:'top',offset:[0,-8]})
+      .on('click',()=>{clearFootprint();$('#detail').innerHTML=placeHead(i)+(A.books.filter(b=>b.place===pl.id).map(bookCard).join(''))+(A.r1381.filter(e=>e.place===pl.id).map(revCard).join(''))}).addTo(groupsLayer.places);
+  }
+}
+/* 1381 */
+function revCard(e){const d=new Date(e.date+'T12:00:00');return `<div class="card"><div class="lab num">${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} 1381${e.merchant?' · merchant':''}${e.approx?' · location approximate':''}</div><h4>${esc(e.who)}</h4><div class="small">${esc(e.text)}</div><div class="small muted">${esc(e.ref)} · <a href="https://data.1381.online/projects_database/pr_search_all_new_ro/" target="_blank" rel="noopener">1381 database ↗</a></div></div>`}
+function render1381(){
+  groupsLayer.r1381.clearLayers(); if(!state.layers.r1381||state.y0>1382||state.y1<1381) return;
+  const by={}; A.r1381.forEach((e,k)=>(by[e.place]=by[e.place]||[]).push(e));
+  for(const [k,es] of Object.entries(by)){ const pi=placeById[k]; if(pi==null) continue; const pl=PL[pi]; const at=pos(pl); if(!at) continue;
+    const days=[...new Set(es.map(e=>+e.date.slice(8)))].join(', ');
+    const ic=L.divIcon({className:'pmark',iconSize:[24,24],html:`<div class="g" style="background:var(--madder)">${es.length>1?es.length:days}</div>`});
+    L.marker(at,{icon:ic,zIndexOffset:800,title:'1381: '+pl.name}).bindTooltip(`<b>${esc(pl.name)}</b>, June 1381<br>${es.map(e=>esc(e.who)).join('<br>')}`,{direction:'top',offset:[0,-12]})
+      .on('click',()=>{clearFootprint();$('#detail').innerHTML=`<h3>1381 at ${esc(pl.name)}</h3>`+es.map(revCard).join('')}).addTo(groupsLayer.r1381);
+  }
+}
+/* coroners' rolls */
+function renderMM(){
+  groupsLayer.mm.clearLayers(); if(!state.layers.mm) return;
+  for(const m of A.murders){
+    if(state.mmFilter==='trade'&&!m.tags.length) continue;
+    if(m.year&&(m.year<state.y0||m.year>state.y1)) continue;
+    const at=state.base==='m1300'?ll(m.p13):ll(m.p15); if(!at) continue;
+    const c=m.tags.includes('merchant')?css('--madder'):m.tags.includes('waterfront')?css('--accent'):css('--ink-2');
+    L.circleMarker(at,{radius:5,color:c,weight:2,fillColor:css('--surface'),fillOpacity:1}).bindTooltip(`<b>${esc(m.title)}</b><br>${m.year||''} · ${esc(m.ref)}`,{direction:'top'})
+     .on('click',()=>{clearFootprint();$('#detail').innerHTML=`<div class="card"><div class="lab">Coroners’ roll ${esc(m.ref)}${m.year?' · '+m.year:''} · ${esc(m.type)}</div><h4>${esc(m.title)}</h4>
+       <div class="small">${m.tags.length?'Tagged: '+m.tags.join(', ')+(m.words.length?' ('+m.words.map(esc).join(', ')+')':''):'No merchant or waterfront terms in the entry.'}</div>
+       <div class="small muted">Position carried over from the Medieval Murder Map’s own placing (fit error c.${Math.round(A.mmfit*0.217/5)*5} m). <a href="https://medievalmurdermap.co.uk/maps/london/${esc(m.slug)}/" target="_blank" rel="noopener">Case on the Medieval Murder Map ↗</a></div></div>`}).addTo(groupsLayer.mm);
+  }
+}
+/* England's Immigrants */
+const EIURL=id=>`https://www.englandsimmigrants.com/person/${id}`;
+const EIAG=new Set(['merchant',"merchant's clerk",'factor/attorney','broker']);
+function eiKey(n){const k=n.toLowerCase().replace(/\[\.\.\.\]/g,'').replace(/[^a-z]/g,'');return k}
+function eiGroups(fn){ const m=new Map(); for(const p of A.ei.people){ if(fn&&!fn(p)) continue; const k=eiKey(p[1]); const key=k.length>4?k:'id'+p[0]; let g=m.get(key); if(!g){g={name:p[1],recs:[]};m.set(key,g)} g.recs.push(p); }
+  return [...m.values()].sort((a,b)=>a.name.localeCompare(b.name)); }
+function eiItem(g){ const r=g.recs; const u=f=>[...new Set(r.map(f).filter(Boolean))];
+  return `<li><span class="dot" style="background:var(--ink-2)"></span><div><b>${esc(g.name)}</b> <span class="meta">${esc(u(x=>x[6]).join(', '))}${u(x=>x[2]).length?' · '+esc(u(x=>x[2]).join(', ')):''}</span>
+  <div class="meta">${u(x=>x[5]).length?'From '+esc(u(x=>x[5]).join(', '))+' · ':''}${u(x=>x[3]).length?esc(u(x=>x[3]).join(', '))+' · ':''}<span class="num">${u(x=>x[4].slice(0,4)).sort().join(', ')}</span></div>
+  <div>${r.map(x=>`<a class="flag" href="${EIURL(x[0])}" target="_blank" rel="noopener" title="England’s Immigrants record ${x[0]}">${x[4]}</a>`).join('')}</div></div></li>`; }
+function renderEI(){
+  groupsLayer.ei.clearLayers(); if(!state.layers.ei||state.y1<1430||state.y0>1460) return;
+  const WD=A.ei.wards, max=d3.max(Object.values(WD),v=>v[0]);
+  const zf=Math.max(0.55,Math.min(1.1,0.55+0.22*((cmap.getZoom()||1)-0.5)));
+  for(const [w,[n,pi]] of Object.entries(WD)){ if(pi<0) continue; const pl=PL[pi]; const at=pos(pl); if(!at) continue;
+    const r=(9+30*Math.sqrt(n/max))*zf, sz=Math.ceil(r*2+4);
+    const html=`<svg width="${sz}" height="${sz}" viewBox="${-sz/2} ${-sz/2} ${sz} ${sz}"><circle r="${r}" fill="${css('--ink')}" fill-opacity=".07" stroke="${css('--ink')}" stroke-width="1.8" stroke-dasharray="0.5 3.5" stroke-linecap="round"/></svg>`;
+    L.marker(at,{icon:L.divIcon({className:'eiring',html,iconSize:[sz,sz]}),zIndexOffset:-1000,title:w+' ward: alien residents'})
+      .bindTooltip(`<b>${esc(w)} ward</b><br>${n.toLocaleString()} entries for alien residents`,{direction:'top',offset:[0,-r]})
+      .on('click',()=>showEIWard(w)).addTo(groupsLayer.ei);
+  }
+}
+function showEIWard(w){
+  clearFootprint(); const [n,pi]=A.ei.wards[w]; const tot=d3.sum(Object.values(A.ei.wards),v=>v[0]);
+  const rank=Object.entries(A.ei.wards).sort((a,b)=>b[1][0]-a[1][0]).findIndex(e=>e[0]===w)+1;
+  const gs=eiGroups(p=>p[7]===pi);
+  $('#detail').innerHTML=`<div class="card"><div class="lab">England’s Immigrants · alien residents</div><h4>${esc(w)} ward</h4>
+    <dl class="kv"><dt>Entries</dt><dd class="num">${n.toLocaleString()}</dd><dt>Share</dt><dd>${(100*n/tot).toFixed(1)}% of the ${tot.toLocaleString()} London entries that name a ward (rank ${rank} of 25)</dd></dl>
+    <div class="small muted">Nearly all from the alien subsidy assessments of the 1440s and 1450s. Counts are entries; the same person can appear in several assessments.</div></div>`+
+    (gs.length?`<h3>Merchants and agents recorded in this ward</h3><ul class="plist">${gs.map(eiItem).join('')}</ul>`:'')+
+    `<p><button class="btn" id="eiAll">All alien merchants and agents in London</button></p>`;
+  $('#eiAll').onclick=()=>showEIList('');
+}
+function showEIList(nat){
+  clearFootprint();
+  const base=p=>EIAG.has(p[6]); const all=A.ei.people.filter(base);
+  const gs=eiGroups(p=>base(p)&&(!nat||(nat==='-'?!p[2]:p[2]===nat)));
+  const nats=d3.rollups(all,v=>new Set(v.map(p=>eiKey(p[1]))).size,p=>p[2]||'-').sort((a,b)=>b[1]-a[1]);
+  $('#detail').innerHTML=`<h3>Alien merchants and agents in London</h3><p class="hint">England’s Immigrants entries for merchants, merchants’ clerks, factors and brokers resident in London, 1300–1460 (${all.length} entries, about ${eiGroups(base).length} names). Most come from the assessments of 1449–57, which give no ward.</p>
+    <div class="feat"><button data-n="">All</button>${nats.map(([k,c])=>`<button data-n="${esc(k)}"${k===nat?' style="color:var(--accent);font-weight:700"':''}>${esc(k==='-'?'Nationality not stated':k)} <span class="num">${c}</span></button>`).join('')}</div>
+    <ul class="plist">${gs.map(eiItem).join('')}</ul>`;
+  $('#detail').querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>showEIList(b.dataset.n));
+}
+function renderAll(){renderEI();renderMerch();renderBooks();renderPlaces();render1381();renderMM()}
+
+setBase(state.base,false);
+{ let c1=[(5200-1713)*.75,2600*.75], c2=[(15400-1713)*.75,8600*.75]; if(state.base==='m1520'){c1=to15(c1);c2=to15(c2)} cmap.fitBounds(L.latLngBounds([ll(c1),ll(c2)]).pad(0.02)); }
+setYears(1300,1460);
+let lastZf=null; cmap.on('zoomend',()=>{const z=Math.round(cmap.getZoom()*2)/2; if(z!==lastZf){lastZf=z;renderMerch();renderEI()}});
+$('#detail').innerHTML=`<p class="hint">Click a circle for the merchants recorded at that church or ward, or search for a merchant to trace every place their records name.</p>`;
+
+/* ---------------- SHIPS ---------------- */
+const ships=(function(){
+  const R=A.routes, PORTS=R.ports, WP=R.wp;
+  const FAM=[{n:'Wool',t:['woolB','woolC']},{n:'Grain and coal',t:['corn','coal']},{n:'Cloth',t:['cloth']},{n:'Fish',t:['stockfish','iceland','herring']},
+             {n:'Italian luxuries',t:['galleys']},{n:'Baltic and Low Countries goods',t:['hanse','lowc']},{n:'Wine',t:['wine']},{n:'Iberian goods',t:['iberia']}];
+  const famOf={}; FAM.forEach((f,i)=>f.t.forEach(t=>famOf[t]=i));
+  const fcol=i=>css('--c'+(i+1));
+  const UP=new Set(['steelyard','dowgate','vintry','threecranes','queenhithe','garlickhithe','timberhithe','pauls_wharf','heywharf']);
+  const QNAME={billingsgate:'Billingsgate',woolwharf:'Wool Wharf',galleykey:'Galley Quay',stockfishwharf:'Stockfish Wharf',botolphwharf:'Botolph Wharf',fishwharf:'Fish Wharf',customhouse:'Custom House',tower:'Tower Wharf',stkath:'St Katharine’s',steelyard:'Steelyard',dowgate:'Dowgate',vintry:'Vintry',threecranes:'Three Cranes',queenhithe:'Queenhithe',garlickhithe:'Garlickhithe',timberhithe:'Timberhithe',pauls_wharf:'Paul’s Wharf',heywharf:'Heywharf'};
+  const LONDON=[PORTS.london[1],PORTS.london[2]];
+  function pt(k){ if(PORTS[k]) return [PORTS[k][1],PORTS[k][2]]; return WP[k]; }
+  function routeLL(port){ const ch=R.routes[port]||['gravesend','nore','foreland',port]; return [LONDON,...ch.map(pt)]; }
+  function hav(a,b){const r=Math.PI/180,dl=(b[0]-a[0])*r,dn=(b[1]-a[1])*r;const h=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dn/2)**2;return 12742*Math.asin(Math.sqrt(h))}
+  function km(r){let s=0;for(let i=1;i<r.length;i++)s+=hav(r[i-1],r[i]);return s}
+  function rng(seed){let a=seed>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+  function hash(s){let h=2166136261;for(const c of s)h=Math.imul(h^c.charCodeAt(0),16777619);return h>>>0}
+  const cache={};
+  function voyages(year){
+    if(cache[year]) return cache[year];
+    const out=[]; const base=(year-1300)*365;
+    for(const tr of A.trades){
+      if(year<tr.years[0]||year>tr.years[1]) continue;
+      const r=rng(hash(tr.id+year)); const route=routeLL(tr.origin); const dur=Math.max(1.5,km(route)/140)+0.6;
+      for(let m=0;m<12;m++){ let k=tr.months[m]; k=Math.floor(k*0.9+r()*1.1); for(let j=0;j<k;j++){
+        const day=base+m*30.42+r()*30.42; const dwell=4+r()*9+(tr.id==='hanse'?6:0);
+        let tArr,tLeave; if(tr.dir==='in'){tArr=day;tLeave=day+dwell}else{tLeave=day;tArr=day-dwell}
+        out.push({kind:'model',trade:tr,fam:famOf[tr.id],route,dur,tArr,tLeave,quay:tr.quay,laden:tr.dir,port:tr.origin,id:tr.id+year+'-'+m+'-'+j});
+      }}
+    }
+    for(const s of A.ships){ if(s.year!==year) continue;
+      const day=base+(s.id==='dordrecht'?305:s.id==='borromei'?220:170);
+      if(s.origin){ const route=routeLL(s.origin); const dur=Math.max(1.5,km(route)/140)+0.6;
+        const v={kind:'rec',ship:s,fam:s.outbound?0:5,route,dur,tArr:s.outbound?day-6:day,tLeave:s.outbound?day:day+8,quay:s.quay,laden:s.outbound?'out':'in',port:s.origin,id:s.id};
+        if(s.wreck){ v.wreck=s.wreck; v.tLeave=Infinity; }
+        out.push(v);
+      } else out.push({kind:'rec',ship:s,fam:-1,static:true,quay:s.quay,tArr:base-1,tLeave:base+366,id:s.id});
+    }
+    cache[year]=out; return out;
+  }
+
+  /* sea map (d3, zoomable) */
+  const svg=d3.select('#sea'), seaCanvas=$('#seaCanvas'); let proj,W=0,H=0,routesProj={},zt=d3.zoomIdentity,zoomer=null,gWorld=null,gMarks=null,eiLayer=null,homeT=null,lastWH='';
+  const S=p=>zt.apply(p);
+  const TIER1=['london','calais','sluys','antwerp','bordeaux','lisbon','venice','genoa','hamburg','lubeck','danzig','bergen','iceland','newcastle'];
+  const TIER2=['dordrecht','middelburg','southampton','yarmouth','lynn','seville','larochelle','bayonne','flushing','sandwich','harfleur','caen','cherbourg','brest','berwick','dublin','corunna'];
+  function drawSea(){
+    const box=$('#seawrap').getBoundingClientRect(); W=box.width;H=box.height; if(!W||!H) return;
+    const sameSize=(lastWH===W+'x'+H); lastWH=W+'x'+H;
+    svg.attr('viewBox',`0 0 ${W} ${H}`); svg.selectAll('*').remove();
+    const full={type:'MultiPoint',coordinates:[[-26,34],[22,34],[22,66],[-26,66]]};
+    proj=d3.geoConicConformal().parallels([42,60]).rotate([-2,0]).fitExtent([[6,6],[W-6,H-6]],full);
+    const path=d3.geoPath(proj);
+    svg.append('rect').attr('width',W).attr('height',H).attr('fill',css('--sea'));
+    gWorld=svg.append('g');
+    gWorld.append('path').datum(COAST).attr('d',path).attr('fill',css('--land')).attr('stroke',css('--land-edge')).attr('stroke-width',0.7).attr('vector-effect','non-scaling-stroke');
+    routesProj={};
+    const used=new Set([...A.trades.map(t=>t.origin),...A.ships.filter(s=>s.origin).map(s=>s.origin),'calais','bordeaux','berwick','lisbon','corunna','dublin','brest','cherbourg','caen','jersey','sluys','sea']);
+    for(const k of used){ const r=routeLL(k); routesProj[k]=r.map(p=>proj([p[1],p[0]]));
+      gWorld.append('path').attr('d',d3.line()(routesProj[k])).attr('fill','none').attr('stroke',css('--route')).attr('stroke-width',1).attr('stroke-dasharray','2 3').attr('vector-effect','non-scaling-stroke'); }
+    rsLayer=svg.append('g'); eiLayer=svg.append('g'); gMarks=svg.append('g');
+    const a=proj([-7,59.5]), b=proj([12.5,46.5]);
+    const k=Math.min(W/Math.abs(b[0]-a[0]), H/Math.abs(b[1]-a[1]))*0.95, cx=(a[0]+b[0])/2, cy=(a[1]+b[1])/2;
+    homeT=d3.zoomIdentity.translate(W/2-k*cx,H/2-k*cy).scale(k);
+    zoomer=d3.zoom().scaleExtent([0.9,30]).translateExtent([[-W*0.3,-H*0.3],[W*1.3,H*1.3]])
+      .on('zoom',e=>{zt=e.transform;gWorld.attr('transform',zt);drawMarks();drawRS();drawEIOrig();if(!playing)frame(true)});
+    svg.call(zoomer).on('dblclick.zoom',null);
+    svg.call(zoomer.transform, sameSize?zt:homeT);
+    sizeCanvas(seaCanvas,W,H);
+  }
+  function drawMarks(){
+    if(!gMarks||!proj) return; gMarks.selectAll('*').remove();
+    const keys=[...TIER1,...(homeT&&zt.k>=homeT.k*1.5?TIER2:[])];
+    for(const k of keys){ const p=PORTS[k]; if(!p) continue; const xy=S(proj([p[2],p[1]])); if(xy[0]<-30||xy[0]>W+30||xy[1]<-30||xy[1]>H+30) continue;
+      gMarks.append('circle').attr('cx',xy[0]).attr('cy',xy[1]).attr('r',k==='london'?4.5:2.6).attr('fill',k==='london'?css('--accent'):css('--ink-2'));
+      gMarks.append('text').attr('class','port-label').attr('x',xy[0]+5).attr('y',xy[1]-4).text(p[0]).attr('font-weight',k==='london'?700:400); }
+  }
+  $$('.zbtns button').forEach(b=>b.onclick=()=>{ if(!zoomer) return; const t=svg.transition().duration(450);
+    if(b.dataset.z==='in') t.call(zoomer.scaleBy,1.6); else if(b.dataset.z==='out') t.call(zoomer.scaleBy,1/1.6);
+    else if(b.dataset.z==='home') t.call(zoomer.transform,homeT); else t.call(zoomer.transform,d3.zoomIdentity); });
+  function sizeCanvas(c,w,h){const d=window.devicePixelRatio||1;c.width=Math.round(w*d);c.height=Math.round(h*d);c.style.width=w+'px';c.style.height=h+'px';c.getContext('2d').setTransform(d,0,0,d,0,0)}
+  function along(pts,f){ // pts projected; f 0..1 -> [x,y,angle]
+    if(!pts||pts.length<2) return null; let tot=0; const seg=[]; for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);tot+=d}
+    let t=Math.max(0,Math.min(1,f))*tot; for(let i=0;i<seg.length;i++){ if(t<=seg[i]||i===seg.length-1){const a=pts[i],b=pts[i+1],u=seg[i]?t/seg[i]:0;return [a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u,Math.atan2(b[1]-a[1],b[0]-a[0])]} t-=seg[i]; }
+  }
+  function fracNearest(pts,xy){let tot=0,best=0,bd=Infinity,acc=0;const seg=[];for(let i=1;i<pts.length;i++){seg.push(Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));tot+=seg.at(-1)}
+    for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];for(let u=0;u<=1;u+=0.05){const x=a[0]+(b[0]-a[0])*u,y=a[1]+(b[1]-a[1])*u;const d=Math.hypot(x-xy[0],y-xy[1]);if(d<bd){bd=d;best=acc+seg[i-1]*u}}acc+=seg[i-1]}return tot?best/tot:0}
+  function drawShip(ctx,x,y,ang,col,laden,rec,scale=1){
+    ctx.save();ctx.translate(x,y);ctx.rotate(ang);ctx.scale(scale,scale);
+    ctx.beginPath();ctx.moveTo(7,0);ctx.lineTo(-5,-3.6);ctx.lineTo(-3.5,0);ctx.lineTo(-5,3.6);ctx.closePath();
+    if(laden){ctx.fillStyle=col;ctx.fill();ctx.lineWidth=1.2;ctx.strokeStyle=css('--surface');ctx.stroke()}else{ctx.fillStyle=css('--surface');ctx.fill();ctx.lineWidth=1.6;ctx.strokeStyle=col;ctx.stroke()}
+    if(rec){ctx.beginPath();ctx.arc(0,0,9,0,Math.PI*2);ctx.lineWidth=2;ctx.strokeStyle=css('--weld');ctx.stroke()}
+    ctx.restore();
+  }
+  /* pool map (Leaflet, 1300 base) */
+  let pmap=null, poolCanvas=$('#poolCanvas'), riverLL=null, paths={};
+  function initPool(){
+    if(pmap) return;
+    pmap=L.map('pool',{crs:L.CRS.Simple,minZoom:0,maxZoom:6,zoomSnap:0.25,attributionControl:false,zoomControl:false,maxBoundsViscosity:1});
+    L.control.zoom({position:'bottomright'}).addTo(pmap);
+    tileLayer('m1300').addTo(pmap);
+    L.rectangle(boundsOf('m1300').pad(0.5),{className:'veil',interactive:false,stroke:false,fillOpacity:0.18}).addTo(pmap);
+    pmap.setMaxBounds(boundsOf('m1300'));
+    pmap.fitBounds(L.latLngBounds([ll([(9400-1713)*.75,7350*.75]),ll([(14200-1713)*.75,8350*.75])]));
+    const riv=[...A.river.down,...A.river.up].map(p=>p.p13);
+    riverLL=riv;
+    for(const [k,d] of Object.entries(A.river.docks)){
+      const dk=d.p13; const down=A.river.down.map(p=>p.p13), up=A.river.up.map(p=>p.p13);
+      let pth=[];
+      if(UP.has(k)){ pth=[...down]; for(const u of up){ if(u[0]>dk[0]) pth.push(u); else break; } }
+      else { for(const u of down){ if(u[0]>dk[0]+40) pth.push(u); else break; } }
+      pth.push(dk); paths[k]=pth;
+    }
+    const SHOWQ=new Set(['queenhithe','vintry','steelyard','billingsgate','woolwharf','galleykey','tower']);
+    for(const [k,d] of Object.entries(A.river.docks)){ if(!SHOWQ.has(k)) continue;
+      L.marker(ll(d.p13),{icon:L.divIcon({className:'plabel',html:QNAME[k],iconSize:null,iconAnchor:[-6,6]}),interactive:false}).addTo(pmap); }
+    pmap.on('move zoom resize',()=>{ if(!playing) frame(true) });
+  }
+  /* clock */
+  let T=(store.get('shipYear',1390)-1300)*365+60, playing=false, secPerDay=1.2, last=0, raf=0, active=false, rsLayer=null;
+  const yearOf=t=>1300+Math.floor(t/365);
+  function dateStr(t){const y=yearOf(t);let d=Math.floor(t-(y-1300)*365);const ml=[31,28,31,30,31,30,31,31,30,31,30,31];let m=0;while(m<11&&d>=ml[m]){d-=ml[m];m++}return `${d+1} ${MONTHS[m]} ${y}`}
+  function current(){const y=yearOf(T);return [...voyages(y-1),...voyages(y),...voyages(Math.min(1460,y+1))]}
+  const POOLT=0.9;
+  function statusAt(v){
+    if(v.static) return {where:'dock'};
+    if(v.wreck){ const inStart=v.tArr-v.dur; if(T>=inStart&&T<v.tArr-POOLT) return {where:'sea',dir:'in',f:(T-inStart)/(v.dur-POOLT)}; return null; }
+    const inStart=v.tArr-v.dur;
+    if(T>=inStart&&T<v.tArr-POOLT) return {where:'sea',dir:'in',f:(T-inStart)/(v.dur-POOLT)};
+    if(T>=v.tArr-POOLT&&T<v.tArr) return {where:'river',dir:'in',f:(T-(v.tArr-POOLT))/POOLT};
+    if(T>=v.tArr&&T<v.tLeave) return {where:'dock'};
+    if(T>=v.tLeave&&T<v.tLeave+POOLT) return {where:'river',dir:'out',f:1-(T-v.tLeave)/POOLT};
+    if(T>=v.tLeave+POOLT&&T<v.tLeave+v.dur) return {where:'sea',dir:'out',f:(T-v.tLeave-POOLT)/(v.dur-POOLT)};
+    return null;
+  }
+  let hits=[];
+  function frame(still){
+    const now=performance.now();
+    if(playing&&!still){ const dt=Math.min(0.25,(now-last)/1000); T+=dt/secPerDay; if(T>(1460-1300+1)*365) T=0; }
+    last=now;
+    const y=yearOf(T); if(+$('#year').value!==y){$('#year').value=y;$('#yearOut').textContent=y;store.set('shipYear',y);drawStrip();drawRS();listVessels()}
+    $('#dateOut').textContent=dateStr(T);
+    const vs=current(); hits=[];
+    // sea
+    const sc=seaCanvas.getContext('2d'); sc.clearRect(0,0,W,H);
+    if(proj){ for(const v of vs){ const s=statusAt(v); if(!s||s.where!=='sea') continue; const rp=routesProj[v.port]; if(!rp) continue;
+        let f=s.dir==='in'?1-s.f:s.f; let pts=rp;
+        if(v.wreck){ const fw=fracNearest(rp,proj([v.wreck[1],v.wreck[0]])); f=fw+(1-fw)*(1-s.f); }
+        const a0=along(pts,f); if(!a0) continue; const xy=S([a0[0],a0[1]]); const ang=s.dir==='in'?a0[2]+Math.PI:a0[2];
+        if(xy[0]<-20||xy[0]>W+20||xy[1]<-20||xy[1]>H+20) continue;
+        const col=v.fam<0?css('--weld'):fcol(v.fam); const laden=(v.laden===s.dir);
+        drawShip(sc,xy[0],xy[1],ang,col,laden,v.kind==='rec',v.kind==='rec'?1.3:1);
+        hits.push({x:xy[0],y:xy[1],v,s,c:'sea'}); }
+      for(const v of vs){ if(!v.wreck) continue; const wp=S(proj([v.wreck[1],v.wreck[0]])); if(T>=v.tArr-POOLT&&T<v.tArr+120){ sc.save();sc.strokeStyle=css('--madder');sc.lineWidth=2.5;sc.beginPath();sc.moveTo(wp[0]-6,wp[1]-6);sc.lineTo(wp[0]+6,wp[1]+6);sc.moveTo(wp[0]+6,wp[1]-6);sc.lineTo(wp[0]-6,wp[1]+6);sc.stroke();sc.fillStyle=css('--ink');sc.font='600 12px '+css('--f-sans');sc.fillText('Wrecked at Reculver, 1389',wp[0]+9,wp[1]+16);sc.restore(); hits.push({x:wp[0],y:wp[1],v,s:{where:'wreck'},c:'sea'})} }
+    }
+    // pool
+    if(pmap){ const pc=poolCanvas.getContext('2d'); const sz=pmap.getSize(); if(poolCanvas.width!==Math.round(sz.x*(window.devicePixelRatio||1))) sizeCanvas(poolCanvas,sz.x,sz.y);
+      pc.clearRect(0,0,sz.x,sz.y);
+      const slots={}; const docked=[];
+      for(const v of vs){ const s=statusAt(v); if(!s||s.where==='sea') continue; if(v.wreck) continue;
+        const pth=paths[v.quay]; if(!pth) continue;
+        const pts=pth.map(p=>{const q=pmap.latLngToContainerPoint(ll(p));return [q.x,q.y]});
+        const col=v.fam<0?css('--weld'):fcol(v.fam);
+        if(s.where==='river'){ const ease=s.f<0?0:s.f>1?1:(1-Math.cos(Math.PI*s.f))/2; const a=along(pts,ease); if(!a) continue; const ang=s.dir==='in'?a[2]:a[2]+Math.PI;
+          drawShip(pc,a[0],a[1],ang,col,v.laden===s.dir,v.kind==='rec',1.5); hits.push({x:a[0],y:a[1],v,s,c:'pool'}); }
+        else { const k=slots[v.quay]=(slots[v.quay]||0)+1; const d=pts[pts.length-1]; const x=d[0]+((k%2?1:-1)*Math.ceil((k-1)/2))*16, yy=d[1]+ (k>2?6:0);
+          drawShip(pc,x,yy,Math.PI,col,v.laden==='in'&&T<(v.tArr+v.tLeave)/2||v.laden==='out'&&T>(v.tArr+v.tLeave)/2,v.kind==='rec',1.5); hits.push({x,y:yy,v,s,c:'pool'}); docked.push(v);
+          if(v.kind==='rec'){pc.save();pc.font='italic 600 12px '+css('--f-serif');pc.fillStyle=css('--ink');pc.strokeStyle=css('--surface');pc.lineWidth=3;pc.strokeText(v.ship.name,x+12,yy+18);pc.fillText(v.ship.name,x+12,yy+18);pc.restore()} }
+      }
+      if(!still||frame.n++%10===0) inPort(docked);
+    }
+    moveStripMarker();
+    if(playing&&active&&!still) raf=requestAnimationFrame(()=>frame());
+  }
+  frame.n=0;
+  let lastInport='';
+  function inPort(docked){
+    const by={}; docked.forEach(v=>{(by[v.quay]=by[v.quay]||[]).push(v)});
+    const html=Object.entries(by).sort((a,b)=>b[1].length-a[1].length).map(([q,vs])=>`<div><span>${esc(QNAME[q]||q)}</span><span>${vs.map(v=>`<span class="dot" title="${esc(v.kind==='rec'?v.ship.name:FAM[v.fam].n)}" style="display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:2px;background:${v.fam<0?css('--weld'):fcol(v.fam)}"></span>`).join('')} <span class="num muted">${vs.length}</span></span></div>`).join('')||'<p class="hint">No ships at the quays.</p>';
+    if(html!==lastInport){$('#inport').innerHTML=html;lastInport=html}
+  }
+  /* month strip */
+  const strip=d3.select('#monthstrip'); let sx=null;
+  function drawStrip(){
+    const el=$('#monthstrip'); const w=el.getBoundingClientRect().width||400, h=46; strip.attr('viewBox',`0 0 ${w} ${h}`); strip.selectAll('*').remove();
+    const y=yearOf(T); sx=d3.scaleLinear([0,12],[0,w]);
+    const act=A.trades.filter(t=>y>=t.years[0]&&y<=t.years[1]);
+    const byFam=FAM.map((f,i)=>d3.range(12).map(m=>d3.sum(act.filter(t=>famOf[t.id]===i),t=>t.months[m])));
+    const maxv=d3.max(d3.range(12),m=>d3.sum(byFam,a=>a[m]))||1; const yh=d3.scaleLinear([0,maxv],[0,h-16]);
+    for(let m=0;m<12;m++){ let acc=0; byFam.forEach((a,i)=>{ if(!a[m]) return; const hh=yh(a[m]); strip.append('rect').attr('x',sx(m)+1).attr('width',Math.max(1,sx(1)-sx(0)-2)).attr('y',h-14-acc-hh).attr('height',Math.max(0,hh-1)).attr('fill',fcol(i)); acc+=hh; });
+      strip.append('text').attr('x',sx(m+0.5)).attr('y',h-2).attr('text-anchor','middle').attr('font-size',10).attr('fill',css('--ink-3')).text(MONTHS[m].slice(0,3)); }
+    strip.append('line').attr('id','mmk').attr('y1',0).attr('y2',h-12).attr('stroke',css('--ink')).attr('stroke-width',2);
+    moveStripMarker();
+  }
+  function moveStripMarker(){ if(!sx) return; const y=yearOf(T); const d=T-(y-1300)*365; const x=sx(d/30.42); strip.select('#mmk').attr('x1',x).attr('x2',x); }
+  $('#monthstrip').addEventListener('click',e=>{const r=e.currentTarget.getBoundingClientRect();const f=(e.clientX-r.left)/r.width;const y=yearOf(T);T=(y-1300)*365+f*365;frame(true)});
+  /* royal service overlay */
+  function drawRS(){
+    if(!rsLayer||!proj) return; rsLayer.selectAll('*').remove(); const on=$('#rs').checked; if(!on){$('#rsList').innerHTML='';return}
+    const y=yearOf(T), merch=$('#rsMerch').checked;
+    const rows=A.soldiers.filter(s=>s[5]>=y-2&&s[5]<=y+2&&(!merch||s[2]>=0));
+    const by=d3.rollup(rows,v=>v.length,d=>d[4]); const lon=S(proj([PORTS.london[2],PORTS.london[1]]));
+    for(const [k,n] of by){ const p=PORTS[k]; if(!p) continue; const xy=S(proj([p[2],p[1]])); const mx=(lon[0]+xy[0])/2+(xy[1]-lon[1])*0.25, my=(lon[1]+xy[1])/2-(xy[0]-lon[0])*0.25;
+      rsLayer.append('path').attr('d',`M${lon[0]},${lon[1]} Q${mx},${my} ${xy[0]},${xy[1]}`).attr('fill','none').attr('stroke',css('--madder')).attr('stroke-width',1+Math.sqrt(n)*1.6).attr('stroke-opacity',.75).attr('stroke-linecap','round');
+      rsLayer.append('text').attr('x',xy[0]+6).attr('y',xy[1]+14).attr('class','port-label').attr('font-weight',700).attr('fill',css('--madder')).text(`${p[0]}: ${n}`); }
+    const list=rows.slice(0,60).map(s=>`<div style="border-top:1px solid var(--rule);padding:3px 0"><b>${esc(s[0])}</b>${s[1]?' <span class="muted">'+esc(s[1])+'</span>':''} · ${esc(s[3])} · <span class="num">${s[5]}</span><div class="muted">${esc(s[6])}, ${esc(s[7])}</div></div>`).join('');
+    $('#rsList').innerHTML=`<p class="hint"><b class="num">${rows.length}</b> records, ${y-2}–${y+2}. Destinations with no named port (“France”, “overseas”) are drawn to Calais.</p>`+list+(rows.length>60?`<p class="hint">First 60 shown.</p>`:'');
+  }
+  $('#rs').onchange=drawRS; $('#rsMerch').onchange=drawRS;
+  /* England's Immigrants: home towns */
+  const AGENTS=new Set(['merchant',"merchant's clerk",'factor/attorney','broker']);
+  function eiTownCounts(mode){
+    const E=A.ei, out=new Map();
+    if(mode==='all'){ for(const [t,n] of Object.entries(E.towns)) if(E.towncoords[t]) out.set(t,{n,nat:''}); return out; }
+    const seen=new Set();
+    for(const p of E.people){ if(!AGENTS.has(p[6])||!p[5]||!E.towncoords[p[5]]) continue; const key=p[5]+'|'+p[1].toLowerCase().replace(/[^a-z]/g,''); if(seen.has(key)) continue; seen.add(key);
+      const o=out.get(p[5])||{n:0,nat:p[2]}; o.n++; out.set(p[5],o); }
+    return out;
+  }
+  function drawEIOrig(){
+    if(!eiLayer||!proj) return; eiLayer.selectAll('*').remove(); if(!$('#eiOrig').checked){$('#eiOrigList').innerHTML='';return}
+    const mode=$('#eiMode').value, E=A.ei, counts=eiTownCounts(mode); const lon=S(proj([PORTS.london[2],PORTS.london[1]]));
+    const col=css('--accent');
+    for(const [t,o] of [...counts.entries()].sort((a,b)=>a[1].n-b[1].n)){ const c=E.towncoords[t]; const xy=S(proj([c[1],c[0]]));
+      const mx=(lon[0]+xy[0])/2-(xy[1]-lon[1])*0.22, my=(lon[1]+xy[1])/2+(xy[0]-lon[0])*0.22;
+      eiLayer.append('path').attr('d',`M${xy[0]},${xy[1]} Q${mx},${my} ${lon[0]},${lon[1]}`).attr('fill','none').attr('stroke',col).attr('stroke-width',0.6+Math.sqrt(o.n)*0.55).attr('stroke-opacity',.55).attr('stroke-linecap','round');
+      eiLayer.append('circle').attr('cx',xy[0]).attr('cy',xy[1]).attr('r',2+Math.sqrt(o.n)*0.5).attr('fill',col).attr('stroke',css('--surface')).attr('stroke-width',1);
+      if(o.n>=(mode==='all'?6:3)) eiLayer.append('text').attr('class','port-label').attr('x',xy[0]+6).attr('y',xy[1]+13).attr('font-weight',700).attr('fill',col).text(`${t}: ${o.n}`); }
+    const rows=[...counts.entries()].sort((a,b)=>b[1].n-a[1].n);
+    $('#eiOrigList').innerHTML=`<p class="hint">${mode==='all'?`Entries naming a home town, all alien residents of London, 1300–1460 (${rows.length} towns with three or more entries). One person can appear in several assessments.`:`Distinct names per home town among merchants, clerks, factors and brokers (${d3.sum(rows,r=>r[1].n)} names). Lines join home and London; they are not routes, and many came overland.`}</p>`+
+      rows.slice(0,24).map(([t,o])=>`<div class="rowc" style="border-top:1px solid var(--rule);padding:2px 0"><span style="flex:1">${esc(t)}</span><b class="num">${o.n}</b></div>`).join('');
+  }
+  $('#eiOrig').onchange=drawEIOrig; $('#eiMode').onchange=drawEIOrig;
+  /* vessels list */
+  function listVessels(){
+    $('#vlist').innerHTML=A.ships.map(s=>`<button data-y="${s.year}" data-id="${esc(s.id)}"><span class="y">${s.year}</span>${esc(s.name)}<span class="muted small"> · ${esc(s.owner.split(';')[0])}</span></button>`).join('');
+    $('#vlist').querySelectorAll('button').forEach(b=>b.onclick=()=>{const s=A.ships.find(x=>x.id===b.dataset.id);
+      T=(s.year-1300)*365+(s.id==='dordrecht'?298:s.id==='borromei'?214:s.origin?160:170); frame(true);
+      showShip(s)});
+  }
+  function showShip(s){$('#shipDetail').innerHTML=`<div class="card"><div class="lab">Named in the records · ${s.year}</div><h4>${esc(s.name)}</h4><dl class="kv"><dt>Owner(s)</dt><dd>${esc(s.owner)}</dd>${s.cargo?`<dt>Cargo</dt><dd>${esc(s.cargo)}</dd>`:''}<dt>Quay shown</dt><dd>${esc(QNAME[s.quay]||s.quay)}</dd></dl><div class="small">${esc(s.note)}</div><div class="small muted" style="margin-top:4px">${esc(s.src)}${s.pid?` · <a href="${MLD(s.pid)}" target="_blank" rel="noopener">MLD ${s.pid} ↗</a>`:''}. The day within the year is not recorded; the animation places it.</div></div>`}
+  /* legend */
+  $('#tradeLegend').innerHTML=FAM.map((f,i)=>`<svg class="shipsvg" viewBox="-8 -6 16 12" aria-hidden="true"><path d="M7 0 L-5 -3.6 L-3.5 0 L-5 3.6Z" fill="${fcol(i)}"/></svg><span>${esc(f.n)} <span class="muted small">${f.t.map(t=>A.trades.find(x=>x.id===t)?.name).filter(Boolean).join(', ')}</span></span>`).join('')+
+    `<svg class="shipsvg" viewBox="-8 -6 16 12" aria-hidden="true"><path d="M7 0 L-5 -3.6 L-3.5 0 L-5 3.6Z" fill="none" stroke="${css('--ink-2')}" stroke-width="1.6"/></svg><span>Hollow: sailing in ballast or with return cargo</span>
+     <svg class="shipsvg" viewBox="-10 -10 20 20" aria-hidden="true"><circle r="8" fill="none" stroke="${css('--weld')}" stroke-width="2"/></svg><span>Vessel named in the records</span>`;
+  /* hover / click */
+  const tip=$('#tip');
+  function nearest(e,c){const wrap=c==='sea'?$('#seawrap'):$('#poolwrap');const r=wrap.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;let best=null,bd=14;for(const h of hits){if(h.c!==c)continue;const d=Math.hypot(h.x-x,h.y-y);if(d<bd){bd=d;best=h}}return best}
+  function describe(h){const v=h.v;if(v.kind==='rec')return `<b>${esc(v.ship.name)}</b> <span class="num">${v.ship.year}</span><br>${esc(v.ship.cargo||'')}${v.ship.cargo?'<br>':''}<span class="muted">${esc(QNAME[v.quay]||'')}</span>`;
+    const tr=v.trade;const st=h.s.where==='dock'?'At '+(QNAME[v.quay]||v.quay):h.s.dir==='in'?'Inbound from '+PORTS[v.port][0]:'Outbound to '+PORTS[v.port][0];
+    return `<b>${esc(tr.name)}</b><br>${esc(st)}<br><span class="muted">${tr.dir===(h.s.dir||'in')?'Laden: '+esc(tr.cargo):'Return leg'}</span><br><span class="muted small">Modelled ship</span>`}
+  ['sea','pool'].forEach(c=>{const wrap=c==='sea'?$('#seawrap'):$('#poolwrap');
+    wrap.addEventListener('mousemove',e=>{const h=nearest(e,c);if(!h){tip.hidden=true;return}tip.innerHTML=describe(h);tip.hidden=false;tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY+10)+'px'});
+    wrap.addEventListener('mouseleave',()=>tip.hidden=true);
+    wrap.addEventListener('click',e=>{const h=nearest(e,c);if(!h)return;if(h.v.kind==='rec')showShip(h.v.ship);else{const tr=h.v.trade;$('#shipDetail').innerHTML=`<div class="card"><div class="lab">Modelled · ${esc(FAM[h.v.fam].n)}</div><h4>${esc(tr.name)}</h4><dl class="kv"><dt>Port</dt><dd>${esc(PORTS[tr.origin][0])}</dd><dt>London quay</dt><dd>${esc(QNAME[tr.quay])}</dd><dt>Laden cargo</dt><dd>${esc(tr.cargo)} (${tr.dir==='in'?'inbound':'outbound'})</dd><dt>Years run</dt><dd class="num">${tr.years[0]}–${tr.years[1]}</dd></dl><div class="small">${esc(tr.basis)}</div><div class="small muted" style="margin-top:4px"><span class="pill verify">Modelled</span> a generalisation from the secondary literature, not yet checked against sources.</div></div>`}},true);
+  });
+  /* controls */
+  function setPlaying(p){playing=p;$('#play').textContent=p?'Pause':'Play';$('#play').setAttribute('aria-pressed',p);if(p&&active){last=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>frame())}}
+  $('#play').onclick=()=>setPlaying(!playing);
+  $$('#speed button').forEach(b=>b.onclick=()=>{secPerDay=+b.dataset.s;$$('#speed button').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  $('#year').oninput=e=>{const y=+e.target.value;const d=T-(yearOf(T)-1300)*365;T=(y-1300)*365+d;$('#yearOut').textContent=y;store.set('shipYear',y);drawStrip();drawRS();frame(true)};
+  const ro=new ResizeObserver(()=>{if(active){drawSea();drawStrip();pmap&&pmap.invalidateSize();frame(true)}});
+  ro.observe($('#seawrap'));
+  return {
+    activate(){active=true;initPool();setTimeout(()=>{pmap.invalidateSize();drawSea();drawStrip();listVessels();frame(true);if(playing){last=performance.now();raf=requestAnimationFrame(()=>frame())}},0)},
+    deactivate(){active=false;cancelAnimationFrame(raf)},
+    FAM
+  };
+})();
+
+/* ---------------- BOOKS PAGE ---------------- */
+(function(){
+  const crafts=[...new Set(A.books.map(b=>b.craft))].sort(), cats=[...new Set(A.books.map(b=>b.cat))].sort();
+  $('#fCraft').innerHTML+=crafts.map(c=>`<option>${esc(c)}</option>`).join(''); $('#fCat').innerHTML+=cats.map(c=>`<option>${esc(c)}</option>`).join('');
+  function draw(){
+    const c=$('#fCraft').value,k=$('#fCat').value,b=($('#fBasis')||{}).value||'',t=$('#fText').value.toLowerCase();
+    const rows=A.books.filter(x=>(!c||x.craft===c)&&(!k||x.cat===k)&&(!b||x.basis===b)&&(!t||(x.who+' '+x.books+' '+x.note).toLowerCase().includes(t))).sort((a,b)=>a.year-b.year);
+    $('#bookCount').textContent=`${rows.length} of ${A.books.length}`;
+    $('#bookRows').innerHTML=rows.map(x=>{const pl=PL[placeById[x.place]];return `<tr><td class="y">${x.year}</td><td><b>${esc(x.who)}</b><div class="muted small">${esc(x.craft)}</div></td><td class="bk">${esc(x.books)}<div class="muted small" style="font-style:normal;font-family:var(--f-sans)">${esc(x.cat)}</div></td><td class="small">${esc(x.note)}${x.flag?` <span class="pill approx">${esc(x.flag)}</span>`:''}</td><td class="small"><a href="#city" data-pl="${esc(x.place)}">${esc(pl?pl.name:x.place)}</a></td><td class="small">${x.basis==='mld'?`<span class="pill db">Database</span><div>${esc(x.src)}</div>${x.pid?`<a href="${MLD(x.pid)}" target="_blank" rel="noopener">MLD ${x.pid} ↗</a>`:''}`:'<span class="pill verify">To verify</span>'}</td></tr>`}).join('');
+    $('#bookRows').querySelectorAll('[data-pl]').forEach(a=>a.onclick=e=>{e.preventDefault();show('city');state.layers.books=true;renderBooks();const pl=PL[placeById[a.dataset.pl]];setTimeout(()=>{cmap.flyTo(pos(pl),4.25,{duration:.7});$('#detail').innerHTML=placeHead(placeById[a.dataset.pl])+'<h3>Books</h3>'+A.books.filter(b=>b.place===a.dataset.pl).map(bookCard).join('')},60)});
+  }
+  ['#fCraft','#fCat','#fBasis','#fText'].forEach(s=>{const el=$(s); if(el) el.addEventListener('input',draw)}); draw();
+})();
+
+/* ---------------- FIGURES ---------------- */
+const figures=(function(){
+  let drawn=false;
+  const decs=d3.range(1300,1460,10);
+  function frame(id,title,sub){const el=$('#'+id);el.innerHTML=`<h3>${title}</h3><p class="sub">${sub}</p><div class="plot"></div><div class="lgd"></div><details class="tbl"><summary>Show the numbers</summary><div class="t"></div></details>`;return el}
+  function tooltip(html,e){const t=$('#tip');t.innerHTML=html;t.hidden=false;t.style.left=(e.clientX+12)+'px';t.style.top=(e.clientY+12)+'px'}
+  function untip(){$('#tip').hidden=true}
+  function stacked(el,series,keys,colors,opts={}){
+    const w=Math.max(320,el.querySelector('.plot').getBoundingClientRect().width||520),h=opts.h||260,m={t:10,r:10,b:26,l:36};
+    const svg=d3.select(el.querySelector('.plot')).append('svg').attr('viewBox',`0 0 ${w} ${h}`).attr('role','img').attr('aria-label',opts.aria||'');
+    const x=d3.scaleBand(series.map(d=>d.dec),[m.l,w-m.r]).padding(0.18);
+    const st=d3.stack().keys(keys)(series); const ymax=d3.max(st.at(-1),d=>d[1])||1;
+    const y=d3.scaleLinear([0,ymax],[h-m.b,m.t]).nice();
+    svg.append('g').attr('class','grid').attr('transform',`translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(w-m.l-m.r)).tickFormat('')).call(g=>g.select('.domain').remove());
+    svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-m.b})`).call(d3.axisBottom(x).tickValues(series.map(d=>d.dec).filter((d,i)=>i%2===0)).tickSizeOuter(0));
+    svg.append('g').attr('class','axis').attr('transform',`translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5)).call(g=>g.select('.domain').remove());
+    st.forEach((s,i)=>svg.append('g').selectAll('rect').data(s).join('rect').attr('x',d=>x(d.data.dec)).attr('width',x.bandwidth()).attr('y',d=>y(d[1])+(d[1]>d[0]?1:0)).attr('height',d=>Math.max(0,y(d[0])-y(d[1])-1)).attr('fill',colors[i]).attr('rx',1)
+      .on('mousemove',(e,d)=>tooltip(`<b>${d.data.dec}s</b><br>${esc(keys[i])}: <b class="num">${d.data[keys[i]]}</b><br><span class="muted">Decade total ${d3.sum(keys,k=>d.data[k])}</span>`,e)).on('mouseleave',untip));
+    el.querySelector('.lgd').innerHTML=keys.map((k,i)=>`<span><i style="background:${colors[i]}"></i>${esc(k)}</span>`).join('');
+    el.querySelector('.t').innerHTML=`<table><tr><th>Decade</th>${keys.map(k=>`<th>${esc(k)}</th>`).join('')}</tr>${series.map(d=>`<tr><td>${d.dec}s</td>${keys.map(k=>`<td>${d[k]||0}</td>`).join('')}</tr>`).join('')}</table>`;
+  }
+  function draw(){
+    if(drawn) return; drawn=true;
+    const cols=[...GROUPS.map((_,i)=>gcol(i)),css('--c0')]; const keys=[...GROUPS,'Other / unknown'];
+    // mayors
+    let el=frame('ch-mayor','Mayoral elections by craft','Elections recorded in the Medieval Londoners Database (from MASL and Beaven), by the mayor’s craft, per decade, 1300–1459. A mayor elected in several years counts once for each year.');
+    const ser=decs.filter(d=>d<=1460).map(d=>{const o={dec:d};keys.forEach(k=>o[k]=(A.offices.Mayor?.[d]?.[k])||0);return o});
+    stacked(el,ser,keys,cols,{aria:'Stacked bars of mayoral elections per decade by craft'});
+    // MLD coverage
+    el=frame('ch-mld','Merchants recorded in the database, by decade','Distinct merchants whose recorded career overlaps each decade. Shows where the database is dense: the mercers dominate because Anne Sutton’s mercer biographies were entered whole.');
+    const ser2=decs.filter(d=>d<=1460).map(d=>{const o={dec:d};GROUPS.forEach(g=>o[g]=0);P.forEach(p=>{if(p[3]<=d+9&&p[4]>=d)o[GROUPS[p[2]]]++});return o});
+    stacked(el,ser2,GROUPS,cols.slice(0,8),{aria:'Merchants recorded per decade by craft'});
+    // pleas (small multiples)
+    el=frame('ch-pleas','Londoners described by craft in the Common Pleas','Entries in the Court of Common Pleas rolls (CP 40) where “civis et [craft]” falls near “London”, per 1,000 entries naming a citizen of London, by decade. Machine transcription via Glyph Machina; English and Latin forms of each craft name added together.');
+    const G=A.glyph, base=G._baseline?.civis?.decades||{};
+    const FORMS={Mercer:['mercer','mercerus'],Grocer:['grocer','grossar','grossarius'],Draper:['draper','pannarius'],Fishmonger:['fisshmonger','fishmonger','fysshemonger','piscenarius','piscinarius','stokfisshmonger'],Goldsmith:['goldsmyth','aurifaber'],Skinner:['skynner','pelliparius'],Vintner:['vynter','vinetarius','vyntener','vinetar'],'Other merchant':['iremonger','irmonger','haberdassher','haberdasshere','salter']};
+    const all={}; for(const k of Object.values(G)) Object.assign(all,k);
+    const sm=GROUPS.map((g,i)=>{const sum={};const seenSig=new Set();(FORMS[g]||[]).forEach(f=>{const d=all[f]?.decades;if(!d)return;const sig=JSON.stringify(d);if(seenSig.has(sig))return;seenSig.add(sig);for(const [k,v] of Object.entries(d))sum[k]=(sum[k]||0)+v});
+      return {g,i,vals:decs.filter(d=>d<=1460).map(d=>({dec:d,n:sum[d]||0,b:base[d]||0,r:base[d]?1000*(sum[d]||0)/base[d]:null}))}});
+    const plot=el.querySelector('.plot'); plot.style.display='grid'; plot.style.gridTemplateColumns='repeat(auto-fit,minmax(min(100%,250px),1fr))'; plot.style.gap='10px 18px';
+    const rmax=d3.max(sm,s=>d3.max(s.vals,v=>v.r||0));
+    sm.forEach(s=>{const box=document.createElement('div');plot.appendChild(box);const w=260,h=120,m={t:18,r:8,b:20,l:30};
+      const svg=d3.select(box).append('svg').attr('viewBox',`0 0 ${w} ${h}`);
+      const x=d3.scaleLinear([1300,1460],[m.l,w-m.r]), y=d3.scaleLinear([0,rmax],[h-m.b,m.t]).nice();
+      svg.append('text').attr('x',m.l).attr('y',12).attr('font-size',12.5).attr('font-weight',700).attr('fill',css('--ink')).text(s.g);
+      svg.append('g').attr('class','grid').attr('transform',`translate(${m.l},0)`).call(d3.axisLeft(y).ticks(3).tickSize(-(w-m.l-m.r)).tickFormat('')).call(g=>g.select('.domain').remove());
+      svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-m.b})`).call(d3.axisBottom(x).tickValues([1300,1350,1400,1450]).tickFormat(d3.format('d')).tickSizeOuter(0));
+      svg.append('g').attr('class','axis').attr('transform',`translate(${m.l},0)`).call(d3.axisLeft(y).ticks(3)).call(g=>g.select('.domain').remove());
+      svg.append('line').attr('x1',x(1413)).attr('x2',x(1413)).attr('y1',m.t).attr('y2',h-m.b).attr('stroke',css('--ink-3')).attr('stroke-width',1);
+      const vv=s.vals.filter(v=>v.r!=null).map(v=>({...v,x:x(v.dec+5)}));
+      svg.append('path').datum(vv).attr('d',d3.area().x(d=>d.x).y0(y(0)).y1(d=>y(d.r))).attr('fill',gcol(s.i)).attr('fill-opacity',.14);
+      svg.append('path').datum(vv).attr('d',d3.line().x(d=>d.x).y(d=>y(d.r))).attr('fill','none').attr('stroke',gcol(s.i)).attr('stroke-width',2);
+      const last=vv.at(-1); if(last) svg.append('circle').attr('cx',last.x).attr('cy',y(last.r)).attr('r',3.5).attr('fill',gcol(s.i)).attr('stroke',css('--surface')).attr('stroke-width',1.5);
+      svg.append('g').selectAll('rect').data(vv).join('rect').attr('x',d=>d.x-8).attr('width',16).attr('y',m.t).attr('height',h-m.t-m.b).attr('fill','transparent')
+        .on('mousemove',(e,d)=>tooltip(`<b>${esc(s.g)}, ${d.dec}s</b><br><span class="num">${d.n}</span> entries of <span class="num">${d.b.toLocaleString()}</span><br><b class="num">${d.r.toFixed(1)}</b> per 1,000`,e)).on('mouseleave',untip);
+    });
+    el.querySelector('.lgd').innerHTML=`<span>Vertical rule: 1413, the Statute of Additions, which required a defendant’s occupation in original writs. The rule marks the date; the chart does not test its effect.</span>`;
+    el.querySelector('.t').innerHTML=`<table><tr><th>Decade</th><th>Baseline</th>${GROUPS.map(g=>`<th>${esc(g)}</th>`).join('')}</tr>${decs.filter(d=>d<=1460).map((d,k)=>`<tr><td>${d}s</td><td>${(base[d]||0).toLocaleString()}</td>${sm.map(s=>`<td>${s.vals[k].n}</td>`).join('')}</tr>`).join('')}</table><p class="hint">Raw entry counts. Searches: “near” mode within about ten words, series CP40, years 1300–1469, “London” required in the same entry. Forms searched: ${Object.entries(FORMS).map(([g,f])=>esc(g)+': '+f.join(', ')).join('; ')}.</p>`;
+    // protections
+    el=frame('ch-prot','Londoners going overseas under royal protection','Letters of protection and attorney naming a Londoner, by destination and decade (Medieval Soldier database). Most of these men were not soldiers.');
+    const DG={'Calais and its march':['calais'],'France, port not stated':['france','overseas'],'Gascony':['bordeaux'],'Normandy and Brittany':['caen','cherbourg','brest','jersey'],'Iberia':['lisbon','corunna'],'Scottish march':['berwick'],'Ireland and Flanders':['dublin','sluys'],'At sea':['sea']};
+    const dk=Object.keys(DG); const ser3=decs.filter(d=>d<=1460).map(d=>{const o={dec:d};dk.forEach(k=>o[k]=A.soldiers.filter(s=>Math.floor(s[5]/10)*10===d&&DG[k].includes(s[4])).length);return o}).filter(o=>dk.some(k=>o[k]));
+    stacked(el,ser3,dk,cols.slice(0,8),{aria:'Letters of protection by destination per decade'});
+    // England's Immigrants
+    el=frame('ch-ei','Alien residents of London','England’s Immigrants entries for London, 1300–1460, by ward (left) and, for merchants, clerks, factors and brokers, by nationality as recorded (right). Almost all are from the alien subsidy assessments of 1440–57; most merchant entries give no ward.');
+    { const pl=el.querySelector('.plot'); pl.style.display='grid'; pl.style.gridTemplateColumns='repeat(auto-fit,minmax(min(100%,420px),1fr))'; pl.style.gap='12px 28px';
+      const bars=(rows,label,col)=>{ const box=document.createElement('div'); pl.appendChild(box); const w=440,rh=17,m={t:18,r:44,b:6,l:124},h=m.t+m.b+rows.length*rh;
+        const svg=d3.select(box).append('svg').attr('viewBox',`0 0 ${w} ${h}`).attr('role','img').attr('aria-label',label);
+        const x=d3.scaleLinear([0,d3.max(rows,r=>r[1])],[m.l,w-m.r]);
+        svg.append('text').attr('x',0).attr('y',12).attr('font-size',12.5).attr('font-weight',700).attr('fill',css('--ink')).text(label);
+        rows.forEach((r,i)=>{ const y=m.t+i*rh;
+          svg.append('text').attr('x',m.l-6).attr('y',y+rh*0.68).attr('text-anchor','end').attr('font-size',11.5).attr('fill',css('--ink-2')).text(r[0]);
+          svg.append('rect').attr('x',m.l).attr('y',y+3).attr('height',rh-6).attr('width',Math.max(1,x(r[1])-m.l)).attr('rx',2).attr('fill',col)
+            .on('mousemove',e=>tooltip(`<b>${esc(r[0])}</b><br><span class="num">${r[1].toLocaleString()}</span>`,e)).on('mouseleave',untip);
+          svg.append('text').attr('x',x(r[1])+4).attr('y',y+rh*0.68).attr('font-size',11).attr('fill',css('--ink-3')).attr('class','num').text(r[1].toLocaleString()); }); };
+      const wr=Object.entries(A.ei.wards).map(([w,v])=>[w,v[0]]).sort((a,b)=>b[1]-a[1]);
+      bars(wr,'Entries naming a ward',css('--c1'));
+      const AG=new Set(['merchant',"merchant's clerk",'factor/attorney','broker']);
+      const nr=d3.rollups(A.ei.people.filter(p=>AG.has(p[6])),v=>new Set(v.map(p=>p[1].toLowerCase().replace(/[^a-z]/g,''))).size,p=>p[2]||'Not stated').sort((a,b)=>b[1]-a[1]);
+      bars(nr,'Merchants and agents: distinct names',css('--c1'));
+      el.querySelector('.lgd').innerHTML=`<span>${A.ei.total.toLocaleString()} London entries in all, 1300–1460; ${d3.sum(wr,r=>r[1]).toLocaleString()} name a ward. By decade: ${Object.entries(A.ei.decades).map(([d,n])=>d+'s '+n.toLocaleString()).join(' · ')}.</span>`;
+      el.querySelector('.t').innerHTML=`<table><tr><th>Nationality (all alien residents)</th><th>Entries</th></tr>${Object.entries(A.ei.nationalities).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${v}</td></tr>`).join('')}</table>`; }
+    // murder map tags
+    el=frame('ch-mm','Coroners’ inquests, 1300–40','Cases on the Medieval Murder Map’s London layer placed within the 1300 map, by whether the entry names a merchant or trader, or the waterfront. Tags come from a word search of the case text and need reading case by case.');
+    const t1=A.murders.filter(m=>m.tags.includes('merchant')).length,t2=A.murders.filter(m=>m.tags.includes('waterfront')&&!m.tags.includes('merchant')).length,t3=A.murders.length-t1-t2;
+    const pl=el.querySelector('.plot'); const items=[['Names a merchant or trader',t1,css('--madder')],['Waterfront, no trader named',t2,css('--accent')],['Neither',t3,css('--c0')]];
+    const tot=t1+t2+t3; pl.innerHTML=`<div style="display:flex;height:26px;border-radius:4px;overflow:hidden;gap:2px">${items.map(([k,v,c])=>`<div title="${esc(k)}: ${v}" style="flex:${v};background:${c}"></div>`).join('')}</div>`+items.map(([k,v,c])=>`<div class="rowc" style="margin-top:6px"><i style="width:10px;height:10px;border-radius:2px;background:${c};display:inline-block"></i><span style="flex:1">${esc(k)}</span><b class="num">${v}</b><span class="muted num">${Math.round(100*v/tot)}%</span></div>`).join('');
+    el.querySelector('.t').innerHTML=`<p class="hint">${tot} cases in all. Open the City view and switch on “Coroners’ rolls” to see them placed.</p>`;
+  }
+  return {draw};
+})();
+
+/* ---------------- SOURCES PAGE ---------------- */
+(function(){
+  const nB=A.books.filter(b=>b.basis==='mld').length, nG=A.books.filter(b=>b.basis==='gk').length;
+  const verify=[...A.books.filter(b=>b.basis==='gk'||b.flag).map(b=>`<li><b>${esc(b.who)}</b> (${b.year}): ${esc(b.books)}. ${esc(b.flag||'Not drawn from the databases; check before citing.')}</li>`),
+    ...A.trades.map(t=>`<li><b>${esc(t.name)}</b> (port view): ${esc(t.basis)}</li>`)].join('');
+  $('#sourcesBody').innerHTML=`
+  <h1>Sources and method</h1>
+  <p class="lede">What each layer is built from, how it was placed on the maps, and what remains provisional.</p>
+  <div class="note commentary" data-view="sources" hidden></div>
+  <h2>Databases</h2>
+  <div class="srcgrid">
+    <div class="card"><div class="lab">People, crafts, parishes, books, ships</div><h4>Medieval Londoners Database</h4><p class="small">Fordham University. Full person list (${(24965).toLocaleString()} Londoners) and record list (43,109 records) downloaded from the database’s own data feed on 6 Oct. 2026. Merchants here are the ${P.length.toLocaleString()} people in the eight craft groups below whose recorded dates overlap 1300–1460; ${LINKS.length.toLocaleString()} of their records name a parish or ward. Book bequests (${nB} entries) and ships are paraphrased from individual records; each links back.</p><a href="https://medievallondoners.ace.fordham.edu/search/" target="_blank" rel="noopener">medievallondoners.ace.fordham.edu ↗</a></div>
+    <div class="card"><div class="lab">Coroners’ inquests</div><h4>Medieval Murder Map</h4><p class="small">University of Cambridge, Violence Research Centre. ${A.murders.length} London cases (c.1300–40) taken with their placings on the Historic Towns Trust map and carried onto this one with a fitted transform (27 sanctuary churches as control points; median error about ${Math.round(A.mmfit*0.217)} m). Tags (“merchant”, “waterfront”) come from a word search of each case and are not a classification.</p><a href="https://medievalmurdermap.co.uk/maps/london/" target="_blank" rel="noopener">medievalmurdermap.co.uk ↗</a></div>
+    <div class="card"><div class="lab">Londoners overseas</div><h4>The Medieval Soldier</h4><p class="small">Search: origin “London”, all datasets, 1300–1460; ${A.soldiers.length.toLocaleString()} records, almost all letters of protection and attorney (TNA C 61, C 64, C 76). Occupations are read from the name field where the clerk gave one. Service destinations were grouped to ports for the sea map; “France” without a place is drawn to Calais. Information on soldiers has been taken from the AHRC-funded ‘The Soldier in Later Medieval England Online Database’, www.medievalsoldier.org, accessed 6 October 2026.</p><a href="https://www.medievalsoldier.org/database/" target="_blank" rel="noopener">medievalsoldier.org ↗</a></div>
+    <div class="card"><div class="lab">1381</div><h4>The People of 1381</h4><p class="small">One export of incidents located in London (107 entries). ${A.r1381.length} are mapped here with summaries written for this page; references are the database’s. Data from The People of 1381 project, data.1381.online, accessed 6 October 2026.</p><a href="https://data.1381.online/projects_database/pr_search_all_new_ro/" target="_blank" rel="noopener">data.1381.online ↗</a></div>
+    <div class="card"><div class="lab">Plea rolls</div><h4>Glyph Machina (AALT transcriptions)</h4><p class="small">Automatic transcriptions of the Anglo-American Legal Tradition images. Each merchant craft searched as “civis et [form]” near “London” in CP 40, grouped by decade, plus a baseline of entries with “civis” and “London”. HTR noise is high; counts are entries, not people. Searches run through Glyph Machina, with thanks to the Glyph Machina team and to the Anglo-American Legal Tradition project founded by the late Robert Palmer.</p><a href="https://glyphmachina.utsc.utoronto.ca/" target="_blank" rel="noopener">glyphmachina.utsc.utoronto.ca ↗</a></div>
+    <div class="card"><div class="lab">Alien residents</div><h4>England’s Immigrants 1330–1550</h4><p class="small">Search: residence London, 1300–1460 (${A.ei.total.toLocaleString()} entries). Counts by ward, nationality, home town and occupation were read from the search facets; the ${A.ei.people.length} entries for merchants, clerks, factors, brokers and aliens in merchant crafts were read from the result lists. Each links to its record. Accessed ${esc(A.ei.accessed)}.</p><a href="https://www.englandsimmigrants.com/" target="_blank" rel="noopener">englandsimmigrants.com ↗</a></div>
+    <div class="card"><div class="lab">Base maps</div><h4>Historic Towns Trust</h4><p class="small">“London 1270 to 1300” (cartography Giles Darkes, after Henry Johns, revised 2021) and “Tudor London” (c.1520). Both are in copyright and are reproduced with acknowledgement to the Trust. The c.1520 sheet is rotated so north is up.</p><a href="https://www.historictownstrust.uk/" target="_blank" rel="noopener">historictownstrust.uk ↗</a></div>
+  </div>
+  <h2>Placing things on the maps</h2>
+  <p>Every label on the 1270–1300 map was read by optical character recognition (2,010 labels). Parish churches, wharves, markets and gates are placed at their own labels, so a point sits beside the church, usually within 20–30 m. Places that came into being after 1300 (Whittington’s College, the Charterhouse, St Mary Graces, the company halls, the Custom House, Galley Quay, Blackwell Hall) were read from the c.1520 map and carried back. The two maps were tied together by matching ${A.xform.n} labels that appear on both (median residual about ${Math.round(A.xform.med)} px on the 1520 sheet), so every point appears on either map. Points marked “placed by hand” are estimates and say so. The Westminster inset on the 1300 map has no counterpart on the 1520 sheet, so Westminster points are hidden there.</p>
+  <p>Records naming a ward but no parish are drawn at the weighted centre of the parishes the database most often names with that ward, with a dashed ring. A record that names several parishes (common in Husting wills, which list bequests) is linked to each, so the City map shows where a merchant is recorded, not only where he lived.</p>
+  <h2>Craft groups</h2>
+  <p>Mercer · Grocer (with pepperers and spicers) · Draper · Fishmonger (with stockfishmongers) · Goldsmith · Skinner · Vintner · Other merchant (staplers, woolmongers, ironmongers, salters, haberdashers, and people described only as merchants). Taken from the database’s craft and occupation fields; a person with two crafts falls in the first group listed.</p>
+  <h2>The port and sea view</h2>
+  <p>Two kinds of ship appear. Ships outlined in gold are vessels and cargoes named in Medieval Londoners records; the day within the year is not recorded and the animation supplies one. All other ships are a model: each trade sails in the months the secondary literature associates with it, in numbers that show the season, not the volume. Routes follow the coasts through way-points; durations assume about 140 km a day. Upstream quays (Queenhithe, the Vintry, the Steelyard, Dowgate) are reached through the bridge’s drawspan.</p>
+  ${CONFIG.showUnverified?`<h2>Entries not yet verified</h2><ul class="checklist small">${verify}</ul>`:`<h2>Modelled elements</h2><ul class="checklist small">${A.trades.map(t=>`<li><b>${esc(t.name)}</b> (port view): ${esc(t.basis)}</li>`).join('')}</ul>`}
+  <h2>Credits</h2>
+  <p class="small">Medieval Londoners Database, Fordham University. England’s Immigrants 1330–1550. Medieval Murder Map, Violence Research Centre, University of Cambridge. The Soldier in Later Medieval England Online Database (AHRC). The People of 1381. Glyph Machina and the Anglo-American Legal Tradition. Base maps © Historic Towns Trust. Coastlines from Natural Earth. Map display by Leaflet; charts by D3.</p>
+  <p class="small">Concept: Daniel Davies. Data compilation, georeferencing and interface prepared with Claude (Anthropic).</p>
+  <h2>Not yet included</h2>
+  <ul class="small">
+    <li>Customs particulars (TNA E 122) for London, which would replace the modelled traffic with real sailings for particular years.</li>
+    <li>Property histories from the Historical Gazetteer of London before the Great Fire (Keene and Harding), which the mercer biographies cite by parish and plot.</li>
+    <li>The Johnston c.1520 map sheets, left out because the Historic Towns Trust c.1520 map covers the same ground.</li>
+  </ul>`;
+})();
+
+/* start */
+const hv=(location.hash||'').slice(1);
+show(views[hv]?hv:store.get('view','city'));
+})();
+</script>
+</body>
+</html>
