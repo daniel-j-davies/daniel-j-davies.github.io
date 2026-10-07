@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Berwick upon Tweed 1100–1500</title>
+<meta name="description" content="An interactive companion to a study of Berwick-upon-Tweed, c. 1100–1500: the town and its sieges, the March, who held and governed it, its port and sea links, the garrison, petitions to the crown, and the books and manuscripts that place it.">
+<meta name="author" content="Daniel Davies">
+<link rel="canonical" href="https://danieldavies.co/berwick/">
+<meta property="og:title" content="Berwick upon Tweed 1100–1500">
+<meta property="og:description" content="Berwick-upon-Tweed between England and Scotland, c. 1100–1500: town, March, governance, port, garrison, petitions and texts.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://danieldavies.co/berwick/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f5e5b'/%3E%3Cpath d='M9 26V11h3v3h2.5v-3h3v3H20v-3h3v15z' fill='%23fff'/%3E%3Cpath d='M14.5 26v-5a1.5 1.5 0 0 1 3 0v5z' fill='%231f5e5b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IM+Fell+English+SC&display=swap">
+<style>
+/* Layout: one-screen atlas, same model as Merchant London. Top bar with view tabs; map views = working surface + 380px side panel (stacks on phones); page views scroll. */
+:root{
+  --bg:#eceeea; --surface:#f8f9f6; --surface-2:#e2e7e2; --ink:#1b2326; --ink-2:#45525a; --ink-3:#69767d; --rule:#cbd3ce;
+  --accent:#1f5e5b; --accent-ink:#ffffff;           /* Tweed green-slate */
+  --eng:#a63d2f; --sco:#3456a0; --reb:#8a6d1f;       /* who held the town */
+  --ok:#2e7a4f; --weld:#9a7410; --lit:#3d6aa8;
+  --sea:#d3e0e4; --land:#f3f1e9; --land-edge:#aeb9b8; --river:#6b93b0; --street:#8b8f8c; --street-2:#c7c9c3; --bldg:#e3dfd3; --green:#e3ead9;
+  --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a; --c4:#eda100; --c5:#e87ba4; --c6:#008300; --c7:#4a3aa7; --c8:#e34948; --c0:#9aa1a6;
+  --f-display:"IM Fell English SC", "Alegreya", Georgia, serif;
+  --f-serif:"Alegreya", Georgia, "Times New Roman", serif;
+  --f-sans:"Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+  --bar-h:52px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#101518; --surface:#161d21; --surface-2:#212a30; --ink:#e7ecec; --ink-2:#b2bdc1; --ink-3:#8b979c; --rule:#2c363c;
+  --accent:#7fc0b8; --accent-ink:#0d1716; --eng:#e07b6c; --sco:#8ea9e8; --reb:#d4b45a; --ok:#6cc495; --weld:#d6ad48; --lit:#8fb1ea;
+  --sea:#17252d; --land:#262c2f; --land-edge:#47535a; --river:#4f7c9c; --street:#8d9592; --street-2:#3d4548; --bldg:#30383b; --green:#27322a;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#2a9a2a; --c7:#9085e9; --c8:#e66767; --c0:#6d757c;
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#101518; --surface:#161d21; --surface-2:#212a30; --ink:#e7ecec; --ink-2:#b2bdc1; --ink-3:#8b979c; --rule:#2c363c;
+  --accent:#7fc0b8; --accent-ink:#0d1716; --eng:#e07b6c; --sco:#8ea9e8; --reb:#d4b45a; --ok:#6cc495; --weld:#d6ad48; --lit:#8fb1ea;
+  --sea:#17252d; --land:#262c2f; --land-edge:#47535a; --river:#4f7c9c; --street:#8d9592; --street-2:#3d4548; --bldg:#30383b; --green:#27322a;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#2a9a2a; --c7:#9085e9; --c8:#e66767; --c0:#6d757c;
+  color-scheme:dark; }
+html,body{height:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:15px;line-height:1.45;margin:0}
+*{box-sizing:border-box}
+a{color:var(--accent)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+#app{display:flex;flex-direction:column;height:100%}
+.bar{display:flex;align-items:center;gap:18px;min-height:var(--bar-h);padding-inline:16px;border-bottom:1px solid var(--rule);background:var(--surface);flex:0 0 auto}
+.brand{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:22px;letter-spacing:.01em}
+.brand span{font-family:var(--f-serif);font-style:italic;color:var(--ink-3);font-size:15px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:none;padding:8px 11px;border-radius:6px;cursor:pointer;color:var(--ink-2);white-space:nowrap;font-weight:500;font-size:14.5px;letter-spacing:.02em}
+.tab:hover{background:var(--surface-2)}
+.home{white-space:nowrap;font-size:13.5px;color:var(--ink-2);text-decoration:none;border-left:1px solid var(--rule);padding-left:14px}
+.home:hover{color:var(--accent)}
+@media (max-width:640px){.home{display:none}}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+main{flex:1 1 auto;min-height:0;position:relative}
+.view{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 380px}
+.view.page{display:block;overflow:auto;padding-block:24px;padding-inline:16px}
+.panel{border-left:1px solid var(--rule);background:var(--surface);overflow:auto;padding:16px 16px 32px;min-width:0}
+.panel h2{font-family:var(--f-serif);font-weight:700;font-size:19px;margin:0 0 4px;text-wrap:balance}
+.panel h3,.pagewrap h3.lab{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:20px 0 8px;font-weight:700}
+.muted{color:var(--ink-3)} .small{font-size:13px}
+.hint{font-size:13px;color:var(--ink-3);margin:6px 0 0}
+.pill{display:inline-block;border:1px solid var(--rule);border-radius:999px;padding:0 8px;font-size:12px;color:var(--ink-2);white-space:nowrap;line-height:1.6}
+.pill.src{border-color:var(--ok);color:var(--ok)}
+.pill.lit{border-color:var(--lit);color:var(--lit)}
+.pill.db{border-color:var(--accent);color:var(--accent)}
+.pill.verify{border-color:var(--weld);color:var(--weld);border-style:dashed}
+.note{border:1px dashed var(--rule);border-radius:8px;padding:10px 12px;margin:14px 0;font-size:13.5px;color:var(--ink-2);background:var(--bg)}
+.note b{font-family:var(--f-serif)}
+.card{border:1px solid var(--rule);border-radius:8px;padding:10px 12px;margin:8px 0;background:var(--surface)}
+.card h4{margin:2px 0 4px;font-family:var(--f-serif);font-size:16.5px;font-weight:700;text-wrap:balance}
+.card .lab{font-size:12px;color:var(--ink-3);letter-spacing:.04em}
+.card .ref{font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.list{list-style:none;padding:0;margin:0}
+.list li{padding:6px 0;border-bottom:1px solid var(--rule);font-size:14px}
+.list li button.lk{all:unset;cursor:pointer;color:var(--ink)}
+.list li button.lk:hover,.list li button.lk:focus-visible{color:var(--accent);text-decoration:underline}
+.btn{border:1px solid var(--rule);background:var(--surface);border-radius:7px;padding:4px 10px;cursor:pointer;font-size:13.5px;color:var(--ink-2)}
+.btn:hover{background:var(--surface-2)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--surface);padding:5px 10px;cursor:pointer;font-size:13px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:999px;padding:2px 9px;font-size:12.5px;background:var(--surface);cursor:pointer;color:var(--ink-2)}
+.chip[aria-pressed="false"]{opacity:.45}
+.sw{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+/* maps */
+.mapwrap{position:relative;min-width:0;min-height:0;overflow:hidden;background:var(--sea)}
+.mapwrap>svg{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.floating{position:absolute;z-index:5;background:var(--surface);border:1px solid var(--rule);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:8px 10px;font-size:13px}
+.ctl-tr{top:12px;right:12px;display:flex;flex-direction:column;gap:8px;max-width:min(270px,calc(100% - 24px))}
+.ctl-bl{left:12px;bottom:26px;right:12px;max-width:640px}
+.credit{position:absolute;right:8px;bottom:4px;z-index:4;font-size:11px;color:var(--ink-3);background:color-mix(in srgb,var(--surface) 80%,transparent);padding:1px 6px;border-radius:4px;max-width:calc(100% - 16px)}
+.zoomctl{position:absolute;left:12px;top:12px;z-index:5;display:flex;flex-direction:column;gap:4px}
+.zoomctl button{width:30px;height:30px;border:1px solid var(--rule);border-radius:7px;background:var(--surface);cursor:pointer;font-size:16px;line-height:1;color:var(--ink-2)}
+.mapwrap path{vector-effect:non-scaling-stroke}
+.mk{cursor:pointer}
+.mk:focus{outline:none}
+.mk:focus-visible circle,.mk:focus-visible rect{stroke:var(--accent);stroke-width:3}
+.lbl{font-family:var(--f-sans);font-size:12px;fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.lbl.sea{stroke:var(--sea);fill:var(--ink-3);font-style:italic}
+.rangebox{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rangebox input[type=range]{flex:1;min-width:120px}
+.tip{position:fixed;z-index:50;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:6px 9px;font-size:13px;max-width:300px;box-shadow:0 2px 10px rgba(0,0,0,.15);pointer-events:none}
+/* pages */
+.pagewrap{max-width:1080px;margin:0 auto}
+.pagewrap h1{font-family:var(--f-display);font-weight:400;font-size:30px;margin:0 0 4px;letter-spacing:.01em;text-wrap:balance}
+.lede{font-family:var(--f-serif);font-size:17px;color:var(--ink-2);max-width:68ch;margin:4px 0 18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:18px}
+.fig{border:1px solid var(--rule);border-radius:10px;background:var(--surface);padding:14px 14px 10px;min-width:0}
+.fig h3{font-family:var(--f-serif);font-size:18px;margin:0 0 2px;font-weight:700;text-wrap:balance}
+.fig .sub{font-size:13px;color:var(--ink-3);margin:0 0 8px;max-width:72ch}
+.fig .plot{width:100%;overflow-x:auto}
+.fig svg{display:block}
+.fig svg text{fill:var(--ink-2);font-family:var(--f-sans)}
+.axis path,.axis line{stroke:var(--rule)}
+.axis text{font-size:11.5px}
+.gridline line{stroke:var(--rule);stroke-dasharray:2 3}
+.lgd{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink-2);margin:6px 0 0}
+.lgd span{display:inline-flex;align-items:center;gap:5px}
+details.tbl{margin-top:6px;font-size:13px}
+details.tbl summary{cursor:pointer;color:var(--ink-3)}
+.tblwrap{overflow-x:auto}
+table.data{border-collapse:collapse;font-size:13px;width:100%}
+table.data th,table.data td{border-bottom:1px solid var(--rule);padding:4px 6px;text-align:left;vertical-align:top}
+table.data th{font-weight:700;color:var(--ink-2);position:sticky;top:0;background:var(--surface)}
+table.data td.n{text-align:right;font-variant-numeric:tabular-nums}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.toolbar select{border:1px solid var(--rule);border-radius:7px;padding:4px 6px;background:var(--surface)}
+.toolbar input[type=search]{border:1px solid var(--rule);border-radius:7px;padding:4px 8px;background:var(--surface);min-width:0;flex:1;max-width:280px}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:12px}
+.books .card{margin:0;display:flex;flex-direction:column;gap:4px}
+.books .card .ms{font-size:13px;color:var(--ink-2)}
+.checklist li{margin:4px 0}
+.struct{display:grid;gap:8px}
+.tier{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:8px}
+.node{border:1px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--bg)}
+.node b{font-family:var(--f-serif);font-size:15px;display:block}
+.node .small{color:var(--ink-3)}
+.node.crown{border-color:var(--ink-3)}
+.node.burgh{border-color:var(--accent)}
+.legendrow{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12.5px;color:var(--ink-2);margin-top:8px}
+.quote{font-family:var(--f-serif);font-style:italic;color:var(--ink);border-left:3px solid var(--rule);padding:2px 0 2px 10px;margin:6px 0}
+.ranges{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 8px}
+.ranges .btn{font-size:13px}
+.govband text{pointer-events:none}
+.brush .selection{fill:var(--ink);fill-opacity:.08;stroke:var(--ink);stroke-width:1.2}
+.voices{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:10px}
+.voices .card{margin:0}
+.voices .card .lab b{color:var(--ink)}
+.siegecard{border-left:4px solid var(--c8)}
+.siegecard.failed{border-left-color:var(--sco)}
+.siegecard[aria-current="true"]{outline:2px solid var(--ink);outline-offset:1px}
+.tagrow{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.commentary:empty{display:none}
+@media (max-width:860px){
+  .view{grid-template-columns:1fr;grid-template-rows:minmax(300px,58%) auto;overflow:auto}
+  .view .mapwrap{min-height:300px}
+  .panel{border-left:0;border-top:1px solid var(--rule);overflow:visible}
+  .brand span{display:none}
+  .ctl-tr{max-width:200px}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="bar">
+    <div class="brand"><b>Berwick upon Tweed</b><span>1100–1500</span></div>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="t-town" aria-selected="true" data-v="town">Town</button>
+      <button class="tab" role="tab" id="t-march" aria-selected="false" data-v="march">March</button>
+      <button class="tab" role="tab" id="t-gov" aria-selected="false" data-v="gov">Control &amp; governance</button>
+      <button class="tab" role="tab" id="t-sea" aria-selected="false" data-v="sea">Port &amp; sea</button>
+      <button class="tab" role="tab" id="t-garrison" aria-selected="false" data-v="garrison">Garrison</button>
+      <button class="tab" role="tab" id="t-petitions" aria-selected="false" data-v="petitions">Petitions</button>
+      <button class="tab" role="tab" id="t-records" aria-selected="false" data-v="records">Records</button>
+      <button class="tab" role="tab" id="t-books" aria-selected="false" data-v="books">Books &amp; manuscripts</button>
+      <button class="tab" role="tab" id="t-people" aria-selected="false" data-v="people">Figures</button>
+      <button class="tab" role="tab" id="t-sources" aria-selected="false" data-v="sources">Sources &amp; method</button>
+    </nav>
+    <a class="home" href="https://danieldavies.co/">Daniel Davies</a>
+  </header>
+  <main>
+    <!-- TOWN -->
+    <section class="view" id="v-town" role="tabpanel" aria-labelledby="t-town">
+      <div class="mapwrap" id="townwrap">
+        <svg id="townsvg" role="img" aria-label="Map of Berwick"></svg>
+        <div class="zoomctl"><button id="tz-in" aria-label="Zoom in">+</button><button id="tz-out" aria-label="Zoom out">−</button><button id="tz-fit" aria-label="Fit to town" title="Fit">⤢</button></div>
+        <div class="floating ctl-tr">
+          <div class="seg" role="group" aria-label="Base map"><button id="tb-modern" aria-pressed="true">Modern plan</button><button id="tb-speed" aria-pressed="false">Speed, 1610</button></div>
+          <div class="seg" role="group" aria-label="Layer"><button id="tm-places" aria-pressed="true">Places</button><button id="tm-sieges" aria-pressed="false">Sieges</button><button id="tm-freiris" aria-pressed="false">Freiris</button></div>
+          <div class="chips" id="townChips"></div>
+        </div>
+        <div class="credit" id="townCredit"></div>
+      </div>
+      <aside class="panel" id="townPanel"></aside>
+    </section>
+    <!-- MARCH -->
+    <section class="view" id="v-march" role="tabpanel" aria-labelledby="t-march" hidden>
+      <div class="mapwrap" id="marchwrap">
+        <svg id="marchsvg" role="img" aria-label="Map of the Anglo-Scottish march"></svg>
+        <div class="zoomctl"><button id="mz-in" aria-label="Zoom in">+</button><button id="mz-out" aria-label="Zoom out">−</button><button id="mz-fit" aria-label="Fit" title="Fit">⤢</button></div>
+        <div class="floating ctl-tr">
+          <div class="chips" id="marchChips"></div>
+          <label class="small"><input type="checkbox" id="m-up" checked> Land over 300 m</label>
+          <label class="small"><input type="checkbox" id="m-border" checked> Modern border</label>
+          <label class="small"><input type="checkbox" id="m-sieges" checked> Sieges and assaults</label>
+        </div>
+        <div class="floating ctl-bl">
+          <div class="rangebox"><span class="small">Events from</span><input type="range" id="m-y0" min="1170" max="1510" value="1170" aria-label="From year"><span class="small">to</span><input type="range" id="m-y1" min="1170" max="1510" value="1510" aria-label="To year"><b class="num small" id="m-yl"></b></div>
+          <svg id="marchRibbon" height="34" style="width:100%;display:block;margin-top:4px" aria-label="Who held Berwick"></svg>
+        </div>
+        <div class="credit">Relief: Mapzen/AWS terrain tiles · Coast and border: Natural Earth · Rivers © OpenStreetMap contributors</div>
+      </div>
+      <aside class="panel" id="marchPanel"></aside>
+    </section>
+    <!-- GOVERNANCE -->
+    <section class="view page" id="v-gov" role="tabpanel" aria-labelledby="t-gov" hidden><div class="pagewrap" id="govBody"></div></section>
+    <!-- SEA -->
+    <section class="view" id="v-sea" role="tabpanel" aria-labelledby="t-sea" hidden>
+      <div class="mapwrap" id="seawrap">
+        <svg id="seasvg" role="img" aria-label="Map of the North Sea world"></svg>
+        <div class="zoomctl"><button id="sz-in" aria-label="Zoom in">+</button><button id="sz-out" aria-label="Zoom out">−</button><button id="sz-fit" aria-label="Fit" title="Fit">⤢</button></div>
+        <div class="floating ctl-tr">
+          <div class="seg" role="group" aria-label="Layer"><button id="sl-links" aria-pressed="true">Documented links</button><button id="sl-ports" aria-pressed="false">Ships' home ports</button></div>
+          <div class="chips" id="seaChips"></div>
+        </div>
+        <div class="floating ctl-bl" id="seaRange">
+          <div class="rangebox"><span class="small">Years from</span><input type="range" id="s-y0" min="1280" max="1470" value="1280" aria-label="From year"><span class="small">to</span><input type="range" id="s-y1" min="1280" max="1470" value="1470" aria-label="To year"><b class="num small" id="s-yl"></b></div>
+        </div>
+        <div class="credit">Coastline: Natural Earth</div>
+      </div>
+      <aside class="panel" id="seaPanel"></aside>
+    </section>
+    <!-- GARRISON -->
+    <section class="view page" id="v-garrison" role="tabpanel" aria-labelledby="t-garrison" hidden><div class="pagewrap" id="garBody"></div></section>
+    <!-- PETITIONS -->
+    <section class="view page" id="v-petitions" role="tabpanel" aria-labelledby="t-petitions" hidden><div class="pagewrap" id="petBody"></div></section>
+    <!-- RECORDS -->
+    <section class="view page" id="v-records" role="tabpanel" aria-labelledby="t-records" hidden><div class="pagewrap" id="recBody"></div></section>
+    <!-- BOOKS -->
+    <section class="view page" id="v-books" role="tabpanel" aria-labelledby="t-books" hidden><div class="pagewrap" id="bookBody"></div></section>
+    <!-- PEOPLE -->
+    <section class="view" id="v-people" role="tabpanel" aria-labelledby="t-people" hidden>
+      <div class="mapwrap" id="pplwrap">
+        <svg id="pplsvg" role="img" aria-label="Map of a figure's places"></svg>
+        <div class="zoomctl"><button id="pz-in" aria-label="Zoom in">+</button><button id="pz-out" aria-label="Zoom out">−</button><button id="pz-fit" aria-label="Fit" title="Fit">⤢</button></div>
+        <div class="credit">Coastline: Natural Earth</div>
+      </div>
+      <aside class="panel" id="pplPanel"></aside>
+    </section>
+    <!-- SOURCES -->
+    <section class="view page" id="v-sources" role="tabpanel" aria-labelledby="t-sources" hidden><div class="pagewrap" id="srcBody"></div></section>
+  </main>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+"use strict";
+// ---------------------------------------------------------------- shared
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const STATUS={src:['src','Checked in sources'],lit:['lit','From secondary studies'],db:['db','Database'],verify:['verify','To verify']};
+const pill=s=>{if(s==='verify'&&!CONFIG.showUnverified) return ''; const t=STATUS[s]||['','']; return `<span class="pill ${t[0]}">${t[1]}</span>`};
+const KINDS={control:['Control','--c8'],siege:['War and sieges','--c2'],governance:['Governance','--c1'],trade:['Trade and shipping','--c4'],diplomacy:['Diplomacy','--c7'],church:['Church','--c5'],people:['People','--c3'],text:['Texts','--c6']};
+const kc=k=>`var(${(KINDS[k]||['','--c0'])[1]})`;
+const HOLD={E:['England','--eng'],S:['Scotland','--sco'],R:['Percy rebels','--reb']};
+/* ---- Site settings (the public build, made by build/make_deploy.py, changes these) ----
+   showUnverified: false hides every entry marked "To verify".
+   commentary: a URL whose <section data-view="..."> blocks fill the commentary slots; null shows empty slots for review. */
+const CONFIG={showUnverified:false, commentary:'content/commentary.html', review:false};
+let COMMENTARY={};
+const comment=(v)=>{const h=COMMENTARY[v]; if(h) return `<div class="note commentary" data-view="${v}">${h}</div>`; return CONFIG.review?`<div class="note commentary" data-view="${v}"><b>Author’s commentary.</b> Space reserved for the chapter author. Not yet written.</div>`:''};
+let A,G;
+const tip=$('#tip');
+function showTip(html,e){tip.innerHTML=html;tip.hidden=false;const w=tip.offsetWidth,h=tip.offsetHeight;let x=e.clientX+14,y=e.clientY+14;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+h>innerHeight-8)y=e.clientY-h-14;tip.style.left=Math.max(4,x)+'px';tip.style.top=Math.max(4,y)+'px'}
+function hideTip(){tip.hidden=true}
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+function yearsLabel(a,b){return a===b?`${a}`:`${a}–${b}`}
+function holderAt(y){for(const c of A.interruptions){if(y>=c[0]&&y<c[1])return c[2]} for(const c of A.control){if(y>=c[0]&&y<c[1])return c[2]} return null}
+function placeLL(id){ if(Array.isArray(id)) return id; const t=TOWNBY[id]; if(t) return t.ll; const r=REGBY[id]; if(r) return r.ll; const l=A.link_places[id]; if(l) return [l[1],l[2]]; const p=A.ports[id]; if(p) return [p[1],p[2]]; return null }
+function placeName(id){ if(Array.isArray(id)) return ''; return (TOWNBY[id]||REGBY[id]||{}).name || (A.link_places[id]||A.ports[id]||[])[0] || id }
+let TOWNBY={},REGBY={};
+
+// ---------------------------------------------------------------- tabs
+const built={};
+function show(v){
+  CURV=v;
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.v===v));
+  document.querySelectorAll('main>section').forEach(s=>s.hidden=s.id!=='v-'+v);
+  if(!built[v]){built[v]=true; ({town:buildTown,march:buildMarch,gov:buildGov,sea:buildSea,garrison:buildGarrison,petitions:buildPetitions,records:buildRecords,books:buildBooks,people:buildPeople,sources:buildSources})[v]()}
+  else if(RESIZE[v]) RESIZE[v]();
+  store('bw-view',v);
+  if(location.hash!=='#'+v) history.replaceState(null,'','#'+v);
+}
+const RESIZE={}; let CURV='town';
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>show(t.dataset.v));
+document.querySelector('.tabs').addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.tab')];const i=tabs.findIndex(t=>t.getAttribute('aria-selected')==='true');if(e.key==='ArrowRight'){tabs[(i+1)%tabs.length].focus();tabs[(i+1)%tabs.length].click()}if(e.key==='ArrowLeft'){tabs[(i-1+tabs.length)%tabs.length].focus();tabs[(i-1+tabs.length)%tabs.length].click()}});
+let rzT; addEventListener('resize',()=>{clearTimeout(rzT); rzT=setTimeout(()=>{const v=document.querySelector('.tab[aria-selected="true"]').dataset.v; if(RESIZE[v]) RESIZE[v]()},250)});
+
+// generic zoomable SVG map
+function makeMap(svgSel,{extent=[1,40]}={}){
+  const svg=d3.select(svgSel); svg.selectAll('*').remove();
+  const g=svg.append('g');
+  const zoom=d3.zoom().scaleExtent(extent).on('zoom',e=>{g.attr('transform',e.transform); const k=e.transform.k; g.selectAll('.cs').attr('transform',function(){return `translate(${this.dataset.x},${this.dataset.y}) scale(${1/k})`}); svg.node().dispatchEvent(new CustomEvent('zoomed',{detail:k}))});
+  svg.call(zoom).on('dblclick.zoom',null);
+  return {svg,g,zoom,size(){const r=svg.node().getBoundingClientRect();return [Math.max(10,r.width),Math.max(10,r.height)]}};
+}
+function wireZoom(m,pre,fit){ $(`#${pre}-in`).onclick=()=>m.svg.transition().duration(250).call(m.zoom.scaleBy,1.6); $(`#${pre}-out`).onclick=()=>m.svg.transition().duration(250).call(m.zoom.scaleBy,1/1.6); $(`#${pre}-fit`).onclick=fit }
+function mapLabel(g,xy,text,cls='',opts={}){const t=g.append('g').attr('class','cs').attr('data-x',xy[0]).attr('data-y',xy[1]).attr('transform',`translate(${xy[0]},${xy[1]})`).append('text').attr('class','lbl '+cls).attr('text-anchor',opts.anchor||'middle').text(text); if(opts.size)t.attr('font-size',opts.size); if(opts.ls)t.attr('letter-spacing',opts.ls); return t}
+function ringPath(proj,ring){let s='';ring.forEach((p,i)=>{const q=proj(p);s+=(i?'L':'M')+q[0].toFixed(1)+','+q[1].toFixed(1)});return s+'Z'}
+function linePath(proj,l){let s='';l.forEach((p,i)=>{const q=proj(p);s+=(i?'L':'M')+q[0].toFixed(1)+','+q[1].toFixed(1)});return s}
+function keyAct(sel,fn){sel.attr('tabindex',0).attr('role','button').on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fn(e,d)}})}
+
+// ---------------------------------------------------------------- TOWN
+const TT={castle:['Castle and walls','--c8'],wall:['Castle and walls','--c8'],church:['Church and hospitals','--c5'],hospital:['Church and hospitals','--c5'],street:['Streets and gates','--c1'],gate:['Streets and gates','--c1'],bridge:['Waterfront','--c4'],quay:['Waterfront','--c4'],hall:['Waterfront','--c4'],settlement:['Around the town','--c3'],battle:['Around the town','--c3']};
+const OUTC={taken:'taken',surrendered:'surrendered',retaken:'taken, then retaken',failed:'failed'};
+let townBase='modern', townMode='places', townSel=null, townSiege=null, townLine=null, townHidden=new Set();
+function buildTown(){
+  const m=makeMap('#townsvg',{extent:[1,24]}); const [W,H]=m.size();
+  const bb=G.town.bbox;
+  const proj=d3.geoMercator().fitExtent([[0,0],[W,H]],{type:'MultiPoint',coordinates:[[bb[0],bb[1]],[bb[2],bb[3]],[bb[0],bb[3]],[bb[2],bb[1]]]});
+  const modern=m.g.append('g').attr('class','modern');
+  const speed=m.g.append('g').attr('class','speedbase');
+  const halo=m.g.append('g'); const marks=m.g.append('g');
+  const P=p=>proj(p);
+  modern.append('rect').attr('x',-W).attr('y',-H).attr('width',W*3).attr('height',H*3).attr('fill','var(--sea)');
+  modern.append('path').attr('d',G.town.land.map(r=>ringPath(P,r)).join('')).attr('fill','var(--land)').attr('stroke','var(--land-edge)').attr('stroke-width',.6);
+  modern.append('path').attr('d',G.town.green.map(r=>ringPath(P,r)).join('')).attr('fill','var(--green)');
+  modern.append('path').attr('d',G.town.buildings.map(r=>ringPath(P,r)).join('')).attr('fill','var(--bldg)');
+  modern.append('path').attr('d',G.town.streets.filter(s=>!s[0]).map(s=>linePath(P,s[2])).join('')).attr('fill','none').attr('stroke','var(--street-2)').attr('stroke-width',1.1);
+  modern.append('path').attr('d',G.town.streets.filter(s=>s[0]).map(s=>linePath(P,s[2])).join('')).attr('fill','none').attr('stroke','var(--street)').attr('stroke-width',1.6);
+  modern.append('path').attr('d',G.town.rail.map(l=>linePath(P,l)).join('')).attr('fill','none').attr('stroke','var(--ink-3)').attr('stroke-width',1).attr('stroke-dasharray','4 3');
+  modern.append('path').attr('d',G.town.piers.map(l=>linePath(P,l)).join('')).attr('fill','none').attr('stroke','var(--land-edge)').attr('stroke-width',2);
+  modern.append('path').attr('d',G.town.walls.map(l=>linePath(P,l)).join('')).attr('fill','none').attr('stroke','var(--ink-3)').attr('stroke-width',2.4).attr('stroke-opacity',.55);
+  mapLabel(modern,P([-1.9985,55.7742]),'Elizabethan walls (1558–70)','',{size:10.5,anchor:'start'});
+  [['River Tweed',[-2.030,55.7660]],['North Sea',[-1.983,55.7790]],['Spittal',[-1.993,55.7565]]].forEach(([t,ll])=>mapLabel(modern,P(ll),t,/Sea|River/.test(t)?'sea':''));
+  const SW=1993,SH=1273; const s=Math.min(W/SW,H/SH)*0.98; const ox=(W-SW*s)/2, oy=(H-SH*s)/2;
+  speed.append('rect').attr('x',-W).attr('y',-H).attr('width',W*3).attr('height',H*3).attr('fill','var(--surface-2)');
+  speed.append('image').attr('href','img/speed1610.jpg').attr('x',ox).attr('y',oy).attr('width',SW*s).attr('height',SH*s).attr('preserveAspectRatio','none');
+  const SP=p=>[ox+p[0]*s, oy+p[1]*s];
+  const TOWNC={modern:P([-2.0035,55.7705]), speed:SP([1150,600])};
+  const xy=f=>townBase==='speed'?(f.sp?SP(f.sp):null):P([f.ll[1],f.ll[0]]);
+  function highlightIds(){
+    if(townMode==='sieges'&&townSiege){const sg=A.sieges.find(x=>x.id===townSiege); return new Set(sg.places)}
+    if(townMode==='freiris'){ if(townLine!=null){const id=A.freiris.lines[townLine][1]; return new Set(id?[id]:[])} return new Set(A.freiris.lines.map(l=>l[1]).filter(Boolean))}
+    if(townMode==='sieges') return new Set(A.sieges.flatMap(x=>x.places));
+    return null;
+  }
+  function draw(){
+    const isS=townBase==='speed';
+    modern.attr('display',isS?'none':null); speed.attr('display',isS?null:'none');
+    marks.selectAll('*').remove(); halo.selectAll('*').remove();
+    const k=d3.zoomTransform(m.svg.node()).k;
+    const hi=highlightIds();
+    const feats=A.town.filter(f=>townMode!=='places'||!townHidden.has((TT[f.t]||['Other'])[0])).filter(f=>xy(f));
+    const items=feats.map(f=>({f,xy:xy(f),on:!hi||hi.has(f.id)}));
+    if(isS&&townMode==='places') A.speed_notes.forEach(n=>items.push({note:n,xy:SP(n.sp),on:true}));
+    // whole-town halo when a siege or line concerns the town as a whole
+    if(hi&&hi.has('berwick')){const c=TOWNC[townBase]; halo.append('g').attr('class','cs').attr('data-x',c[0]).attr('data-y',c[1]).attr('transform',`translate(${c[0]},${c[1]}) scale(${1/k})`).append('circle').attr('r',isS?Math.min(W,H)*0.33:120).attr('fill','var(--c8)').attr('fill-opacity',.07).attr('stroke','var(--c8)').attr('stroke-dasharray','6 4').attr('stroke-width',1.5)}
+    const col=d=>d.note?'var(--surface)':(townMode==='sieges'&&d.on?'var(--c8)':townMode==='freiris'&&d.on?'var(--c6)':`var(${(TT[d.f.t]||['','--c0'])[1]})`);
+    const gm=marks.selectAll('g.mk').data(items).join('g').attr('class','mk').attr('transform',d=>`translate(${d.xy[0]},${d.xy[1]}) scale(${1/k})`).attr('opacity',d=>d.on?1:.28);
+    gm.filter(d=>d.on&&townMode!=='places').append('circle').attr('r',14).attr('fill','none').attr('stroke',d=>col(d)).attr('stroke-width',2).attr('stroke-opacity',.6);
+    gm.append('circle').attr('r',d=>d.note?6:8).attr('fill',col).attr('stroke',d=>d.note?'var(--ink-2)':'var(--surface)').attr('stroke-width',2).attr('stroke-dasharray',d=>d.f&&d.f.approx?'3 2':null);
+    gm.filter(d=>d.f&&townSel===d.f.id).append('circle').attr('r',13).attr('fill','none').attr('stroke','var(--ink)').attr('stroke-width',2);
+    gm.append('text').attr('class','lbl').attr('x',11).attr('y',4).text(d=>d.note?d.note.name:d.f.name).attr('display',d=>d.on?null:'none');
+    gm.attr('aria-label',d=>d.note?d.note.name:d.f.name)
+      .on('mousemove',(e,d)=>showTip(d.note?`<b>${esc(d.note.name)}</b><br>${esc(d.note.note)}`:`<b>${esc(d.f.name)}</b>${d.f.approx?'<br><span class="muted">position approximate</span>':''}`,e)).on('mouseleave',hideTip)
+      .on('click',(e,d)=>{ if(d.f) selectTown(d.f.id); else noteTown(d.note) });
+    keyAct(gm,(e,d)=>{ if(d.f) selectTown(d.f.id); else noteTown(d.note) });
+    $('#townCredit').innerHTML=isS?'John Speed, <i>Northumberland</i> (1610), inset plan “Barwick”; BnF scan via Wikimedia Commons, public domain. Speed’s letters are not keyed on the plate.':'Streets, walls, coast © OpenStreetMap contributors (ODbL). Dashed marker outlines: position approximate.';
+    $('#townChips').hidden=townMode!=='places';
+  }
+  m.svg.node().addEventListener('zoomed',e=>{marks.selectAll('g.mk').attr('transform',d=>`translate(${d.xy[0]},${d.xy[1]}) scale(${1/e.detail})`)});
+  function fit(instant){ const isS=townBase==='speed'; let t;
+    if(isS) t=d3.zoomIdentity; else { const a=P([-2.0155,55.7745]), b=P([-1.995,55.7655]); const kk=Math.min(W/(b[0]-a[0]),H/(b[1]-a[1]))*0.85; t=d3.zoomIdentity.translate(W/2,H/2).scale(Math.max(1,kk)).translate(-(a[0]+b[0])/2,-(a[1]+b[1])/2) }
+    if(instant) m.svg.call(m.zoom.transform,t); else m.svg.transition().duration(300).call(m.zoom.transform,t) }
+  wireZoom(m,'tz',()=>fit());
+  const setBase=b=>{townBase=b;$('#tb-modern').setAttribute('aria-pressed',b==='modern');$('#tb-speed').setAttribute('aria-pressed',b==='speed');draw();fit()};
+  $('#tb-modern').onclick=()=>setBase('modern'); $('#tb-speed').onclick=()=>setBase('speed');
+  const setMode=md=>{townMode=md;townSel=null;townSiege=null;townLine=null;['places','sieges','freiris'].forEach(x=>$('#tm-'+x).setAttribute('aria-pressed',x===md));draw();townPanel()};
+  $('#tm-places').onclick=()=>setMode('places'); $('#tm-sieges').onclick=()=>setMode('sieges'); $('#tm-freiris').onclick=()=>setMode('freiris');
+  const groups=[...new Set(Object.values(TT).map(v=>v[0]))];
+  $('#townChips').innerHTML=groups.map(gname=>{const c=Object.values(TT).find(v=>v[0]===gname)[1];return `<button class="chip" aria-pressed="${!townHidden.has(gname)}" data-g="${esc(gname)}"><span class="sw" style="background:var(${c})"></span>${esc(gname)}</button>`}).join('');
+  $('#townChips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const gname=b.dataset.g; if(townHidden.has(gname))townHidden.delete(gname); else townHidden.add(gname); b.setAttribute('aria-pressed',!townHidden.has(gname)); draw()});
+  window.selectTown=id=>{ if(id&&townMode!=='places'){townMode='places';['places','sieges','freiris'].forEach(x=>$('#tm-'+x).setAttribute('aria-pressed',x==='places'))} townSel=id; draw(); townPanel(id)};
+  window.selectSiege=(id,force)=>{ if(townMode!=='sieges'){townMode='sieges';['places','sieges','freiris'].forEach(x=>$('#tm-'+x).setAttribute('aria-pressed',x==='sieges'))} townSiege=(townSiege===id&&!force)?null:id; draw(); townPanel()};
+  window.selectLine=i=>{townLine=townLine===i?null:i; draw(); townPanel()};
+  window.noteTown=n=>{townSel=null; draw(); $('#townPanel').innerHTML=`<p><button class="btn" id="tback">← All places</button></p><div class="card"><div class="lab">On Speed’s plan</div><h4>${esc(n.name)}</h4><div class="small">${esc(n.note)}</div></div>`; $('#tback').onclick=()=>{townSel=null;draw();townPanel()}};
+  draw(); fit(true); townPanel(townSel);
+  RESIZE.town=()=>{built.town=false; buildTown()};
+}
+function evCard(e){return `<div class="card"><div class="lab num">${esc(e.d)} · <span style="color:${kc(e.k)}">${esc((KINDS[e.k]||[''])[0])}</span></div><h4>${esc(e.t)}</h4><div class="small">${esc(e.x)}</div><div class="ref">${pill(e.s)} ${esc(e.r||'')}</div></div>`}
+function siegeCard(sg,cur){return `<div class="card siegecard ${sg.o==='failed'?'failed':''}" ${cur?'aria-current="true"':''} data-sg="${sg.id}" tabindex="0" role="button"><div class="lab num">${esc(sg.d)} · ${esc(A.siege_methods[sg.m]||sg.m)} · ${esc(OUTC[sg.o]||sg.o)}</div><h4>${esc(sg.by)}</h4><div class="small"><span class="muted">Held for:</span> ${esc(sg.held)}</div><div class="small">${esc(sg.x)}</div><div class="ref">${pill(sg.s)} ${esc(sg.r)}</div></div>`}
+function townPanel(id){
+  const P=$('#townPanel');
+  if(townMode==='sieges'){
+    const L=A.sieges;
+    P.innerHTML=`<h2>Sieges and assaults</h2><p class="small muted">Every attack on the town or castle recorded in the sources searched. Choose one to see the places involved; red cards are captures, blue are failures. Places marked on the map are those the sources name.</p>
+      <div class="tagrow">${Object.entries(A.siege_methods).map(([k,v])=>`<span class="pill">${esc(v)}: ${L.filter(x=>x.m===k).length}</span>`).join('')}</div>
+      <h3>${L.length} episodes, ${L[0].d.match(/\d{4}/)[0]}–${L[L.length-1].d.match(/\d{4}/)[0]}</h3>${L.map(sg=>siegeCard(sg,sg.id===townSiege)).join('')}${comment('town')}`;
+    P.querySelectorAll('[data-sg]').forEach(c=>{c.onclick=()=>selectSiege(c.dataset.sg); c.onkeydown=e=>{if(e.key==='Enter')selectSiege(c.dataset.sg)}});
+    const cur=P.querySelector('[aria-current="true"]'); if(cur) cur.scrollIntoView({block:'nearest'});
+    return;
+  }
+  if(townMode==='freiris'){
+    const F=A.freiris;
+    P.innerHTML=`<h2>${esc(F.title)}</h2><p class="small muted">The opening of the Scots tale describes the town. Choose a line to see the place it names; lines without a marker name houses whose sites are not known.</p>
+      ${F.lines.map((l,i)=>`<div class="card" data-ln="${i}" tabindex="0" role="button" ${townLine===i?'aria-current="true" style="outline:2px solid var(--ink)"':''}><div class="quote">${esc(l[0])}</div><div class="small muted">${l[1]?esc(TOWNBY[l[1]].name):'Not placed'}</div></div>`).join('')}
+      <p class="small">${esc(F.note)}</p><div class="ref small muted">${pill('src')} ${esc(F.ref)}</div>${comment('town')}`;
+    P.querySelectorAll('[data-ln]').forEach(c=>{c.onclick=()=>selectLine(+c.dataset.ln); c.onkeydown=e=>{if(e.key==='Enter')selectLine(+c.dataset.ln)}});
+    return;
+  }
+  if(!id){
+    P.innerHTML=`<h2>The town</h2><p class="small muted">Places in and around medieval Berwick. Choose a marker or a name. The Speed base shows the town in 1610, when the medieval wall circuit still stood outside the new Elizabethan walls. Switch the layer to <b>Sieges</b> or to the <b>Freiris</b> poem above the map.</p>
+    <h3>Places</h3><ul class="list">${A.town.map(f=>`<li><button class="lk" data-id="${f.id}">${esc(f.name)}</button> ${f.approx?'<span class="pill">approx.</span>':''}</li>`).join('')}</ul>
+    <h3>Recorded but not placed</h3><p class="small muted">Houses named in the documents whose sites are not established; listed here rather than given an invented position.</p>
+    ${A.unplaced.map(u=>`<div class="card"><h4>${esc(u.name)}</h4><div class="small">${esc(u.note)}</div><div class="ref">${pill(u.status)} ${esc(u.refs||'')}</div></div>`).join('')}
+    ${comment('town')}`;
+    P.querySelectorAll('.lk').forEach(b=>b.onclick=()=>selectTown(b.dataset.id)); return;
+  }
+  const f=TOWNBY[id]; const ev=A.events.filter(e=>e.p===id); const sg=A.sieges.filter(x=>x.places.includes(id));
+  P.innerHTML=`<p><button class="btn" id="tback">← All places</button></p><h2>${esc(f.name)}</h2><p class="small muted">${esc((TT[f.t]||[''])[0])}${f.approx?' · position approximate':''}${f.sp?'':' · not identified on Speed’s plan'}</p>
+  <div class="small">${esc(f.note)}</div><div class="ref small muted" style="margin-top:6px">${pill(f.status)} ${esc(f.refs||'')}</div>
+  ${sg.length?`<h3>Sieges and assaults here</h3>${sg.map(x=>siegeCard(x,false)).join('')}`:''}
+  ${ev.length?`<h3>Events here</h3>${ev.map(evCard).join('')}`:''}${comment('town')}`;
+  $('#tback').onclick=()=>{townSel=null; selectTown(null)};
+  P.querySelectorAll('[data-sg]').forEach(c=>c.onclick=()=>selectSiege(c.dataset.sg));
+}
+
+// ---------------------------------------------------------------- MARCH
+const RT={burgh:['Burghs','--c1'],castle:['Castles','--c8'],abbey:['Religious houses','--c5'],battle:['Battles','--c2'],meeting:['Meetings and treaties','--c7'],manor:['Manors','--c3']};
+let marchHidden=new Set(), marchSel=null;
+function buildMarch(){
+  const m=makeMap('#marchsvg',{extent:[1,12]}); const [W,H]=m.size(); const bb=G.region.bbox;
+  const proj=d3.geoMercator().fitExtent([[0,0],[W,H]],{type:'MultiPoint',coordinates:[[bb[0],bb[1]],[bb[2],bb[3]],[bb[0],bb[3]],[bb[2],bb[1]]]});
+  const P=p=>proj(p);
+  m.g.append('rect').attr('x',-W).attr('y',-H).attr('width',W*3).attr('height',H*3).attr('fill','var(--sea)');
+  m.g.append('path').attr('d',G.region.land.map(r=>ringPath(P,r[1])).join('')).attr('fill','var(--land)').attr('stroke','var(--land-edge)').attr('stroke-width',.7);
+  const dm=G.region.dem; const a=P([dm.west,dm.north]), b=P([dm.east,dm.south]);
+  const clip=m.g.append('clipPath').attr('id','landclip'); clip.append('path').attr('d',G.region.land.map(r=>ringPath(P,r[1])).join(''));
+  const up=m.g.append('g').attr('clip-path','url(#landclip)');
+  up.append('image').attr('href','img/hillshade.png').attr('x',a[0]).attr('y',a[1]).attr('width',b[0]-a[0]).attr('height',b[1]-a[1]).attr('preserveAspectRatio','none').attr('opacity',.55);
+  const upl=up.append('image').attr('href','img/upland.png').attr('x',a[0]).attr('y',a[1]).attr('width',b[0]-a[0]).attr('height',b[1]-a[1]).attr('preserveAspectRatio','none');
+  m.g.append('path').attr('d',G.region.rivers.map(r=>linePath(P,r[2])).join('')).attr('fill','none').attr('stroke','var(--river)').attr('stroke-width',.9).attr('stroke-linejoin','round');
+  const tweed=G.region.rivers.filter(r=>/Tweed/.test(r[0]));
+  m.g.append('path').attr('d',tweed.map(r=>linePath(P,r[2])).join('')).attr('fill','none').attr('stroke','var(--river)').attr('stroke-width',2);
+  const border=m.g.append('path').attr('d',G.region.border.map(l=>linePath(P,l)).join('')).attr('fill','none').attr('stroke','var(--ink-2)').attr('stroke-width',1.6).attr('stroke-dasharray','6 3 1.5 3');
+  [['North Sea',[-1.55,55.95]],['Firth of Forth',[-2.95,56.10]],['Solway Firth',[-3.55,54.88]],['Cheviot Hills',[-2.25,55.42]],['Lammermuir Hills',[-2.62,55.84]],['Southern Uplands',[-3.25,55.45]],['SCOTLAND',[-3.6,55.95]],['ENGLAND',[-2.4,54.75]]].forEach(([t,ll])=>mapLabel(m.g,P(ll),t,/Sea|Firth/.test(t)?'sea':'',{size:/[A-Z]{4}/.test(t)?13:12,ls:/[A-Z]{4}/.test(t)?'.2em':null}));
+  const marks=m.g.append('g');
+  $('#m-up').onchange=e=>up.attr('display',e.target.checked?null:'none');
+  $('#m-border').onchange=e=>border.attr('display',e.target.checked?null:'none');
+  const y0=$('#m-y0'), y1=$('#m-y1');
+  const yr=()=>[Math.min(+y0.value,+y1.value), Math.max(+y0.value,+y1.value)];
+  function evs(){const [a,b]=yr(); return A.events.filter(e=>e.y>=a&&e.y<=b+0.99)}
+  function sgs(){const [a,b]=yr(); return {bw:A.sieges.filter(s=>s.y>=a&&s.y<=b), reg:A.sieges_region.filter(s=>s.y>=a&&s.y<=b)}}
+  function placeOfEvent(e){ const t=TOWNBY[e.p]; return t?'berwick':e.p }
+  function draw(){
+    const a=Math.min(+y0.value,+y1.value), b=Math.max(+y0.value,+y1.value); $('#m-yl').textContent=yearsLabel(a,b);
+    const cnt=d3.rollup(evs(),v=>v.length,placeOfEvent);
+    const k=d3.zoomTransform(m.svg.node()).k;
+    const items=A.region.filter(r=>!marchHidden.has(RT[r.t][0])).map(r=>({r,xy:P([r.ll[1],r.ll[0]]),n:cnt.get(r.id)||0}));
+    const gm=marks.selectAll('g.mk').data(items,d=>d.r.id).join('g').attr('class','mk').attr('transform',d=>`translate(${d.xy[0]},${d.xy[1]}) scale(${1/k})`);
+    gm.selectAll('*').remove();
+    gm.append('circle').attr('r',d=>d.r.id==='berwick'?9:5+Math.min(6,d.n*1.5)).attr('fill',d=>`var(${RT[d.r.t][1]})`).attr('stroke',d=>marchSel===d.r.id?'var(--ink)':'var(--surface)').attr('stroke-width',d=>marchSel===d.r.id?3:1.5).attr('fill-opacity',d=>d.r.id==='northberwick'?.45:1);
+    gm.append('text').attr('class','lbl').attr('x',9).attr('y',4).text(d=>d.r.name+(d.n?` (${d.n})`:''));
+    gm.attr('aria-label',d=>d.r.name).on('click',(e,d)=>selectMarch(d.r.id)).on('mousemove',(e,d)=>showTip(`<b>${esc(d.r.name)}</b><br>${esc(d.r.note)}`,e)).on('mouseleave',hideTip);
+    keyAct(gm,(e,d)=>selectMarch(d.r.id));
+    const sOn=$('#m-sieges').checked, SG=sgs();
+    gm.each(function(d){const n=d.r.id==='berwick'?SG.bw.length:SG.reg.filter(s=>s.p===d.r.id).length; if(!sOn||!n) return;
+      const g=d3.select(this), rr=(d.r.id==='berwick'?9:5+Math.min(6,d.n*1.5))+5;
+      g.insert('circle',':first-child').attr('r',rr).attr('fill','none').attr('stroke','var(--c8)').attr('stroke-width',2.5).attr('stroke-dasharray','4 2.5');
+      g.append('circle').attr('cx',-rr*.8).attr('cy',-rr*.8).attr('r',8).attr('fill','var(--c8)').attr('stroke','var(--surface)').attr('stroke-width',1.5);
+      g.append('text').attr('x',-rr*.8).attr('y',-rr*.8+3.5).attr('text-anchor','middle').attr('font-size',10.5).attr('font-weight',700).style('fill','#fff').style('stroke','none').text(n)});
+    ribbon(); marchPanel(marchSel,evs(),sOn?SG:null);
+  }
+  function ribbon(){
+    const svg=d3.select('#marchRibbon'); const w=svg.node().getBoundingClientRect().width||400; svg.selectAll('*').remove();
+    const x=d3.scaleLinear().domain([1170,1510]).range([0,w]);
+    A.control.forEach(c=>svg.append('rect').attr('x',x(Math.max(1170,c[0]))).attr('y',2).attr('width',Math.max(0,x(Math.min(1510,c[1]))-x(Math.max(1170,c[0])))).attr('height',12).attr('fill',`var(${HOLD[c[2]][1]})`).attr('opacity',.85));
+    A.interruptions.forEach(c=>svg.append('rect').attr('x',x(c[0])).attr('y',2).attr('width',Math.max(2,x(c[1])-x(c[0]))).attr('height',12).attr('fill',`var(${HOLD[c[2]][1]})`));
+    const a=Math.min(+y0.value,+y1.value), b=Math.max(+y0.value,+y1.value);
+    svg.append('rect').attr('x',x(a)).attr('y',0).attr('width',Math.max(1,x(b+1)-x(a))).attr('height',16).attr('fill','none').attr('stroke','var(--ink)').attr('stroke-width',1.5);
+    if($('#m-sieges').checked) svg.append('g').selectAll('path').data(A.sieges).join('path').attr('d',d=>`M${x(d.y+.5)},16 l-3.5,6.5 h7 z`).attr('fill',d=>d.o==='failed'?'none':'var(--c8)').attr('stroke','var(--c8)').attr('stroke-width',1.2);
+    svg.append('text').attr('x',0).attr('y',32).attr('font-size',10).attr('fill','var(--ink-3)').text('1170'); svg.append('text').attr('x',w).attr('y',32).attr('text-anchor','end').attr('font-size',10).attr('fill','var(--ink-3)').text('1510');
+  }
+  y0.oninput=draw; y1.oninput=draw; $('#m-sieges').onchange=draw;
+  m.svg.node().addEventListener('zoomed',e=>marks.selectAll('g.mk').attr('transform',d=>`translate(${d.xy[0]},${d.xy[1]}) scale(${1/e.detail})`));
+  wireZoom(m,'mz',()=>m.svg.transition().duration(300).call(m.zoom.transform,d3.zoomIdentity));
+  $('#marchChips').innerHTML=Object.values(RT).map(([n,c])=>`<button class="chip" aria-pressed="true" data-g="${esc(n)}"><span class="sw" style="background:var(${c})"></span>${esc(n)}</button>`).join('');
+  $('#marchChips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const n=b.dataset.g; marchHidden.has(n)?marchHidden.delete(n):marchHidden.add(n); b.setAttribute('aria-pressed',!marchHidden.has(n)); draw()});
+  window.selectMarch=id=>{marchSel=id; draw()};
+  draw();
+  RESIZE.march=()=>{built.march=false; buildMarch()};
+}
+function regSiegeCard(x){return `<div class="card siegecard"><div class="lab num">${esc(x.d)}</div><h4>${esc(REGBY[x.p].name)}</h4><div class="small">${esc(x.x)}</div><div class="ref">${pill(x.s)} ${esc(x.r)}</div></div>`}
+function marchPanel(id,evs,SG){
+  const P=$('#marchPanel');
+  const wire=()=>P.querySelectorAll('[data-sg]').forEach(c=>{c.onclick=()=>goSiege(c.dataset.sg); c.onkeydown=e=>{if(e.key==='Enter')goSiege(c.dataset.sg)}});
+  const sgHTML=(bw,reg)=>SG?`${bw.length?`<h3>Sieges and assaults on Berwick</h3><p class="small muted">Choose one to see the places involved on the town map.</p>${bw.map(x=>siegeCard(x,false)).join('')}`:''}${reg.length?`<h3>Sieges elsewhere in the March</h3>${reg.map(regSiegeCard).join('')}`:''}`:'';
+  const inBerwick=e=>!!TOWNBY[e.p];
+  if(!id){
+    const n=evs.length;
+    P.innerHTML=`<h2>The March</h2><p class="small muted">The borderland around Berwick: castles, religious houses, battles and meeting places, with land over 300 metres shaded. Numbers count dated events in the chosen years; events in the town count for Berwick. The border line is the modern one; Berwick’s own liberties lay north of the Tweed.</p>
+    <p class="small"><b class="num">${n}</b> events between the chosen years${SG?`, and <b class="num">${SG.bw.length}</b> sieges or assaults on Berwick (red rings and badges; triangles on the strip)`:''}. The strip under the map shows who held Berwick: <span style="color:var(--sco)">■</span> Scotland, <span style="color:var(--eng)">■</span> England, <span style="color:var(--reb)">■</span> Percy rebels.</p>
+    ${SG?sgHTML(SG.bw,SG.reg):''}
+    <h3>Events in these years</h3>${evs.slice().sort((a,b)=>a.y-b.y).map(evCard).join('')||'<p class="small muted">None.</p>'}${comment('march')}`; wire(); return;
+  }
+  const r=REGBY[id]; const ev=evs.filter(e=>id==='berwick'?inBerwick(e)||e.p==='berwick':e.p===id);
+  P.innerHTML=`<p><button class="btn" id="mback">← Overview</button></p><h2>${esc(r.name)}</h2><p class="small muted">${esc(RT[r.t][0])}</p><div class="small">${esc(r.note)}</div><div class="ref small muted" style="margin-top:6px">${pill(r.status)} ${esc(r.refs||'')}</div>
+  ${SG?sgHTML(id==='berwick'?SG.bw:[],SG.reg.filter(x=>x.p===id)):''}
+  <h3>Events in the chosen years</h3>${ev.map(evCard).join('')||'<p class="small muted">None in this window.</p>'}${comment('march')}`;
+  $('#mback').onclick=()=>selectMarch(null); wire();
+}
+
+// ---------------------------------------------------------------- charts (shared)
+function figure(el,title,sub){el.innerHTML=`<h3>${title}</h3><p class="sub">${sub}</p><div class="plot"></div><div class="lgd"></div><details class="tbl"><summary>Show the numbers</summary><div class="tblwrap"></div></details>`;return {plot:el.querySelector('.plot'),lgd:el.querySelector('.lgd'),tbl:el.querySelector('.tblwrap')}}
+function table(el,head,rows,numcols=[]){el.innerHTML=`<table class="data"><thead><tr>${head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${numcols.includes(i)?'n':''}">${typeof c==='string'&&c.startsWith('<')?c:esc(c??'')}</td>`).join('')}</tr>`).join('')}</tbody></table>`}
+function legend(el,items){el.innerHTML=items.map(([n,c,shape])=>`<span><span class="sw" style="background:${c};${shape==='sq'?'border-radius:2px':''}"></span>${esc(n)}</span>`).join('')}
+function controlBands(g,x,h){ A.control.forEach(c=>{const a=Math.max(c[0],x.domain()[0]), b=Math.min(c[1],x.domain()[1]); if(b>a&&c[2]==='S') g.append('rect').attr('x',x(a)).attr('y',0).attr('width',x(b)-x(a)).attr('height',h).attr('fill','var(--sco)').attr('opacity',.08)})}
+function stackedDecades(fig,{data,keys,colors,x0=1280,x1=1510,h=230,ylab=''}){
+  const W=Math.max(520,fig.plot.clientWidth||640), M={l:44,r:10,t:10,b:26};
+  const svg=d3.select(fig.plot).append('svg').attr('width',W).attr('height',h);
+  const x=d3.scaleLinear().domain([x0,x1]).range([M.l,W-M.r]);
+  const dec=d3.range(Math.ceil(x0/10)*10,x1,10);
+  const rows=dec.map(d=>{const o={d};keys.forEach(k=>o[k]=(data[d]||{})[k]||0);return o});
+  const st=d3.stack().keys(keys)(rows);
+  const y=d3.scaleLinear().domain([0,d3.max(rows,r=>d3.sum(keys,k=>r[k]))||1]).nice().range([h-M.b,M.t]);
+  controlBands(svg.append('g'),x,h-M.b);
+  svg.append('g').attr('class','gridline').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(5).tickSize(-(W-M.l-M.r)).tickFormat('')).select('.domain').remove();
+  const bw=Math.max(2,x(x0+10)-x(x0)-2);
+  st.forEach((s,i)=>svg.append('g').selectAll('rect').data(s).join('rect').attr('x',d=>x(d.data.d)+1).attr('width',bw).attr('y',d=>y(d[1])).attr('height',d=>Math.max(0,y(d[0])-y(d[1]))).attr('fill',colors[i])
+    .on('mousemove',(e,d)=>showTip(`<b>${d.data.d}s</b><br>${keys.map((k,j)=>`${esc(k)}: <b class="num">${d.data[k]}</b>`).join('<br>')}`,e)).on('mouseleave',hideTip));
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-M.b})`).call(d3.axisBottom(x).ticks(8).tickFormat(d3.format('d')));
+  svg.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(5));
+  if(ylab) svg.append('text').attr('x',4).attr('y',M.t+2).attr('font-size',11).text(ylab);
+  legend(fig.lgd,[...keys.map((k,i)=>[k,colors[i],'sq']),['Berwick in Scottish hands','color-mix(in srgb,var(--sco) 25%,transparent)','sq']]);
+  table(fig.tbl,['Decade',...keys,'Total'],rows.map(r=>[r.d+'s',...keys.map(k=>r[k]),d3.sum(keys,k=>r[k])]),[1,2,3,4,5,6,7]);
+}
+
+// ---------------------------------------------------------------- GOVERNANCE
+const GOV_PERIODS=[['All years',1170,1510],['1170–1300',1170,1300],['1290–1340',1290,1340],['1330–1400',1330,1400],['1400–1510',1400,1510]];
+let govRange=[1170,1510];
+const OFF_ORD=['keeper','constable','chancellor','chamberlain','sheriff','mayor','customs','works','other'];
+const stCol=s=>({src:'var(--ok)',lit:'var(--lit)',db:'var(--accent)',verify:'var(--weld)'})[s];
+// keeps labels from overlapping: place(x0,x1,row) returns false if the span is taken
+function labelPlacer(){const used={}; const f=(x0,x1,row=0)=>{const r=used[row]||(used[row]=[]); if(r.some(([p,q])=>x0<q+3&&x1>p-3)) return false; r.push([x0,x1]); return true}; f.reserve=(x0,x1,row=0)=>{(used[row]||(used[row]=[])).push([x0,x1])}; return f}
+function placeLabel(g,place,x0,y,cands,maxX,row=0,size=11.5){const t=g.append('text').attr('x',x0).attr('y',y).attr('font-size',size);
+  for(const c of cands){t.text(c); const w=t.node().getComputedTextLength(); if(x0+w<=maxX&&place(x0,x0+w,row)) return t}
+  t.remove(); return null}
+function fitText(t,cands,maxw){for(const c of cands){t.text(c); if(t.node().getComputedTextLength()<=maxw) return true} t.text(''); return false}
+const trunc=(s,n)=>s.length>n?s.slice(0,n-1).trimEnd()+'…':s;
+function goSiege(id){show('town'); selectSiege(id,true); const p=$('#townPanel'); if(p) p.scrollTop=0}
+function buildGov(){
+  const B=$('#govBody');
+  B.innerHTML=`<h1>Control and governance</h1><p class="lede">Who held Berwick, what happened there, and who ran it. The office-holders are drawn from the calendars, the Foedera syllabus, Scott’s <i>Berwick-upon-Tweed</i> (1888) and the Medieval Soldier database; each bar carries its reference.</p>
+  <div class="fig" id="g-time"><h3>Who held Berwick, and what happened</h3>
+    <p class="sub">Choose a period, or drag across the overview strip to pick your own years; the charts below follow the choice. Hover or choose any mark for details.${CONFIG.showUnverified?' Hollow marks with dashed edges are still to verify.':''}</p>
+    <div class="ranges" role="group" aria-label="Period" id="g-ranges">${GOV_PERIODS.map((p,i)=>`<button class="btn" data-i="${i}">${p[0]}</button>`).join('')}<span class="small muted">Showing <b class="num" id="g-rl"></b></span></div>
+    <div class="plot" id="g-over"></div>
+    <div class="plot" id="g-plot"></div>
+    <div class="lgd" id="g-lgd"></div>
+    <div id="g-sel"></div>
+    <details class="tbl"><summary>Show the events in these years</summary><div class="tblwrap" id="g-evtab"></div></details>
+  </div>
+  <div class="fig" id="g-off" style="margin-top:18px"><h3>Office-holders</h3><p class="sub">Each bar is one holder, from the first to the last year the sources name them in office, so a short bar means “named in that year”, not a one-year term. Colour shows the basis of the entry; a blue outline marks an office held under the Scottish crown. Follows the period chosen above.</p>
+    <div class="plot" id="g-oplot"></div><div class="lgd" id="g-olgd"></div><div id="g-osel"></div>
+    <details class="tbl"><summary>Show the office-holders in these years</summary><div class="tblwrap" id="g-otab"></div></details></div>
+  <div class="grid2" style="margin-top:18px"><div class="fig" id="g-struct"></div><div class="fig" id="g-tab"></div></div>
+  ${comment('gov')}`;
+  const selCard=(sel,html)=>{const s=$(sel); s.innerHTML=html; s.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>goSiege(b.dataset.goto)); s.scrollIntoView({block:'nearest',behavior:'smooth'})};
+  const ctlCard=c=>`<div class="card"><div class="lab num">${c[0]}–${c[1]} · held by ${esc(HOLD[c[2]][0])}</div><h4>${esc(c[3])}</h4><div class="small">${esc(c[5]||'')}</div><div class="ref">${pill(c[4])}</div></div>`;
+  const intCard=c=>`<div class="card"><div class="lab num">${Math.floor(c[0])} · interruption · ${esc(HOLD[c[2]][0])}</div><h4>${esc(c[3])}</h4><div class="ref">${pill(c[4])}</div></div>`;
+  const sgSel=sg=>siegeCard(sg,false).replace('</div></div>',`</div><p style="margin:6px 0 0"><button class="btn" data-goto="${sg.id}">Show on the town map</button></p></div>`);
+  const offCard=r=>`<div class="card"><div class="lab num">${yearsLabel(r[1],r[2])} · ${esc(A.office_names[r[0]])} · ${r[4]==='S'?'Scottish':'English'} Berwick</div><h4>${esc(r[3])}</h4><div class="small">${esc(r[7]||'')}</div><div class="ref">${pill(r[5])} ${esc(r[6])}</div></div>`;
+  const OV=$('#g-over');
+  let moveBrush=null;
+  function geom(el){const W=Math.max(300,el.clientWidth||900), narrow=W<640; return {W,narrow,M:{l:narrow?8:150,r:16,t:6,b:26}}}
+  function drawOverview(){
+    OV.innerHTML=''; const {W,narrow,M}=geom(OV); const H=50;
+    const svg=d3.select(OV).append('svg').attr('width',W).attr('height',H).attr('role','img').attr('aria-label','Overview of 1170–1510; drag to choose years');
+    const x=d3.scaleLinear().domain([1170,1511]).range([M.l,W-M.r]);
+    A.control.forEach(c=>{const a=Math.max(1170,c[0]),b=Math.min(1511,c[1]); if(b>a) svg.append('rect').attr('x',x(a)).attr('y',5).attr('width',x(b)-x(a)).attr('height',12).attr('fill',`var(${HOLD[c[2]][1]})`)});
+    A.interruptions.forEach(c=>svg.append('rect').attr('x',x(c[0])-1).attr('y',3).attr('width',Math.max(3,x(c[1])-x(c[0]))).attr('height',16).attr('fill',`var(${HOLD[c[2]][1]})`).attr('stroke','var(--surface)').attr('stroke-width',.6));
+    svg.append('g').selectAll('path').data(A.sieges).join('path').attr('d',d=>`M${x(d.y+.5)},20 l-3.5,6.5 h7 z`).attr('fill','var(--c8)');
+    svg.append('g').attr('class','axis').attr('transform','translate(0,28)').call(d3.axisBottom(x).ticks(narrow?5:10).tickFormat(d3.format('d')).tickSizeOuter(0));
+    if(!narrow) svg.append('text').attr('x',M.l-8).attr('y',15).attr('text-anchor','end').attr('font-size',12).text('Drag to choose');
+    const br=d3.brushX().extent([[M.l,0],[W-M.r,28]]).on('end',e=>{ if(!e.sourceEvent) return;
+      if(!e.selection){setRange(1170,1510,false);return}
+      let [a,b]=e.selection.map(v=>Math.round(x.invert(v))); if(b-a<5) b=a+5; setRange(Math.max(1170,a),Math.min(1510,b),false)});
+    const bg=svg.append('g').attr('class','brush').call(br);
+    moveBrush=(a,b)=>bg.call(br.move,(a===1170&&b===1510)?null:[x(a),x(b+1)]);
+    moveBrush(...govRange);
+  }
+  function setRange(a,b,mv=true){
+    govRange=[a,b]; $('#g-rl').textContent=yearsLabel(a,b);
+    $('#g-ranges').querySelectorAll('.btn').forEach(bt=>{const p=GOV_PERIODS[+bt.dataset.i]; bt.setAttribute('aria-pressed',p[1]===a&&p[2]===b)});
+    if(mv&&moveBrush) moveBrush(a,b);
+    drawDetail(); drawOffices();
+  }
+  $('#g-ranges').querySelectorAll('.btn').forEach(bt=>bt.onclick=()=>{const p=GOV_PERIODS[+bt.dataset.i]; setRange(p[1],p[2])});
+  function drawDetail(){
+    const el=$('#g-plot'); el.innerHTML=''; const [a,b]=govRange; const {W,narrow,M}=geom(el);
+    const kinds=Object.keys(KINDS), lh=34;
+    const rows=[{id:'held',label:'Held by',h:46},{id:'int',label:'Interruptions',h:24},{id:'sg',label:'Sieges and assaults',h:30},...kinds.map(k=>({id:k,label:KINDS[k][0],h:lh,k}))];
+    let yy=M.t+4; rows.forEach(r=>{r.lab=yy; yy+=narrow?15:0; r.y=yy; yy+=r.h+(r.id==='held'?8:4)});
+    const H=yy+M.b; const RY=id=>rows.find(r=>r.id===id);
+    const svg=d3.select(el).append('svg').attr('width',W).attr('height',H);
+    const x=d3.scaleLinear().domain([a,b+1]).range([M.l,W-M.r]);
+    const yrW=x(a+1)-x(a); const xc=v=>x(v)+(Number.isInteger(v)?yrW/2:0);
+    svg.append('clipPath').attr('id','gclip').append('rect').attr('x',M.l).attr('y',0).attr('width',W-M.l-M.r).attr('height',H);
+    controlBands(svg.append('g'),x,H-M.b);
+    svg.append('g').attr('class','gridline').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(narrow?5:12).tickSize(-(H-M.b-M.t)).tickFormat('')).select('.domain').remove();
+    rows.forEach((r,i)=>{
+      if(narrow) svg.append('text').attr('x',M.l).attr('y',r.lab+11).attr('font-size',11.5).attr('font-weight',700).text(r.label);
+      else svg.append('text').attr('x',M.l-8).attr('y',r.y+r.h/2+4).attr('text-anchor','end').attr('font-size',12).attr('font-weight',r.id==='held'?700:400).text(r.label);
+      if(i>=2) svg.append('line').attr('x1',M.l).attr('x2',W-M.r).attr('y1',r.y+r.h/2).attr('y2',r.y+r.h/2).attr('stroke','var(--rule)')});
+    const labs=svg.append('g').attr('class','govband');
+    // held by: tall band, labelled inside each segment
+    const hr=RY('held');
+    const segs=A.control.map(c=>({c,a:Math.max(a,c[0]),b:Math.min(b+1,c[1])})).filter(s=>s.b>s.a);
+    const hg=svg.append('g').attr('class','govband').attr('clip-path','url(#gclip)').selectAll('g').data(segs).join('g').style('cursor','pointer').attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.c[0]}–${d.c[1]}: ${d.c[3]}`);
+    hg.append('rect').attr('x',d=>x(d.a)).attr('y',hr.y).attr('width',d=>Math.max(1,x(d.b)-x(d.a))).attr('height',hr.h).attr('fill',d=>`var(${HOLD[d.c[2]][1]})`).attr('stroke','var(--surface)').attr('stroke-width',1.5);
+    hg.each(function(d){const g=d3.select(this), w=x(d.b)-x(d.a)-10; if(w<8) return;
+      const t1=g.append('text').attr('x',x(d.a)+5).attr('y',hr.y+19).attr('font-size',12.5).attr('font-weight',700).style('fill','var(--surface)');
+      fitText(t1,[d.c[3],HOLD[d.c[2]][0],d.c[2]==='E'?'Eng.':d.c[2]==='S'?'Sco.':'Reb.',d.c[2]],w);
+      const t2=g.append('text').attr('x',x(d.a)+5).attr('y',hr.y+36).attr('font-size',11.5).style('fill','var(--surface)');
+      fitText(t2,[`${d.c[0]}–${d.c[1]}`,`${d.c[0]}–`,`${String(d.c[0]).slice(2)}–`],w)});
+    hg.on('mousemove',(e,d)=>showTip(`<b>${d.c[0]}–${d.c[1]}: ${esc(d.c[3])}</b><br>${esc(d.c[5]||'')}`,e)).on('mouseleave',hideTip)
+      .on('click',(e,d)=>selCard('#g-sel',ctlCard(d.c))).on('keydown',(e,d)=>{if(e.key==='Enter')selCard('#g-sel',ctlCard(d.c))});
+    // interruptions: their own row, labelled when there is room
+    const ir=RY('int'), pl=labelPlacer();
+    const ints=A.interruptions.filter(c=>c[1]>=a&&c[0]<b+1);
+    const ig=svg.append('g').selectAll('rect').data(ints).join('rect').attr('x',d=>x(d[0])-2).attr('y',ir.y+3).attr('width',d=>Math.max(6,x(d[1])-x(d[0])+4)).attr('height',ir.h-6).attr('rx',2)
+      .attr('fill',d=>`var(${HOLD[d[2]][1]})`).style('cursor','pointer').attr('tabindex',0).attr('role','button').attr('aria-label',d=>d[3]);
+    ig.on('mousemove',(e,d)=>showTip(`<b>${Math.floor(d[0])}</b>: ${esc(d[3])}`,e)).on('mouseleave',hideTip).on('click',(e,d)=>selCard('#g-sel',intCard(d))).on('keydown',(e,d)=>{if(e.key==='Enter')selCard('#g-sel',intCard(d))});
+    ints.forEach(d=>pl.reserve(x(d[0])-2,x(d[0])-2+Math.max(6,x(d[1])-x(d[0])+4)));
+    ints.forEach(d=>{const x0=x(d[0])-2+Math.max(6,x(d[1])-x(d[0])+4)+4, yr=Math.floor(d[0]); placeLabel(labs,pl,x0,ir.y+ir.h/2+4,[`${yr}: ${d[3]}`,`${yr}: ${trunc(d[3],26)}`,`${yr}`],W-M.r)});
+    // sieges
+    const sr=RY('sg'), pls=labelPlacer();
+    const sgs=A.sieges.filter(s=>s.y>=a&&s.y<=b);
+    const sgg=svg.append('g').selectAll('path').data(sgs).join('path').attr('transform',d=>`translate(${xc(d.y)},${sr.y+sr.h/2})`).attr('d','M0,-8 L7.5,6 L-7.5,6 Z')
+      .attr('fill',d=>d.o==='failed'?'var(--surface)':'var(--c8)').attr('stroke','var(--c8)').attr('stroke-width',2).attr('stroke-dasharray',d=>d.s==='verify'?'2 2':null)
+      .style('cursor','pointer').attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.d}: ${d.by}`);
+    sgg.on('mousemove',(e,d)=>showTip(`<b>${esc(d.d)}</b>: ${esc(A.siege_methods[d.m]||d.m)}, ${esc(OUTC[d.o]||d.o)}<br>${esc(d.by)}`,e)).on('mouseleave',hideTip)
+      .on('click',(e,d)=>selCard('#g-sel',sgSel(d))).on('keydown',(e,d)=>{if(e.key==='Enter')selCard('#g-sel',sgSel(d))});
+    sgs.forEach(d=>pls.reserve(xc(d.y)-7.5,xc(d.y)+7.5));
+    sgs.forEach(d=>{const y=Math.floor(d.y); placeLabel(labs,pls,xc(d.y)+11,sr.y+sr.h/2+4,[`${y} ${A.siege_methods[d.m]||d.m}, ${OUTC[d.o]||d.o}`,`${y} ${A.siege_methods[d.m]||d.m}`,`${y}`],W-M.r)});
+    // events: lanes by kind; dots that would overlap move up or down within the lane
+    const evs=A.events.filter(e=>e.y>=a&&e.y<b+1);
+    const showEvLab=(b-a)<=120;
+    const pts=[];
+    kinds.forEach(k=>{const r=RY(k), last=[-1e9,-1e9,-1e9], off=[0,-9,9];
+      evs.filter(e=>e.k===k).sort((p,q)=>p.y-q.y).forEach(e=>{const cx=xc(e.y); let s=last.findIndex(v=>cx-v>=12); if(s<0) s=0; last[s]=cx; pts.push({e,cx,cy:r.y+r.h/2+off[s],sub:s,k})})});
+    const eg=svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx',d=>d.cx).attr('cy',d=>d.cy).attr('r',5.5)
+      .attr('fill',d=>d.e.s==='verify'?'var(--surface)':kc(d.k)).attr('stroke',d=>d.e.s==='verify'?kc(d.k):'var(--surface)').attr('stroke-width',d=>d.e.s==='verify'?2:1.2).attr('stroke-dasharray',d=>d.e.s==='verify'?'2 2':null)
+      .style('cursor','pointer').attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.e.d}: ${d.e.t}`);
+    eg.on('mousemove',(e,d)=>showTip(`<b>${esc(d.e.d)}: ${esc(d.e.t)}</b><br>${esc(d.e.x)}`,e)).on('mouseleave',hideTip)
+      .on('click',(e,d)=>selCard('#g-sel',evCard(d.e))).on('keydown',(e,d)=>{if(e.key==='Enter')selCard('#g-sel',evCard(d.e))});
+    if(showEvLab){const plk={}; pts.forEach(d=>(plk[d.k]||(plk[d.k]=labelPlacer())).reserve(d.cx-5.5,d.cx+5.5)); pts.forEach(d=>placeLabel(labs,plk[d.k],d.cx+9,d.cy+4,[trunc(d.e.t,46),trunc(d.e.t,24)],W-M.r,0,11))}
+    svg.append('g').attr('class','axis').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(narrow?5:12).tickFormat(d3.format('d')));
+    $('#g-lgd').innerHTML=[['England','var(--eng)'],['Scotland','var(--sco)'],['Percy rebels','var(--reb)']].map(([n,c])=>`<span><span class="sw" style="background:${c};border-radius:2px"></span>${n}</span>`).join('')
+      +`<span><svg width="14" height="12" aria-hidden="true"><path d="M7,1 L13,11 L1,11 Z" fill="var(--c8)"/></svg>Town or castle taken</span><span><svg width="14" height="12" aria-hidden="true"><path d="M7,1.5 L12.5,10.5 L1.5,10.5 Z" fill="none" stroke="var(--c8)" stroke-width="1.6"/></svg>Attack failed</span>`
+      +kinds.map(k=>`<span><span class="sw" style="background:${kc(k)}"></span>${esc(KINDS[k][0])}</span>`).join('')
+      +`<span class="muted">${showEvLab?'':'Event names appear when the period is 120 years or shorter.'}</span>`;
+    table($('#g-evtab'),['Date','Kind','Event','Summary','Basis','Reference'],evs.slice().sort((p,q)=>p.y-q.y).map(e=>[e.d,KINDS[e.k][0],e.t,e.x,STATUS[e.s][1],e.r||'']));
+  }
+  function drawOffices(){
+    const el=$('#g-oplot'); el.innerHTML=''; const [a,b]=govRange; const {W,narrow,M}=geom(el); const rh=21;
+    const offs=A.offices.filter(o=>o[2]+1>a&&o[1]<=b).sort((p,q)=>OFF_ORD.indexOf(p[0])-OFF_ORD.indexOf(q[0])||p[1]-q[1]);
+    table($('#g-otab'),['Office','From','To','Name','Held for','Basis','Reference','Note'],offs.map(r=>[A.office_names[r[0]],r[1],r[2],r[3],r[4]==='S'?'Scotland':'England',STATUS[r[5]][1],r[6],r[7]]),[1,2]);
+    if(!offs.length){el.innerHTML='<p class="small muted">No office-holders are named in these years.</p>'; $('#g-olgd').innerHTML=''; return}
+    const svg=d3.select(el).append('svg').attr('width',W);
+    const x=d3.scaleLinear().domain([a,b+1]).range([M.l,W-M.r]);
+    const meas=svg.append('text').attr('font-size',11.5); const tw=s=>{meas.text(s); return meas.node().getComputedTextLength()};
+    const rows=[], placed=[], first={};
+    OFF_ORD.forEach(o=>{const L=offs.filter(r=>r[0]===o); if(!L.length) return;
+      if(narrow) rows.push({hdr:o});
+      const base=rows.length; first[o]=base; const lanes=[];
+      L.forEach(r=>{const x0=x(Math.max(a,r[1])), x1=Math.max(x0+4,x(Math.min(b+1,r[2]+1))), w=tw(r[3]);
+        const flip=x1+4+w>W-M.r && x0-4-w>=M.l-(narrow?0:140);
+        const lx0=flip?x0-4-w:x0, lx1=flip?x1:x1+4+w;
+        let li=lanes.findIndex(end=>end<lx0-8); if(li<0){li=lanes.length; lanes.push(0)} lanes[li]=lx1; placed.push({r,row:base+li,x0,x1,flip})});
+      lanes.forEach(()=>rows.push({o}))});
+    meas.remove();
+    const H=M.t+rows.length*rh+M.b; svg.attr('height',H);
+    controlBands(svg.append('g'),x,H-M.b);
+    svg.append('g').attr('class','gridline').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(narrow?5:12).tickSize(-(H-M.b-M.t)).tickFormat('')).select('.domain').remove();
+    Object.entries(first).forEach(([o,i])=>{const y0=M.t+(narrow?i-1:i)*rh;
+      svg.append('line').attr('x1',narrow?M.l:0).attr('x2',W-M.r).attr('y1',y0).attr('y2',y0).attr('stroke','var(--rule)');
+      if(narrow) svg.append('text').attr('x',M.l).attr('y',y0+15).attr('font-size',12).attr('font-weight',700).text(A.office_names[o]);
+      else svg.append('text').attr('x',M.l-8).attr('y',y0+15).attr('text-anchor','end').attr('font-size',12).attr('font-weight',700).text(A.office_names[o])});
+    const gg=svg.append('g').selectAll('g').data(placed).join('g').attr('transform',d=>`translate(0,${M.t+d.row*rh})`).style('cursor','pointer').attr('tabindex',0).attr('role','button').attr('aria-label',d=>`${d.r[3]}, ${A.office_names[d.r[0]]}, ${yearsLabel(d.r[1],d.r[2])}`);
+    gg.append('rect').attr('x',d=>d.x0).attr('y',3).attr('height',rh-6).attr('width',d=>d.x1-d.x0).attr('rx',2).attr('fill',d=>stCol(d.r[5])).attr('opacity',d=>d.r[4]==='S'?.6:.9).attr('stroke',d=>d.r[4]==='S'?'var(--sco)':'none').attr('stroke-width',1.5);
+    gg.append('text').attr('x',d=>d.flip?d.x0-4:d.x1+4).attr('text-anchor',d=>d.flip?'end':'start').attr('y',rh-6).attr('font-size',11.5).text(d=>d.r[3]);
+    gg.on('mousemove',(e,d)=>showTip(`<b>${esc(d.r[3])}</b><br>${esc(A.office_names[d.r[0]])}, ${yearsLabel(d.r[1],d.r[2])}<br><span class="muted">${esc(d.r[6])}</span>`,e)).on('mouseleave',hideTip)
+      .on('click',(e,d)=>selCard('#g-osel',offCard(d.r))).on('keydown',(e,d)=>{if(e.key==='Enter')selCard('#g-osel',offCard(d.r))});
+    svg.append('g').attr('class','axis').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(narrow?5:12).tickFormat(d3.format('d')));
+    legend($('#g-olgd'),[['Checked in sources','var(--ok)','sq'],['From secondary studies','var(--lit)','sq'],['Database','var(--accent)','sq'],...(CONFIG.showUnverified?[['To verify','var(--weld)','sq']]:[]),['Berwick in Scottish hands','color-mix(in srgb,var(--sco) 25%,transparent)','sq']]);
+  }
+  // structure and mayors
+  const tiers=[0,1,2].map(t=>A.structure.filter(s=>s.tier===t));
+  $('#g-struct').innerHTML=`<h3>English Berwick: the offices</h3><p class="sub">As the calendars name them, c. 1333–1461. Berwick had its own chancellor and chamberlain, and a sheriff for the county of Berwick held by England. Before 1296 it was a Scottish royal burgh under the king’s chamberlain.</p>
+   <div class="struct">${tiers.map(t=>`<div class="tier">${t.map(s=>`<div class="node ${s.id==='crown'?'crown':s.id==='mayor'?'burgh':''}"><b>${esc(s.label)}</b><span class="small">${esc(s.sub)}</span>${s.ref?`<div class="small muted" style="margin-top:3px">${esc(s.ref)}</div>`:''}</div>`).join('')}</div>`).join('')}</div>`;
+  $('#g-tab').innerHTML=`<h3>Mayors of Berwick named in the sources</h3><p class="sub">A partial list; the burgh’s own records are lost.</p><div class="tblwrap"></div>`;
+  table($('#g-tab .tblwrap'),['Year(s)','Mayor','Basis','Reference'],A.offices.filter(o=>o[0]==='mayor').sort((p,q)=>p[1]-q[1]).map(o=>[yearsLabel(o[1],o[2]),o[3],STATUS[o[5]][1],o[6]]));
+  drawOverview(); setRange(...govRange);
+  RESIZE.gov=()=>{drawOverview(); drawDetail(); drawOffices()};
+}
+
+// ---------------------------------------------------------------- SEA
+const LK={trade:['Trade','--c4'],diplomacy:['Diplomacy','--c7'],finance:['Finance','--c1'],church:['Church','--c5'],people:['People','--c3'],war:['War','--c2']};
+let seaLayer='links', seaHidden=new Set();
+function buildSea(){
+  const m=makeMap('#seasvg',{extent:[1,10]}); const [W,H]=m.size();
+  const bb=G.sea.bbox;
+  const proj=d3.geoConicConformal().parallels([48,60]).rotate([-4,0]).fitExtent([[10,10],[W-10,H-10]],{type:'MultiPoint',coordinates:[[-8,50],[20,61],[-6,58.5],[12.6,41.6],[-4,41.8]]});
+  const P=p=>proj(p);
+  m.g.append('rect').attr('x',-W*2).attr('y',-H*2).attr('width',W*5).attr('height',H*5).attr('fill','var(--sea)');
+  m.g.append('path').attr('d',G.sea.land.map(r=>ringPath(P,r)).join('')).attr('fill','var(--land)').attr('stroke','var(--land-edge)').attr('stroke-width',.6);
+  [['North Sea',[3,56.2]],['Baltic',[18.5,57.2]],['Bay of Biscay',[-5,45.5]],['English Channel',[-2,50.1]]].forEach(([t,ll])=>mapLabel(m.g,P(ll),t,'sea'));
+  const lines=m.g.append('g'), marks=m.g.append('g');
+  const BW=P([-2.0,55.77]);
+  const y0=$('#s-y0'), y1=$('#s-y1');
+  function arc(a,b,f=1.3){const dx=b[0]-a[0],dy=b[1]-a[1],dr=Math.hypot(dx,dy)*f;return `M${a[0]},${a[1]}A${dr},${dr} 0 0,1 ${b[0]},${b[1]}`}
+  function draw(){
+    const k=d3.zoomTransform(m.svg.node()).k;
+    lines.selectAll('*').remove(); marks.selectAll('*').remove();
+    $('#seaRange').hidden=seaLayer!=='links'; $('#seaChips').hidden=seaLayer!=='links';
+    if(seaLayer==='links'){
+      const a=Math.min(+y0.value,+y1.value), b=Math.max(+y0.value,+y1.value); $('#s-yl').textContent=yearsLabel(a,b);
+      const L=A.links.filter(l=>l[1]>=a&&l[1]<=b&&!seaHidden.has(l[3]));
+      const by=d3.group(L,l=>l[2]);
+      const KO=Object.keys(LK);
+      const arcs=[...d3.group(L,l=>l[2]+'|'+l[3])].map(([key,ls])=>({pid:ls[0][2],kind:ls[0][3],n:ls.length}));
+      lines.selectAll('path').data(arcs).join('path').attr('d',d=>{const ll=A.link_places[d.pid];return arc(BW,P([ll[2],ll[1]]),1.15+KO.indexOf(d.kind)*0.18)}).attr('fill','none')
+        .attr('stroke',d=>`var(${LK[d.kind][1]})`).attr('stroke-width',d=>1+Math.sqrt(d.n)*1.2).attr('stroke-opacity',.75);
+      const items=[...by].map(([pid,ls])=>{const ll=A.link_places[pid];return {pid,ls,xy:P([ll[2],ll[1]]),name:ll[0]}});
+      const gm=marks.selectAll('g').data(items).join('g').attr('class','mk').attr('transform',d=>`translate(${d.xy[0]},${d.xy[1]}) scale(${1/k})`);
+      gm.append('circle').attr('r',d=>4+Math.sqrt(d.ls.length)*2).attr('fill',d=>`var(${LK[d.ls[0][3]][1]})`).attr('stroke','var(--surface)').attr('stroke-width',1.5);
+      gm.append('text').attr('class','lbl').attr('x',8).attr('y',4).text(d=>d.name).attr('display',d=>(d.ls.length>=2||k>=2.2||!(d.xy[1]>P([0,52.6])[1]&&d.xy[1]<P([0,50.6])[1]&&d.xy[0]>P([1.5,51])[0]&&d.xy[0]<P([5.5,51])[0]))?null:'none');
+      gm.on('click',(e,d)=>seaPanel({place:d})).on('mousemove',(e,d)=>showTip(`<b>${esc(d.name)}</b><br>${d.ls.length} documented link${d.ls.length>1?'s':''}`,e)).on('mouseleave',hideTip);
+      keyAct(gm,(e,d)=>seaPanel({place:d}));
+      seaPanel({list:L,a,b});
+    } else {
+      const hp=A.homeports.wool, all=A.homeports.all_top;
+      const ids=[...new Set([...Object.keys(hp),...Object.keys(all)])];
+      const items=ids.map(id=>({id,w:hp[id]||0,t:all[id]||0,xy:P([A.ports[id][2],A.ports[id][1]]),name:A.ports[id][0]}));
+      lines.selectAll('path').data(items.filter(d=>d.id!=='berwick')).join('path').attr('d',d=>arc(d.xy,BW)).attr('fill','none').attr('stroke','var(--c4)').attr('stroke-width',d=>1+(d.t||d.w)*0.35).attr('stroke-opacity',.7);
+      const gm=marks.selectAll('g').data(items).join('g').attr('class','mk').attr('transform',d=>`translate(${d.xy[0]},${d.xy[1]}) scale(${1/k})`);
+      gm.append('circle').attr('r',d=>4+Math.sqrt(Math.max(d.w,d.t))*2.2).attr('fill','var(--c4)').attr('stroke','var(--surface)').attr('stroke-width',1.5);
+      gm.append('text').attr('class','lbl').attr('x',9).attr('y',4).text(d=>`${d.name}${d.w?` · ${d.w} wool`:''}${d.t?` · ${d.t} all`:''}`);
+      seaPanel({ports:true});
+    }
+    const bm=marks.append('g').attr('transform',`translate(${BW[0]},${BW[1]}) scale(${1/k})`); bm.append('rect').attr('x',-6).attr('y',-6).attr('width',12).attr('height',12).attr('fill','var(--accent)').attr('stroke','var(--surface)').attr('stroke-width',2); bm.append('text').attr('class','lbl').attr('x',-10).attr('y',-10).attr('text-anchor','end').attr('font-weight',700).text('Berwick');
+  }
+  m.svg.node().addEventListener('zoomed',()=>draw());
+  y0.oninput=draw; y1.oninput=draw;
+  $('#seaChips').innerHTML=Object.entries(LK).map(([k,[n,c]])=>`<button class="chip" aria-pressed="true" data-k="${k}"><span class="sw" style="background:var(${c})"></span>${n}</button>`).join('');
+  $('#seaChips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const k=b.dataset.k; seaHidden.has(k)?seaHidden.delete(k):seaHidden.add(k); b.setAttribute('aria-pressed',!seaHidden.has(k)); draw()});
+  $('#sl-links').onclick=()=>{seaLayer='links';$('#sl-links').setAttribute('aria-pressed',true);$('#sl-ports').setAttribute('aria-pressed',false);draw()};
+  $('#sl-ports').onclick=()=>{seaLayer='ports';$('#sl-ports').setAttribute('aria-pressed',true);$('#sl-links').setAttribute('aria-pressed',false);draw()};
+  wireZoom(m,'sz',()=>m.svg.transition().duration(300).call(m.zoom.transform,d3.zoomIdentity));
+  draw();
+  RESIZE.sea=()=>{built.sea=false; buildSea()};
+}
+const E122=()=>A.accounts.filter(a=>a.ser==='E 122').sort((a,b)=>a.y-b.y||a.ref.localeCompare(b.ref));
+function linkCard(l){const pl=A.link_places[l[2]];return `<div class="card"><div class="lab num">${l[1]} · ${esc(pl[0])} · <span style="color:var(${LK[l[3]][1]})">${esc(LK[l[3]][0])}</span></div><div class="small">${esc(l[4])}</div><div class="ref">${pill(l[6])} ${esc(l[5])}</div></div>`}
+function seaPanel(o){
+  const P=$('#seaPanel');
+  const charts=`<h3>Customs and sailings</h3><div id="sc-cust"></div><div id="sc-month"></div><div id="sc-ports"></div><h3>Freight and volume</h3><table class="data">${A.freight.map(f=>`<tr><td>${esc(f[0])}</td><td>${esc(f[1])}<div class="small muted">${esc(f[2])}</div></td></tr>`).join('')}</table>
+  <h3>Surviving customs accounts</h3><p class="small muted">${E122().length} Exchequer customs accounts and related papers for the port of Berwick (The National Archives, E 122), from the Discovery catalogue. The 1335–37 account is the source of the home-port figures. ${OGL}</p>
+  <table class="data">${E122().map(a=>`<tr><td class="num" style="white-space:nowrap">${esc(a.date)}</td><td><a href="${TNA(a.id)}" target="_blank" rel="noopener">${esc(a.ref)}</a><div class="small">${esc(a.d.replace(/^Port: /,''))}</div></td></tr>`).join('')}</table>`;
+  if(o.place){P.innerHTML=`<p><button class="btn" id="sback">← All links</button></p><h2>${esc(o.place.name)}</h2><p class="small muted">${o.place.ls.length} documented link${o.place.ls.length>1?'s':''} with Berwick in the chosen years.</p>${o.place.ls.map(linkCard).join('')}${comment(CURV)}`; $('#sback').onclick=()=>$('#s-y0').dispatchEvent(new Event('input')); return}
+  if(o.ports){P.innerHTML=`<h2>Ships at Berwick</h2><p class="small muted">Home ports of ships customed at Berwick in 1335–36 (the particulars name home ports, never destinations). Wool ships: 20; all sailings: Lynn 16, London 8, Newcastle 7 (Donnelly 2017, p. 19).</p>
+     <h3>Named ships</h3><table class="data"><thead><tr><th>Ship</th><th>Year</th><th>What</th></tr></thead><tbody>${A.ships.slice().sort((a,b)=>(a[2]||0)-(b[2]||0)).map(s=>`<tr><td><b>${esc(s[0])}</b>${s[1]?` <span class="muted">of ${esc(A.ports[s[1]][0])}</span>`:''}</td><td class="n">${s[2]||''}</td><td class="small">${esc(s[4])}<div class="muted">${pill(s[6])} ${esc(s[5])}</div></td></tr>`).join('')}</tbody></table>${charts}${comment(CURV)}`; drawSeaCharts(); return}
+  P.innerHTML=`<h2>Port &amp; sea</h2><p class="small muted">Lines join Berwick to places named with it in a dated record: ships, cargoes, merchants, money, letters. Each line is a record, not a trade volume. Use the years and kinds to filter; switch to “Ships’ home ports” for the 1335–36 customs particulars.</p>
+  <p class="small"><b class="num">${o.list.length}</b> links, ${yearsLabel(o.a,o.b)}.</p>${o.list.slice().sort((a,b)=>a[1]-b[1]).map(linkCard).join('')}${charts}${comment(CURV)}`;
+  drawSeaCharts();
+}
+function drawSeaCharts(){
+  // customs per year (annualised), as steps
+  const el=$('#sc-cust'); if(!el) return; const W=340,H=170,M={l:40,r:8,t:8,b:22};
+  el.innerHTML=`<p class="small"><b>Great custom at Berwick, £ a year</b> <span class="muted">(annualised; Donnelly 2017, Table 1)</span></p>`;
+  const svg=d3.select(el).append('svg').attr('width',W).attr('height',H).attr('viewBox',`0 0 ${W} ${H}`).style('max-width','100%');
+  const x=d3.scaleLinear().domain([1310,1374]).range([M.l,W-M.r]), y=d3.scaleLinear().domain([0,800]).range([H-M.b,M.t]);
+  controlBands(svg.append('g'),x,H-M.b);
+  svg.append('g').selectAll('rect').data(A.customs).join('rect').attr('x',d=>x(d[0])).attr('width',d=>Math.max(2,x(d[1])-x(d[0]))).attr('y',d=>y(d[4])).attr('height',d=>y(0)-y(d[4])).attr('fill','var(--c4)')
+    .on('mousemove',(e,d)=>showTip(`<b>${d[2]}</b><br>£${d[4]} a year${d[3]?`<br>${d[3]} sailings`:''}${d[5]?`<br>${d[5]} cockets`:''}${d[6]?`<br><span class="muted">${d[6]}</span>`:''}`,e)).on('mouseleave',hideTip);
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(6).tickFormat(d3.format('d')));
+  svg.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(4));
+  // months
+  const el2=$('#sc-month'); el2.innerHTML=`<p class="small"><b>Sailings by month</b> <span class="muted">(customed exports; Donnelly 2017, Table 3)</span></p>`;
+  const keys=Object.keys(A.months).filter(k=>k!=='labels'); const cols=['var(--c4)','var(--c2)','var(--c1)','var(--c0)'];
+  const s3=d3.select(el2).append('svg').attr('width',W).attr('height',H).attr('viewBox',`0 0 ${W} ${H}`).style('max-width','100%');
+  const xb=d3.scaleBand().domain(A.months.labels).range([M.l,W-M.r]).padding(.15), y3=d3.scaleLinear().domain([0,9]).range([H-M.b,M.t]);
+  const xs=d3.scaleBand().domain(keys).range([0,xb.bandwidth()]);
+  keys.forEach((k,i)=>s3.append('g').selectAll('rect').data(A.months[k]).join('rect').attr('x',(d,j)=>xb(A.months.labels[j])+xs(k)).attr('width',xs.bandwidth()).attr('y',d=>y3(d)).attr('height',d=>y3(0)-y3(d)).attr('fill',cols[i]).on('mousemove',(e,d)=>showTip(`${esc(k)}: <b>${d}</b>`,e)).on('mouseleave',hideTip));
+  s3.append('g').attr('class','axis').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(xb).tickValues(['Oct','Dec','Feb','Apr','Jun','Aug']));
+  s3.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y3).ticks(4));
+  const lg=document.createElement('div'); lg.className='lgd'; el2.appendChild(lg); legend(lg,keys.map((k,i)=>[k,cols[i],'sq']));
+  // ports share
+  const el3=$('#sc-ports'); const sh=A.sailings.share_wool_1327_33; el3.innerHTML=`<p class="small"><b>Share of Scotland’s wool exports, 1327–33</b></p>`+Object.entries(sh).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="small" style="display:grid;grid-template-columns:80px 1fr 36px;gap:6px;align-items:center"><span>${k}</span><span style="height:10px;background:${k==='Berwick'?'var(--accent)':'var(--c0)'};width:${v*2.6}%"></span><span class="num">${v}%</span></div>`).join('')+`<p class="small muted">Berwick was the fifth-busiest customs port in the British Isles, 4.6% of all dutiable exports, 1327–32 (Donnelly 2017, pp. 8–10).</p>`;
+}
+
+// ---------------------------------------------------------------- GARRISON
+function buildGarrison(){
+  const B=$('#garBody'); const S=A.soldiers;
+  const nOrig=S.filter(r=>r[1]).length, nPl=S.filter(r=>r[10]!=null).length;
+  B.innerHTML=`<h1>Garrison</h1><p class="lede">Who was sent to Berwick, from where, and under whom. ${S.length.toLocaleString()} service records from the Medieval Soldier database (service “Berwick”, 1350–1459), the Patent Rolls’ protections, and the 1319 siege army.</p>
+  <div class="grid2"><div class="fig" id="ga-years"></div><div class="fig" id="ga-map"></div></div>
+  <div class="grid2" style="margin-top:18px"><div class="fig" id="ga-caps"></div><div class="fig" id="ga-1319"></div></div>
+  <div class="fig" id="ga-prot" style="margin-top:18px"></div>
+  <div class="grid2" style="margin-top:18px"><div class="fig" id="ga-scots"></div><div class="fig" id="ga-rec"></div></div>${comment(CURV)}`;
+  // by year stacked by source type
+  const f=figure($('#ga-years'),'Records of service at Berwick, by year','Letters of protection (going to or staying at Berwick), muster rolls and retinue rolls. The three peaks are single documents: musters of 1384 (TNA E 101/39/39–40) and the retinue roll of 1403 (E 101/43/26).');
+  const types=['protection','muster','retinue','attorney'], names={protection:'Letters of protection',muster:'Muster rolls',retinue:'Retinue rolls',attorney:'Attorney / revocation'};
+  const byY=d3.rollup(S,v=>v.length,r=>r[6],r=>r[8]);
+  const years=d3.range(1350,1460); const rows=years.map(y=>{const o={y};types.forEach(t=>o[t]=(byY.get(y)||new Map()).get(t)||0);return o});
+  const W=Math.max(460,f.plot.clientWidth||520),H=240,M={l:44,r:8,t:8,b:24};
+  const svg=d3.select(f.plot).append('svg').attr('width',W).attr('height',H);
+  const x=d3.scaleBand().domain(years).range([M.l,W-M.r]).padding(.1);
+  const yl=d3.scaleSymlog().constant(10).domain([0,700]).range([H-M.b,M.t]);
+  const st=d3.stack().keys(types)(rows); const cols=['var(--c1)','var(--c2)','var(--c4)','var(--c0)'];
+  st.forEach((s,i)=>svg.append('g').selectAll('rect').data(s).join('rect').attr('x',d=>x(d.data.y)).attr('width',x.bandwidth()).attr('y',d=>yl(d[1])).attr('height',d=>Math.max(0,yl(d[0])-yl(d[1]))).attr('fill',cols[i]).on('mousemove',(e,d)=>showTip(`<b>${d.data.y}</b><br>${types.filter(t=>d.data[t]).map(t=>`${names[t]}: <b>${d.data[t]}</b>`).join('<br>')}`,e)).on('mouseleave',hideTip));
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).tickValues(years.filter(y=>y%10===0)));
+  svg.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(yl).tickValues([1,5,10,50,100,500]));
+  svg.append('text').attr('x',4).attr('y',10).attr('font-size',11).text('log scale');
+  legend(f.lgd,types.map((t,i)=>[names[t],cols[i],'sq']));
+  table(f.tbl,['Year',...types.map(t=>names[t])],rows.filter(r=>types.some(t=>r[t])).map(r=>[r.y,...types.map(t=>r[t])]),[0,1,2,3,4]);
+  // origins map
+  const fm=figure($('#ga-map'),'Where they came from',`Home places recorded for ${nOrig} of the ${S.length.toLocaleString()} records; ${nPl} placed. Circles are sized by records. Places were matched with OpenStreetMap’s gazetteer and checked by eye; ambiguous names (“one of several”) are left out.`);
+  const Wm=Math.max(420,fm.plot.clientWidth||480), Hm=430;
+  const sm=d3.select(fm.plot).append('svg').attr('width',Wm).attr('height',Hm);
+  const pr=d3.geoConicConformal().parallels([50,56]).rotate([2,0]).fitExtent([[6,6],[Wm-6,Hm-6]],{type:'MultiPoint',coordinates:[[-5.5,50.0],[1.8,52.8],[-3.2,55.95],[-1.6,56.0]]});
+  sm.append('rect').attr('width',Wm).attr('height',Hm).attr('fill','var(--sea)');
+  sm.append('path').attr('d',G.sea.land.map(r=>ringPath(pr,r)).join('')).attr('fill','var(--land)').attr('stroke','var(--land-edge)').attr('stroke-width',.6);
+  const agg=d3.rollups(S.filter(r=>r[10]!=null),v=>({n:v.length,name:v[0][1],ll:[v[0][11],v[0][10]],recs:v}),r=>r[10]+','+r[11]).map(d=>d[1]).sort((a,b)=>b.n-a.n);
+  const bwp=pr([-2.004,55.77]);
+  sm.append('g').selectAll('circle').data(agg).join('circle').attr('cx',d=>pr(d.ll)[0]).attr('cy',d=>pr(d.ll)[1]).attr('r',d=>2.5+Math.sqrt(d.n)*1.6).attr('fill','var(--c2)').attr('fill-opacity',.6).attr('stroke','var(--surface)').attr('stroke-width',.8)
+    .on('mousemove',(e,d)=>showTip(`<b>${esc(d.name)}</b><br>${d.n} record${d.n>1?'s':''}<br><span class="muted">${esc([...new Set(d.recs.map(r=>r[5]).filter(Boolean))].slice(0,3).join('; '))}</span>`,e)).on('mouseleave',hideTip);
+  sm.append('rect').attr('x',bwp[0]-5).attr('y',bwp[1]-5).attr('width',10).attr('height',10).attr('fill','var(--accent)');
+  sm.append('text').attr('class','lbl').attr('x',bwp[0]+8).attr('y',bwp[1]+4).text('Berwick');
+  const foreign=S.filter(r=>/Florence|Genoa|Lucca|Navarre|Brabant|Zeeland|Calais|Dublin|Esterling|Wales/.test(r[1]));
+  fm.lgd.innerHTML=`<span class="small">Outside England: ${[...d3.rollup(foreign,v=>v.length,r=>r[1])].map(([k,v])=>`${esc(k)} (${v})`).join('; ')}.</span>`;
+  table(fm.tbl,['Recorded origin','Records'],d3.rollups(S.filter(r=>r[1]),v=>v.length,r=>r[1]).sort((a,b)=>b[1]-a[1]),[1]);
+  // captains
+  const fc=figure($('#ga-caps'),'Captains named in the service records','Years in which each captain is named; bar length runs from first to last. Several were keepers or wardens of Berwick (see Control & governance).');
+  const caps=d3.rollups(S.filter(r=>r[5]),v=>({a:d3.min(v,r=>r[6]),b:d3.max(v,r=>r[6]),n:v.length}),r=>r[5].split(';')[0].replace(/,? ?(keeper of the town|keeper of Berwick)$/,'').replace(/ \(.*\)/,'')).map(([k,v])=>({k,...v})).sort((a,b)=>a.a-b.a);
+  const merged=d3.rollups(caps,v=>({a:d3.min(v,d=>d.a),b:d3.max(v,d=>d.b),n:d3.sum(v,d=>d.n)}),d=>d.k.replace(/^(\w+), (\w+).*/,'$2 $1')).map(([k,v])=>({k,...v})).sort((a,b)=>a.a-b.a);
+  const Wc=Math.max(460,fc.plot.clientWidth||520), rh=16, Hc=merged.length*rh+30;
+  const sc=d3.select(fc.plot).append('svg').attr('width',Wc).attr('height',Hc);
+  const xc=d3.scaleLinear().domain([1350,1460]).range([150,Wc-40]);
+  merged.forEach((d,i)=>{const yy=6+i*rh; sc.append('text').attr('x',145).attr('y',yy+11).attr('text-anchor','end').attr('font-size',11.5).text(d.k.length>24?d.k.slice(0,23)+'…':d.k);
+    sc.append('rect').attr('x',xc(d.a)).attr('y',yy+3).attr('width',Math.max(3,xc(d.b+1)-xc(d.a))).attr('height',rh-6).attr('fill','var(--c1)').attr('rx',2).on('mousemove',e=>showTip(`<b>${esc(d.k)}</b><br>${yearsLabel(d.a,d.b)} · ${d.n} records`,e)).on('mouseleave',hideTip);
+    sc.append('text').attr('x',xc(d.b+1)+4).attr('y',yy+11).attr('font-size',10.5).attr('fill','var(--ink-3)').text(d.n)});
+  sc.append('g').attr('class','axis').attr('transform',`translate(0,${Hc-22})`).call(d3.axisBottom(xc).ticks(6).tickFormat(d3.format('d')));
+  table(fc.tbl,['Captain','First','Last','Records'],merged.map(d=>[d.k,d.a,d.b,d.n]),[1,2,3]);
+  // 1319
+  const f9=figure($('#ga-1319'),'The army besieging Berwick, 1319','Contingents listed in the pay sheet (CDS iii, no. 668). Welsh foot outnumber the men of Yorkshire.');
+  const D=A.siege1319; const W9=Math.max(420,f9.plot.clientWidth||480), r9=18, H9=D.length*r9+28;
+  const s9=d3.select(f9.plot).append('svg').attr('width',W9).attr('height',H9); const x9=d3.scaleLinear().domain([0,2400]).range([190,W9-50]);
+  const c9={foot:'var(--c2)',mixed:'var(--c4)',hobelars:'var(--c1)',archers:'var(--c3)'};
+  D.forEach((d,i)=>{const yy=4+i*r9; s9.append('text').attr('x',185).attr('y',yy+12).attr('text-anchor','end').attr('font-size',11.5).text(d[0].length>30?d[0].slice(0,29)+'…':d[0]);
+    s9.append('rect').attr('x',x9(0)).attr('y',yy+3).attr('width',x9(d[1])-x9(0)).attr('height',r9-6).attr('fill',c9[d[2]]).on('mousemove',e=>showTip(`<b>${esc(d[0])}</b><br>${d[1]} ${esc(d[2])}${d[3]?`<br>${esc(d[3])}`:''}`,e)).on('mouseleave',hideTip);
+    s9.append('text').attr('x',x9(d[1])+4).attr('y',yy+12).attr('font-size',11).text(d[1].toLocaleString())});
+  s9.append('g').attr('class','axis').attr('transform',`translate(0,${H9-22})`).call(d3.axisBottom(x9).ticks(5));
+  legend(f9.lgd,Object.entries(c9).map(([k,v])=>[k,v,'sq']));
+  table(f9.tbl,['Contingent','Men','Kind','Note'],D,[1]);
+  // protections
+  const fp=$('#ga-prot'); fp.innerHTML=`<h3>Protections for service at Berwick, 1384–1483 (Patent Rolls)</h3><p class="sub">Revocations of protections granted to people “going to” or “staying at” Berwick in a captain’s company, cancelled because they were found elsewhere. Many are London and York tradesmen victualling the garrison. Cleaned by hand from the calendar text.</p>
+   <div class="toolbar"><input type="search" id="pq" placeholder="Filter by name, trade or place" aria-label="Filter protections"><span class="small muted num" id="pn"></span></div><div class="tblwrap" id="ptab" style="max-height:420px;overflow:auto"></div>`;
+  const drawP=()=>{const q=$('#pq').value.toLowerCase(); const R=A.protections.filter(r=>!q||r.join(' ').toLowerCase().includes(q)); $('#pn').textContent=`${R.length} of ${A.protections.length}`; table($('#ptab'),['Year','Name','Trade or status','Of','Found instead at','Captain','Reference'],R,[0])};
+  $('#pq').oninput=drawP; drawP();
+  // EI scots
+  const fs=figure($('#ga-scots'),'Scots living in England, 1330–1550','England’s Immigrants: 3,361 people recorded as Scots, by county of residence (top 15). Most are in the 1440 alien subsidy.');
+  const C=Object.entries(A.ei.scots.counties).slice(0,15); const Ws=Math.max(420,fs.plot.clientWidth||480), rs=18, Hs=C.length*rs+26;
+  const ss=d3.select(fs.plot).append('svg').attr('width',Ws).attr('height',Hs); const xs=d3.scaleLinear().domain([0,850]).range([150,Ws-40]);
+  C.forEach(([k,v],i)=>{const yy=2+i*rs; ss.append('text').attr('x',145).attr('y',yy+12).attr('text-anchor','end').attr('font-size',11.5).text(k); ss.append('rect').attr('x',xs(0)).attr('y',yy+3).attr('width',xs(v)-xs(0)).attr('height',rs-6).attr('fill',/Northumberland|Cumberland|Westmorland|Durham/.test(k)?'var(--sco)':'var(--c0)'); ss.append('text').attr('x',xs(v)+4).attr('y',yy+12).attr('font-size',11).text(v)});
+  ss.append('g').attr('class','axis').attr('transform',`translate(0,${Hs-22})`).call(d3.axisBottom(xs).ticks(4));
+  fs.lgd.innerHTML=`<span class="small">Three of them were born in Berwick: Brice Strayton, John Williamson and Thomas Williamson, licensed to remain in England in 1480 while the town was Scottish (CPR 1476–85, pp. 194, 206). Origin towns named include Coldingham, Greenlaw, Mordington, Upsettlington and Whitsome.</span>`;
+  table(fs.tbl,['County','Scots'],Object.entries(A.ei.scots.counties),[1]);
+  // records table (searchable)
+  const fr=$('#ga-rec'); fr.innerHTML=`<h3>Search the service records</h3><p class="sub">All ${S.length.toLocaleString()} records, with references to The National Archives.</p><div class="toolbar"><input type="search" id="rq" placeholder="Name, captain, origin or year" aria-label="Search service records"><span class="small muted num" id="rn"></span></div><div class="tblwrap" id="rtab" style="max-height:360px;overflow:auto"></div><p class="small muted">Source: <a href="https://www.medievalsoldier.org/database/" target="_blank" rel="noopener">The Soldier in Later Medieval England</a>, queried 6 Oct. 2026.</p>`;
+  const drawR=()=>{const q=$('#rq').value.toLowerCase(); const R=S.filter(r=>!q||(r[0]+' '+r[1]+' '+r[5]+' '+r[6]+' '+r[3]+' '+r[2]).toLowerCase().includes(q)); $('#rn').textContent=`${R.length} records`; table($('#rtab'),['Year','Name','Rank / status','Origin','Captain','Type','Reference'],R.slice(0,400).map(r=>[r[6],r[0],[r[3],r[2]].filter(Boolean).join(', '),r[1],r[5],r[8],r[9]]),[0])};
+  $('#rq').oninput=drawR; drawR();
+}
+
+// ---------------------------------------------------------------- PETITIONS
+const PCAT={town:['The town: mayor, burgesses, commune','var(--accent)'],burgess:['Burgesses of Berwick, singly','var(--c1)'],merchants:['Merchants and mariners','var(--c4)'],officers:['Officers, soldiers and lords','var(--c8)'],church:['Clergy and religious houses','var(--c7)'],women:['Women','var(--c5)'],scots:['Scots','var(--sco)'],crown:['The king (letters)','var(--c2)'],individuals:['Other named people','var(--c3)'],unnamed:['Not named','var(--c0)']};
+const TNA=id=>`https://discovery.nationalarchives.gov.uk/details/r/${id}`;
+const OGL=`Contains public sector information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0</a>.`;
+function buildPetitions(){
+  const B=$('#petBody'), L=A.petitions;
+  const np=L.filter(p=>p.kind==='petition').length, nl=L.length-np;
+  B.innerHTML=`<h1>Petitions and letters</h1><p class="lede">Requests and letters to the English king and council that name Berwick, from the catalogue of The National Archives: ${np} petitions (SC 8, Ancient Petitions) and ${nl} letters (SC 1, Ancient Correspondence). Each row links to the catalogue entry.</p>
+  <div class="fig" id="p-voices"><h3>Selected petitions</h3><p class="sub">Petitions from the town and from people who lived, traded or served there. Each summary paraphrases the catalogue entry; follow the reference for the full text.</p><div class="voices"></div></div>
+  <div class="fig" id="p-dec" style="margin-top:18px"></div>
+  <div class="fig" id="p-tab" style="margin-top:18px"><h3>All entries</h3><p class="sub">Search the catalogue text, or filter by kind and petitioner. Petitioner groups are assigned from keywords in the catalogue’s petitioner field and are a rough guide only.</p>
+    <div class="toolbar"><input type="search" id="petq" placeholder="Search petitioners, requests, answers" aria-label="Search petitions and letters"><select id="petk" aria-label="Kind"><option value="">Petitions and letters</option><option value="petition">Petitions (SC 8)</option><option value="letter">Letters (SC 1)</option></select><select id="petc" aria-label="Petitioner group"><option value="">All petitioners</option>${Object.entries(PCAT).map(([k,v])=>`<option value="${k}">${esc(v[0])}</option>`).join('')}</select><span class="small muted num" id="petn"></span></div>
+    <div class="tblwrap" id="pettbl" style="max-height:560px;overflow:auto"></div></div>
+  <p class="small muted">Catalogue descriptions from The National Archives, Discovery, searched 6 Oct. 2026 for Berwick-upon-Tweed and phrases that name the town (an entry naming only “Berwick” without the town’s context is left out). Dates are the catalogue’s, often a reign or a bracketed estimate. ${OGL}</p>
+  ${comment('petitions')}`;
+  B.querySelector('#p-voices .voices').innerHTML=L.filter(p=>p.hl).sort((a,b)=>a.y-b.y).map(p=>`<div class="card"><div class="lab num">${esc(p.date)} · <b>${esc(PCAT[p.cat][0])}</b></div><div class="small">${esc(p.hl)}</div><div class="ref"><a href="${TNA(p.id)}" target="_blank" rel="noopener">${esc(p.ref)} ↗</a></div></div>`).join('');
+  const keys=Object.keys(PCAT); const data={};
+  L.forEach(p=>{const d=Math.floor(p.y/10)*10, k=PCAT[p.cat][0]; (data[d]=data[d]||{})[k]=(data[d][k]||0)+1});
+  stackedDecades(figure($('#p-dec'),'Petitions and letters by decade and petitioner','Each entry counted in the decade of the first year of its catalogue date, so items dated only by reign fall in the reign’s first decade.'),{data,keys:keys.map(k=>PCAT[k][0]),colors:keys.map(k=>PCAT[k][1]),x0:1270,x1:1500});
+  function draw(){const q=$('#petq').value.toLowerCase(), k=$('#petk').value, c=$('#petc').value;
+    const R=L.filter(p=>(!k||p.kind===k)&&(!c||p.cat===c)&&(!q||(p.who+' '+p.req+' '+p.end+' '+p.ref+' '+p.date).toLowerCase().includes(q))).sort((a,b)=>a.y-b.y||a.ref.localeCompare(b.ref));
+    $('#petn').textContent=`${R.length} of ${L.length}`;
+    $('#pettbl').innerHTML=`<table class="data"><thead><tr><th>Date</th><th>Reference</th><th>From</th><th>Request or content</th><th>Answer</th></tr></thead><tbody>${R.map(p=>`<tr><td class="num" style="white-space:nowrap">${esc(p.date)}</td><td style="white-space:nowrap"><a href="${TNA(p.id)}" target="_blank" rel="noopener">${esc(p.ref)}</a><div class="small muted">${p.kind}</div></td><td>${esc(p.who)}<div class="small muted">${esc(PCAT[p.cat][0])}</div></td><td>${esc(p.req)}${p.req.length>=415?'…':''}</td><td class="small">${esc(p.end)}</td></tr>`).join('')}</tbody></table>`;
+  }
+  $('#petq').oninput=draw; $('#petk').onchange=draw; $('#petc').onchange=draw; draw();
+  RESIZE.petitions=()=>{built.petitions=false; buildPetitions()};
+}
+
+// ---------------------------------------------------------------- RECORDS
+function buildRecords(){
+  const B=$('#recBody');
+  B.innerHTML=`<h1>Berwick in the record</h1><p class="lede">How often Berwick appears in the English records, and where. Counts are of entries, not of documents or events, and depend on what was calendared and what survives.</p>
+  <div class="fig" id="r-cal"></div><div class="grid2" style="margin-top:18px"><div class="fig" id="r-theme"></div><div class="fig" id="r-dated"></div></div>
+  <div class="fig" id="r-gm" style="margin-top:18px"></div><div class="fig" id="r-tna" style="margin-top:18px"></div>${comment('records')}`;
+  const cal=A.calendar.decades;
+  stackedDecades(figure($('#r-cal'),'Entries naming Berwick in the calendars, by decade',`${A.calendar.total.CPR.toLocaleString()} Patent Roll entries and ${A.calendar.total.CDS} entries in the Calendar of Documents relating to Scotland (vols iii–iv only, so none before 1307). Index pages are excluded and an entry naming Berwick several times counts once. Patent Roll volumes for some years are missing from the folder.`),{data:cal,keys:['CPR','CDS'],colors:['var(--c1)','var(--c4)']});
+  // themes as lines (share)
+  const ft=figure($('#r-theme'),'What the entries are about','Share of Berwick entries (Patent Rolls and CDS) matching each set of keywords, by decade. An entry can match several.');
+  const th=A.calendar.themes; const keys=['war','governance','trade','church']; const cols=['var(--c2)','var(--c1)','var(--c4)','var(--c5)'];
+  const decs=Object.keys(th).map(Number).filter(d=>d>=1290&&d<=1500);
+  const W=Math.max(420,ft.plot.clientWidth||480),H=230,M={l:40,r:10,t:10,b:24};
+  const s=d3.select(ft.plot).append('svg').attr('width',W).attr('height',H); const x=d3.scaleLinear().domain([1290,1500]).range([M.l,W-M.r]), y=d3.scaleLinear().domain([0,1]).range([H-M.b,M.t]);
+  controlBands(s.append('g'),x,H-M.b);
+  keys.forEach((k,i)=>{const pts=decs.map(d=>{const tot=d3.sum(Object.values(cal[d]||{}));return tot>=8?[d+5,(th[d][k]||0)/tot,tot]:null}).filter(Boolean);
+    s.append('path').attr('d',d3.line().x(p=>x(p[0])).y(p=>y(p[1]))(pts)).attr('fill','none').attr('stroke',cols[i]).attr('stroke-width',2);
+    s.append('g').selectAll('circle').data(pts).join('circle').attr('cx',p=>x(p[0])).attr('cy',p=>y(p[1])).attr('r',3).attr('fill',cols[i]).on('mousemove',(e,p)=>showTip(`<b>${p[0]-5}s</b>: ${k} ${Math.round(p[1]*100)}% of ${p[2]}`,e)).on('mouseleave',hideTip)});
+  s.append('g').attr('class','axis').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(6).tickFormat(d3.format('d')));
+  s.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(d3.format('.0%')));
+  legend(ft.lgd,keys.map((k,i)=>[k,cols[i]]));
+  table(ft.tbl,['Decade','Entries',...keys],decs.map(d=>[d+'s',d3.sum(Object.values(cal[d]||{})),...keys.map(k=>th[d][k]||0)]),[1,2,3,4,5]);
+  // dated at berwick
+  const fd=figure($('#r-dated'),'Letters patent dated at Berwick','Entries in the Patent Rolls whose place of issue is Berwick: the English court and chancery in the town. Hover for the months.');
+  const byY=d3.rollup(Object.entries(A.dated),v=>d3.sum(v,e=>e[1]),e=>+e[0].slice(0,4));
+  const Wd=Math.max(420,fd.plot.clientWidth||480),Hd=220; const sd=d3.select(fd.plot).append('svg').attr('width',Wd).attr('height',Hd);
+  const xd=d3.scaleLinear().domain([1285,1410]).range([40,Wd-10]), yd=d3.scaleLinear().domain([0,d3.max([...byY.values()])]).nice().range([Hd-24,10]);
+  sd.append('g').selectAll('rect').data([...byY]).join('rect').attr('x',d=>xd(d[0])-3).attr('width',6).attr('y',d=>yd(d[1])).attr('height',d=>yd(0)-yd(d[1])).attr('fill','var(--accent)')
+    .on('mousemove',(e,d)=>showTip(`<b>${d[0]}</b>: ${d[1]} letters<br>${Object.entries(A.dated).filter(x=>+x[0].slice(0,4)===d[0]).map(x=>`${['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+x[0].slice(5)]} ${x[1]}`).join(', ')}`,e)).on('mouseleave',hideTip);
+  [[1291,'Great Cause'],[1296,'sack'],[1311,'Edward II'],[1335,'Edward III'],[1405,'Henry IV']].forEach(([yr,t])=>{const v=byY.get(yr)||byY.get(yr+1)||0; sd.append('text').attr('x',xd(yr)).attr('y',yd(v)-4).attr('text-anchor','middle').attr('font-size',10.5).text(t)});
+  sd.append('g').attr('class','axis').attr('transform',`translate(0,${Hd-24})`).call(d3.axisBottom(xd).ticks(6).tickFormat(d3.format('d')));
+  sd.append('g').attr('class','axis').attr('transform','translate(40,0)').call(d3.axisLeft(yd).ticks(4));
+  table(fd.tbl,['Year-month','Letters'],Object.entries(A.dated),[1]);
+  // glyph machina
+  const gm=A.glyph.super_twedam;
+  const fg=figure($('#r-gm'),'“super Twedam” in the plea and exchequer rolls (Glyph Machina)',`Machine transcriptions of ${gm.total.toLocaleString()} entries containing the phrase that names Berwick-upon-Tweed (“Berwicum super Twedam”), by decade and series. Exchequer series dominate: memoranda rolls E 159 and E 368, pipe rolls E 372. Counts are uncorrected HTR output. <a href="${gm.url}" target="_blank" rel="noopener">Open the search</a>.`);
+  const ser=['E159','E368','E372','CP40','KB27']; const data={}; ser.forEach(sn=>Object.entries(gm.by_series_decade[sn]).forEach(([d,n])=>{(data[d]=data[d]||{})[sn]=n}));
+  stackedDecades(fg,{data,keys:ser,colors:['var(--c1)','var(--c7)','var(--c3)','var(--c4)','var(--c2)'],x0:1280,x1:1500});
+  // The National Archives catalogue
+  const tk=['Petitions (SC 8)','Letters (SC 1)','Accounts various (E 101)','Customs accounts (E 122)'], td={};
+  const add=(y,k)=>{const d=Math.floor(y/10)*10; (td[d]=td[d]||{})[k]=(td[d][k]||0)+1};
+  A.petitions.forEach(p=>add(p.y,p.kind==='petition'?tk[0]:tk[1])); A.accounts.forEach(a=>add(a.y,a.ser==='E 122'?tk[3]:tk[2]));
+  const ft2=figure($('#r-tna'),'Berwick in the catalogue of The National Archives',`${A.petitions.length} petitions and letters and ${A.accounts.length} Exchequer accounts whose catalogue descriptions name the town (Discovery, 6 Oct. 2026). Each item is counted in the decade of the first year of its catalogue date, so items dated only by reign fall in the reign’s first decade. The petitions have their own view. ${OGL}`);
+  stackedDecades(ft2,{data:td,keys:tk,colors:['var(--c7)','var(--c5)','var(--c2)','var(--c4)'],x0:1270,x1:1500});
+}
+
+// ---------------------------------------------------------------- BOOKS
+const BG={town:'Written in or for Berwick',record:'Records',chronicle:'Chronicles',verse:'Verse',map:'Maps and plans',romance:'Romance'};
+function buildBooks(){
+  const B=$('#bookBody');
+  B.innerHTML=`<h1>Books and manuscripts</h1><p class="lede">Texts written in Berwick, records made there, and chronicles, poems and maps that place it. ${CONFIG.showUnverified?'Shelfmarks marked “to verify” come from reference knowledge and need checking against the catalogues.':''}</p>
+  <div class="toolbar"><div class="chips" id="bkChips"></div><input type="search" id="bq" placeholder="Search titles, shelfmarks, notes" aria-label="Search books"></div><div id="bkList"></div>
+  <div class="fig" id="bk-rom" style="margin-top:22px"><h3>Searching the romances and verse for Berwick</h3><p class="sub">${esc(A.romnote)}</p><div class="tblwrap"></div></div>${comment('books')}`;
+  table($('#bk-rom .tblwrap'),['Edition searched','Matches','Text'],A.romsearch.slice().sort((a,b)=>b[2]-a[2]||a[0].localeCompare(b[0])).map(r=>[r[0],String(r[2]),`<a href="https://archive.org/details/${encodeURIComponent(r[1])}" target="_blank" rel="noopener">archive.org ↗</a>`]),[1]);
+  let hide=new Set();
+  $('#bkChips').innerHTML=Object.entries(STATUS).filter(([k])=>CONFIG.showUnverified||k!=='verify').map(([k,v])=>`<button class="chip" aria-pressed="true" data-k="${k}">${pill(k)}</button>`).join('');
+  $('#bkChips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const k=b.dataset.k; hide.has(k)?hide.delete(k):hide.add(k); b.setAttribute('aria-pressed',!hide.has(k)); draw()});
+  function draw(){const q=$('#bq').value.toLowerCase();
+    $('#bkList').innerHTML=Object.entries(BG).map(([g,n])=>{const L=A.books.filter(b=>b.g===g&&!hide.has(b.status)&&(!q||JSON.stringify(b).toLowerCase().includes(q))); if(!L.length) return '';
+      return `<h3 class="lab" style="font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px">${esc(n)}</h3><div class="books">${L.map(b=>`<div class="card"><div class="lab num">${esc(b.date)}${b.who?' · '+esc(b.who):''}</div><h4>${esc(b.title)}</h4>${b.ms?`<div class="ms"><b>MS / edition.</b> ${esc(b.ms)}</div>`:''}<div class="small">${esc(b.berwick).replace(/&quot;(.+?)&quot;/g,'<i>“$1”</i>')}</div><div class="ref">${pill(b.status)} ${esc(b.refs||'')}${b.link?` · <a href="${esc(b.link)}" target="_blank" rel="noopener">link ↗</a>`:''}${b.place?` · <button class="btn" style="padding:0 6px;font-size:12px" data-go="${esc(b.place)}">on map</button>`:''}</div></div>`).join('')}</div>`}).join('');
+    $('#bkList').querySelectorAll('[data-go]').forEach(bt=>bt.onclick=()=>{const id=bt.dataset.go; if(TOWNBY[id]){show('town'); selectTown(id)} else {show('march'); selectMarch(id)}});
+  }
+  $('#bq').oninput=draw; draw();
+}
+
+// ---------------------------------------------------------------- PEOPLE
+let pplSel=null;
+function buildPeople(){
+  const m=makeMap('#pplsvg',{extent:[1,60]}); const [W,H]=m.size();
+  const proj=d3.geoConicConformal().parallels([48,60]).rotate([-4,0]).fitExtent([[10,10],[W-10,H-10]],{type:'MultiPoint',coordinates:[[-8,50],[20,61],[-6,58.5],[12.6,41.6],[-4,41.8]]});
+  const P=p=>proj(p);
+  m.g.append('rect').attr('x',-W*2).attr('y',-H*2).attr('width',W*5).attr('height',H*5).attr('fill','var(--sea)');
+  m.g.append('path').attr('d',G.sea.land.map(r=>ringPath(P,r)).join('')).attr('fill','var(--land)').attr('stroke','var(--land-edge)').attr('stroke-width',.5);
+  m.g.append('path').attr('d',G.region.land.map(r=>ringPath(P,r[1])).join('')).attr('fill','var(--land)').attr('stroke','var(--land-edge)').attr('stroke-width',.3);
+  const lay=m.g.append('g');
+  function draw(){
+    lay.selectAll('*').remove(); const k=d3.zoomTransform(m.svg.node()).k; if(!pplSel) return;
+    const p=A.people.find(x=>x.id===pplSel);
+    const pts=p.places.map(([id,y,w])=>{const ll=placeLL(id);return ll?{xy:P([ll[1],ll[0]]),y,w,name:placeName(id)}:null}).filter(Boolean).sort((a,b)=>a.y-b.y);
+    lay.append('path').attr('d',d3.line()(pts.map(d=>d.xy))).attr('fill','none').attr('stroke','var(--accent)').attr('stroke-width',1.6).attr('stroke-dasharray','4 3');
+    const gm=lay.selectAll('g').data(pts).join('g').attr('transform',d=>`translate(${d.xy[0]},${d.xy[1]}) scale(${1/k})`);
+    gm.append('circle').attr('r',6).attr('fill','var(--accent)').attr('stroke','var(--surface)').attr('stroke-width',2);
+    gm.append('text').attr('class','lbl').attr('x',8).attr('y',(d,i)=>4+(i%2?10:0)).text(d=>`${d.y} ${d.name}`);
+    gm.on('mousemove',(e,d)=>showTip(`<b>${d.y}, ${esc(d.name)}</b><br>${esc(d.w)}`,e)).on('mouseleave',hideTip);
+  }
+  function fitTo(){ if(!pplSel){m.svg.transition().duration(300).call(m.zoom.transform,d3.zoomIdentity);return}
+    const p=A.people.find(x=>x.id===pplSel); const xy=p.places.map(([id])=>placeLL(id)).filter(Boolean).map(ll=>P([ll[1],ll[0]]));
+    const [x0,x1]=d3.extent(xy,d=>d[0]), [y0,y1]=d3.extent(xy,d=>d[1]); const kk=Math.min(40,0.7/Math.max((x1-x0+30)/W,(y1-y0+30)/H));
+    m.svg.transition().duration(400).call(m.zoom.transform,d3.zoomIdentity.translate(W/2,H/2).scale(Math.max(1,kk)).translate(-(x0+x1)/2,-(y0+y1)/2)) }
+  m.svg.node().addEventListener('zoomed',draw);
+  wireZoom(m,'pz',fitTo);
+  window.selectPerson=id=>{pplSel=id; draw(); fitTo(); pplPanel()};
+  function pplPanel(){
+    const Pn=$('#pplPanel');
+    const list=`<ul class="list">${A.people.map(p=>`<li><button class="lk" data-id="${p.id}"><b>${esc(p.name)}</b></button> <span class="small muted">${esc(p.dates)}</span><div class="small muted">${esc(p.role)}</div></li>`).join('')}</ul>`;
+    if(!pplSel){Pn.innerHTML=`<h2>Figures</h2><p class="small muted">People tied to Berwick by office, trade, writing or captivity. Choose one to draw the places the sources put them, in date order.</p>${list}${comment(CURV)}`}
+    else{const p=A.people.find(x=>x.id===pplSel); Pn.innerHTML=`<p><button class="btn" id="pback">← All figures</button></p><h2>${esc(p.name)}</h2><p class="small muted">${esc(p.dates)} · ${esc(p.role)}</p><div class="ref small">${pill(p.status)} ${esc(p.refs)}</div><h3>Places</h3><ul class="list">${p.places.slice().sort((a,b)=>a[1]-b[1]).map(([id,y,w])=>`<li><span class="num">${y}</span> · <b>${esc(placeName(id))}</b><div class="small">${esc(w)}</div></li>`).join('')}</ul><h3>Other figures</h3>${list}${comment(CURV)}`; $('#pback').onclick=()=>selectPerson(null)}
+    Pn.querySelectorAll('.lk').forEach(b=>b.onclick=()=>selectPerson(b.dataset.id));
+  }
+  pplPanel(); selectPerson('gray');
+  RESIZE.people=()=>{built.people=false; buildPeople()};
+}
+
+// ---------------------------------------------------------------- SOURCES
+const EDITIONS=[
+ ['Lanercost (Maxwell)','The Chronicle of Lanercost 1272–1346, trans. H. Maxwell (Glasgow, 1913)'],
+ ['Scalacronica (Maxwell)','Sir Thomas Gray, Scalacronica, trans. H. Maxwell (Glasgow, 1907)'],
+ ['Fordun (Skene)','John of Fordun’s Chronicle of the Scottish Nation, ed. W. F. Skene, ii (Edinburgh, 1872)'],
+ ['Guisborough (Hamilton)','Chronicon domini Walteri de Hemingburgh, ed. H. C. Hamilton, 2 vols (1848–49)'],
+ ['Langtoft (Wright)','The Chronicle of Pierre de Langtoft, ed. T. Wright, Rolls Series, 2 vols (1866–68)'],
+ ['Barbour (Mackenzie)','John Barbour, The Bruce, ed. W. M. Mackenzie (London, 1909)'],
+ ['Walsingham (Riley)','Thomas Walsingham, Historia Anglicana, ed. H. T. Riley, Rolls Series, 2 vols (1863–64)'],
+ ['Knighton (Lumby)','Chronicon Henrici Knighton, ed. J. R. Lumby, Rolls Series, 2 vols (1889–95)'],
+ ['Brut (Brie)','The Brut, or the Chronicles of England, ed. F. W. D. Brie, EETS o.s. 131 (1906)'],
+ ['Minot (Hall)','The Poems of Laurence Minot, ed. J. Hall, 3rd edn (Oxford, 1914)'],
+ ['Hardyng (Ellis)','The Chronicle of John Hardyng, ed. H. Ellis (London, 1812)'],
+ ['Erceldoune (Murray)','The Romance and Prophecies of Thomas of Erceldoune, ed. J. A. H. Murray, EETS o.s. 61 (1875)'],
+ ['Wallace (Moir)','Hary, The Actis and Deidis of Schir William Wallace, ed. J. Moir, STS (1889)'],
+ ['Bannatyne iv','The Bannatyne Manuscript, Hunterian Club, iv (1896)'],
+ ['Scott 1888','J. Scott, Berwick-upon-Tweed: The History of the Town and Guild (London, 1888)'],
+ ['CDS i–ii','Calendar of Documents relating to Scotland, ed. J. Bain, i–ii (1881–84)']];
+function buildSources(){
+  const S=A.soldiers, cnt=s=>A.events.filter(e=>e.s===s).length, R=CONFIG.review;
+  const V=[];
+  A.events.filter(e=>e.s==='verify').forEach(e=>V.push(['Event',`${e.d}: ${e.t}`,e.r]));
+  A.offices.filter(o=>o[5]==='verify').forEach(o=>V.push(['Office',`${o[3]} (${A.office_names[o[0]]}, ${yearsLabel(o[1],o[2])})`,o[6]]));
+  A.sieges.filter(x=>x.s==='verify').forEach(x=>V.push(['Siege',`${x.d}: ${x.by}`,x.r]));
+  A.books.filter(b=>b.status==='verify').forEach(b=>V.push(['Book or manuscript',b.title,b.ms||b.refs||'']));
+  A.people.filter(p=>p.status==='verify').forEach(p=>V.push(['Figure',p.name,p.refs||'']));
+  A.links.filter(l=>l[6]==='verify').forEach(l=>V.push(['Link',`${l[1]}, ${(A.link_places[l[2]]||[l[2]])[0]}: ${l[4]}`,l[5]]));
+  A.town.filter(t=>t.status==='verify').forEach(t=>V.push(['Town place',t.name,t.refs||'']));
+  A.unplaced.filter(t=>t.status==='verify').forEach(t=>V.push(['Unplaced house',t.name,t.refs||'']));
+  A.region.filter(t=>t.status==='verify').forEach(t=>V.push(['March place',t.name,t.refs||'']));
+  const hiddenOnSite=V.filter(v=>['Event','Office','Siege','Book or manuscript','Figure','Link'].includes(v[0]));
+  $('#srcBody').innerHTML=`<h1>Sources and method</h1><p class="lede">What each view is built from, how the data were gathered, and what remains provisional.</p>
+  ${comment('sources')}
+  <h3 class="lab">Status marks used throughout</h3><p>${pill('src')} found in a printed calendar or edition (volume, page or item given) · ${pill('lit')} taken from a secondary study (chiefly the two articles on Berwick and Scott 1888) · ${pill('db')} from an online database${CONFIG.showUnverified?` · ${pill('verify')} from reference knowledge or a web page, to be checked before publication`:''}.</p>
+  <p class="small">Events: ${cnt('src')} checked in sources, ${cnt('lit')} from secondary studies, ${cnt('db')} from databases${CONFIG.showUnverified?`, ${cnt('verify')} to verify`:''}. Sieges and assaults: ${A.sieges.length}.</p>
+  <div class="tblwrap"><table class="data"><thead><tr><th>View</th><th>Built from</th><th>Basis</th></tr></thead><tbody>
+  <tr><td>Town</td><td>OpenStreetMap streets, walls and coast (Overpass, 6 Oct. 2026); Speed’s 1610 plan (BnF copy, Wikimedia Commons). Sieges layer: ${A.sieges.length} attacks on the town or castle, ${A.sieges[0]?A.sieges[0].y:''}–${A.sieges.length?A.sieges[A.sieges.length-1].y:''}, from the chronicles and calendars. Freiris layer: the opening of <i>The Freiris of Berwik</i> (Bannatyne MS).</td><td>Positions of lost buildings are approximate and marked so; houses with no known site are listed, not mapped. The places a siege involved are those its sources name.</td></tr>
+  <tr><td>March</td><td>Natural Earth coast and border; OSM rivers; Mapzen/AWS terrain tiles (zoom 9) for land over 300 m and 500 m. Sieges elsewhere in the March from Scalacronica, Fordun and Minot.</td><td>Places placed by modern coordinates; notes cite sources.</td></tr>
+  <tr><td>Control &amp; governance</td><td>${A.events.length} dated events; ${A.offices.length} office-holder entries from CDS i–iv, CPR, the Foedera syllabus, Medieval Soldier and Scott 1888.</td><td>A bar runs from first to last naming in office, not a term of appointment.</td></tr>
+  <tr><td>Port &amp; sea</td><td>Donnelly 2017 (Tables 1–3, home ports, ships); ${A.links.length} transnational links read from CDS, CPR, CPL and the articles; ${E122().length} customs accounts listed from the TNA catalogue (E 122).</td><td>Each link is one record.</td></tr>
+  <tr><td>Garrison</td><td>Medieval Soldier: ${S.length.toLocaleString()} records with service “Berwick” (6 Oct. 2026); ${A.protections.length} Patent Roll protections cleaned by hand; CDS iii, no. 668; England’s Immigrants facet counts.</td><td>Origins geocoded with OSM Nominatim, corrected by hand where wrong.</td></tr>
+  <tr><td>Petitions</td><td>${A.petitions.length} catalogue entries from The National Archives (SC 8 Ancient Petitions, SC 1 Ancient Correspondence), Discovery API, 6 Oct. 2026.</td><td>Catalogue descriptions, not the documents; petitioner groups assigned by keyword.</td></tr>
+  <tr><td>Records</td><td>Text of 45 CPR volumes and CDS iii–iv; Glyph Machina (8 queries); TNA catalogue counts for SC 8, SC 1, E 101 and E 122.</td><td>Counts of entries; OCR errors may hide some mentions.</td></tr>
+  <tr><td>Books &amp; manuscripts</td><td>${A.books.length} items; ${A.romsearch.length} editions of romances and verse searched in full text (Internet Archive).</td><td>${CONFIG.showUnverified?'Shelfmarks “to verify” unless checked in a source.':'Shelfmarks as given in the editions cited.'}</td></tr>
+  <tr><td>Figures</td><td>${A.people.length} figures with dated places.</td><td>As marked.</td></tr></tbody></table></div>
+  <h3 class="lab">Editions read for the second pass</h3><p class="small muted">Public-domain editions on the Internet Archive, read in their full text. Page numbers are those printed in the editions; a few are approximate and marked “c.”.</p>
+  <ul class="small">${EDITIONS.map(([a,b])=>`<li><b>${esc(a)}</b>: ${esc(b)}</li>`).join('')}</ul>
+  ${R?`<h3 class="lab">Needs your judgment or checking</h3><ul class="checklist small">
+   <li>The romances: the full-text search (Books view) found Berwick in no Arthurian, Charlemagne or English romance edition searched. It found the town in the <i>Buke of the Howlat</i>, <i>The Freiris of Berwik</i>, the Erceldoune prophecies, Minot, Langtoft, the <i>Brut</i>, Hardyng, Barbour and Hary. The Books view keeps an empty slot for the texts the chapter discusses.</li>
+   <li><i>Perceforest</i> was searched only in volumes ii, iv and v of the 1528 print, whose OCR is poor; volumes i and iii could not be downloaded.</li>
+   <li><i>Charters of the Nuns of North Berwick</i> in the Berwick folder concern North Berwick, East Lothian, not Berwick-upon-Tweed.</li>
+   <li>Speed’s lettered key (A–Z) is not printed on the inset; identifications on the Speed base are by eye.</li>
+   <li>“John de Berewyk” and others surnamed Berwick in the English records may come from any of several English Berwicks; none is attributed to the town.</li>
+   <li>Year assignments for CDS items come from the margin dates nearest each item; the Seinte Anne item was corrected from 1322 to 1347 against CPR.</li>
+   <li>The Scottish keepers of 1318–33 come from Scott 1888 and are marked as secondary; the Scottish calendars and the Exchequer Rolls of Scotland were not searched.</li>
+   <li>The dates of 1461 and 1482 are the conventional ones; the editions read give the year but not the day.</li>
+   <li>Petitioner groups in the Petitions view come from keyword rules and misfile some entries (e.g. lords under officers).</li>
+   <li>On the public build every event, office, siege, book, figure and link still marked “to verify” is hidden: ${hiddenOnSite.length} entries at present, including ${A.books.filter(b=>b.status==='verify').map(b=>b.title).slice(0,3).map(esc).join('; ')}. Places marked “to verify” stay on the maps without the mark.</li>
+  </ul>
+  <h3 class="lab">Still to verify (${V.length})</h3><div class="tblwrap"><table class="data"><thead><tr><th>Kind</th><th>Entry</th><th>Reference or note</th></tr></thead><tbody>${V.map(v=>`<tr><td>${esc(v[0])}</td><td>${esc(v[1])}</td><td class="small">${esc(v[2]||'')}</td></tr>`).join('')}</tbody></table></div>`:''}
+  <h3 class="lab">Online databases and catalogues</h3><ul class="small">
+   <li><a href="https://www.medievalsoldier.org/database/" target="_blank" rel="noopener">The Soldier in Later Medieval England</a>. Information on soldiers has been taken from the AHRC-funded ‘The Soldier in Later Medieval England Online Database’, www.medievalsoldier.org, accessed 6 October 2026.</li>
+   <li><a href="https://www.englandsimmigrants.com" target="_blank" rel="noopener">England’s Immigrants 1330–1550</a>, accessed 6 October 2026.</li>
+   <li><a href="https://glyphmachina.utsc.utoronto.ca/" target="_blank" rel="noopener">Glyph Machina</a>: searches run through Glyph Machina, with thanks to the Glyph Machina team and to the Anglo-American Legal Tradition project founded by the late Robert Palmer.</li>
+   <li><a href="https://discovery.nationalarchives.gov.uk/" target="_blank" rel="noopener">The National Archives, Discovery</a>: catalogue descriptions of SC 8, SC 1, E 101 and E 122. ${OGL}</li>
+   <li><a href="https://archive.org/" target="_blank" rel="noopener">Internet Archive</a>: full texts of the public-domain editions listed above.</li>
+   <li><a href="https://cotr.ac.uk/" target="_blank" rel="noopener">The Community of the Realm in Scotland, 1249–1424</a>${R?': consulted for its editions; its viewer and search are closed to automated use.':'.'}</li>
+   ${R?'<li>Not used: People of Medieval Scotland (its robots file bars AI agents by name); Corpus of Middle English and the Anglo-Norman Dictionary (bot checks). All three are worth searching by hand for Berwick.</li>':''}</ul>
+  <h3 class="lab">Rights</h3><ul class="small"><li>OpenStreetMap data © OpenStreetMap contributors, ODbL. Natural Earth: public domain. Terrain: Mapzen terrain tiles on AWS (SRTM and other open sources). Speed’s plan: public-domain scan (BnF, via Wikimedia Commons).</li><li>TNA catalogue descriptions: Open Government Licence v3.0. Medieval Soldier, England’s Immigrants and Glyph Machina results are summarised and cited, with links back.</li></ul>
+  ${R?'':`<h3 class="lab">Credits</h3><p class="small">The Soldier in Later Medieval England Online Database (AHRC). England’s Immigrants 1330–1550. Glyph Machina and the Anglo-American Legal Tradition. The National Archives. Printed sources: Calendar of Patent Rolls; Calendar of Documents relating to Scotland, ed. J. Bain; Calendar of Papal Letters; Foedera (syllabus, ed. T. D. Hardy); Calendar of Letter-Books of the City of London, ed. R. R. Sharpe; and the editions listed above. A. Donnelly, “An Open Economy: The Berwick Shipping Trade, 1311–1373”, <i>Scottish Historical Review</i> (2017); A. King, “Englishmen, Scots and Marchers”, <i>Northern History</i> (2000). Coastlines from Natural Earth; streets © OpenStreetMap contributors. Charts and maps by D3.</p>
+  <p class="small">Concept: Daniel Davies. Data compilation, georeferencing and interface prepared with Claude (Anthropic).</p>`}
+  <p class="small muted">Built ${esc(A.built)}.</p>`;
+}
+
+// ---------------------------------------------------------------- boot
+const loadCommentary=()=>CONFIG.commentary?fetch(CONFIG.commentary).then(r=>r.ok?r.text():'').then(t=>{ if(!t) return; const d=document.createElement('div'); d.innerHTML=t;
+  d.querySelectorAll('section[data-view]').forEach(sec=>{const html=sec.innerHTML.replace(/<!--[\s\S]*?-->/g,'').trim(); if(html) COMMENTARY[sec.dataset.view]=html})}).catch(()=>{}):Promise.resolve();
+Promise.all([fetch('data/atlas.json').then(r=>r.json()),fetch('data/geo.json').then(r=>r.json()),loadCommentary()]).then(([a,g])=>{
+  A=a; G=g;
+  if(!CONFIG.showUnverified){
+    const ok=x=>(x.s??x.status)!=='verify';
+    A.events=A.events.filter(ok); A.sieges=A.sieges.filter(ok); A.sieges_region=A.sieges_region.filter(ok);
+    A.books=A.books.filter(ok); A.people=A.people.filter(ok);
+    A.offices=A.offices.filter(o=>o[5]!=='verify'); A.links=A.links.filter(l=>l[6]!=='verify'); A.ships=A.ships.filter(s=>s[6]!=='verify');
+  }
+  A.town.forEach(t=>TOWNBY[t.id]=t); A.region.forEach(r=>REGBY[r.id]=r);
+  const h=location.hash.slice(1); const v=['town','march','gov','sea','garrison','petitions','records','books','people','sources'].includes(h)?h:(store('bw-view')||'town');
+  show(v);
+}).catch(e=>{document.querySelector('main').innerHTML=`<div class="pagewrap" style="padding:24px"><h1>Could not load the data</h1><p>${esc(e.message)}</p></div>`});
+</script>
+</body>
+</html>
