@@ -1,0 +1,1578 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AALT Transcription Search</title>
+<link rel="stylesheet" href="/static/search.css">
+</head>
+<body>
+<header>
+  
+  <span class="title">Anglo-American Legal Tradition &mdash; Transcriptions</span>
+  <span style="font:13px sans-serif">10 million pages of English legal records: browse, transcribe, search</span>
+</header>
+<div class="wrap">
+
+<p class="credit-note">We are thrilled if you find this tool useful. If you
+publish using records you found using our tool, please credit Glyph Machina
+and <a href="/about-us">the team</a> by name when you cite the records you
+  found.
+  This scholarly project would not have been possible without the Anglo-American
+  Legal Tradition, a massive digitization project undertaken by the late Robert
+  Palmer and his family, friends, and students.
+</p>
+
+<div class="cards">
+  <div class="card">
+    <h2><span class="num">1.</span>AALT mirror</h2>
+    <p>Browse the document images and the original AALT site structure
+       (reigns, series, rolls), with the built-in page viewer that overlays
+       each transcribed line on the scan.</p>
+    <a class="go" href="/IndexPri.html">Browse the mirror &rarr;</a>
+  </div>
+  <div class="card">
+    <h2><span class="num">2.</span>Transcription tool</h2>
+    <p>GlyphMachina, the handwritten-text transcription tool used to produce
+       the automatic transcriptions behind this site.</p>
+    <a class="go" href="/custom" target="_blank" rel="noopener">Open GlyphMachina &rarr;</a>
+  </div>
+  <div class="card">
+    <h2><span class="num">3.</span>Search the transcriptions</h2>
+    <p>Full-text search over ~21 million case entries with reign, series and
+       confidence filters, saved formula searches, person tracing &mdash; and an
+       AI assistant for open-ended questions.</p>
+    <a class="go" href="#search">Search below &darr;</a>
+  </div>
+</div>
+
+<div class="sect-h" id="search">Search the transcriptions</div>
+<form class="search" method="get" action="/">
+  <div class="row">
+    <div>
+      <label>Search (Latin text; spelling of u/v, i/j/y is folded automatically)</label>
+      <input class="q" type="text" name="q" value="NEAR(fuerunt iudei, 4)" placeholder='e.g. nichil dicit, excommunicat*, noctanter'>
+    </div>
+    <div>
+      <label>Also mentions (e.g. a place; spelling variants added)</label>
+      <input type="text" name="extra" value="" size="16" placeholder="e.g. Notingham">
+    </div>
+    <div>
+      <label>Mode <a href="#modes-help" class="help-link">what&rsquo;s this?</a></label>
+      <select name="mode">
+        
+        <option value="phrase" >exact phrase</option>
+        
+        <option value="and" >all words</option>
+        
+        <option value="or" >any word</option>
+        
+        <option value="near" >words near each other</option>
+        
+        <option value="fuzzy" >fuzzy (stems + variants)</option>
+        
+        <option value="robust" >robust (HTR-noise tolerant)</option>
+        
+        <option value="raw" selected>raw FTS5 syntax</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Saved search (formula lexicon)</label>
+      <select name="formula">
+        <option value="">— none —</option>
+        
+        <option value="excommunication" 
+                title="All instances of excommunication (excommunicatus, excommunicacio(n)-, HTR variants with single m / c-t swap, and the abbreviated excoicat- form).">Excommunication</option>
+        
+        <option value="standing_mute" 
+                title="Defendants in felony cases who refused to plead: nihil dicit, tenuit mutam (corpus spells it &#39;se mutum tenet&#39;), peine forte et dure, prison forte et dure (with spelling variants).">Standing mute (refusal to plead)</option>
+        
+        <option value="standing_mute_felony" 
+                title="Standing mute at felony arraignment only: &#39;nihil dicit&#39; co-occurring with arraignment/felony vocabulary in the same entry, or the explicit mute/peine forte et dure formulae.">Standing mute in felony (strict)</option>
+        
+        <option value="night_robbery" 
+                title="Offences committed by night (noctanter) combined with robbery/theft vocabulary (roberia, latrocinium, depredatus, spoliavit, burglaria, furtive).">Robbery/theft at night</option>
+        
+        <option value="by_night" 
+                title="Any offence alleged to have been committed at night.">By night (noctanter)</option>
+        
+        <option value="robbery" 
+                title="Robbery and theft terms regardless of time of day.">Robbery / theft vocabulary</option>
+        
+        <option value="appeal_to_king" 
+                title="Formulae of complaining or petitioning the king (queritur/questus est domino regi, supplicavit, monstravit).">Complaint/petition to the king</option>
+        
+        <option value="housebreaking" 
+                title="Breaking into a house: domum/domos fregit-fregerunt (any word order, within 6 words) and burglaria vocabulary.">Housebreaking (domum fregit)</option>
+        
+        <option value="matricide" 
+                title="A person killing his or her own mother: &#39;matrem suam&#39; near a killing verb (occidit, interfecit, felonice).">Matricide (killing of a mother)</option>
+        
+        <option value="first_finder" 
+                title="Coroner&#39;s-roll &#39;first finder&#39; formula: primus inventor / prima inventrix (with case endings and HTR garbling).">First finder of a body (primus inventor)</option>
+        
+        <option value="first_finder_parent" 
+                title="First finders described as mother/father (mater/pater and genitives) near the inventor formula — candidates for parents finding their own child&#39;s body.">First finder who was a parent</option>
+        
+        <option value="misadventure" 
+                title="Deaths ruled misadventure: per infortunium (and garbled infortun- forms).">Death by misadventure (per infortunium)</option>
+        
+        <option value="drowning" 
+                title="Drownings: submersus/-a/-it and demersus forms.">Drowning (submersus)</option>
+        
+        <option value="attaint" 
+                title="Attaint proceedings reviewing a verdict by a grand jury of 24 knights: &#39;jurata xxiiii militum (de visneto)...&#39;, &#39;venit recognitura si juratores...&#39;.">Writ of attaint (jury of 24)</option>
+        
+      </select>
+    </div>
+    <div><button class="go" type="submit">Search</button></div>
+  </div>
+  <div class="row">
+    <div>
+      <label>Reign from</label>
+      <select name="mfrom">
+        <option value="">—</option>
+        
+        <option value="John" >John (1199–1216)</option>
+        
+        <option value="Henry III" >Henry III (1216–1272)</option>
+        
+        <option value="Edward I" >Edward I (1272–1307)</option>
+        
+        <option value="Edward II" >Edward II (1307–1327)</option>
+        
+        <option value="Edward III" >Edward III (1327–1377)</option>
+        
+        <option value="Richard II" >Richard II (1377–1399)</option>
+        
+        <option value="Henry IV" >Henry IV (1399–1413)</option>
+        
+        <option value="Henry V" >Henry V (1413–1422)</option>
+        
+        <option value="Henry VI" >Henry VI (1422–1461)</option>
+        
+        <option value="Edward IV" >Edward IV (1461–1483)</option>
+        
+        <option value="Edward V" >Edward V (1483–1483)</option>
+        
+        <option value="Richard III" >Richard III (1483–1485)</option>
+        
+        <option value="Henry VII" >Henry VII (1485–1509)</option>
+        
+        <option value="Henry VIII" >Henry VIII (1509–1547)</option>
+        
+        <option value="Edward VI" >Edward VI (1547–1553)</option>
+        
+        <option value="Mary" >Mary (1553–1558)</option>
+        
+        <option value="Elizabeth I" >Elizabeth I (1558–1603)</option>
+        
+        <option value="James I" >James I (1603–1625)</option>
+        
+        <option value="Charles I" >Charles I (1625–1649)</option>
+        
+        <option value="Commonwealth" >Commonwealth (1649–1660)</option>
+        
+        <option value="Charles II" >Charles II (1660–1685)</option>
+        
+        <option value="James II" >James II (1685–1688)</option>
+        
+        <option value="William and Mary" >William and Mary (1689–1694)</option>
+        
+        <option value="William III" >William III (1694–1702)</option>
+        
+        <option value="Anne" >Anne (1702–1714)</option>
+        
+        <option value="George I" >George I (1714–1727)</option>
+        
+        <option value="George II" >George II (1727–1760)</option>
+        
+        <option value="George III" >George III (1760–1820)</option>
+        
+        <option value="George IV" >George IV (1820–1830)</option>
+        
+        <option value="William IV" >William IV (1830–1837)</option>
+        
+        <option value="Victoria" >Victoria (1837–1901)</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Reign to</label>
+      <select name="mto">
+        <option value="">—</option>
+        
+        <option value="John" >John (1199–1216)</option>
+        
+        <option value="Henry III" >Henry III (1216–1272)</option>
+        
+        <option value="Edward I" >Edward I (1272–1307)</option>
+        
+        <option value="Edward II" >Edward II (1307–1327)</option>
+        
+        <option value="Edward III" >Edward III (1327–1377)</option>
+        
+        <option value="Richard II" >Richard II (1377–1399)</option>
+        
+        <option value="Henry IV" >Henry IV (1399–1413)</option>
+        
+        <option value="Henry V" >Henry V (1413–1422)</option>
+        
+        <option value="Henry VI" >Henry VI (1422–1461)</option>
+        
+        <option value="Edward IV" >Edward IV (1461–1483)</option>
+        
+        <option value="Edward V" >Edward V (1483–1483)</option>
+        
+        <option value="Richard III" >Richard III (1483–1485)</option>
+        
+        <option value="Henry VII" >Henry VII (1485–1509)</option>
+        
+        <option value="Henry VIII" >Henry VIII (1509–1547)</option>
+        
+        <option value="Edward VI" >Edward VI (1547–1553)</option>
+        
+        <option value="Mary" >Mary (1553–1558)</option>
+        
+        <option value="Elizabeth I" >Elizabeth I (1558–1603)</option>
+        
+        <option value="James I" >James I (1603–1625)</option>
+        
+        <option value="Charles I" >Charles I (1625–1649)</option>
+        
+        <option value="Commonwealth" >Commonwealth (1649–1660)</option>
+        
+        <option value="Charles II" >Charles II (1660–1685)</option>
+        
+        <option value="James II" >James II (1685–1688)</option>
+        
+        <option value="William and Mary" >William and Mary (1689–1694)</option>
+        
+        <option value="William III" >William III (1694–1702)</option>
+        
+        <option value="Anne" >Anne (1702–1714)</option>
+        
+        <option value="George I" >George I (1714–1727)</option>
+        
+        <option value="George II" >George II (1727–1760)</option>
+        
+        <option value="George III" >George III (1760–1820)</option>
+        
+        <option value="George IV" >George IV (1820–1830)</option>
+        
+        <option value="William IV" >William IV (1830–1837)</option>
+        
+        <option value="Victoria" >Victoria (1837–1901)</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Series (e.g. CP40, KB27, JUST%)</label>
+      <input type="text" name="series" value="" size="10">
+    </div>
+    <div>
+      <label>Year from <a href="#modes-help" class="help-link" title="Calendar years extracted from the entries' own regnal-year datings; approximate for undated entries (roll-side median)">?</a></label>
+      <input type="text" name="yfrom" value="1291" size="5" placeholder="1300">
+    </div>
+    <div>
+      <label>Year to</label>
+      <input type="text" name="yto" value="1600" size="5" placeholder="1350">
+    </div>
+    <div>
+      <label>Min. mean confidence</label>
+      <input type="text" name="minconf" value="" size="4" placeholder="e.g. 50">
+    </div>
+    <div>
+      <label>Sort</label>
+      <select name="order">
+        <option value="chrono" selected>chronological</option>
+        <option value="rank" >relevance</option>
+      </select>
+    </div>
+    <div>
+      <label>Group results (count table)</label>
+      <select name="group">
+        <option value="">— list hits —</option>
+        
+        <option value="reign" >by reign</option>
+        
+        <option value="decade" >by decade</option>
+        
+        <option value="year" >by year</option>
+        
+        <option value="series" >by series</option>
+        
+        <option value="roll" >by roll</option>
+        
+      </select>
+    </div>
+    <div class="checks">
+      <label>&nbsp;</label>
+      <input type="checkbox" name="person" value="1" id="person" >
+      <label for="person" style="display:inline">person trace (&ldquo;Forename Surname&rdquo;)</label>
+    </div>
+  </div>
+  
+  <details class="modes-help" id="modes-help">
+    <summary>What do the search modes mean?</summary>
+    <p class="mh-intro">All modes search <em>case entries</em> (individual
+      records), and fold spelling automatically (u/v, i/j/y). Pick a mode by
+      how your words should relate:</p>
+    <dl>
+      
+      <dt>exact phrase</dt><dd>The words must appear together, in the order you typed them. <b>nichil dicit</b> finds the phrase &ldquo;nichil dicit&rdquo; but not &ldquo;nichil&rdquo; and &ldquo;dicit&rdquo; apart. Best when you know the exact wording of a formula.</dd>
+      
+      <dt>all words</dt><dd>Every word must appear somewhere in the same case entry, in any order and any distance apart. <b>excommunicatus rex</b> finds entries containing both words. Best for narrowing to entries that mention several things at once.</dd>
+      
+      <dt>any word</dt><dd>At least one of the words must appear. <b>roberia latrocinium furtum</b> finds entries with any of those theft terms. Best for gathering synonyms or spelling variants of one idea.</dd>
+      
+      <dt>words near each other</dt><dd>All the words must appear within about 10 words of one another in the same entry. <b>noctanter domum</b> finds them close together (a house entered by night), not merely somewhere in the same long entry. Best when the words must relate to each other.</dd>
+      
+      <dt>fuzzy (stems + variants)</dt><dd>Like &ldquo;all words&rdquo;, but each word is shortened to its stem and common medieval spelling variants are added automatically, so you catch inflected endings and scribal/HTR spellings. <b>spoliavit</b> also matches spoliaverunt, spoliatus, etc. Best when you are unsure of the exact ending or spelling.</dd>
+      
+      <dt>robust (HTR-noise tolerant)</dt><dd>Like fuzzy, but each word additionally matches every spelling in the corpus within one typo of it (two for longer words) &mdash; including errors in the FIRST letters, which fuzzy&rsquo;s stems cannot catch. <b>Chaucer</b> also matches Ehaucer, Thaucer, Chauce&hellip; Best for names and rare words, where transcription errors would otherwise hide hits. Broader than fuzzy: expect some false matches from genuinely similar words.</dd>
+      
+      <dt>raw FTS5 syntax</dt><dd>You write the query yourself using SQLite FTS5 operators (<code>AND OR NOT NEAR() &quot;phrase&quot; prefix*</code>). <b>noctanter AND (roberia* OR latrocin*)</b>. For power users; this is what the saved formulae use under the hood.</dd>
+      
+    </dl>
+    <p class="mh-intro">Add <code>*</code> to any word to match its
+      continuations (<b>excommunicat*</b> &rarr; excommunicatus,
+      excommunicacionem&hellip;). The <b>saved searches</b> dropdown runs
+      expert queries for common topics without needing any of this.</p>
+    <p class="mh-intro"><b>Years</b>: calendar years are extracted from the
+      entries&rsquo; own regnal-year datings (&ldquo;anno regni Regis nunc
+      xxxv&rdquo;); entries without one are dated approximately (shown as
+      &ldquo;c.&nbsp;1352&rdquo;) from their roll side. The <b>year
+      from/to</b> boxes filter on these, so questions like &ldquo;between
+      1300 and 1350&rdquo; or &ldquo;before 1300&rdquo; work directly.
+      <b>Group results</b> turns the hit list into a count table (by reign,
+      decade, year, series or roll) with drill-down links &mdash; e.g.
+      robbery with housebreaking, grouped by decade. <b>Also mentions</b>
+      requires an extra word (a town, a person) to appear in the same entry,
+      with spelling variants added automatically &mdash; combine it with the
+      person trace to find e.g. every <i>Roger</i> in entries mentioning
+      <i>Nottingham</i>. NB a place term also matches toponymic surnames
+      (&ldquo;Johannes de Notingham&rdquo; living elsewhere).</p>
+  </details>
+</form>
+
+<details class="ask" id="ask-panel" >
+<summary style="cursor:pointer; font: bold 15px Georgia, serif; color:#3b2f23">
+  Ask the AI assistant (chat)</summary>
+<p class="note" style="margin:8px 0 6px">
+  A conversation with Claude Code on the server: it can run the search tools
+  over the corpus and reads the noisy transcriptions for you. Follow-up
+  questions stay in the same conversation. Answers stream in and can take a
+  few minutes for hard questions.</p>
+<div id="chat-log"></div>
+<textarea id="ask-q" placeholder="e.g. Were there any cases of women standing mute in felony trials under Edward III?"></textarea>
+<div class="row2">
+  <button id="ask-go" type="button">Send</button>
+  <button id="ask-stop" type="button">Stop</button>
+  <button id="ask-new" type="button" style="background:#7a6a4d;color:#fff">New conversation</button>
+  <button id="ask-dl" type="button">Download transcript</button>
+  <label class="note" id="ask-ctx-row" style="display:none; cursor:pointer">
+    <input type="checkbox" id="ask-ctx" checked>
+    give the assistant my current search (query, filters, result count)
+  </label>
+  <span class="note" id="ask-status"></span>
+</div>
+</details>
+
+
+<script type="application/json" id="search-ctx">{"extra": "", "formula": "", "group": "", "mfrom": "", "minconf": "", "mode": "raw", "mto": "", "order": "chrono", "page": 5, "person": "", "q": "NEAR(fuerunt iudei, 4)", "series": "", "total": "374", "yfrom": "1291", "yto": "1600"}</script>
+<script src="/static/search.js" defer></script>
+
+
+
+
+<p class="summary">
+  <b>374</b> matching entries
+   &mdash; query: <code>NEAR(fuerunt iudei, 4)</code>
+  &mdash; page 5 of 15
+  
+  <button id="analyze-btn" type="button" style="font: bold 12px sans-serif;
+    margin-left: 10px; padding: 3px 12px; background: #7a2c2c; color: #fff;
+    border: 0; border-radius: 4px; cursor: pointer;">Analyze with AI</button>
+  
+</p>
+
+
+
+
+  <div class="group-h">Edward III — E372 roll 197</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1333</span> &middot;
+      <a href="/AALT4/E3/E372no197/aE372no197fronts/IMG_2227.htm">E372 roll 197 fronts, image 2227</a>
+      &middot; entry of 12 lines &middot;
+      <span class="badge b-low">conf 0</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-69</span>et in rius Walterus Comitis Mareschal habere xvi. la of de feodi firma de Dure et ix licet de veri et novo cremento eiusdem firme in recompensacionem Llici quas percipere consueverunt per acram ad scaccariam pro manerio de Bassyngbourn sicut contra
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-19</span>filius erum le Waleys debitum xii d nati per annum de firma cuiusdam domus et quorundam redditus que <mark>fuerunt</mark> Conesti <mark>iudei</mark> in Cristoll sicut conte in totus xvi et in regi xvii. regis Henrici de quibus Burgensis Bristoltre in dorso Regi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-69</span>fall Abbas de Evesham de b. xxii si vii dini de visu Franciplis et aliis rebus assisas in manerio eiusdem abbatis in hoc comitatu sicut continu in regno xvi. et in regia xliii Regi Henrici. Et lxxii si vii d de anno preteriti. Summa vii li .v. s i d de
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 178</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1334</span> &middot;
+      <a href="/AALT4/E3/E372no178/aE372no178fronts/IMG_0134.htm">E372 roll 178 fronts, image 0134</a>
+      &middot; entry of 8 lines &middot;
+      <span class="badge b-low">conf 6</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">32</span>filio obortus de Barynghton et heredes sui debet de mare de firma xl acris vasti in formeando de Dene sicut continetur in Regis xvi. et xii de qua ballivus de Sancto Braverqud in Item Glonco.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">45</span>fos ionis que fuit uxor Johannis de la Ryuere rei apud xii. quarto de firma custodie duarum parcium terras et tenementa qui <mark>fuerunt</mark> predicti Johannis habendum a festo Pasche anno viii quam diu Regi placuerit Reddendo unam
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">35</span>medietatem ad scaccarium Sancti Michaelis et aliam medietatem ad scaccariam Pasche sicut contra ibidem. Et xvi li de anno preteritos in chilo vir late iii. tallaas. Et debet xvi li .
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-18</span>festo eius miparte et heredes sui vi solido per annum pro domibus illis que <mark>fuerunt</mark> Jespim de Oristoll <mark>iudei</mark> in Gloncasic continatu in Rege xvi. et in rege xxxvi regis Et xx li de anno preteriti.
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">28</span>Pri si et conventus abbati Sancti Petri Clone de custodie eiusdem abbati tempore vacationis eiusdem cum acciderit a xvi die iulii anno xxxiii o imperpetuum sicut etc in rege xii.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 176</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1335</span> &middot;
+      <a href="/AALT4/E3/E372no176/aE372no176fronts/IMG_0107.htm">E372 roll 176 fronts, image 0107</a>
+      &middot; entry of 12 lines &middot;
+      <span class="badge b-low">conf -7</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-43</span>filli bbas de Evesham de apud de lxii solido ii denaris de visa faaplegi et aliis rebus acre in manerio eiusdem abbatis in hoc comitatu si etc in rege xvi. et in Rege xliii Rege Henrici in Tho liber Et quietus est
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-9</span>fe Henrici curie le Waleys debet xii denaris de firma cuidam domus et quodam redditu que <mark>fuerunt</mark> Eonesey <mark>judei</mark> in Bustell sic continet in Rege xvi. et in re xxvii. Rekenis De quibus Burgens Bustolbre in Item loca
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-7</span>fili ille le Sope debet vi d de redditu per quod appentut in Bristell ultra uiam iuxta terram Walteri de Kerdest sicut ent in Rege xvi. et in rege xl re Henrici de quibus Burgens Bristenre in Item Glouc s.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 201</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1335</span> &middot;
+      <a href="/AALT4/E3/E372no201/aE372no201fronts/IMG_3697.htm">E372 roll 201 fronts, image 3697</a>
+      &middot; entry of 13 lines &middot;
+      <span class="badge b-low">conf 32</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">34</span>ad festa Pasche et sancti Michaelis equaliter per manus Ade Batham Roberti le Hog et Willelmi Strugge de Comitatu Wyltes sicut concedit in rege xvi. Et xxxix l xiii. s iii d de anno partes
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">19</span>Willelmus de Cusancia habet unus mesuagii j carucate terre cum pertinenciis in Dounameneye in hoc comitatu que <mark>fuerunt</mark> Hugo le Despens nuper Comuit Wynton a xv die Febri anno primo facta imperpetuum sicut quod in etc xvii.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">47</span>Pe equis ixparty et heredes sui dobis bis per annum pro domibus illis que <mark>fuerunt</mark> Jespimi de Oustoll <mark>iudei</mark> in Wynchestrete in villa Briston cum pertinenciis que sunt inter domos que <mark>fuerunt</mark> Gerardi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">3</span>le Sauvage et domos Iohannis et que se extendunt usque ad aquam de Frome ab xi die Julii anno xxv regis Henrici tercii sicut contra in regis xviii de omnibus Bingenis Unstessd in dorso
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 183</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1336</span> &middot;
+      <a href="/AALT4/E3/E372no183/aE372no183fronts/IMG_0119.htm">E372 roll 183 fronts, image 0119</a>
+      &middot; entry of 3 lines &middot;
+      <span class="badge b-low">conf -44</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-109</span>¶ A ob et monachi de Hayles debent xii li xvii. x. Robertus de feodi firma de Pyimobshire si conteriu regis xvi. et martis xl regis Henrici Et xvi l xli s x d ob de a preter et res in Item Glouc de eadem fra remeari
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">14</span>fit Henrici curie le Waleys debet xii d. de firma cuiusdam domus et quord redditus que <mark>fuerunt</mark> Bonefey <mark>iudei</mark> in Bristoll sic continet in regis xvi. et in rege xxvii reges bis de quibus Burgens Bristollri in dorso Regis
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-36</span>et a ob de Evesham. apud de xxxii s. vii d. de visu Franciplis et aliis rebus assise in manerio eiusdem abbatis in hoc comitatu sicut contra in de xvi. et in rege xliii Rihelris in Thomo liberi in ij. talla. Et quietus est
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1336</span> &middot;
+      <a href="/AALT4/E3/E372no183/aE372no183fronts/IMG_0119.htm">E372 roll 183 fronts, image 0119</a>
+      &middot; entry of 16 lines &middot;
+      <span class="badge b-low">conf -24</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">18</span>fili Robertus de Barynghton et heredes sui debent dimidiam quarto de firma xl acris vasti in forma de Dene sicut conteriu rege xvi et xij de qua vicecomes rponde in dorso Regi
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-35</span>et pro eius siparti et heredes sui u sui per annum pro domibus illis que <mark>fuerunt</mark> Jespiti de Briscoll <mark>judei</mark> in Glouc sic contra mater xvi. et in rege xxvi Rekerus. Et xxi li vi li de anni preteritos
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-26</span>et pro rio et conventus abbati sancti petri Glouc de cestod eiusdem abbati tempore vacationis cui Accidit a xvi die Julii anno xxx quarto imperpetuum si contra in regis xi ei regi patri
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 173</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1337</span> &middot;
+      <a href="/AALT4/E3/E372no173/aE372no173fronts/IMG_0091.htm">E372 roll 173 fronts, image 0091</a>
+      &middot; entry of 21 lines &middot;
+      <span class="badge b-low">conf 14</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">40</span>v s lij. denari in Tho liberum iii. allis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-48</span>filius eor le Waleys debet xii d defor cusdami dontis et quarte redditus que <mark>fuerunt</mark> Bonesti <mark>Judei</mark> in Cristoll sic ant in Re xvi ei Rexxvii Robertus Et xii denaris de anno preterito sua in si de quibus Burgensis Cristestre.
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>in dorso Re
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 184</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1337</span> &middot;
+      <a href="/AALT4/E3/E372no184/aE372no184fronts/IMG_0088.htm">E372 roll 184 fronts, image 0088</a>
+      &middot; entry of 8 lines &middot;
+      <span class="badge b-low">conf 20</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">5</span>sire Et ix le de velit et novo tremento ejusde firme in recompensacionem Rei ledi quas percipere consaeieunt per annum ad scaccario pro manerium de Berfongtnryn sic
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">5</span>Henrie le Waleys de b. xii d de firma cuiusdam domus et quorum reddique <mark>fuerunt</mark> Gonesey <mark>iudei</mark> in Cristoll sic continetur in rege xvi et in rege xxvii. Rohenris de quibus Curgens Sistolre in eorum tus
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">94</span>Et quietus est
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 172</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1338</span> &middot;
+      <a href="/AALT4/E3/E372no172/aE372no172fronts/IMG_0014.htm">E372 roll 172 fronts, image 0014</a>
+      &middot; entry of 1 lines &middot;
+      <span class="badge b-low">conf 10</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">10</span>¶ et idem Wallirus de et Inde in per annum de Johanne Cut et heredibus suis de domibus que <mark>fuerunt</mark> Iocei <mark>judei</mark> in Brugestrete ibidem. Et inde eis de a preterito Summa ii d.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 175</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1338</span> &middot;
+      <a href="/AALT4/E3/E372no175/aE372no175fronts/IMG_0101.htm">E372 roll 175 fronts, image 0101</a>
+      &middot; entry of 7 lines &middot;
+      <span class="badge b-low">conf -32</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-46</span>¶ ovis que fuit uxor Johannis de la Ryuere red optulit de xij quarto de friat custodianes duarum per cum terras teras sui <mark>fuerunt</mark> predicti Johannis habend a festo Pasche ad viis quandam Ege placuerit Redetum una medie ad ecclesie Sancti Michaelis et
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-118</span>aliam medietatem ad scaccarium Pasche sicut cati in rege xvi. a xij. Et lii le et xii. si denaris de anno preteriti. Summa per lio xii. solido iii denarios in Thoma vij. lit i ii tallias. Item in the xx solidos et Joles le Mareschal vicecomiti Buk pro
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-3</span>per Hugo le Despensurum senior clerici ad festum Sancti Michaelis de feodi fata manerii de Lichelade sicut continetum in regis xii. Et. mare Cilertes. de aut preteriti.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-154</span>ei Petrus euparty et heredes sui debet v s per antenatum pro domum illis sui <mark>fuerunt</mark> Jespum de Bristell <mark>judei</mark> in Glouc sic contanatum in rege xvi et in des sed ret Henrico Et xx. li x solidos de anta preteriti. Dmia ix le xv. S. de
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">56</span>quibus homines Gloncos respondit in dorso Regi de v solidos Et debent xix libe x. si
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 205</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1338</span> &middot;
+      <a href="/AALT4/E3/E372no205/aE372no205fronts/IMG_5152.htm">E372 roll 205 fronts, image 5152</a>
+      &middot; entry of 21 lines &middot;
+      <span class="badge b-low">conf 26</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">93</span>de eadem firma et eius arris
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">28</span>Et Willelmus de Cusaunce habet unum mesuagi et unam carucate terre cum pertinenciis in Simameneye in hoc comitatu que <mark>fuerunt</mark> Hugo le Despend nuper comitatu Wynton muniti et rebella Rege a xv die Februarii anno primo
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">76</span>festum mapiat secundo imperpetuum sicut contanetu in regi octo decimo.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">39</span>Et pro etrus de Miperty et heredibus sui debet v solidis per annum pro domibus illis que <mark>fuerunt</mark> Iospini de Oristoll <mark>iudei</mark> in Wynchestrete in villa Cristol cum pertinenciis que fuerit inter domos que <mark>fuerunt</mark> Gerardi le Savage
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">34</span>et domos Johannis de Celari. et que extendunt usque aquam de Nome ab uico die Julii anno xxv regis Henrici teri sicut continetumin rege xviii. de quibus Burgensis Bristol ei in dorso Re
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 218</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1338</span> &middot;
+      <a href="/AALT4/E3/E372no218/aE372no218fronts/IMG_0038.htm">E372 roll 218 fronts, image 0038</a>
+      &middot; entry of 89 lines &middot;
+      <span class="badge b-low">conf 40</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">62</span>per anno ad scaccariam pro manerio de Bassyngbourn sicut continetur in rege viri
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">30</span>per Henrici enrice le Waleys de bet xii denaris per anni de firma cuiusdam domus et quorundam redditu que <mark>fuerunt</mark> Bonefey <mark>iudei</mark> in Oustoll sicut continetur in rege xvi et in rege xxvii regis Henrici de quibus
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">80</span>homines Bristoll regi in dorso. Regi
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">77</span>continetur in regi. xv.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">54</span>Petrus Mipty et heredes sui de bet v s per annum de comibus illis que <mark>fuerunt</mark> ospini de Bristoll <mark>iudei</mark> in Wyuchestre in villa Bustoll cum pertinenciis que sunt inter domos
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">49</span>que <mark>fuerunt</mark> Gerardi le Savage et domos Iohannis de Celari et que se extendunt usque aquam de Frome ab uico die Julii anno xxv regis Henrici tercii sicut concordatum in regi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">71</span>xviii De quibus homines Bustoll regi i dorso. Rege
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">54</span>continetur in papa xv.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">62</span>ad Petrus Miperty et heredes sui de bet v s per anum de domibus illis que <mark>fuerunt</mark> Jospini de Bristoll <mark>iudei</mark> in Wynchestre in villa Bustoll cum pertinenciis que sunt inter domos
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">50</span>que <mark>fuerunt</mark> Gerardi le Savage et domos Iohannis de Celari et que se extendunt usque aquam de Frome ab undecimo die Julii anno xxv regis Henrici tercii sicut concordatum in regi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">86</span>xviii De quibus homines Bustoll regis ii dorso. Rege
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E368 roll 113</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1339</span> &middot;
+      <a href="/AALT2/E3/E368no113/aE368no113fronts/IMG_0348.htm">E368 roll 113 fronts, image 0348</a>
+      &middot; entry of 150 lines &middot;
+      <span class="badge b-high">conf 74</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">89</span>Pasche et si forte bona et catalla illa ad summam debito predicti non sufficiant tunc id quod de
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">82</span>bonis et catallis illis fieri non poterit de terris et tenementis que <mark>fuerunt</mark> predicti Rogeri in feodo die quo offit
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">66</span>de uiqutur sibi commissum fuit videlicet vt die Octobris anno tercio regis nunc sicut continetur in
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">73</span>Walour balliuo de Glouc
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">63</span>Et pre sibi Roberto xvii die Februarii hoc anno quod capiat in manum Regis domos illas que <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>Rospini de Bristoll <mark>iudei</mark> in Gloncestra pro v s de firma domorum illarum de predicto anno toto decimo
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">88</span>et xxili. xv s de areragiis eiusdem firme de tempore preceditos qui denarios Regis debentur sicut
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 176</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1339</span> &middot;
+      <a href="/AALT4/E3/E372no176/aE372no176fronts/IMG_0070.htm">E372 roll 176 fronts, image 0070</a>
+      &middot; entry of 42 lines &middot;
+      <span class="badge b-mid">conf 56</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">45</span>Regis obertus Salemon Willelmus le Chorntour et Ricardus Uggel xxvi li vj. d. de precio xxv. bona vij. vacte. viij. multont iii one matrice. xxxvi. Hogastria ij. capere xi. porcelli feni et foragii
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">46</span>in manerio de Dounton sicut continet in compoto Johannis de Cokermicth et Johannis de Heyden execust testamenti Johannis de Dandale nuper Episcopi Wynton de bono et catella sibi <mark>fuerunt</mark> eiusdem Episcopi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">62</span>tercio Re opti
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">43</span>se debere Regi Edwardo avo regi huius pro eodem Bovesei in duabus particulis sicut contianetur in Regis secundo Rege Edwardi patris regis huius et in media de anno xo dicti regis. Edwardi aui inter recognoscendum de termino Pasche scilicet sub titulo
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>de Recogem debitorum que <mark>fuerunt</mark> Touesei de Crekelade <mark>Iudei</mark> factis coram Garoni de scaccario in xv Pasche anno quinto eiusdem Regis avi Quam quidem recognouit predictam prefatus Robertus fecit
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">56</span>nec non Johannes Meysy Johannes filius Ricardi le spenser et quidam alii debitores prefati inde per diversas particulas singillatim usque ad summam lxii li xix s. x denarios similiter recognoverunt prefato Regi
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 215</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1339</span> &middot;
+      <a href="/AALT4/E3/E372no215/aE372no215fronts/IMG_0035.htm">E372 roll 215 fronts, image 0035</a>
+      &middot; entry of 15 lines &middot;
+      <span class="badge b-low">conf 49</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">83</span>continetur in rege. xv.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">36</span>pro ecius miperty et heredibus sui debet si per annum pro domibus illis que <mark>fuerunt</mark> Jespini de Bustoll <mark>iudei</mark> in Wynchestre in villa Rustoll cum pertinenciis que sunt inter domos quem <mark>fuerunt</mark> sorardi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">73</span>de Savage et domos Iohannis de Eglaria et que se extendunt usque aquam de Frome ab xi. die Juliane anno xx v re Henrici tercii sicut continet in rege xviii De quibus homines Bustol.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E159 roll 117</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1341</span> &middot;
+      <a href="/AALT2/E3/E159no117/aE159no117fronts/IMG_0634.htm">E159 roll 117 fronts, image 0634</a>
+      &middot; entry of 73 lines &middot;
+      <span class="badge b-mid">conf 70</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">63</span>Et preseso Roberto Walour ballivo de Glouc. xvij. die Februarii hoc anno quod capiat in manum Regis domos
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">62</span>illas que <mark>fuerunt</mark> Iospum de Bristoll <mark>iudei</mark> in eadem villa Glouc pro v solidis de firma domorum illarum
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">63</span>de predicto anno xiii et xxi l xv. s de arris eiusdem firme de tempore precedits qui denarios Regis debent sibi
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E159 roll 121</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1341</span> &middot;
+      <a href="/AALT2/E3/E159no121/bE159no121dorses/IMG_1165.htm">E159 roll 121 dorses, image 1165</a>
+      &middot; entry of 53 lines &middot;
+      <span class="badge b-mid">conf 68</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">59</span>¶Robertus Waleur nuper Willelmus ville Clone attachiatus fuit essondum hic modo in estiiao
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>ados Hillari ad reddendum Rege campo de exitibus domorum illarum que <mark>fuerunt</mark> iospini de
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">63</span>SuBristoll <mark>iudei</mark> in eadem villa Glouc quas xvii die Febri anno. xv regis nunc preceptum
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">88</span>fuit prefato Roberto tunc balliuo super cumpu suum hic capere in manum ipsius Regis et de exitibus iudicium
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E368 roll 114</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1341</span> &middot;
+      <a href="/AALT2/E3/E368no114/aE368no114fronts/IMG_0249.htm">E368 roll 114 fronts, image 0249</a>
+      &middot; entry of 7 lines &middot;
+      <span class="badge b-high">conf 85</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">78</span>¶Preseo vicecomiti quod distringat Robertum Waltur nuper ballium ville Glouc per terram etc Ita etc
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">82</span>in crastino Clausi Pasche ad reddendum Regi compotum de exitibus illarum domorum que <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">83</span>Jespini <mark>Iudei</mark> de Bristell in dicta villa Glonec de tempore quo etc ex precepto Regis et compotum
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">80</span>inde etc Distringere eciam eodem modo Walterum Dastyn nuper vicecomitem comitatus predicti Ita etc ad eandem
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 180</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1341</span> &middot;
+      <a href="/AALT4/E3/E372no180/aE372no180fronts/IMG_0081.htm">E372 roll 180 fronts, image 0081</a>
+      &middot; entry of 18 lines &middot;
+      <span class="badge b-low">conf 1</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-135</span>et a bas et monachi de Hayles pre olim de xvi li xvi. si x d obolus de feodi frater de Pynnokshire sic contra in a xvi. a mei le xl Re his Nichil xvrleli xiii suburd inirtaliu. Ranteri de eodem sui ob et
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-70</span>per Henrici ni le Waleys debet xii denaris de fraia cuidam domus et quorad reddi que <mark>fuerunt</mark> Bonesey <mark>Iudei</mark> in Cristell sicut contara in la xvi. avi de xxvii. Rogeri De quibus Bigg Bristoltred indorso Regis quieti sicut
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-33</span>fa bbas de Eveshamod et de lxxii. si vii nis de visa Franciplas et aliis rebus acris in manerio eiusdem abbatis in hoc comitatu sicut contatum in Regem xvi. et in regis xliii regis Henrici. Et xxij. s. vij d de a preteritos
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 214</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1341</span> &middot;
+      <a href="/AALT4/E3/E372no214/aE372no214fronts/IMG_0035.htm">E372 roll 214 fronts, image 0035</a>
+      &middot; entry of 15 lines &middot;
+      <span class="badge b-low">conf 23</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">20</span>pre aureos de Berkelehab manerio et Castrum de Brymmesfeld cum pertinenciis a xv die Nonvis anno xiiiijmo incipit sibi et heredibus suis absque aliquo Regi in de redditu imperpetuum sicut contra in Regi xo
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">75</span>pro etius Mipety et heredibus sui de vt v solidos per annum pro domibus illis que <mark>fuerunt</mark> Iospini de Bustoll <mark>iudei</mark> in Wyuchestre in villa Pristol cum pertinenciis que sunt inter domos que <mark>fuerunt</mark> Gerardi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">26</span>le Savage et domos Johannis de Celaret que se extendunt usque aquam de Frome ab decimo die Juliane anno xx vo regis Henrici lii sicut ote in rege xviii de quibus homines bustolrim dorso Regi
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 177</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1342</span> &middot;
+      <a href="/AALT4/E3/E372no177/aE372no177fronts/IMG_0082.htm">E372 roll 177 fronts, image 0082</a>
+      &middot; entry of 7 lines &middot;
+      <span class="badge b-low">conf 10</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">9</span>filli bbas et monachi de Hayles seu pit de xvi li xvi. s. x. d obolus de feodi frata de Pyimokshyre sic continet in de xvi. et in rege xl. re heris. in Thomo libero
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">14</span>filii curie le Waleys debet xii d de firma de fria cujusdam domus et quorundam redditus que <mark>fuerunt</mark> Gonesey <mark>iudei</mark> in Orstoll sic contra in de xvi. et inde xxvii. Rethenrius de quibus reges Dustr in
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-75</span>file Ubas de Evesham opti de xxxii s. vij denarios de visu franciplet aliis rebus acriis in manerio ejusdem abbatis in hoc comitatu sicut continetur in Rexbram Rexlui Robertus in Thomo libero. Et quietus est
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1342</span> &middot;
+      <a href="/AALT4/E3/E372no177/aE372no177fronts/IMG_0083.htm">E372 roll 177 fronts, image 0083</a>
+      &middot; entry of 7 lines &middot;
+      <span class="badge b-low">conf 3</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-6</span>filli bbas et monachi de Hayles rei pli de xvi li xvi. s. x. d obolus de feodi frata de Pymokshyre sic contra in de xvi. et in re xl. re Henricus in Thoma libero
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-27</span>filiis curie le Waleys debet xii d de firma de Pria cujusdam domus et quorundam redditus que <mark>fuerunt</mark> Gonesey <mark>judei</mark> in Oustoll sicut contra in de xvi. et in de xxvii Robertus de quibus agens sinistra in
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-14</span>fos Abbas de Evesham r pit de lxxii. si vii denaris de visufrancipli et aliis rebus acris in manerio ejusdem abbatis in hoc comitatus sicut contiantu in Rexbram Rexlui Robertus in Tho liber. Et quietus est
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 210</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1342</span> &middot;
+      <a href="/AALT4/E3/E372no210/aE372no210fronts/IMG_0039.htm">E372 roll 210 fronts, image 0039</a>
+      &middot; entry of 12 lines &middot;
+      <span class="badge b-low">conf 48</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">29</span>et me aurntirum de Berkele habet manerii et Castrum de Erymmesfeld cum pertinenciis a xv die Novis anno incipit sibi et heredibus suis absque aliquo Regi inde reddit imperpetuum sicut contra in Regis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">76</span>quo etrus Myperty et heredis sui debet v s per annum pro domibus illis que <mark>fuerunt</mark> respimi de Bristoll <mark>iudei</mark> in Wynchestre in villa Bristoll cum pertinenciis que sunt inter domos que <mark>fuerunt</mark> Gerardi le
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">50</span>Savage et domos Johannis de Celarie et que se extendunt usque ad aquam de Frome ab xi die iulii anno xxv Ro senti tercii sicut continet in rege xbiii de quibus homines
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E159 roll 121</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1345</span> &middot;
+      <a href="/AALT2/E3/E159no121/aE159no121fronts/IMG_0209.htm">E159 roll 121 fronts, image 0209</a>
+      &middot; entry of 150 lines &middot;
+      <span class="badge b-high">conf 78</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">87</span>et qui denas nobis per eos prius concessas de temporalibus salibus suis annexis que ad decimnam
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">79</span>inter eadem ialia anno regni domini Edwardi quondam Regis Anglie avi nostri vicesimo taxata <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">81</span>soluerunt de solutione cone predicte pro dimitis temporalibus suis sic ad decimam taxatis penitus
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">82</span>de terris et tenementis si que post dictum vicesimum annum per ipsam Priorissam vel predecessores suas
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">76</span>adquisita <mark>fuerunt</mark> ad opus nostrum leuentur iuxta concordiam supradictam teste me ipso apud
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">91</span>Westmonasterium . xij. die Aprilis anno regni nostri Anglie decimo nono regni vero nostri Francie sexto.
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">84</span>de firma de Clane in comitatu Wiltes habenda et percipiendam sngulis annis per manus dilecti et fidelis nostri Willelmi de
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">92</span>la Zouche de Haryngworth vel aliorum firmam illam tenencium qui pro tempore <mark>fuerunt</mark> ad totam uitam eiusdem
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">86</span>Radulfi ita quod post mortem ipsius Radulphi predicte quindecim libre ad nos et heredes nostros integre reuertantur fut
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">88</span>de terris et tenementis si que post dictum vicesimum annum per ipsam Priorisfam vel predecessores suas
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">73</span>adquisita <mark>fuerunt</mark> ad opus nostrum leventur iuxta concordiam supradictam. Teste me ipso apud
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">86</span>Westmonasterium . xij. die Aprilis anno regni nostri Anglie decimo nono regni vero nostri Francie sexto
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">79</span>de firma de Clane in comitatu Wiltes habenda et percipienda sngulis annis per manus dilecti et fidelis nostri Willelmi de
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">80</span>la Zouche de Harengworth vel aliorum firum iam tenencium qui pro tempore <mark>fuerunt</mark> ad totam uitam eiusdem
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">87</span>Radulfus Ita quod post mortem ipsius Radulphi predicte quindecim libre ad nos et heredes nostros integre reuertantur prout
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">83</span>summonite novam garbam novum vellus et novum agnum nobis per biennium pro expedicione quorundam
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">85</span>negotorum nostrorum in partibus transmarionis concesserunt summoniti non <mark>fuerunt</mark> nec huiusmodi nonauit
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">83</span>nobis concesserunt et qui decimas nobis per eos prius concessas de temporalibus spualibus suis anno
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">71</span>es que ad decimam inter eadem ilia anno regni domini Edwardi. quondam Regis Anglie avi nostri vicesimo
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">85</span>caxata <mark>fuerunt</mark> soluerunt de solucione nove predicte pro predictis temporalibus suis sic ad decimam
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">91</span>taxatis pancens exonentur quodque de terris et tenementis per ipsos Religioses et alios viros ecclesiastics post dictum
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">71</span>eidem Trviso quod nova et lane huiusmodi de terris et tenementis si que post dictum vicesimum
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">69</span>simum annum per ipsum abbatem vel predecessores suos adquisita <mark>fuerunt</mark> ad opus nostrum
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">79</span>loventus iuxta concordiam supradictam Teste me ipso apud Westmonasterium xx die Aprilis
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">80</span>de quondam Regis Anglie proavi nostri ad scaccarium suum missis contineatur quod dictus proavus nostre undecimo die iulii
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">79</span>anno regni sui tricesimo quinto comisit Petro Myparcy et heredibus suis domos illas que <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">81</span>Jospimi de Bristell <mark>iudei</mark> in Gloncestra pro quinque solidis eidem proavo nostro reddendum per annum ad scaccariam c
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>Sancti Michaelis. et pro hac concessione et remissione daret eidem proavo nostro predictus Petrus centum
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">77</span>venit Jospimi et Bruetta uxor eius et Glorietta soror earum pro se et heredibus suis reddiderunt
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">92</span>Regi gratis totum ius et clameum quod habuerunt vel here poterunt in domibus que <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">91</span>Jespini de Bristoll <mark>iudei</mark> in Wynchestret in uilla Bristoll cum pertinenciis que sunt inter domos
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">91</span>que <mark>fuerunt</mark> Berardi le Sanvagio et domos Johannis de Colarie que se extendunt usque ad aquam
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">80</span>de Fronei quas commisimus Petro Myperty et heredibus suis pro quinque solidis nobis reddendum annuati
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>tenorem vobis mittimus presentibus interclisum et non est compertum in rotulis dicto cancellarie de dicto
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">83</span>anno tricesimo quinto aliqua coimissio de predicto redditu quinque solidorum per annum de domibus que <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">86</span>predicti Jospumi in Cloncestra per quod liquet quod irrotulamentum de commissione prefati Petri de eisdem
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">86</span>tenorem vobis mittimus presentibus interclusum et non est compertum in rotulis dicto cancellario de domino
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">75</span>anno aacesimo quinto aliqua commissio de predicto redditu quinque solidorum per annum de domibus que <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">77</span>predicti Jospumi in Gloncestra per quod liquet quod irrotulamentum de commissione prefati Petri de eisdem a
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — E372 roll 198</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1345</span> &middot;
+      <a href="/AALT4/E3/E372no198/aE372no198fronts/IMG_2610.htm">E372 roll 198 fronts, image 2610</a>
+      &middot; entry of 2 lines &middot;
+      <span class="badge b-mid">conf 58</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">27</span>¶ enrie le Waleys de bet xii d per annum de firma cuiusdam domus et quorum reddi que <mark>fuerunt</mark> cionesei <mark>iudei</mark> in Cristoll sicut continetur in regi xii et in regis xxvi regi senici de quibus Gangrtis
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">88</span>Bristol rei in dorso Regi
+      </div>
+      
+    
+  </div>
+  
+
+
+<div class="pager">
+  <a href="/?q=NEAR%28fuerunt+iudei%2C+4%29&amp;extra=&amp;mode=raw&amp;formula=&amp;mfrom=&amp;mto=&amp;series=&amp;yfrom=1291&amp;yto=1600&amp;minconf=&amp;order=chrono&amp;group=&amp;page=4">&larr; previous</a>
+  <a href="/?q=NEAR%28fuerunt+iudei%2C+4%29&amp;extra=&amp;mode=raw&amp;formula=&amp;mfrom=&amp;mto=&amp;series=&amp;yfrom=1291&amp;yto=1600&amp;minconf=&amp;order=chrono&amp;group=&amp;page=6">next &rarr;</a>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1949 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AALT Transcription Search</title>
+<link rel="stylesheet" href="/static/search.css">
+</head>
+<body>
+<header>
+  
+  <span class="title">Anglo-American Legal Tradition &mdash; Transcriptions</span>
+  <span style="font:13px sans-serif">10 million pages of English legal records: browse, transcribe, search</span>
+</header>
+<div class="wrap">
+
+<p class="credit-note">We are thrilled if you find this tool useful. If you
+publish using records you found using our tool, please credit Glyph Machina
+and <a href="/about-us">the team</a> by name when you cite the records you
+  found.
+  This scholarly project would not have been possible without the Anglo-American
+  Legal Tradition, a massive digitization project undertaken by the late Robert
+  Palmer and his family, friends, and students.
+</p>
+
+<div class="cards">
+  <div class="card">
+    <h2><span class="num">1.</span>AALT mirror</h2>
+    <p>Browse the document images and the original AALT site structure
+       (reigns, series, rolls), with the built-in page viewer that overlays
+       each transcribed line on the scan.</p>
+    <a class="go" href="/IndexPri.html">Browse the mirror &rarr;</a>
+  </div>
+  <div class="card">
+    <h2><span class="num">2.</span>Transcription tool</h2>
+    <p>GlyphMachina, the handwritten-text transcription tool used to produce
+       the automatic transcriptions behind this site.</p>
+    <a class="go" href="/custom" target="_blank" rel="noopener">Open GlyphMachina &rarr;</a>
+  </div>
+  <div class="card">
+    <h2><span class="num">3.</span>Search the transcriptions</h2>
+    <p>Full-text search over ~21 million case entries with reign, series and
+       confidence filters, saved formula searches, person tracing &mdash; and an
+       AI assistant for open-ended questions.</p>
+    <a class="go" href="#search">Search below &darr;</a>
+  </div>
+</div>
+
+<div class="sect-h" id="search">Search the transcriptions</div>
+<form class="search" method="get" action="/">
+  <div class="row">
+    <div>
+      <label>Search (Latin text; spelling of u/v, i/j/y is folded automatically)</label>
+      <input class="q" type="text" name="q" value="NEAR(fuerunt iudei, 4)" placeholder='e.g. nichil dicit, excommunicat*, noctanter'>
+    </div>
+    <div>
+      <label>Also mentions (e.g. a place; spelling variants added)</label>
+      <input type="text" name="extra" value="" size="16" placeholder="e.g. Notingham">
+    </div>
+    <div>
+      <label>Mode <a href="#modes-help" class="help-link">what&rsquo;s this?</a></label>
+      <select name="mode">
+        
+        <option value="phrase" >exact phrase</option>
+        
+        <option value="and" >all words</option>
+        
+        <option value="or" >any word</option>
+        
+        <option value="near" >words near each other</option>
+        
+        <option value="fuzzy" >fuzzy (stems + variants)</option>
+        
+        <option value="robust" >robust (HTR-noise tolerant)</option>
+        
+        <option value="raw" selected>raw FTS5 syntax</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Saved search (formula lexicon)</label>
+      <select name="formula">
+        <option value="">— none —</option>
+        
+        <option value="excommunication" 
+                title="All instances of excommunication (excommunicatus, excommunicacio(n)-, HTR variants with single m / c-t swap, and the abbreviated excoicat- form).">Excommunication</option>
+        
+        <option value="standing_mute" 
+                title="Defendants in felony cases who refused to plead: nihil dicit, tenuit mutam (corpus spells it &#39;se mutum tenet&#39;), peine forte et dure, prison forte et dure (with spelling variants).">Standing mute (refusal to plead)</option>
+        
+        <option value="standing_mute_felony" 
+                title="Standing mute at felony arraignment only: &#39;nihil dicit&#39; co-occurring with arraignment/felony vocabulary in the same entry, or the explicit mute/peine forte et dure formulae.">Standing mute in felony (strict)</option>
+        
+        <option value="night_robbery" 
+                title="Offences committed by night (noctanter) combined with robbery/theft vocabulary (roberia, latrocinium, depredatus, spoliavit, burglaria, furtive).">Robbery/theft at night</option>
+        
+        <option value="by_night" 
+                title="Any offence alleged to have been committed at night.">By night (noctanter)</option>
+        
+        <option value="robbery" 
+                title="Robbery and theft terms regardless of time of day.">Robbery / theft vocabulary</option>
+        
+        <option value="appeal_to_king" 
+                title="Formulae of complaining or petitioning the king (queritur/questus est domino regi, supplicavit, monstravit).">Complaint/petition to the king</option>
+        
+        <option value="housebreaking" 
+                title="Breaking into a house: domum/domos fregit-fregerunt (any word order, within 6 words) and burglaria vocabulary.">Housebreaking (domum fregit)</option>
+        
+        <option value="matricide" 
+                title="A person killing his or her own mother: &#39;matrem suam&#39; near a killing verb (occidit, interfecit, felonice).">Matricide (killing of a mother)</option>
+        
+        <option value="first_finder" 
+                title="Coroner&#39;s-roll &#39;first finder&#39; formula: primus inventor / prima inventrix (with case endings and HTR garbling).">First finder of a body (primus inventor)</option>
+        
+        <option value="first_finder_parent" 
+                title="First finders described as mother/father (mater/pater and genitives) near the inventor formula — candidates for parents finding their own child&#39;s body.">First finder who was a parent</option>
+        
+        <option value="misadventure" 
+                title="Deaths ruled misadventure: per infortunium (and garbled infortun- forms).">Death by misadventure (per infortunium)</option>
+        
+        <option value="drowning" 
+                title="Drownings: submersus/-a/-it and demersus forms.">Drowning (submersus)</option>
+        
+        <option value="attaint" 
+                title="Attaint proceedings reviewing a verdict by a grand jury of 24 knights: &#39;jurata xxiiii militum (de visneto)...&#39;, &#39;venit recognitura si juratores...&#39;.">Writ of attaint (jury of 24)</option>
+        
+      </select>
+    </div>
+    <div><button class="go" type="submit">Search</button></div>
+  </div>
+  <div class="row">
+    <div>
+      <label>Reign from</label>
+      <select name="mfrom">
+        <option value="">—</option>
+        
+        <option value="John" >John (1199–1216)</option>
+        
+        <option value="Henry III" >Henry III (1216–1272)</option>
+        
+        <option value="Edward I" >Edward I (1272–1307)</option>
+        
+        <option value="Edward II" >Edward II (1307–1327)</option>
+        
+        <option value="Edward III" >Edward III (1327–1377)</option>
+        
+        <option value="Richard II" >Richard II (1377–1399)</option>
+        
+        <option value="Henry IV" >Henry IV (1399–1413)</option>
+        
+        <option value="Henry V" >Henry V (1413–1422)</option>
+        
+        <option value="Henry VI" >Henry VI (1422–1461)</option>
+        
+        <option value="Edward IV" >Edward IV (1461–1483)</option>
+        
+        <option value="Edward V" >Edward V (1483–1483)</option>
+        
+        <option value="Richard III" >Richard III (1483–1485)</option>
+        
+        <option value="Henry VII" >Henry VII (1485–1509)</option>
+        
+        <option value="Henry VIII" >Henry VIII (1509–1547)</option>
+        
+        <option value="Edward VI" >Edward VI (1547–1553)</option>
+        
+        <option value="Mary" >Mary (1553–1558)</option>
+        
+        <option value="Elizabeth I" >Elizabeth I (1558–1603)</option>
+        
+        <option value="James I" >James I (1603–1625)</option>
+        
+        <option value="Charles I" >Charles I (1625–1649)</option>
+        
+        <option value="Commonwealth" >Commonwealth (1649–1660)</option>
+        
+        <option value="Charles II" >Charles II (1660–1685)</option>
+        
+        <option value="James II" >James II (1685–1688)</option>
+        
+        <option value="William and Mary" >William and Mary (1689–1694)</option>
+        
+        <option value="William III" >William III (1694–1702)</option>
+        
+        <option value="Anne" >Anne (1702–1714)</option>
+        
+        <option value="George I" >George I (1714–1727)</option>
+        
+        <option value="George II" >George II (1727–1760)</option>
+        
+        <option value="George III" >George III (1760–1820)</option>
+        
+        <option value="George IV" >George IV (1820–1830)</option>
+        
+        <option value="William IV" >William IV (1830–1837)</option>
+        
+        <option value="Victoria" >Victoria (1837–1901)</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Reign to</label>
+      <select name="mto">
+        <option value="">—</option>
+        
+        <option value="John" >John (1199–1216)</option>
+        
+        <option value="Henry III" >Henry III (1216–1272)</option>
+        
+        <option value="Edward I" >Edward I (1272–1307)</option>
+        
+        <option value="Edward II" >Edward II (1307–1327)</option>
+        
+        <option value="Edward III" >Edward III (1327–1377)</option>
+        
+        <option value="Richard II" >Richard II (1377–1399)</option>
+        
+        <option value="Henry IV" >Henry IV (1399–1413)</option>
+        
+        <option value="Henry V" >Henry V (1413–1422)</option>
+        
+        <option value="Henry VI" >Henry VI (1422–1461)</option>
+        
+        <option value="Edward IV" >Edward IV (1461–1483)</option>
+        
+        <option value="Edward V" >Edward V (1483–1483)</option>
+        
+        <option value="Richard III" >Richard III (1483–1485)</option>
+        
+        <option value="Henry VII" >Henry VII (1485–1509)</option>
+        
+        <option value="Henry VIII" >Henry VIII (1509–1547)</option>
+        
+        <option value="Edward VI" >Edward VI (1547–1553)</option>
+        
+        <option value="Mary" >Mary (1553–1558)</option>
+        
+        <option value="Elizabeth I" >Elizabeth I (1558–1603)</option>
+        
+        <option value="James I" >James I (1603–1625)</option>
+        
+        <option value="Charles I" >Charles I (1625–1649)</option>
+        
+        <option value="Commonwealth" >Commonwealth (1649–1660)</option>
+        
+        <option value="Charles II" >Charles II (1660–1685)</option>
+        
+        <option value="James II" >James II (1685–1688)</option>
+        
+        <option value="William and Mary" >William and Mary (1689–1694)</option>
+        
+        <option value="William III" >William III (1694–1702)</option>
+        
+        <option value="Anne" >Anne (1702–1714)</option>
+        
+        <option value="George I" >George I (1714–1727)</option>
+        
+        <option value="George II" >George II (1727–1760)</option>
+        
+        <option value="George III" >George III (1760–1820)</option>
+        
+        <option value="George IV" >George IV (1820–1830)</option>
+        
+        <option value="William IV" >William IV (1830–1837)</option>
+        
+        <option value="Victoria" >Victoria (1837–1901)</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Series (e.g. CP40, KB27, JUST%)</label>
+      <input type="text" name="series" value="" size="10">
+    </div>
+    <div>
+      <label>Year from <a href="#modes-help" class="help-link" title="Calendar years extracted from the entries' own regnal-year datings; approximate for undated entries (roll-side median)">?</a></label>
+      <input type="text" name="yfrom" value="1291" size="5" placeholder="1300">
+    </div>
+    <div>
+      <label>Year to</label>
+      <input type="text" name="yto" value="1600" size="5" placeholder="1350">
+    </div>
+    <div>
+      <label>Min. mean confidence</label>
+      <input type="text" name="minconf" value="" size="4" placeholder="e.g. 50">
+    </div>
+    <div>
+      <label>Sort</label>
+      <select name="order">
+        <option value="chrono" selected>chronological</option>
+        <option value="rank" >relevance</option>
+      </select>
+    </div>
+    <div>
+      <label>Group results (count table)</label>
+      <select name="group">
+        <option value="">— list hits —</option>
+        
+        <option value="reign" >by reign</option>
+        
+        <option value="decade" >by decade</option>
+        
+        <option value="year" >by year</option>
+        
+        <option value="series" >by series</option>
+        
+        <option value="roll" >by roll</option>
+        
+      </select>
+    </div>
+    <div class="checks">
+      <label>&nbsp;</label>
+      <input type="checkbox" name="person" value="1" id="person" >
+      <label for="person" style="display:inline">person trace (&ldquo;Forename Surname&rdquo;)</label>
+    </div>
+  </div>
+  
+  <details class="modes-help" id="modes-help">
+    <summary>What do the search modes mean?</summary>
+    <p class="mh-intro">All modes search <em>case entries</em> (individual
+      records), and fold spelling automatically (u/v, i/j/y). Pick a mode by
+      how your words should relate:</p>
+    <dl>
+      
+      <dt>exact phrase</dt><dd>The words must appear together, in the order you typed them. <b>nichil dicit</b> finds the phrase &ldquo;nichil dicit&rdquo; but not &ldquo;nichil&rdquo; and &ldquo;dicit&rdquo; apart. Best when you know the exact wording of a formula.</dd>
+      
+      <dt>all words</dt><dd>Every word must appear somewhere in the same case entry, in any order and any distance apart. <b>excommunicatus rex</b> finds entries containing both words. Best for narrowing to entries that mention several things at once.</dd>
+      
+      <dt>any word</dt><dd>At least one of the words must appear. <b>roberia latrocinium furtum</b> finds entries with any of those theft terms. Best for gathering synonyms or spelling variants of one idea.</dd>
+      
+      <dt>words near each other</dt><dd>All the words must appear within about 10 words of one another in the same entry. <b>noctanter domum</b> finds them close together (a house entered by night), not merely somewhere in the same long entry. Best when the words must relate to each other.</dd>
+      
+      <dt>fuzzy (stems + variants)</dt><dd>Like &ldquo;all words&rdquo;, but each word is shortened to its stem and common medieval spelling variants are added automatically, so you catch inflected endings and scribal/HTR spellings. <b>spoliavit</b> also matches spoliaverunt, spoliatus, etc. Best when you are unsure of the exact ending or spelling.</dd>
+      
+      <dt>robust (HTR-noise tolerant)</dt><dd>Like fuzzy, but each word additionally matches every spelling in the corpus within one typo of it (two for longer words) &mdash; including errors in the FIRST letters, which fuzzy&rsquo;s stems cannot catch. <b>Chaucer</b> also matches Ehaucer, Thaucer, Chauce&hellip; Best for names and rare words, where transcription errors would otherwise hide hits. Broader than fuzzy: expect some false matches from genuinely similar words.</dd>
+      
+      <dt>raw FTS5 syntax</dt><dd>You write the query yourself using SQLite FTS5 operators (<code>AND OR NOT NEAR() &quot;phrase&quot; prefix*</code>). <b>noctanter AND (roberia* OR latrocin*)</b>. For power users; this is what the saved formulae use under the hood.</dd>
+      
+    </dl>
+    <p class="mh-intro">Add <code>*</code> to any word to match its
+      continuations (<b>excommunicat*</b> &rarr; excommunicatus,
+      excommunicacionem&hellip;). The <b>saved searches</b> dropdown runs
+      expert queries for common topics without needing any of this.</p>
+    <p class="mh-intro"><b>Years</b>: calendar years are extracted from the
+      entries&rsquo; own regnal-year datings (&ldquo;anno regni Regis nunc
+      xxxv&rdquo;); entries without one are dated approximately (shown as
+      &ldquo;c.&nbsp;1352&rdquo;) from their roll side. The <b>year
+      from/to</b> boxes filter on these, so questions like &ldquo;between
+      1300 and 1350&rdquo; or &ldquo;before 1300&rdquo; work directly.
+      <b>Group results</b> turns the hit list into a count table (by reign,
+      decade, year, series or roll) with drill-down links &mdash; e.g.
+      robbery with housebreaking, grouped by decade. <b>Also mentions</b>
+      requires an extra word (a town, a person) to appear in the same entry,
+      with spelling variants added automatically &mdash; combine it with the
+      person trace to find e.g. every <i>Roger</i> in entries mentioning
+      <i>Nottingham</i>. NB a place term also matches toponymic surnames
+      (&ldquo;Johannes de Notingham&rdquo; living elsewhere).</p>
+  </details>
+</form>
+
+<details class="ask" id="ask-panel" >
+<summary style="cursor:pointer; font: bold 15px Georgia, serif; color:#3b2f23">
+  Ask the AI assistant (chat)</summary>
+<p class="note" style="margin:8px 0 6px">
+  A conversation with Claude Code on the server: it can run the search tools
+  over the corpus and reads the noisy transcriptions for you. Follow-up
+  questions stay in the same conversation. Answers stream in and can take a
+  few minutes for hard questions.</p>
+<div id="chat-log"></div>
+<textarea id="ask-q" placeholder="e.g. Were there any cases of women standing mute in felony trials under Edward III?"></textarea>
+<div class="row2">
+  <button id="ask-go" type="button">Send</button>
+  <button id="ask-stop" type="button">Stop</button>
+  <button id="ask-new" type="button" style="background:#7a6a4d;color:#fff">New conversation</button>
+  <button id="ask-dl" type="button">Download transcript</button>
+  <label class="note" id="ask-ctx-row" style="display:none; cursor:pointer">
+    <input type="checkbox" id="ask-ctx" checked>
+    give the assistant my current search (query, filters, result count)
+  </label>
+  <span class="note" id="ask-status"></span>
+</div>
+</details>
+
+
+<script type="application/json" id="search-ctx">{"extra": "", "formula": "", "group": "", "mfrom": "", "minconf": "", "mode": "raw", "mto": "", "order": "chrono", "page": 2, "person": "", "q": "NEAR(fuerunt iudei, 4)", "series": "", "total": "374", "yfrom": "1291", "yto": "1600"}</script>
+<script src="/static/search.js" defer></script>
+
+
+
+
+<p class="summary">
+  <b>374</b> matching entries
+   &mdash; query: <code>NEAR(fuerunt iudei, 4)</code>
+  &mdash; page 2 of 15
+  
+  <button id="analyze-btn" type="button" style="font: bold 12px sans-serif;
+    margin-left: 10px; padding: 3px 12px; background: #7a2c2c; color: #fff;
+    border: 0; border-radius: 4px; cursor: pointer;">Analyze with AI</button>
+  
+</p>
+
+
+
+
+  <div class="group-h">Edward II — JUST1 roll 593</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1312</span> &middot;
+      <a href="/AALT4/JUST1/JUST1no593/aJUST1no593fronts/IMG_0920.htm">JUST1 roll 593 fronts, image 0920</a>
+      &middot; entry of 130 lines &middot;
+      <span class="badge b-high">conf 87</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">73</span>clamare ad presens in predictis tenementis nec aliquam iniuriam seu disseisinam eis inde fecerunt et de hoc ponit se super assisam etc. Et idem Hugo tanquam
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">90</span>tenens predictorum tenemento respondet et dicit quod assisa inde fieri non debet. quia dicit quod predicta tenementa aliquo tempore <mark>fuerunt</mark> Abrahe filio Den
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">86</span>lecresse <mark>Iudei</mark> de Norwyco que postmodum tancquam estaeta domini regis Edwardi patris domini regis nunc in manum suam deuenerunt qui quidam
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">93</span>dominus Rex pater etc per cartam suam dedit Vincencio de Kyrkeby et Lucie uxori eius tenementis predicta tenendam de ipso domino Regi et heredibus suis
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">90</span>rotulari. et postmodum idem index laicus propter tenementa illud laicum illud tenementa cui legatur liberare debet. Et ex quo
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">72</span>testamenta predicta iuxta consuetudinem illam coram ballivis ville predicte non <mark>fuerunt</mark> recitata seu irrotulata nec
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">78</span>predictus Johannes de Kyrkeby nec predicta Katerina in predictis tenementis que sunt tenementa laica et ad communem legem per laicum indi
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">87</span>clamavit et in ultima voluntate sua tenementa illa esse perquisitum suum affirmando legavit predictis Katerine et Rogero etc
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">92</span>qui quidam Katerina et Rogerus racione legati illius <mark>fuerunt</mark> inde seisitus sicut superius dictum est quousque predicti Hugo et alii ipsos
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">85</span>Walterum et Katerinam iniuste dies. Et hoc parati sunt venificare per assisam etc petunt judicium etc Et quia in casu isto ex
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">91</span>clamavit et in ultima voluntate sua tenementa illa esse perquisitum suum affirmando legavit predictis Katerine et Rogero etc
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">88</span>qui quidem Katerina et Rogerus racione legati illius <mark>fuerunt</mark> inde seisitus sicut superius dictum est quousque predicti Hugo et alii ipsos
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">81</span>Walterum et Katerinam iniuste disseisivit. Et hoc parati sunt verificare per assisam etc petunt judicium etc Et quia in casu isto ex
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">81</span>villa predicta coram balliuo eiusdem ville Et dicunt de tenemento que deuenerunt in manum Regis nomine estaete quod feoffati per Regem lega
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">87</span>re consueverunt huis tenementi in testimonibus suis et quod hujusmodi legata hactenus <mark>fuerunt</mark> stabilia et firma sicut de aliis perquisitis legatis
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">84</span>in uilla predicta. Et dicunt quod predictus Johannes de Kyrkeby intravit in predictis tenementis ut heres predicte Lucie ut intendunt et quod alii
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E368 roll 83</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1313</span> &middot;
+      <a href="/AALT1/E2/E368no83/aE368no83fronts/IMG_0205.htm">E368 roll 83 fronts, image 0205</a>
+      &middot; entry of 141 lines &middot;
+      <span class="badge b-high">conf 78</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">91</span>¶ Monstraverunt Regi Ricardus de Heydon tenementa terras et tenementa que <mark>fuerunt</mark> Elie de Heydon. et
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">88</span>Iohannes filius et heres Thome Waryn quod cum Thomas de Clare quondam constabularii domini Edwardi. quondam
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">76</span>suo licet ipse non teneat nec aliquo tempore retroacto tenuerit tenementa aliqua in civitate
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">75</span>ford Lendon que aliquando <mark>fuerunt</mark> Iacet filii Benedicti <mark>Iudei</mark> peri Baron nichilominus
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">94</span>quemdam annuum redditum vnius paris calcarium deauratorum de quo quoddam tenemento
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">80</span>si per inspectionem eorundem vel alio modo legitimo eis constare poterit prefatum Priorem tenementum
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">91</span>aliqua que aliquando <mark>fuerunt</mark> prefati Iocei in dicta civitate non tenere nec ex aliqua alia
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">93</span>causa ad dictum redditum nobis reddendum teneri tunc demande quam eidem priori occasione
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-2</span>predicta fiere facere sum per ford ipsum iudies Meculagius et quietum assig de Resdimmeaune me Tho nondum
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">27</span>fillium eodem protnt missus <mark>fuerunt</mark> sue dilane relagave facie uel Rege apud Wesserd et
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">74</span>dit Julii anno septimo.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E368 roll 84</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1313</span> &middot;
+      <a href="/AALT1/E2/E368no84/bE368no84dorses/IMG_1424.htm">E368 roll 84 dorses, image 1424</a>
+      &middot; entry of 33 lines &middot;
+      <span class="badge b-high">conf 80</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">93</span>Maii anno regni sui decimo nono per cartam suam concessisset pro se et heredibus suis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">83</span>Roberto de Leverton capello domos illas cum pertinenciis in Linc que <mark>fuerunt</mark> Benedictim
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">82</span>filii Asey Belle <mark>judei</mark> Lincolnie et domus illam cum pertinenciis in eadem civitate que
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">88</span>fuit Scola judeorum eiusdem civitatis per exilius judeorum a regno suo tanquam estae
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 162</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1313</span> &middot;
+      <a href="/AALT4/E2/E372no162/bE372no162dorses/IMG_0762.htm">E372 roll 162 dorses, image 0762</a>
+      &middot; entry of 74 lines &middot;
+      <span class="badge b-low">conf 44</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">48</span>ibidem. Et vj. d. pro Remtero filio Johannis ibidem. Et x. solidos per Matillidi de Lond ibidem. Et vj. d. pro Galfrido le escot ibidem. Et vj. d. pro Willelmo filio Warinti ibidem. Et iii de pro Thoma
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">28</span>filium Petri ibidem. Et ccc lxix le xix. solidos xi. d de debet pluries pro vicecomiti ibidem. Et ij. d de redditu domorum con <mark>fuerunt</mark> velasset inde ibidem. Et xx. solidos pro Telarias Liticene ibidem.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-3</span>Et ij. sus ij. d.. de redditu domorum qui <mark>fuerunt</mark> uiselli Len <mark>judei</mark>. sicut continet ex alia parte Regis Et xx. solidos de festum et deberus diuersis ibidem. Et xxix. solidos vij. de . defectu et exrau diversos
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">16</span>pro eodem ibidem. Et viij. s. iiij. denarios pro eodem ibidem. Et die ma pro eodem ibidem. Et xx. denarios pro eodem ibidem Et .x. solidos pro eodem ibidem. Et xiii. solido x. denarios pro eodem ibidem. Et iij. s. pro eodem
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 163</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1313</span> &middot;
+      <a href="/AALT4/E2/E372no163/aE372no163fronts/IMG_0054.htm">E372 roll 163 fronts, image 0054</a>
+      &middot; entry of 69 lines &middot;
+      <span class="badge b-low">conf 19</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">35</span>usque ad summas easdem exonerari faciant et per litteras re patentes quas predicti Maior Aldermani vicorie et cives habuerunt de dictis H. ccclxxii henrici xviii si iij. d obolus super hunc apud restitutas. Et debet quan
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">12</span>et Idem vices Ideo per anni ad scaccariam Pasche de Isabal que fuit uxor Ade de Sancto Abbano Junioris et heredibus suis pro domibus illis cum pertinenciis London que <mark>fuerunt</mark> Leonis filio Gressey filie magistri Elie judecita parochia
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">74</span>Sancti Martini Pomitiis et Ismongereglane et que ad manus regis Edwardipatris per exiliunt judeorum deuenerunt ut escaeta Regis habendum et tenendum eidem Isabile et heredibus suis de dicto Rege patre et heredibus suis an xxvii die Decebris anno xix
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">43</span>eius Regis patris imperpetuum sicut contiatum in orig anni xx. eius regis patris Et ii d per annum ad scaccariam Pasche de Willelmo le Kyng de Hatton et heredibus suis pro domibus illis cum pertinenciis et London que <mark>fuerunt</mark> Abrahe Motoun et pro domibus
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">50</span>illa que <mark>fuerunt</mark> Benedicti Mayre in eadem civitate in parochia Sancti Laurencii in Judaisino in Castestrete ibidem. Et in de eis per annum ad scaccariam Pasche de Galfrido de Norton clerico et heredibus suis de placia illa vacua in Corno de
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">29</span>Coleorchestrete que fuit heredum magistri Elie filie Mossei quonde indei London ibidem. Et i de onus per annum ad scaccariam Pasche de Roberto de Basinges et heredibus suis de domibus illis cum pertinenciis et London que <mark>fuerunt</mark> Murcesse
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>filio Cressei filie Gente in parochia Sancte Marie Magdalene in Melkestrete ibidem. Et in de per annum ad scaccariam Pasche de Alano le Cordewaner et heredibus suis pro domibus illis cum pertinenciis in London que <mark>fuerunt</mark> Aarem filium
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">12</span>slemine in parochia Sancti clam in Indaisino et Colcherchestrete ibidem. Et ideo per annum ad scaccariam Pasche de Guidone Ferre et heredibus suis pro domibus illis cum pertinenciis in London que <mark>fuerunt</mark> Benedicti filii Jacobi clerici in parochia Sancte Marie
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">21</span>Magdalene in Melkestrete ibidem. Et in de is per annum ad scaccariam Pasche de Johanne de Laufare et heredibus suis pro domibus illis cum pertinenciis in London que <mark>fuerunt</mark> communitatis judeorum Londano in Wodestrete ibidem. Et ideo per annum ad scaccariam
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">51</span>Pasche de Adam de Horcham et heredibus suis pro domibus illis in Lond que <mark>fuerunt</mark> Thippe que fuit uxor Isaac de Suthwerke in parochia Sancti Laurencii in Iudaisino de Cattestrete ibidem. Et in de alio per annum ad ecclesiam Pasche
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">35</span>de Alano de Hormade et Benedicto de Shordich et heredibus suis pro dontibus illis in London que <mark>fuerunt</mark> Jormi Sakerel <mark>judei</mark> in parochia Sancti clam in Jndaisino et Colcherthestrete ibidem. Et iiij. des per annum ad scaccariam Pasche
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">60</span>de priore et Conventu de Chikesand pro domibus illis in Londenu que <mark>fuerunt</mark> Elie le Eueste <mark>judei</mark> sitis inter locum fratrum sactorum et regiam stratam que vocatur sporierstrete ibidem. Et ideo per annum ad sacanam Pasche de Edmundo
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">50</span>de Lond et heredibus suis pro domibus illis in London que <mark>fuerunt</mark> Benedicti filia Hagini in parochia Sancti Laurencii in Inbaisino de Cattestrete et de domibus illis que <mark>fuerunt</mark> Rogerus Duteman Indee in Corneo de Mewestrete ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">10</span>Et ideo per annum ad scaccariam Pasche de Willelmo de Leure et heredibus suis pro domibus illis in London que <mark>fuerunt</mark> Sarre diei Inde e in parochia Sancti Laurencii et Indaisino in Cornero de Aldermannebury ibidem. Et in denarios per annum ad cita
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">45</span>Pasche de Iabaa que fuit uxor Johannis de Vesty et heredibus suis pro domibus illis in London que <mark>fuerunt</mark> Mossei filium magistri Elie <mark>judei</mark> in Cornero de Wodestrete habenda a xx die Januari dicto anno xix in perpetuum ibidem. Et ii d
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">28</span>per annum ad scaccariam Pasche de Johanne de Buterleye et heredibus suis pro domibus illis in London que <mark>fuerunt</mark> Amitere que fuit uxor vivus filius magistri Mossei. Inde et Iemongereslane in Cattestrete habendam a xx die feni
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">46</span>anno xix imperpetuum ibidem. Et in denaris per annum ad scaccariam Pasche de Henrico de Lacy Countelvie et heredibus suis pro domibus illis in London que <mark>fuerunt</mark> Mauseri filium Daronei <mark>judei</mark> ibidem. Et ii d per annum ad scaccariam Sancti Michaelis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">44</span>de Isabia que fuit vxor Iohannis de Vescy et heredibus suis pro domibus illis que <mark>fuerunt</mark> Elie Bagarde <mark>judei</mark> in civitate Londane habendam a tertio die Aprilis anno xix imperpetuum ibidem. Et i denarios per annum ad scaccarium Sancti Michaelis de Mari
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">51</span>Ferraunt et heredibus suis pro domibus illis in London que <mark>fuerunt</mark> Mossei Grespyn <mark>judei</mark> in Melkestrete habendam a xxiii die Apoplis anno xix perpetuum ibidem. Et in de in per annum ad scaccariam sancti Michaelis de Magistro Willelmo de
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">51</span>Monte forti decano ecclesie Sancti Pauli Londoniensi pro placia illa cum pertinenciis extra Cripelgate in Seurbio London que vocatur Leurestowe et que fuit sepultura judeorum Londoniensi habendum a xii die Juliane anno xix perpetuis
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 165</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1313</span> &middot;
+      <a href="/AALT4/E2/E372no165/bE372no165dorses/IMG_0459.htm">E372 roll 165 dorses, image 0459</a>
+      &middot; entry of 38 lines &middot;
+      <span class="badge b-low">conf 19</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">94</span>predictorum ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">0</span>fit Petrus Miparty. v sita per annum de domibus illis que <mark>fuerunt</mark> Jesum de Bristoll <mark>judei</mark> in Glouc quas rex hic anno Regis xi die iulii anno regni sui xxxv comisit eis Petit et heredibus suis pro v solidos Regi redditus
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">18</span>per annum ad scaccariam Sancti Michaelis sicut contra in Regis de corporibus et in Regis in et in regis xxxvi regis Henricis et in origi anni xxxv eis regis Henrici. Et xvii. Henrici. de anno preteritis
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1313</span> &middot;
+      <a href="/AALT4/E2/E372no165/bE372no165dorses/IMG_0507.htm">E372 roll 165 dorses, image 0507</a>
+      &middot; entry of 46 lines &middot;
+      <span class="badge b-low">conf 29</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">27</span>Adam de Swilington et Johanna uxor ejus que fuit uxor Alexandri de Kirketon debet lxix solidos de debet eius Alexandri pro xxix. solidos vij denarios qua terre ibidem .
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-35</span>i Adam de Lymbegh clericus a num de fama terrarum et tenementa que <mark>fuerunt</mark> Johannis de Saudelby in Holtham in hoc comitatus in manu Regis ratione minoris etat heredis eius Johannis existnus veniat per talem fratrum a festo Pasche anno sexto Et
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-37</span>quam diu Regi placuerit Redditum unam mediam ad scaccariam Sancti Michaelis et aliam medietatem ad scaccarium Pasche sicuti regis ix. Et xiii. quarto de anno preteritos. Quo debet summonita de xiii. muros que sunt de ultimo dimidio anno vij. et anni viij. x. xxi.
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">56</span>quod predictum Adam de predictis ii nr annis a predicto xxxi die martis exonerari et quietum esse faciant. Et debet .ii. quarto.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-3</span>filius balliui Luce debet. Ideo per annum de Adam Cokerel de Lince et heredibus suis de domibus que <mark>fuerunt</mark> viselli Leny <mark>judei</mark> in parochia Sancti Marti euagii ibidem. de quo eius regis in Ite Luce s.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-61</span>Priore quetus Sancte Katerine extra Lucia suceori sui ri eodem nunc. per annum ad scaccariam Sancti Michaelis de faria illius peciit quod fuit Hagun filius Benedicti <mark>judei</mark> de Lince ibidem. Et iii. quarto de annu preteritos
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">25</span>Thomas de Burnham nupervicecomes. Wiche recognit de xxa xv concessi hoc comitatu a primo pro diuers providenciam ad opus ei faciende ibidem
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">67</span>Otelimus Ferre vallectus Rege CC. henrici de prestito ei facto de Thoro rege termino Pasche anno primo sic conti Regis ex
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">51</span>Johannes de Moubray. Chomas de fine pro licencia adquiratur quodam tenementa que <mark>fuerunt</mark> Willelmi de Breuse ibidem et quedam tenementa que Marca de Grense tenuit in dotem ibidem et in Sussex et Regi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">66</span>Simon de Eseuden et Robertus i thewro xxiii. s. ij. d. detallicatum et redditus diversorum in villa de Helewell assesso anno xxxii ibidem.
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-110</span>fit maiori eius Landa iidem pratum de red domorpe que fecit Walteri le Siatuit et unius testi quod Athelma la Parthemmere tentum et civitate London sicut ei in rege xi. Et xxirhana. xvii ilius
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">56</span>de auri eius redditus et redditu domorum que <mark>fuerunt</mark> Diabelle Indee ante annum xix sic monte ibidem
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 164</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1314</span> &middot;
+      <a href="/AALT4/E2/E372no164/bE372no164dorses/IMG_0186.htm">E372 roll 164 dorses, image 0186</a>
+      &middot; entry of 150 lines &middot;
+      <span class="badge b-low">conf 40</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-101</span>la Salopi. Summa cxviii solidos eis inde Thomo nichil Et in pardonatur prefato Johanni de Somery xxviii si ij deo per breve Regis allociis insta. Et idem Johannes erit facta de recto predicto que nerunt pro te die. Et quieti sunt.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-14</span>pro Rogero Damory. Cle ham per annum pro custodia diversorum castrorum et tenementa que <mark>fuerunt</mark> Ehetbaldi de Verdon in diuersis comitatu habendum ad talem filium a xxiii die Januarii anno x usque ad legis etase vocatis predicti Thicbaldi Radulfus ueram
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-44</span>mei ad scaccariam Pascha et aliam medietatem ad scaccarium sancti Michaelis sicut erant i origina anni x. Et et xix H. ix solidos de ultis ix septimanis iiij diebus secundi quarti et ultimo die anno s. et anno con
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">10</span>et Johannes de Hodynetii quarto per annum de fria piscari de Kyngespol juxta Seaff tenementa per talem fatrma xviii die Saobris hoc anno quad Regis placuerit Rede vnam mediam ad scaccariam Pasche et aliam medie ad scaccario Sancti
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-12</span>terrarum tempore qui habuit custodiam earumdem x marcio Que quidem mise et expntum non prius allocati <mark>fuerunt</mark> sicut monte ibidem. Et debirla.x. solidos xi. d . de quare
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">63</span>Michaeli sicut continetur in meum huis anni. xii.
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-10</span>est omnibus moni fili Cher astesseassi et predicta berna. Et prodinne Rate omnino de anno. xv
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">3</span>balliui civitate Nordicii ii d per annum ad scaccarium Sancti Michaeli de Bartho filio Radulfi de Becles de domo illa in Nordico que fuit scola judecorum eis civitatis et eciam de domo illa sui fuit Elie filius Elie <mark>judei</mark> in eadem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">33</span>civitate habendam eidem Bartholo et heredibus suis de rege et heredibus Regis a secundo die Augusti anno xix imperpetuum Redditus per annum per manus balliuorum civitatis predicte qui pro tempore <mark>fuerunt</mark> reddi antedictum sicut etc in originale de anno xx Et
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">65</span>iiij. denaris per annum ad saccurium Sancti Michaelis de Petro de Bumstede de domibus illis in Norwico que <mark>fuerunt</mark> Elie filio Elie <mark>iudei</mark> in Norwico et de domibus illis que <mark>fuerunt</mark> Scole judeorum eius ville et de domibus illis sibi <mark>fuerunt</mark> sente
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">70</span>de Glouco judee eius ville et de una Shopasia fuit Iaac le Chapeleyn judee eius ville habenda vt supra a secundo die Novis anno xix imperpetuum ibidem. Et in denardom per annum ad scaccariam Sancti Michaelis de Thoma Sparwe de
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">62</span>Nor wico de domibus illis que <mark>fuerunt</mark> abrasde de Eboraco <mark>judei</mark> eius ville habendum ut sic a secundo die Novis anno xix imperpetuum ibidem. Et ij denarios per annum ad scaccariam Sancti Michaelis de Roberto de Heghham de domibus illis in
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">54</span>Norwico que <mark>fuerunt</mark> Haac filius Deulacres <mark>judei</mark> Norwici habendum ut sic an xxix die Novis anno xx imperpetuum ibidem. Et ij deritos per annum ad scaccariam Sancti Michaelis de Roberto de Biry Lormari de domtibus illis in Norwico
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">44</span>qui <mark>fuerunt</mark> Milonis kat ludei Norwici habendum ut supra a xxx die Novis anno xx imperpetuum ibidem. Et in denarios per annum ad scaccarium Sancti Michaelis de Henrico Paresay de domibus illis in Norwico que <mark>fuerunt</mark> Iscat de ser
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">48</span>nenucch <mark>iudei</mark> Norwici habendum ut supra. a xxx die Novis anno xx imperpetuum ibidem. Et idem per annum ad scaccariam Pasche de Willelmo de Hegham et Willelmo le Lyndraper de Norwico de domibus illis in Nordico sui <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">77</span>Notei Deulacres <mark>judei</mark> habenda ut supra a iiii die Novis anno xx in perpetuum ibidem. Summa hiis annui reddit .xj. denarios.
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">43</span>Bartholomei filius Radulfi de Becles iiij. solido viij. denarios. de ar res predicti redditus sui de domibus judeorum in Norwico de anno xix et xxvii anno sequentibus
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 167</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1314</span> &middot;
+      <a href="/AALT4/E2/E372no167/aE372no167fronts/IMG_0337.htm">E372 roll 167 fronts, image 0337</a>
+      &middot; entry of 16 lines &middot;
+      <span class="badge b-low">conf -4</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">46</span>et. ciis sibi ii d de averis ipsius prioris et hominum suorum infra lecam de Ely sicut continu in Regis xii.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-22</span>et balliui ville Cantebr debito oneris per annum de Johanne But de Caneti et heredibus suis de domibus que <mark>fuerunt</mark> Iocei <mark>Judei</mark> in Briggestte ibidem. De quo homines cantrsregni dorso Rege
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">40</span>et Magister Robertus de Thorp Radulfus Louel xlii le xi s iii d de acris firme capitali mesuagii in manerii de Haschngfeld ibidem. Et recint in Regi Exannali.
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1314</span> &middot;
+      <a href="/AALT4/E2/E372no167/aE372no167fronts/IMG_0338.htm">E372 roll 167 fronts, image 0338</a>
+      &middot; entry of 7 lines &middot;
+      <span class="badge b-low">conf -5</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">34</span>et visum ii d de averia ipsius prioris et hominum suorum infra letam de Ely sicut contanatum in Regis xii.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">25</span>fili balliviville Cantebr debito decanis per annum de Johanne But de Canti et heredibus suis de domibus que os <mark>fuerunt</mark> Jocei <mark>judei</mark> in Briggestere ibidem. De quo homines cantes regis in dorso Regi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">17</span>et Magister Robertus de Thorp et Radulfus Louel xliii le x s iii d de auri firme capitalis mesuagii manerii de Hasclingfeld ibidem. Et recint in Regi exannali.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 164</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1315</span> &middot;
+      <a href="/AALT4/E2/E372no164/aE372no164fronts/IMG_0054.htm">E372 roll 164 fronts, image 0054</a>
+      &middot; entry of 78 lines &middot;
+      <span class="badge b-low">conf 36</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">19</span>libras de Oseneys debet xvii. s. viij. d. obolum quadrantam de tallis mobilis suorum in villa de Hanebgh assesso anno vj. Et xii denaris de eodem talli reddit suorum eadem villa sicut contra in Oxoniem. et dorso
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">2</span>abbas de Oseneye ij. s. .xj. d. quas de tallagiis redditus tenementis que <mark>fuerunt</mark> Willelmi de Wodeston in Exonia sicut et in regi vir in tam Oxonie et summa Homini Exonie vj de tanti redditu dictorum tenemento etc
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">68</span>per de tallis assesso in Comitatu Exonie per Willelmum mere et sociorum suos anno sexto.
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">11</span>abbas de Oseneye debet xvij. s. viij. d. ob quan de tallis mobilis suorum in villa de Hanebgh assesso anno vj. Et xii denaris de eodem talli redditus suorum in eadem villa sicut contana in Oxoniam. et quod in dorso Regis to
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-27</span>abbas de Oseneye is xij. d. qua de tallagis redditus tenementum que <mark>fuerunt</mark> Willelmi de Wodeston in Exonia sicut en in Regis vir in factum Exonie et firma homini Exonie vi de mota redditu dictorum tenementis sicut contra
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">71</span>et de tallis assess in comitatu Exonie per Willelmum mere et sotum suos anno sexto.
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">94</span>Robertus filius Johannis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">24</span>xij. Henrici. xix si de extenta terrarum et tenementa que <mark>fuerunt</mark> Willemum de Moun defuncti qui de Rege tenuit in capite in comitatu Bedfordiae. habendam ad talem firmam a xii. die Wetemor
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">3</span>anno regni regis Edwardi patris Regis huius ad voluntatem regis sicut continetur in orig de eodem anno .xj. Et CcCclxvrh iiij. solido de dicto anno vi et xxxv annis sequentibus
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">3</span>Et vicecomites iij. denaris per annum ad ecclesia Sancti Michaelis de Willelmo le Taborrer de Bedeford et Katerina uxor eius de domibus illis que <mark>fuerunt</mark> Cok filius Benedicti de Bedeford inde habendas a xxix diesovis anno xx perpetuum.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-21</span>dedi pro manus vicecomiti Bedeford sicut etc in originale de anno xxmo Et ij. d per annaos ad scaccariam Sancti Michaelis de Priore et suentu de Newham de domibus illis in Bedef que <mark>fuerunt</mark> benedicti Saluo Pictam <mark>iudei</mark> Gedoria tona cum tercia
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">39</span>de unius mesuagium que fuit Cok filius Benedicti Jude in eadem villa habenda a xxx die ovis anno xx imperpetuum ibidem. Summa huius annui redditus iij. d de ariis eiusdem redditus respondet visia
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">16</span>Henrici de Bohun. ex here de fine per tan venat et foresta de Baggeshete in Regis de festo redeptus et averis itimeris foresent de Windes et Comitatu Berkr coram Rogero de Clifford et sociis suis anno viii regis Edwardi patris
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">54</span>xii. henici xix sic de extenta terrarum et tenementa que <mark>fuerunt</mark> Willemum de Moun defuncti qui de Rege tenuit in capite in comitatu Bedfordiae habendam ad talem firmama xii die Decembris
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 165</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1315</span> &middot;
+      <a href="/AALT4/E2/E372no165/aE372no165fronts/IMG_0377.htm">E372 roll 165 fronts, image 0377</a>
+      &middot; entry of 1 lines &middot;
+      <span class="badge b-mid">conf 54</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">54</span>¶ Robertus le Venour iij. s. viij. d. de arreragiis ij. d annuorum de domibus in locis que <mark>fuerunt</mark> Benedicti de London <mark>judei</mark> ibidem.
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1315</span> &middot;
+      <a href="/AALT4/E2/E372no165/aE372no165fronts/IMG_0377.htm">E372 roll 165 fronts, image 0377</a>
+      &middot; entry of 1 lines &middot;
+      <span class="badge b-low">conf 24</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">24</span>¶ Johannes filius Simonis le Pestour de Lune ij. s. iij. d. de annis dictis annui de domos que <mark>fuerunt</mark> salutionis de Londonie <mark>judei</mark> in Brauncegate ibidem.
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1315</span> &middot;
+      <a href="/AALT4/E2/E372no165/aE372no165fronts/IMG_0378.htm">E372 roll 165 fronts, image 0378</a>
+      &middot; entry of 7 lines &middot;
+      <span class="badge b-low">conf 37</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">72</span>¶ Emma que fuit uxor Bartholomei le Cordewan iij. s. viij. d. de arerio ij. d annuorum de domibus aui <mark>fuerunt</mark> Belestehe Iudee in Staunforde ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">66</span>Nicholaus de Burton de Staunford ij. s. iij. d. de arreragiis predictis annui de dontibus in Staunford que <mark>fuerunt</mark> Reyne uxor David judicium ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">23</span>balliui civitatis licie xix d. per annum de redditu diversorum domorum que <mark>fuerunt</mark> judeorum in Luciam sicut inter in Rege preceditu. Et xix denarios de a preterito.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">20</span>Johannes Bere de Luce iij. s. viij. d. de annos i. d annuorum de domibus qui <mark>fuerunt</mark> Jacobi Lem <mark>Judei</mark> in Luce ibidem.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">62</span>Willelmus de Came le Cordewaner iij. s. viij. d. de acris ij. d annuorum de domibus que <mark>fuerunt</mark> Florie de London Judee in Luce ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-9</span>Walterus Bek de Luce ii si iij. d. de annis in dictis annui de domo sui <mark>fuerunt</mark> inde <mark>judei</mark> in ballio Luce ibidem.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">23</span>Simon le Feure de Luce ij. solidos iij. d. dearicus jdianmi de domibus que <mark>fuerunt</mark> Flore de Luce judicium in Luce ibidem
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1315</span> &middot;
+      <a href="/AALT4/E2/E372no165/aE372no165fronts/IMG_0378.htm">E372 roll 165 fronts, image 0378</a>
+      &middot; entry of 2 lines &middot;
+      <span class="badge b-low">conf 15</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">31</span>¶ Robertus le Venour iij. s. viij. d. de acris ij. de annorum de domos que <mark>fuerunt</mark> Haguni filius Benedicti <mark>Judei</mark> et Benedicti le Cute Indei in Lucia ibidem.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-1</span>Et Petrus de Coleby de Lune ij. solido iij. d. de ar is in ditus annui de domibus ab <mark>fuerunt</mark> Jacobi de Brauncegate <mark>judei</mark> in Lucia ibidem
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1315</span> &middot;
+      <a href="/AALT4/E2/E372no165/aE372no165fronts/IMG_0378.htm">E372 roll 165 fronts, image 0378</a>
+      &middot; entry of 3 lines &middot;
+      <span class="badge b-low">conf 24</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">38</span>¶ Adam filius Martini de Lince iij. solidi viii d de arreragiis ij. diamnorum de domibus que <mark>fuerunt</mark> Iocei gabays Judicium de Lince ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">17</span>Johannes de Norwico de Luce et mater uxor eius .ii. solidi iii denarios de arranis reddatis annui de domibus qui <mark>fuerunt</mark> Manseri de Bradeworth judicium in Luciam ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">17</span>Alexandri filii Johannis filii Martini de Lune iij. s. viij. d. de acris ii d annuorum de domibus que <mark>fuerunt</mark> salutis de London <mark>judei</mark> in Luce ibidem
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1315</span> &middot;
+      <a href="/AALT4/E2/E372no165/aE372no165fronts/IMG_0378.htm">E372 roll 165 fronts, image 0378</a>
+      &middot; entry of 2 lines &middot;
+      <span class="badge b-low">conf -3</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">7</span>¶ Walterus de Glouc de Liunce.vi. solidos de acris ii d annorum de domibus qui <mark>fuerunt</mark> Mansen de Bradeworth Jotei de Coletestr et Benedicti de London judicium in Lucie ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-13</span>Johannes filius Simonis le Pestour de Lune .i. solidis iiii d. de acris des annui de domo que <mark>fuerunt</mark> salutinis de Londende <mark>judei</mark> in Brauncegate ibidem.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 167</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1315</span> &middot;
+      <a href="/AALT4/E2/E372no167/aE372no167fronts/IMG_0314.htm">E372 roll 167 fronts, image 0314</a>
+      &middot; entry of 9 lines &middot;
+      <span class="badge b-low">conf 32</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">42</span>in Hugo le despensuru senior Chomam ad festum Sancti Michaelis de feodi firma manerii de Luthelade sicut etc in rege xiii. Et ccc Henricus de anno preteriti.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-29</span>fili Petrus eparte et heredes sui usi panum de domibus illis que <mark>fuerunt</mark> Jespum de Bristell <mark>judei</mark> in Clonetonite ibidem in Regis ugider res Henrici. Et xvii. hanc regni de anni preteritis
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-34</span>Willelmus Pasche de Newebold. xx si de fine pertinencis per Willelmi de Sovernill dic ote in regni etc regii et tria Bygorni. Et reciti in Reexannali.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 163</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1316</span> &middot;
+      <a href="/AALT4/E2/E372no163/aE372no163fronts/IMG_0131.htm">E372 roll 163 fronts, image 0131</a>
+      &middot; entry of 9 lines &middot;
+      <span class="badge b-low">conf 36</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">23</span>¶ Johannes qui de xii. parco xv. solidos qui sunt de dictis x. solidis annis de ultimo veste dominio anno xix et de xxvii anno sequentibus hoc anno ultimo computato nec de eisdem x. solidos annis decetero onerari per breve regis in quo continetur quod Rex Est
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">17</span>exebii die Martis anno regni xix per cartam suam concessit Roberto de Leverton domos illas cum pertinenciis in Luce que <mark>fuerunt</mark> Benedicti filii die belle <mark>iudei</mark> Luce et domum illa cum pertinenciis eadem cuit que fuit sola indorum
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">19</span>Et in parochia Sancti Cathberti Luce per exillesium judeorum tanquam escaeta eius Regis patris in manu sua tunc existentes et que ad xx solidos extendebantur per annum habendum et tenendum eidem Roberto et heredibus suis uel cui illas sectam osuetudinem. villis
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">24</span>predicte dare uel assignare vellet de ipso Rege patre et heredibus suis imperpetuum. reddito inde eidem Regni patri et heredibus suis ii denarios per manus balliuorum eius cunitis singulis annis ad scaccariam Sancti Michaelis et in quo brevi suggerit quod ille domus que ad um
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">73</span>predicti filiis Diei Kelle fuit ille et eedem domus que <mark>fuerunt</mark> predicte Diabelle per quod breve Rex mandat Baron quod si per inquisicio vel alio modo legitimo eis constare poterit quod ille domus que <mark>fuerunt</mark> predicte Diabelle sint ille motariis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">46</span>que <mark>fuerunt</mark> predicti Benedicti in dicta carta contente. tunc Willelmum Golering tenent domorum predictarum de dictis x. solido annis a dicto xxvii die Martis exonerari et quietum esse faciant proviso quod de predictis apud annis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">61</span>predictis Regi juxta tenorem carte predicte ad scaccariam respondeatur. Et per inquisicio inde captam que est inter inquisicio et extentas de anno ix. per quam compertum est quod ille eadem domus que <mark>fuerunt</mark> dicte Diabewe sunt eodem dota
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">19</span>Rex E. dedit Roberto de Leverton capelle et quod easdem domus tempore exilii judeorum tenum predictus Benedictus filius dicte Sicibelle ad firmam pro x solidos. Et per consideratum Baroni annotatam in meum anni. xii termino Sancte termini
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 164</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1316</span> &middot;
+      <a href="/AALT4/E2/E372no164/bE372no164dorses/IMG_0177.htm">E372 roll 164 dorses, image 0177</a>
+      &middot; entry of 107 lines &middot;
+      <span class="badge b-low">conf 44</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">50</span>etatem existente sicut contra in originale anni x. Et xx. so xi. dit de anno xo et xi.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-4</span>filii matris que fuit uxor Gilberti de Clare nuper Comitatu Glouc viii d .ij. d.. per an qui excesunt dotem suam ei assignata per Regem in manerio de Hoveden a xx die Februarii a viij. quamdam terras et tenementa qui <mark>fuerunt</mark> predicti comitatus etc
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">62</span>qui sunt de ultimo die anno x et anno xi. et hoc anno xii. nec de eodem redditu decetero onerari quia repar
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">3</span>qui ea tenuit de regii capiale tenendo de Regi per ead seruicia a xxx die maii anno xxxi. perpetuum sicut menta in originale de anno xxxi.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">44</span>Rogerus de Felton de exioan maneriorum de Comlton et comitatu Canetigiae Rothing in comitatu Essex que <mark>fuerunt</mark> Philippi de Hastang qui de Rege tenuit et capud a xxv die marcii anno x usque xxx diem eiusdem mensis sic
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">46</span>etc optulit Waledeyn de esca citra trenta et regis xi. Regis optulit.
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-10</span>per ballivum emitatis hereford. Ideo per annum ad curie Sancti Michaeli de Waltero de Pedewardyn de domo illa et hereford que fuit Daron le Celend iudicii et de domo illa in eadem villa que fuit scclce judecorpem una cum
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">72</span>quadam chopa dotiui illi ontigna quod fuit Elkimi filius predicti Baroniei <mark>judei</mark> et shopis illis in eadem villa que <mark>fuerunt</mark> Francelim de Hereford <mark>judei</mark> habendam eidem Waltero et heredibus suis de rei et heredibus suis anno xviii die Octobris anno xix
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">23</span>imperpetuum Radulfo per annum per manus balliuorum civitatis predicte qui pro tempore <mark>fuerunt</mark> reddi antedictum sicut nunc in sigil de anno. xx. Et i denarios per annum ad scaccariam Sancti Michaelis de Johanne de la Felde Capello de domibus illis in hereford
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">35</span>qui <mark>fuerunt</mark> solum indei heford cum duabus perius shopis qui <mark>fuerunt</mark> eisdem <mark>judei</mark> et Malierestrecelane habenda ut supra an xxii die Octobris anno xix imperpetuum ibidem. Et in denarios per annum ad scaccariam sancti Michaelis de Nicho Wyot
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">67</span>de illa debili domo et Hereford qua fuit Elie de Ardre indei Hereford et malierestrete habenda ut supra a dicto xxii die Octobris imperpetuum ibidem. Et ij. de per annum ad scaccariam Sancti Michaelis de Hugone Bade de domibus
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">63</span>illis et hereford que <mark>fuerunt</mark> Hagini de Welbeleye <mark>iudei</mark> heres et de duabus prius shopis que <mark>fuerunt</mark> Fatmtelim <mark>judei</mark> eis civitatis et Malierestrecelane habendum ut supra a dicto xxii die Octobris imperpetuum. Et quod
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">42</span>per ant ad scaccariam Sancti Michaelis de Hugo de la Hale de dontibus illis in heref que fuerint civitasse Judec habet cum quadam parva sbopa que fuit eius Iudee in vico. qui dicitur Iwenstrete habendam ut supra a dicto xxii die
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">32</span>eate imperpetuum ibidem. Et in denarius per attornatos ad scacminam sancti Michaelis de Rogero le Mungehosebaud de domibus illis et hereford que <mark>fuerunt</mark> crispini <mark>judei</mark> heres in vico. qui dicitur vicecus judeorum habendum ut supra a dicto xxii die
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">29</span>Catbri perpetuum ibidem. Et ij. de per annum ad scaccarium sancti Michaelis de Regina Maniworth de hreford de domibus illis et heres que <mark>fuerunt</mark> Elie de Ardre et Daron le Blund judeorum eis civitatis in Malierestrete
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">77</span>habendum ut supra an secundo die Novis anno xix imperpetuum ibidem. Summa huius actuui redditus ix. denarios.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 165</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1316</span> &middot;
+      <a href="/AALT4/E2/E372no165/bE372no165dorses/IMG_0506.htm">E372 roll 165 dorses, image 0506</a>
+      &middot; entry of 2 lines &middot;
+      <span class="badge b-low">conf -2</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">22</span>¶ ballivis Luce debet. Ideo per annum de Adam Cokerel de Lince et heredibus suis de domibus qui <mark>fuerunt</mark> viselli Leny <mark>judei</mark> in parochia Sancti Marti euagii ibidem. de quo cives reddidit in item Lincina.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-25</span>Porequetus Sancte Katerine eam Lucia et successori sui regi eandem quare per annum ad scaccarium Sancti Michaelis de faria illi mesuagii quod fuit Hagun filius Benedicti <mark>Judei</mark> de Lunce ibidem. Et iij. quarto de annu preteritos
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 164</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1317</span> &middot;
+      <a href="/AALT4/E2/E372no164/bE372no164dorses/IMG_0208.htm">E372 roll 164 dorses, image 0208</a>
+      &middot; entry of 39 lines &middot;
+      <span class="badge b-low">conf 28</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">63</span>xi annis sequentibus. Set non debet inde summonita nec de eodem redditu decetero onerari per breve Ralloci Roberto Peuel in adhuc item Berkrie. et per cosidere warantiam annotus in meum anni xiiii. inter recorda de termino sancti Michaeli. Et quietus est
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">18</span>pro ballivu ville Exonie vj. d. per annum ad scaccariam Sancti Michaelis de Willelmo Burnel preposito Wellens de domibus ille in Oxonie que <mark>fuerunt</mark> posset filius Jacobi de Lond <mark>judei</mark> in parochia sancti Aldati et de domo illa que fuit Scola judic
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">80</span>in eadem villa et de domibus illis et tenementis que <mark>fuerunt</mark> Margalicie que fuit uxor vines de Glenco judicium in eadem villa et de domibus illis que <mark>fuerunt</mark> Bonefey filius Lumbardi de Crikelade <mark>judei</mark> et parochia Sancti Martini in
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">56</span>eadem villa et de domibus illis que <mark>fuerunt</mark> Sarre que fuit uxor Benedicti Levesque judicium in parochia sancti abbati in eadem villa et de domibus illis que <mark>fuerunt</mark> Florie la vidue Jude in eadem parochia et de domibus illis sui <mark>fuerunt</mark> Benedicti de la
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">72</span>Cornere <mark>judei</mark> in eadem parochia et de domibus illis que <mark>fuerunt</mark> die que fuit uxor Benedicti Caus judicia et de domibus illis que <mark>fuerunt</mark> Anegaye filie Benedicti de Wynton indee in eadem parochia et eciam de domtibus illis que <mark>fuerunt</mark> Sanvielis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">2</span>de Berkhampstede <mark>judei</mark> et eadem parochie habenda eis Willelmo et heredibus suis de regis et heredi regis anno xxiii die maui an xix perpetuum. Redditus per annum ad scaccariam sancti Michaelis per manus balliuorum ville predicte qui pro tempore <mark>fuerunt</mark> predictos vi denaris sicut continetur
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">89</span>norigiti de anno xx
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">79</span>Willelmus Burnel prepositus Welle
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">42</span>xiii. solidis de aruris predictorum vj. de annorum de redditus domorum <mark>fuerunt</mark> judeorum in Oxonie de anno xix et xxvii anni sequenti
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-209</span>abbas et Conventus de Oseneye collum duo cleri concessi a xii parte episcopatus Luce reges apud de cia xiii. le . xiii. de. de remissio compoto sui de eadem xxa sicut continet in comput eorumdem Regis computi eiusdem xii. in chori ciro xi he vi s viii d
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E368 roll 89</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1318</span> &middot;
+      <a href="/AALT1/E2/E368no89/bE368no89dorses/IMG_0485.htm">E368 roll 89 dorses, image 0485</a>
+      &middot; entry of 150 lines &middot;
+      <span class="badge b-high">conf 72</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">90</span>sui decimo nono per cartam suam concessisset Roberto de Leuerton capello de
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">87</span>mos illas cum pertinenciis in Lyncoln que <mark>fuerunt</mark> bene dicti filii Dlei belle <mark>Iudei</mark>
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">84</span>Lyncolnien et domum illam cum pertinenciis in eadem civitate que fuit Scola in sei
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">93</span>prout in carta predicta plenius continetur et prefatus Robertus postmodum dictas de
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">89</span>mos que <mark>fuerunt</mark> predicti Benedicti eidem Willelmo virtute carte predicte et iuxta con
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">93</span>suetudinem predictum dedisset et concessisset habendam sibi et heredibus suis de nobis et
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">82</span>Sumonie de scaccario nostro predicto sibi directe de diem solidos annuis ad opus nostrum
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>ab anno dicti patris nostri terciodecimo de qui sidia domibus que <mark>fuerunt</mark> Axabelle
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">85</span>Indee Lyncolnie dampnate que ad me ius dicti patris nostri tanquam escaeta sua per
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">86</span>feloniam dicte Indee deuenerunt que sit ad firmam posite <mark>fuerunt</mark> levendami
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">92</span>imponens eidem Willelmo quod ipso enet easdem domos que <mark>fuerunt</mark> Ayabelle et quod
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">90</span>de dictis decem solidis annui nobis debet respondere ipsum Willelmum ad illos decios
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">46</span>solidos annos nobis et con terciodecimo anno solvendo quamquam dicte dominus que <mark>fuerunt</mark>
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">86</span>runt predicte Diabelle sint ille cedium domus que <mark>fuerunt</mark> predicti benedicti in dicto
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">87</span>carta contere virtute carte illius de predictis decem solidis annuis exonerinte
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">86</span>sua mandamus quod inspecta carta predicta si per inquisicionem per vos inde faciendam vel alio
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">86</span>modo legitimo vobis constare poterit quod dicte domus que <mark>fuerunt</mark> predicte Dlabelle mihi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>dicta Smmonem contente sint ille eadem domus que continentur in dicta carta et que
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">87</span>concessit pro se et heredibus suis Roberto de Lenton capello domos illas cum pertinenciis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>in Luce que <mark>fuerunt</mark> Benedicti filii diex belle <mark>iudei</mark> Lyncolnien et domum illam
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">89</span>cum pertinenciis in eadem civitate que fuit Scola judeorum eiusdem civiter in parochia
+      </div>
+      
+    
+      <div class="ellipsis">&hellip;</div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">71</span>factum Wyltosi quod maior et cives Lyncolnie onerantur de .x. Solidos per annum de redditu
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">78</span>domorum que <mark>fuerunt</mark> Diabelle inde Luce dampnate que fuit escaeta
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">75</span>Regis sicut continetur in compoto Magistri Henrici de Bray de escaetis Regis citra grentio
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">80</span>in rotulo xvimo rotulo compoto Et quia non constat curie per cartam predictam si predicte
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">86</span>domus que <mark>fuerunt</mark> predicte Diabelle unde dicti decem solidis annui exiguntur si
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">83</span>ille eodem domus qui <mark>fuerunt</mark> predicti Benedicti filii Diei belle et que continetur mihi
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">77</span>predicta carta concordatum est quod inquiratur inde. Et Johannes de Insula Baro etc
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 165</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1318</span> &middot;
+      <a href="/AALT4/E2/E372no165/bE372no165dorses/IMG_0460.htm">E372 roll 165 dorses, image 0460</a>
+      &middot; entry of 23 lines &middot;
+      <span class="badge b-low">conf 9</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">94</span>predictorum ibidem
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">2</span>fili Petrus Miparty. v sita per annum de domibus illis que <mark>fuerunt</mark> Jessum de Bristoll <mark>judei</mark> in Glouc quas rex hic anno Regi xij die iulii anno regni sui xxxv onusit eidem Petit et heredibus suis pro v solidos Regi redditus
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">19</span>per annum ad scaccarium Sancti Michaelis. sicut ante in Regis de corporibus et in Regi in et in regis xxxvi regis Henrici et in origi anni xxxv eis regis Henrici et xvii. Henrici. de anno preteritos
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward II — E372 roll 168</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward II</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1318</span> &middot;
+      <a href="/AALT4/E2/E372no168/aE372no168fronts/IMG_0011.htm">E372 roll 168 fronts, image 0011</a>
+      &middot; entry of 1 lines &middot;
+      <span class="badge b-low">conf -120</span>
+    </div>
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">-120</span>¶ Per eius eppanti et heredi sui usi per annum pro domibus illis que <mark>fuerunt</mark> Jespiti de Bustoll <mark>judei</mark> in glondan sumoniti in de precepto et in ei xiii et i d xxxvi. Roalknas. Et xvii. has x. s de anni preteritis
+      </div>
+      
+    
+  </div>
+  
+
+
+<div class="pager">
+  <a href="/?q=NEAR%28fuerunt+iudei%2C+4%29&amp;extra=&amp;mode=raw&amp;formula=&amp;mfrom=&amp;mto=&amp;series=&amp;yfrom=1291&amp;yto=1600&amp;minconf=&amp;order=chrono&amp;group=&amp;page=1">&larr; previous</a>
+  <a href="/?q=NEAR%28fuerunt+iudei%2C+4%29&amp;extra=&amp;mode=raw&amp;formula=&amp;mfrom=&amp;mto=&amp;series=&amp;yfrom=1291&amp;yto=1600&amp;minconf=&amp;order=chrono&amp;group=&amp;page=3">next &rarr;</a>
+</div>
+
+</div>
+</body>
+</html>

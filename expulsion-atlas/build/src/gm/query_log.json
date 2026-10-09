@@ -1,0 +1,265 @@
+[
+ {
+  "key": "baseline_decade",
+  "q": "iudeus iudei iudeorum iudeo iudea iudee iudeis iudeum",
+  "mode": "or",
+  "group": "decade",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=iudeus+iudei+iudeorum+iudeo+iudea+iudee+iudeis+iudeum&extra=&mode=or&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=decade",
+  "fetched": "2026-10-08 18:25"
+ },
+ {
+  "key": "baseline_series",
+  "q": "iudeus iudei iudeorum iudeo iudea iudee iudeis iudeum",
+  "mode": "or",
+  "group": "series",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=iudeus+iudei+iudeorum+iudeo+iudea+iudee+iudeis+iudeum&extra=&mode=or&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=series",
+  "fetched": "2026-10-08 18:25"
+ },
+ {
+  "key": "escheat_decade",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "decade",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=decade",
+  "fetched": "2026-10-08 18:25"
+ },
+ {
+  "key": "escheat_series",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "series",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=series",
+  "fetched": "2026-10-08 18:25"
+ },
+ {
+  "key": "debita_decade",
+  "q": "\"debita iudeorum\" OR \"debitis iudeorum\" OR \"debitorum iudeorum\"",
+  "mode": "raw",
+  "group": "decade",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=%22debita+iudeorum%22+OR+%22debitis+iudeorum%22+OR+%22debitorum+iudeorum%22&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=decade",
+  "fetched": "2026-10-08 18:26"
+ },
+ {
+  "key": "archa_decade",
+  "q": "NEAR(archa* iudeorum, 3) OR \"archa cirographorum\" OR \"archam cirographorum\" OR \"arche cirographorum\"",
+  "mode": "raw",
+  "group": "decade",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28archa%2A+iudeorum%2C+3%29+OR+%22archa+cirographorum%22+OR+%22archam+cirographorum%22+OR+%22arche+cirographorum%22&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=decade",
+  "fetched": "2026-10-08 18:26"
+ },
+ {
+  "key": "exile_decade",
+  "q": "NEAR(exilium iudeorum, 8) OR NEAR(exilium iudei, 8) OR NEAR(exilium iudeis, 8)",
+  "mode": "raw",
+  "group": "decade",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28exilium+iudeorum%2C+8%29+OR+NEAR%28exilium+iudei%2C+8%29+OR+NEAR%28exilium+iudeis%2C+8%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=decade",
+  "fetched": "2026-10-08 18:26"
+ },
+ {
+  "key": "conversorum_series",
+  "q": "domus conversorum",
+  "mode": "phrase",
+  "group": "series",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=domus+conversorum&extra=&mode=phrase&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=series",
+  "fetched": "2026-10-08 18:27"
+ },
+ {
+  "key": "iudaismus_decade",
+  "q": "iudaism*",
+  "mode": "raw",
+  "group": "decade",
+  "extra": {},
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=iudaism%2A&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=&yto=&minconf=&order=chrono&group=decade",
+  "fetched": "2026-10-08 18:27"
+ },
+ {
+  "key": "escheat_list_p02",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "2"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=2",
+  "fetched": "2026-10-08 18:27"
+ },
+ {
+  "key": "escheat_list_p03",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "3"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=3",
+  "fetched": "2026-10-08 18:27"
+ },
+ {
+  "key": "escheat_list_p04",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "4"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=4",
+  "fetched": "2026-10-08 18:28"
+ },
+ {
+  "key": "escheat_list_p05",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "5"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=5",
+  "fetched": "2026-10-08 18:28"
+ },
+ {
+  "key": "escheat_list_p06",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "6"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=6",
+  "fetched": "2026-10-08 18:28"
+ },
+ {
+  "key": "escheat_list_p07",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "7"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=7",
+  "fetched": "2026-10-08 18:28"
+ },
+ {
+  "key": "escheat_list_p08",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "8"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=8",
+  "fetched": "2026-10-08 18:29"
+ },
+ {
+  "key": "escheat_list_p09",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "9"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=9",
+  "fetched": "2026-10-08 18:29"
+ },
+ {
+  "key": "escheat_list_p10",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "10"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=10",
+  "fetched": "2026-10-08 18:29"
+ },
+ {
+  "key": "escheat_list_p11",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "11"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=11",
+  "fetched": "2026-10-08 18:29"
+ },
+ {
+  "key": "escheat_list_p12",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "12"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=12",
+  "fetched": "2026-10-08 18:30"
+ },
+ {
+  "key": "escheat_list_p13",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "13"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=13",
+  "fetched": "2026-10-08 18:30"
+ },
+ {
+  "key": "escheat_list_p14",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "14"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=14",
+  "fetched": "2026-10-08 18:30"
+ },
+ {
+  "key": "escheat_list_p15",
+  "q": "NEAR(fuerunt iudei, 4)",
+  "mode": "raw",
+  "group": "",
+  "extra": {
+   "yfrom": "1291",
+   "yto": "1600",
+   "page": "15"
+  },
+  "url": "https://glyphmachina.utsc.utoronto.ca/?q=NEAR%28fuerunt+iudei%2C+4%29&extra=&mode=raw&formula=&mfrom=&mto=&series=&yfrom=1291&yto=1600&minconf=&order=chrono&group=&page=15",
+  "fetched": "2026-10-08 18:30"
+ }
+]

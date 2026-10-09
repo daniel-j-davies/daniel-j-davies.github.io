@@ -1,0 +1,639 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Expulsion of 1290</title>
+<meta name="description" content="Records of the dissolution of England's Jewish community, 1275–1600: the expulsion of 1290, the disposal of houses and bonds, the House of Converts, and the charges that outlived the community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Spectral+SC:wght@500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: one-screen atlas in the family of the Berwick and Merchant London atlases. Top bar with view tabs (its lower edge cut like an indented chirograph); map view = working surface + 380px panel; page views scroll. */
+:root{
+  --bg:#e7eaee; --surface:#f6f7f9; --surface-2:#dce1e7; --ink:#191d24; --ink-2:#3f4753; --ink-3:#646e7a; --rule:#c5ccd4;
+  --accent:#34426e; --accent-ink:#ffffff;            /* iron-gall indigo */
+  --ok:#2e7a4f; --weld:#93700f; --lit:#3d6aa8;
+  --sea:#dbe3ea; --land:#f3f2ee; --land-2:#e6e7e3; --land-edge:#a7b1bb; --river:#8fb0c8;
+  --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a; --c4:#eda100; --c5:#e87ba4; --c6:#008300; --c7:#4a3aa7; --c8:#e34948; --c0:#9aa1a6;
+  --f-display:"Spectral SC", "Spectral", Georgia, serif;
+  --f-serif:"Spectral", Georgia, "Times New Roman", serif;
+  --f-sans:"Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+  --bar-h:52px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1217; --surface:#151a21; --surface-2:#202833; --ink:#e6e9ee; --ink-2:#b4bbc5; --ink-3:#8a939e; --rule:#2b333e;
+  --accent:#a7b4e8; --accent-ink:#10141b; --ok:#6cc495; --weld:#d6ad48; --lit:#8fb1ea;
+  --sea:#141c24; --land:#232931; --land-2:#1b2027; --land-edge:#46505b; --river:#4f7c9c;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#2a9a2a; --c7:#9085e9; --c8:#e66767; --c0:#6d757c;
+  color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0f1217; --surface:#151a21; --surface-2:#202833; --ink:#e6e9ee; --ink-2:#b4bbc5; --ink-3:#8a939e; --rule:#2b333e;
+  --accent:#a7b4e8; --accent-ink:#10141b; --ok:#6cc495; --weld:#d6ad48; --lit:#8fb1ea;
+  --sea:#141c24; --land:#232931; --land-2:#1b2027; --land-edge:#46505b; --river:#4f7c9c;
+  --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#2a9a2a; --c7:#9085e9; --c8:#e66767; --c0:#6d757c;
+  color-scheme:dark; }
+html,body{height:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:15px;line-height:1.45;margin:0}
+*{box-sizing:border-box}
+a{color:var(--accent)}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+#app{display:flex;flex-direction:column;height:100%}
+.bar{position:relative;z-index:6;display:flex;align-items:center;gap:18px;min-height:var(--bar-h);padding-inline:16px;background:var(--surface);flex:0 0 auto}
+.bar::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:6px;pointer-events:none;
+  background:linear-gradient(135deg,var(--surface) 40%,transparent 41%) 0 0/10px 6px repeat-x,linear-gradient(225deg,var(--surface) 40%,transparent 41%) 0 0/10px 6px repeat-x}
+.brand{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.brand b{font-family:var(--f-display);font-weight:500;font-size:21px;letter-spacing:.02em}
+.brand span{font-family:var(--f-serif);font-style:italic;color:var(--ink-3);font-size:14.5px}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:none;padding:8px 11px;border-radius:6px;cursor:pointer;color:var(--ink-2);white-space:nowrap;font-weight:500;font-size:14.5px;letter-spacing:.02em}
+.tab:hover{background:var(--surface-2)}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+main{flex:1 1 auto;min-height:0;position:relative}
+.view{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 380px}
+.view.page{display:block;overflow:auto;scrollbar-gutter:stable;padding-block:28px 40px;padding-inline:16px}
+.panel{border-left:1px solid var(--rule);background:var(--surface);overflow:auto;padding:18px 16px 32px;min-width:0}
+.panel h2{font-family:var(--f-serif);font-weight:600;font-size:19px;margin:0 0 4px;text-wrap:balance}
+h3.lab{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:22px 0 8px;font-weight:700}
+.muted{color:var(--ink-3)} .small{font-size:13px}
+.pill{display:inline-block;border:1px solid var(--rule);border-radius:999px;padding:0 8px;font-size:12px;color:var(--ink-2);white-space:nowrap;line-height:1.6}
+.pill.src{border-color:var(--ok);color:var(--ok)} .pill.db{border-color:var(--accent);color:var(--accent)} .pill.verify{border-color:var(--weld);color:var(--weld);border-style:dashed}
+.note{border:1px dashed var(--rule);border-radius:8px;padding:10px 12px;margin:14px 0;font-size:13.5px;color:var(--ink-2);background:var(--bg)}
+.note b{font-family:var(--f-serif)}
+.card{border:1px solid var(--rule);border-left:4px solid var(--tc,var(--rule));border-radius:6px;padding:9px 12px;margin:8px 0;background:var(--surface)}
+.card h4{margin:2px 0 3px;font-family:var(--f-serif);font-size:15.5px;font-weight:600;text-wrap:balance}
+.card .lab{font-size:12px;color:var(--ink-3);letter-spacing:.03em}
+.card .ref{font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.quote{font-family:var(--f-serif);font-style:italic;color:var(--ink-2);font-size:13.5px;border-left:2px solid var(--rule);padding:1px 0 1px 9px;margin:5px 0;overflow-wrap:anywhere}
+.btn{border:1px solid var(--rule);background:var(--surface);border-radius:7px;padding:4px 10px;cursor:pointer;font-size:13.5px;color:var(--ink-2)}
+.btn:hover{background:var(--surface-2)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--rule);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:var(--surface);padding:5px 10px;cursor:pointer;font-size:13px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:999px;padding:2px 9px;font-size:12.5px;background:var(--surface);cursor:pointer;color:var(--ink-2)}
+.chip[aria-pressed="false"]{opacity:.42}
+.sw{width:10px;height:10px;border-radius:50%;display:inline-block;flex:0 0 auto}
+/* map */
+.mapwrap{position:relative;min-width:0;min-height:0;overflow:hidden;background:var(--sea)}
+.mapwrap>svg{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.floating{position:absolute;z-index:5;background:var(--surface);border:1px solid var(--rule);border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.12);padding:8px 10px;font-size:13px}
+.ctl-tr{top:12px;right:12px;left:56px;width:max-content;margin-left:auto;display:flex;flex-direction:column;gap:8px;max-width:min(300px,calc(100% - 64px))}
+.credit{position:absolute;right:8px;bottom:4px;z-index:4;font-size:11px;color:var(--ink-3);background:color-mix(in srgb,var(--surface) 80%,transparent);padding:1px 6px;border-radius:4px;max-width:calc(100% - 16px)}
+.zoomctl{position:absolute;left:12px;top:12px;z-index:5;display:flex;flex-direction:column;gap:4px}
+.zoomctl button{width:30px;height:30px;border:1px solid var(--rule);border-radius:7px;background:var(--surface);cursor:pointer;font-size:16px;line-height:1;color:var(--ink-2)}
+.mapwrap path{vector-effect:non-scaling-stroke}
+.mk{cursor:pointer} .mk:focus{outline:none} .mk:focus-visible circle.ring{stroke:var(--accent);stroke-width:3}
+.lbl{font-family:var(--f-sans);font-size:12px;fill:var(--ink);paint-order:stroke;stroke:var(--land);stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.lbl.sea{stroke:var(--sea);fill:var(--ink-3);font-style:italic}
+.tip{position:fixed;z-index:50;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:6px 9px;font-size:13px;max-width:320px;box-shadow:0 2px 10px rgba(0,0,0,.15);pointer-events:none}
+/* pages */
+.pagewrap{max-width:1100px;margin:0 auto}
+.pagewrap h1{font-family:var(--f-display);font-weight:500;font-size:30px;margin:0 0 4px;letter-spacing:.015em;text-wrap:balance}
+.lede{font-family:var(--f-serif);font-size:16.5px;color:var(--ink-2);max-width:70ch;margin:6px 0 18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:18px}
+.fig{border:1px solid var(--rule);border-radius:10px;background:var(--surface);padding:14px 14px 10px;min-width:0;margin:0 0 18px}
+.fig h3{font-family:var(--f-serif);font-size:18px;margin:0 0 2px;font-weight:600;text-wrap:balance}
+.fig .sub{font-size:13px;color:var(--ink-3);margin:0 0 8px;max-width:76ch}
+.fig .plot{width:100%;overflow-x:auto}
+.fig svg{display:block}
+.fig svg text{fill:var(--ink-2);font-family:var(--f-sans)}
+.axis path,.axis line{stroke:var(--rule)} .axis text{font-size:11.5px}
+.gridline line{stroke:var(--rule);stroke-dasharray:2 3}
+.lgd{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink-2);margin:6px 0 0}
+.lgd span{display:inline-flex;align-items:center;gap:5px}
+details.tbl{margin-top:6px;font-size:13px} details.tbl summary{cursor:pointer;color:var(--ink-3)}
+.tblwrap{overflow-x:auto;max-height:420px;overflow-y:auto}
+table.data{border-collapse:collapse;font-size:13px;width:100%}
+table.data th,table.data td{border-bottom:1px solid var(--rule);padding:5px 6px;text-align:left;vertical-align:top}
+table.data th{font-weight:700;color:var(--ink-2);position:sticky;top:0;background:var(--surface);z-index:1}
+table.data td.n{text-align:right;font-variant-numeric:tabular-nums}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 12px}
+.toolbar select,.toolbar input{border:1px solid var(--rule);border-radius:7px;padding:4px 6px;background:var(--surface);min-width:0}
+.toolbar input[type=search]{flex:1 1 200px;max-width:320px}
+.ranges{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0 8px}
+.cards2{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:10px}
+.cards2 .card{margin:0}
+.seq{display:grid;grid-template-columns:118px minmax(0,1fr);gap:0 14px}
+.seq .when{font-family:var(--f-serif);font-size:14px;color:var(--ink-2);padding-top:12px;text-align:right;font-variant-numeric:tabular-nums}
+.seq .when b{display:block;font-family:var(--f-display);font-weight:500;font-size:17px;color:var(--ink)}
+.seq .what{border-left:2px solid var(--rule);padding-left:14px;min-width:0}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:baseline}
+.checklist li{margin:6px 0}
+.commentary:empty{display:none}
+.more{margin-top:10px}
+.rulenote{font-size:12px;fill:var(--ink-3)}
+@media (max-width:860px){
+  .view{display:block;overflow:auto}
+  .view .mapwrap{position:relative;height:62vh;min-height:320px}
+  .brand b{font-size:18px}
+  .panel{border-left:0;border-top:1px solid var(--rule);overflow:visible}
+  .brand span{display:none}
+  .seq{grid-template-columns:82px minmax(0,1fr)}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div id="app">
+  <header class="bar">
+    <div class="brand"><b>The Expulsion of 1290</b><span>records of the dissolution, 1275–1600</span></div>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="t-overview" aria-selected="true" data-v="overview">Overview</button>
+      <button class="tab" role="tab" id="t-sequence" aria-selected="false" data-v="sequence">1290–93</button>
+      <button class="tab" role="tab" id="t-map" aria-selected="false" data-v="map">Map</button>
+      <button class="tab" role="tab" id="t-houses" aria-selected="false" data-v="houses">Houses &amp; rents</button>
+      <button class="tab" role="tab" id="t-domus" aria-selected="false" data-v="domus">House of Converts</button>
+      <button class="tab" role="tab" id="t-records" aria-selected="false" data-v="records">Records</button>
+      <button class="tab" role="tab" id="t-sources" aria-selected="false" data-v="sources">Sources &amp; method</button>
+    </nav>
+  </header>
+  <main>
+    <section class="view page" id="v-overview" role="tabpanel" aria-labelledby="t-overview"><div class="pagewrap" id="ovBody"></div></section>
+    <section class="view page" id="v-sequence" role="tabpanel" aria-labelledby="t-sequence" hidden><div class="pagewrap" id="seqBody"></div></section>
+    <section class="view" id="v-map" role="tabpanel" aria-labelledby="t-map" hidden>
+      <div class="mapwrap" id="mapwrap">
+        <svg id="mapsvg" role="img" aria-label="Map of England with the places named in the records"></svg>
+        <div class="zoomctl"><button id="mz-in" aria-label="Zoom in">+</button><button id="mz-out" aria-label="Zoom out">−</button><button id="mz-fit" aria-label="Fit to England" title="Fit">⤢</button></div>
+        <div class="floating ctl-tr">
+          <div class="seg" role="group" aria-label="Period" id="mapPeriods"></div>
+        </div>
+        <div class="credit">Coast and rivers: Natural Earth</div>
+      </div>
+      <aside class="panel"><div class="chips" id="mapChips" aria-label="Record types shown"></div><div id="mapPanel"></div></aside>
+    </section>
+    <section class="view page" id="v-houses" role="tabpanel" aria-labelledby="t-houses" hidden><div class="pagewrap" id="hoBody"></div></section>
+    <section class="view page" id="v-domus" role="tabpanel" aria-labelledby="t-domus" hidden><div class="pagewrap" id="doBody"></div></section>
+    <section class="view page" id="v-records" role="tabpanel" aria-labelledby="t-records" hidden><div class="pagewrap" id="recBody"></div></section>
+    <section class="view page" id="v-sources" role="tabpanel" aria-labelledby="t-sources" hidden><div class="pagewrap" id="srcBody"></div></section>
+  </main>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+"use strict";
+// ---------------------------------------------------------------- shared
+const CONFIG={showUnverified:true, commentary:null, review:true};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const STATUS={src:['src','Checked in sources'],db:['db','Database'],verify:['verify','To verify']};
+const pill=s=>{if(s==='verify'&&!CONFIG.showUnverified) return ''; const t=STATUS[s]||['','']; return `<span class="pill ${t[0]}">${t[1]}</span>`};
+const SRCNAME={CPR:'Calendar of Patent Rolls',TNA:'TNA catalogue',GM:'Glyph Machina',Sweep:'Earlier Glyph Machina sweep',Event:'Dated events'};
+let A,G,T={},TOWN={};
+let COMMENTARY={};
+const comment=v=>{const h=COMMENTARY[v]; if(h) return `<div class="note commentary" data-view="${v}">${h}</div>`; return CONFIG.review?`<div class="note commentary" data-view="${v}"><b>Author’s commentary.</b> Space reserved for the author. Not yet written.</div>`:''};
+const tc=k=>`var(${(T[k]||{color:'--c0'}).color})`;
+const tlab=k=>(T[k]||{label:k}).label;
+const tip=$('#tip');
+function showTip(html,e){tip.innerHTML=html;tip.hidden=false;const w=tip.offsetWidth,h=tip.offsetHeight;let x=e.clientX+14,y=e.clientY+14;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+h>innerHeight-8)y=e.clientY-h-14;tip.style.left=Math.max(4,x)+'px';tip.style.top=Math.max(4,y)+'px'}
+function hideTip(){tip.hidden=true}
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+const linkRef=r=>r.url?`<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.ref)}</a>`:esc(r.ref);
+const townName=k=>k&&TOWN[k]?TOWN[k].name:'';
+function recCard(r,{showTown=true}={}){
+  return `<div class="card" style="--tc:${tc(r.type)}"><div class="lab num">${esc(r.date||r.y||'')}${showTown&&r.town?' · '+esc(townName(r.town)):''} · ${esc(tlab(r.type))}</div>
+  <div class="small">${esc(r.title)}</div>${r.quote?`<div class="quote">${esc(r.quote)}</div>`:''}<div class="ref">${pill(r.status)} ${linkRef(r)}</div></div>`}
+function figure(el,title,sub){el.innerHTML=`<h3>${title}</h3><p class="sub">${sub}</p><div class="plot"></div><div class="lgd"></div><details class="tbl"><summary>Show the numbers</summary><div class="tblwrap"></div></details>`;return {plot:el.querySelector('.plot'),lgd:el.querySelector('.lgd'),tbl:el.querySelector('.tblwrap')}}
+function table(el,head,rows,numcols=[]){el.innerHTML=`<table class="data"><thead><tr>${head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td class="${numcols.includes(i)?'n':''}">${typeof c==='string'&&c.startsWith('<')?c:esc(c??'')}</td>`).join('')}</tr>`).join('')}</tbody></table>`}
+function legend(el,items){el.innerHTML=items.map(([n,c,shape])=>`<span><span class="sw" style="background:${c};${shape==='sq'?'border-radius:2px':''}"></span>${esc(n)}</span>`).join('')}
+function labelPlacer(){const used={}; return (x0,x1,row=0)=>{const r=used[row]||(used[row]=[]); if(r.some(([p,q])=>x0<q+4&&x1>p-4)) return false; r.push([x0,x1]); return true}}
+const REIGNS=[['Henry III',1216,1272],['Edward I',1272,1307],['Edward II',1307,1327],['Edward III',1327,1377],['Richard II',1377,1399],['Henry IV',1399,1413],['Henry V',1413,1422],['Henry VI',1422,1461],['Edward IV',1461,1483],['Richard III',1483,1485],['Henry VII',1485,1509],['Henry VIII',1509,1547],['Edward VI',1547,1553],['Mary',1553,1558],['Elizabeth I',1558,1603],['James I',1603,1625]];
+const reignOf=y=>{const r=REIGNS.find(r=>y>=r[1]&&y<r[2]); return r?r[0]:''};
+function rule1290(svg,x,y0,y1,label=true){ if(x.domain()[0]>1290||x.domain()[1]<1290) return; svg.append('line').attr('x1',x(1290)).attr('x2',x(1290)).attr('y1',y0).attr('y2',y1).attr('stroke','var(--ink)').attr('stroke-width',1).attr('stroke-dasharray','3 3').attr('opacity',.55);
+  if(label) svg.append('text').attr('class','rulenote').attr('x',x(1290)+4).attr('y',y0+10).text('1290')}
+const plotW=el=>Math.max(560,(el.clientWidth||el.parentNode.clientWidth||700)-2);
+
+// ---------------------------------------------------------------- tabs
+const built={}, RESIZE={}; const VIEWS=['overview','sequence','map','houses','domus','records','sources'];
+function show(v){
+  document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.v===v));
+  document.querySelectorAll('main>section').forEach(s=>s.hidden=s.id!=='v-'+v);
+  if(!built[v]){built[v]=true; ({overview:buildOverview,sequence:buildSequence,map:buildMap,houses:buildHouses,domus:buildDomus,records:buildRecords,sources:buildSources})[v]()}
+  else if(RESIZE[v]) RESIZE[v]();
+  store('ex-view',v); if(location.hash!=='#'+v) history.replaceState(null,'','#'+v);
+}
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>show(t.dataset.v));
+document.querySelector('.tabs').addEventListener('keydown',e=>{const tabs=[...document.querySelectorAll('.tab')];const i=tabs.findIndex(t=>t.getAttribute('aria-selected')==='true');if(e.key==='ArrowRight'){tabs[(i+1)%tabs.length].focus();tabs[(i+1)%tabs.length].click()}if(e.key==='ArrowLeft'){tabs[(i-1+tabs.length)%tabs.length].focus();tabs[(i-1+tabs.length)%tabs.length].click()}});
+addEventListener('hashchange',()=>{const h=location.hash.slice(1); if(VIEWS.includes(h)&&!document.querySelector(`#v-${h}`).hidden===false) show(h)});
+let rzT; addEventListener('resize',()=>{clearTimeout(rzT); rzT=setTimeout(()=>{const v=document.querySelector('.tab[aria-selected="true"]').dataset.v; if(RESIZE[v]) RESIZE[v]()},250)});
+
+// ---------------------------------------------------------------- OVERVIEW
+const OV_RANGES=[['1190–1660',1190,1660],['1270–1310',1270,1310],['1290–1400',1290,1400],['1400–1660',1400,1660]];
+let ovRange=[1190,1660], ovSel=null;
+function buildOverview(){
+  const R=A.records, n=k=>R.filter(r=>r.src===k).length;
+  $('#ovBody').innerHTML=`<h1>The Expulsion of 1290</h1>
+  <p class="lede">Records of England’s Jews from the Statute of the Jewry (1275) to the last Exchequer charges on houses that had been theirs (1596), with the House of Converts, which outlived the community it was founded for. ${A.records.length.toLocaleString()} records: ${n('CPR')} Patent Roll entries, ${n('TNA')} catalogue entries from The National Archives, ${n('GM')} machine-transcribed roll entries from Glyph Machina, and ${A.events.length} dated events.</p>
+  ${comment('overview')}
+  <div class="fig" id="ov-ev"></div>
+  <div class="fig" id="ov-gm"></div>
+  <div class="fig" id="ov-cpr"></div>`;
+  drawEvents(); drawFormulae(); drawCprDecades();
+  RESIZE.overview=()=>{drawEvents(); drawFormulae(); drawCprDecades()};
+}
+function drawEvents(){
+  const el=$('#ov-ev');
+  el.innerHTML=`<h3>Dated events, ${ovRange[0]}–${ovRange[1]}</h3><p class="sub">Each mark is an event in the curated chronology, coloured by type. Where marks crowd, only some are labelled: choose a shorter period to see them all, or choose a mark for the detail and its source.</p>
+   <div class="ranges">${OV_RANGES.map(([l,a,b])=>`<button class="btn" aria-pressed="${ovRange[0]===a&&ovRange[1]===b}" data-a="${a}" data-b="${b}">${l}</button>`).join('')}</div><div class="plot"></div><div class="lgd"></div><div id="ov-evcard"></div>`;
+  el.querySelectorAll('.ranges .btn').forEach(b=>b.onclick=()=>{ovRange=[+b.dataset.a,+b.dataset.b]; drawEvents()});
+  const plot=el.querySelector('.plot'), W=plotW(plot), M={l:14,r:14,t:8,b:44};
+  const evs=A.events.filter(e=>e.y>=ovRange[0]&&e.y<=ovRange[1]&&(CONFIG.showUnverified||e.status!=='verify'));
+  const x=d3.scaleLinear().domain(ovRange).range([M.l,W-M.r]);
+  const tf=e=>e.y+((e.m||7)-0.5)/12+((e.d||15)-15)/365;
+  // place labels in rows above the axis
+  const place=labelPlacer(); const rows=[]; const svgTmp=d3.select(plot).append('svg').attr('width',W).attr('height',10);
+  const meas=svgTmp.append('text').attr('font-size',12);
+  const sorted=[...evs].sort((a,b)=>tf(a)-tf(b));
+  sorted.forEach(e=>{meas.text(e.label); const w=meas.node().getComputedTextLength(); const cx=x(tf(e)); let row=0; let x0=Math.min(Math.max(M.l,cx-4),W-M.r-w);
+    while(row<8&&!place(x0,x0+w,row)) row++; rows.push({e,row:row<8?row:null,x0,w,cx})});
+  svgTmp.remove();
+  const nrow=(d3.max(rows.filter(r=>r.row!=null),r=>r.row)??0)+1, RH=19, H=M.t+nrow*RH+30+M.b;
+  const svg=d3.select(plot).append('svg').attr('width',W).attr('height',H).attr('role','img').attr('aria-label','Timeline of dated events');
+  const axY=H-M.b;
+  // reigns band
+  const rg=svg.append('g');
+  REIGNS.filter(r=>r[2]>ovRange[0]&&r[1]<ovRange[1]).forEach((r,i)=>{const a=x(Math.max(r[1],ovRange[0])), b=x(Math.min(r[2],ovRange[1]));
+    rg.append('rect').attr('x',a).attr('y',axY+18).attr('width',Math.max(0,b-a-1)).attr('height',14).attr('fill',i%2?'var(--surface-2)':'var(--bg)');
+    const t=rg.append('text').attr('x',a+3).attr('y',axY+29).attr('font-size',10.5).text(r[0]); if(t.node().getComputedTextLength()>b-a-6) t.remove()});
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${axY})`).call(d3.axisBottom(x).ticks(Math.min(12,W/80)).tickFormat(d3.format('d')));
+  rule1290(svg,x,M.t,axY,false);
+  const g=svg.append('g');
+  rows.forEach(({e,row,x0,cx})=>{const lab=row!=null, ly=lab?M.t+row*RH+12:axY-8;
+    if(lab) g.append('line').attr('x1',cx).attr('x2',cx).attr('y1',ly+3).attr('y2',axY).attr('stroke',tc(e.type)).attr('stroke-width',1).attr('opacity',.45);
+    const gg=g.append('g').attr('class','mk').attr('tabindex',0).attr('role','button').attr('aria-label',`${e.y}: ${e.label}`);
+    gg.append('circle').attr('cx',cx).attr('cy',axY).attr('r',5).attr('fill',tc(e.type)).attr('stroke','var(--surface)').attr('stroke-width',2);
+    if(lab){gg.append('text').attr('x',x0).attr('y',ly).attr('font-size',12).attr('font-weight',ovSel===e?700:400).text(e.label);
+    gg.append('rect').attr('x',x0-3).attr('y',ly-12).attr('width',Math.max(10,cx-x0+10,140)).attr('height',RH).attr('fill','transparent')}
+    else gg.append('circle').attr('cx',cx).attr('cy',axY).attr('r',9).attr('fill','transparent');
+    const pick=()=>{ovSel=e; evCard(e); g.selectAll('text').attr('font-weight',400); gg.select('text').attr('font-weight',700)};
+    gg.on('click',pick).on('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick()}})
+      .on('mousemove',ev=>showTip(`<b>${esc(dateOf(e))}</b><br>${esc(e.label)}`,ev)).on('mouseleave',hideTip)});
+  legend(el.querySelector('.lgd'),A.types.filter(t=>evs.some(e=>e.type===t.key)).map(t=>[t.label,`var(${t.color})`]));
+  evCard(ovSel&&evs.includes(ovSel)?ovSel:evs.find(e=>e.y===1290&&e.m===7)||evs[0]);
+}
+const MON=['','Jan.','Feb.','Mar.','Apr.','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'];
+const dateOf=e=>(e.d?e.d+' ':'')+(e.m?MON[e.m]+' ':'')+e.y;
+function evCard(e){ if(!e) return; $('#ov-evcard').innerHTML=`<div class="card" style="--tc:${tc(e.type)}"><div class="lab num">${esc(dateOf(e))} · ${esc(reignOf(e.y))} · ${esc(tlab(e.type))}</div><h4>${esc(e.label)}</h4><div class="small">${esc(e.detail)}</div><div class="ref">${pill(e.status)} ${esc(e.ref)}</div></div>`}
+function drawFormulae(){
+  const el=$('#ov-gm'); const S=A.gm_series;
+  const rowsDef=[{label:'Plea rolls of the Exchequer of the Jews',gloss:'surviving rolls, TNA E 9, by first year',data:Object.fromEntries(Object.entries(A.e9_years).map(([y,n])=>[y,n])),type:'before',total:d3.sum(Object.values(A.e9_years)),byYear:true,url:null},
+    ...S.map(s=>({label:s.label,gloss:s.gloss,data:s.decades,type:s.type,total:s.total,url:s.url}))];
+  el.innerHTML=`<h3>Formulae of the Jewry in the plea and Exchequer rolls, 1200–1600</h3><p class="sub">Glyph Machina entries matching each formula, by decade (machine transcription of the AALT images; counts are matching entries, not verified readings, and transcription errors hide some). Each row has its own scale, marked at the right. The first row counts surviving plea rolls of the Exchequer of the Jews in The National Archives’ catalogue.</p><div class="plot"></div><details class="tbl"><summary>Show the numbers</summary><div class="tblwrap"></div></details>`;
+  const plot=el.querySelector('.plot'); const W=plotW(plot), M={l:210,r:58,t:6,b:26}, RH=46, H=M.t+rowsDef.length*RH+M.b;
+  const svg=d3.select(plot).append('svg').attr('width',W).attr('height',H).attr('role','img').attr('aria-label','Small multiples of formula counts by decade');
+  const x=d3.scaleLinear().domain([1200,1600]).range([M.l,W-M.r]); const bw=Math.max(2,x(1210)-x(1200)-2);
+  rowsDef.forEach((r,i)=>{const y0=M.t+i*RH, h=RH-12;
+    const dec={}; Object.entries(r.data).forEach(([k,v])=>{const d=Math.floor(+k/10)*10; dec[d]=(dec[d]||0)+v}); r.dec=dec;
+    const mx=d3.max(Object.values(dec))||1; const y=d3.scaleLinear().domain([0,mx]).range([y0+h,y0+2]);
+    svg.append('line').attr('x1',M.l).attr('x2',W-M.r).attr('y1',y0+h+.5).attr('y2',y0+h+.5).attr('stroke','var(--rule)');
+    const tg=svg.append('text').attr('x',0).attr('y',y0+14).attr('font-size',13).attr('font-weight',700).text(r.label); tg.style('fill','var(--ink)');
+    svg.append('text').attr('x',0).attr('y',y0+29).attr('font-size',11.5).text(r.gloss.length>34?r.gloss.slice(0,33)+'…':r.gloss);
+    svg.append('text').attr('x',W-M.r+6).attr('y',y(mx)+9).attr('font-size',11).attr('class','num').text(`max ${mx}`);
+    svg.append('g').selectAll('rect').data(Object.entries(dec).filter(([d])=>+d>=1200&&+d<1600)).join('rect')
+      .attr('x',([d])=>x(+d)+1).attr('width',bw).attr('y',([,v])=>y(v)).attr('height',([,v])=>Math.max(1,y(0)-y(v))).attr('fill',tc(r.type)).attr('rx',1.5)
+      .on('mousemove',(e,[d,v])=>showTip(`<b>${d}s</b> · ${esc(reignOf(+d+5))}<br>${esc(r.label)}: <b class="num">${v}</b>`,e)).on('mouseleave',hideTip);
+  });
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${H-M.b})`).call(d3.axisBottom(x).ticks(8).tickFormat(d3.format('d')));
+  rule1290(svg,x,M.t,H-M.b);
+  const decs=d3.range(1200,1600,10);
+  table(el.querySelector('.tblwrap'),['Decade',...rowsDef.map(r=>r.label)],decs.map(d=>[d+'s',...rowsDef.map(r=>r.dec[d]||0)]),rowsDef.map((_,i)=>i+1));
+  el.querySelector('.tblwrap').insertAdjacentHTML('beforeend',`<p class="small">Searches: ${S.map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a> (${s.total})`).join(' · ')}.</p>`);
+}
+function drawCprDecades(){
+  const el=$('#ov-cpr'); const R=A.records.filter(r=>r.src==='CPR');
+  const fig=figure(el,'Patent Roll entries read for this atlas, by decade and type',`${R.length} entries chosen by hand from the ${A.cpr_candidates} Patent Roll entries (1281–1485 and 1547–48 volumes in the London Merchants sources) that name Jews, the Jewry, Judaism or the converts. Volumes for 1338–40 and 1485–1547 are not in the folder.`);
+  const keys=A.types.map(t=>t.key).filter(k=>R.some(r=>r.type===k));
+  const data={}; R.forEach(r=>{const d=Math.floor(r.y/10)*10; (data[d]=data[d]||{})[r.type]=((data[d]||{})[r.type]||0)+1});
+  const W=plotW(fig.plot), M={l:36,r:10,t:10,b:26}, h=210;
+  const svg=d3.select(fig.plot).append('svg').attr('width',W).attr('height',h);
+  const x=d3.scaleLinear().domain([1280,1490]).range([M.l,W-M.r]);
+  const dec=d3.range(1280,1490,10); const rows=dec.map(d=>{const o={d}; keys.forEach(k=>o[k]=(data[d]||{})[k]||0); return o});
+  const st=d3.stack().keys(keys)(rows);
+  const y=d3.scaleLinear().domain([0,d3.max(rows,r=>d3.sum(keys,k=>r[k]))||1]).nice().range([h-M.b,M.t]);
+  svg.append('g').attr('class','gridline').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W-M.l-M.r)).tickFormat('')).select('.domain').remove();
+  const bw=Math.max(2,x(1290)-x(1280)-3);
+  st.forEach(s=>svg.append('g').selectAll('rect').data(s).join('rect').attr('x',d=>x(d.data.d)+1.5).attr('width',bw).attr('y',d=>y(d[1])).attr('height',d=>Math.max(0,y(d[0])-y(d[1])-(d[1]>d[0]?1:0))).attr('fill',tc(s.key))
+    .on('mousemove',(e,d)=>showTip(`<b>${d.data.d}s</b><br>${keys.filter(k=>d.data[k]).map(k=>`${esc(tlab(k))}: <b class="num">${d.data[k]}</b>`).join('<br>')}`,e)).on('mouseleave',hideTip));
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-M.b})`).call(d3.axisBottom(x).ticks(8).tickFormat(d3.format('d')));
+  svg.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(4));
+  rule1290(svg,x,M.t,h-M.b);
+  legend(fig.lgd,keys.map(k=>[tlab(k),tc(k),'sq']));
+  table(fig.tbl,['Decade',...keys.map(tlab),'Total'],rows.map(r=>[r.d+'s',...keys.map(k=>r[k]),d3.sum(keys,k=>r[k])]),keys.map((_,i)=>i+1).concat([keys.length+1]));
+}
+
+// ---------------------------------------------------------------- 1290-93
+function buildSequence(){
+  const inW=r=>r.y>=1290&&r.y<=1293&&r.type!=='before'&&(CONFIG.showUnverified||r.status!=='verify');
+  const ord=r=>{const m=(r.date||'').match(/(Jan|Feb|Mar|Apr|May|June|July|Aug|Sept|Oct|Nov|Dec)/); const mi=m?['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'].indexOf(m[1])+1:13; const d=+((r.date||'').match(/^(\d{1,2}) /)||[0,15])[1]; return r.y*1000+mi*40+d};
+  const recs=A.records.filter(inW).filter(r=>r.src!=='GM'||/Kendale|C66 roll 112|E101 roll 250|E368 roll 72/.test(r.ref+r.quote)).sort((a,b)=>ord(a)-ord(b));
+  const groups=d3.groups(recs,r=>{const m=(r.date||'').match(/(Jan|Feb|Mar|Apr|May|June|July|Aug|Sept|Oct|Nov|Dec)\.?/); return (m?m[0].replace(/\.$/,'')+' ':'')+r.y});
+  const rolls=A.records.filter(r=>r.src==='TNA'&&/obligations and charters of Jews/.test(r.title));
+  $('#seqBody').innerHTML=`<h1>1290–93: the expulsion and the disposal</h1>
+  <p class="lede">The writs of 18 July 1290, the safe-conducts, the departures, and the three years in which the Crown sold the houses, took in the chests of bonds and enrolled the obligations county by county. Entries are in date order; those dated only by year come at the end of their year.</p>
+  ${comment('sequence')}
+  <div class="fig" id="seq-rolls"></div>
+  <div class="seq">${groups.map(([k,rs])=>`<div class="when"><b>${esc(k.split(' ').length>1?k.split(' ')[0]:k)}</b>${k.split(' ').length>1?esc(k.split(' ')[1]):''}</div><div class="what">${rs.map(r=>recCard(r)).join('')}</div>`).join('')}</div>`;
+  const fig=figure($('#seq-rolls'),'Rolls of obligations and charters of Jews, by county, 1291–93',`The bonds found in the chests were enrolled county by county (TNA E 101/250/2–12). Bar length is the number of membranes, from the catalogue. Counties are placed on the Map at their main Jewry.`);
+  const rows=rolls.map(r=>({c:(r.title.match(/(?:county|counties) of ([^.]+?)\.|in (Devonshire)\./)||[])[1]||(r.title.match(/in (Devonshire)/)||[])[1]||'?',m:+(r.title.match(/(\d+) membranes?/)||[0,1])[1],r})).sort((a,b)=>b.m-a.m);
+  const W=Math.min(plotW(fig.plot),760), M={l:190,r:40,t:4,b:22}, bh=20, h=M.t+rows.length*bh+M.b;
+  const svg=d3.select(fig.plot).append('svg').attr('width',W).attr('height',h);
+  const x=d3.scaleLinear().domain([0,d3.max(rows,r=>r.m)||1]).range([M.l,W-M.r]);
+  rows.forEach((r,i)=>{const y=M.t+i*bh; svg.append('text').attr('x',M.l-8).attr('y',y+14).attr('text-anchor','end').attr('font-size',12.5).text(r.c);
+    svg.append('rect').attr('x',M.l).attr('y',y+4).attr('width',x(r.m)-M.l).attr('height',bh-8).attr('rx',2).attr('fill',tc('bonds'))
+      .on('mousemove',e=>showTip(`<b>${esc(r.r.ref)}</b><br>${esc(r.r.date)}<br>${r.m} membrane${r.m>1?'s':''}`,e)).on('mouseleave',hideTip);
+    svg.append('text').attr('x',x(r.m)+5).attr('y',y+14).attr('font-size',12).attr('class','num').text(r.m)});
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-M.b})`).call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('d')));
+  fig.lgd.innerHTML='';
+  table(fig.tbl,['County','Membranes','Reference','Dates'],rows.map(r=>[r.c,r.m,`<a href="${esc(r.r.url)}" target="_blank" rel="noopener">${esc(r.r.ref)}</a>`,r.r.date]),[1]);
+}
+
+// ---------------------------------------------------------------- MAP
+const PERIODS=[['1275–89',1275,1289],['1290–93',1290,1293],['1294–1400',1294,1400],['1401–1600',1401,1600],['All',1100,1700]];
+let mapPer=0, mapHidden=new Set(), mapSel=null, MAP=null;
+function buildMap(){
+  $('#mapPeriods').innerHTML=PERIODS.map(([l],i)=>`<button aria-pressed="${i===mapPer}" data-i="${i}">${l}</button>`).join('');
+  $('#mapPeriods').querySelectorAll('button').forEach(b=>b.onclick=()=>{mapPer=+b.dataset.i; $('#mapPeriods').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b)); drawMarkers(); mapPanel()});
+  $('#mapChips').innerHTML=A.types.map(t=>`<button class="chip" aria-pressed="true" data-k="${t.key}"><span class="sw" style="background:var(${t.color})"></span>${esc(t.label)}</button>`).join('');
+  $('#mapChips').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const k=c.dataset.k; mapHidden.has(k)?mapHidden.delete(k):mapHidden.add(k); c.setAttribute('aria-pressed',!mapHidden.has(k)); drawMarkers(); mapPanel()});
+  const svg=d3.select('#mapsvg'); svg.selectAll('*').remove(); const g=svg.append('g');
+  const zoom=d3.zoom().scaleExtent([1,24]).on('zoom',e=>{g.attr('transform',e.transform); const k=e.transform.k; g.selectAll('.cs').attr('transform',function(){return `translate(${this.dataset.x},${this.dataset.y}) scale(${1/k})`})});
+  svg.call(zoom).on('dblclick.zoom',null);
+  MAP={svg,g,zoom};
+  const fit=()=>{const r=svg.node().getBoundingClientRect(); const W=Math.max(10,r.width), H=Math.max(10,r.height);
+    const proj=d3.geoAlbers().center([0,52.7]).rotate([2,0]).parallels([50,56]).fitExtent([[24,64],[W-24,H-28]],{type:'MultiPoint',coordinates:[[-5.7,50.0],[1.8,50.7],[1.8,54.7],[-3.2,54.9]]});
+    MAP.proj=proj; drawBase(); drawMarkers(); svg.call(zoom.transform,d3.zoomIdentity)};
+  $('#mz-in').onclick=()=>svg.transition().duration(250).call(zoom.scaleBy,1.6); $('#mz-out').onclick=()=>svg.transition().duration(250).call(zoom.scaleBy,1/1.6); $('#mz-fit').onclick=fit;
+  fit(); mapPanel(); RESIZE.map=fit;
+}
+function drawBase(){
+  const {g,proj}=MAP; g.selectAll('*').remove(); const path=d3.geoPath(proj);
+  const base=g.append('g');
+  G.land.forEach(u=>u.polys.forEach(p=>base.append('path').attr('d',path({type:'Polygon',coordinates:p})).attr('fill',u.eng?'var(--land)':'var(--land-2)').attr('stroke','var(--land-edge)').attr('stroke-width',.8)));
+  G.rivers.forEach(r=>base.append('path').attr('d',path({type:'LineString',coordinates:r.line})).attr('fill','none').attr('stroke','var(--river)').attr('stroke-width',.9).attr('opacity',.8));
+  [['North Sea',[2.2,53.6]],['English Channel',[-1.9,50.25]],['Irish Sea',[-5.0,53.6]]].forEach(([n,ll])=>{const p=proj(ll); g.append('g').attr('class','cs').attr('data-x',p[0]).attr('data-y',p[1]).attr('transform',`translate(${p[0]},${p[1]})`).append('text').attr('class','lbl sea').attr('text-anchor','middle').text(n)});
+  g.append('g').attr('id','mk');
+}
+const inPer=r=>{const [,a,b]=PERIODS[mapPer]; return r.y>=a&&r.y<=b};
+const mapRecs=()=>A.records.filter(r=>r.town&&r.y&&inPer(r)&&!mapHidden.has(r.type)&&(CONFIG.showUnverified||r.status!=='verify'));
+function drawMarkers(){
+  const {g,proj}=MAP; const mk=g.select('#mk'); mk.selectAll('*').remove();
+  const by=d3.group(mapRecs(),r=>r.town); const mx=d3.max([...by.values()],v=>v.length)||1;
+  const rs=d3.scaleSqrt().domain([1,Math.max(mx,40)]).range([5,24]);
+  const pie=d3.pie().sort(null).value(d=>d[1]);
+  [...by.entries()].sort((a,b)=>b[1].length-a[1].length).forEach(([k,rs0])=>{
+    const t=TOWN[k]; if(!t) return; const p=proj(t.ll); const r=rs(rs0.length);
+    const cnt=A.types.map(t=>[t.key,rs0.filter(x=>x.type===t.key).length]).filter(d=>d[1]);
+    const gg=mk.append('g').attr('class','cs mk').attr('data-x',p[0]).attr('data-y',p[1]).attr('transform',`translate(${p[0]},${p[1]})`)
+      .attr('tabindex',0).attr('role','button').attr('aria-label',`${t.name}: ${rs0.length} records`);
+    gg.append('circle').attr('class','ring').attr('r',r+2).attr('fill','var(--surface)').attr('stroke',mapSel===k?'var(--ink)':'var(--land-edge)').attr('stroke-width',mapSel===k?2.5:1);
+    const arc=d3.arc().innerRadius(cnt.length>1?r*0.45:0).outerRadius(r);
+    gg.selectAll('path').data(pie(cnt)).join('path').attr('d',arc).attr('fill',d=>tc(d.data[0])).attr('stroke','var(--surface)').attr('stroke-width',cnt.length>1?1:0);
+    gg.append('text').attr('class','lbl').attr('x',r+5).attr('y',4).text(t.name);
+    const pick=()=>{mapSel=k; drawMarkers(); mapPanel()};
+    gg.on('click',pick).on('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}})
+      .on('mousemove',e=>showTip(`<b>${esc(t.name)}</b> · ${rs0.length} record${rs0.length>1?'s':''}<br>${cnt.map(([k,n])=>`<span class="dot" style="background:${tc(k)}"></span>${esc(tlab(k))}: ${n}`).join('<br>')}<br><span class="muted">Last: ${d3.max(rs0,r=>r.y)}</span>`,e)).on('mouseleave',hideTip);
+  });
+  const sc=d3.zoomTransform(MAP.svg.node()).k; mk.selectAll('.cs').attr('transform',function(){return `translate(${this.dataset.x},${this.dataset.y}) scale(${1/sc})`});
+}
+function mapPanel(){
+  const P=$('#mapPanel'); P.parentNode.scrollTop=0; const recs=mapRecs(); const [lab]=PERIODS[mapPer];
+  const noTown=A.records.filter(r=>!r.town&&r.y&&inPer(r)&&!mapHidden.has(r.type)&&(CONFIG.showUnverified||r.status!=='verify')).length;
+  if(mapSel&&TOWN[mapSel]){
+    const rs=recs.filter(r=>r.town===mapSel).sort((a,b)=>a.y-b.y);
+    const all=A.records.filter(r=>r.town===mapSel&&r.y);
+    P.innerHTML=`<button class="btn" id="mp-back" style="margin-top:14px">← All places</button><h2 style="margin-top:12px">${esc(TOWN[mapSel].name)}</h2>
+     <p class="small muted">${rs.length} record${rs.length===1?'':'s'} in ${esc(lab)}; ${all.length} in all, ${d3.min(all,r=>r.y)}–${d3.max(all,r=>r.y)}.</p>
+     ${typeRow(rs)}${rs.length>60?`<p class="small muted">Showing the first 60 and the last 10 in date order; the Records view lists all of them.</p>`:''}
+     ${(rs.length>70?[...rs.slice(0,60),...rs.slice(-10)]:rs).map(r=>recCard(r,{showTown:false})).join('')||'<p class="muted small">Nothing in this period with the types shown.</p>'}`;
+    $('#mp-back').onclick=()=>{mapSel=null; drawMarkers(); mapPanel()};
+  } else {
+    const by=d3.rollups(recs,v=>[v.length,d3.max(v,r=>r.y)],r=>r.town).sort((a,b)=>b[1][0]-a[1][0]);
+    P.innerHTML=`<h2 style="margin-top:14px">Places in the records, ${esc(lab)}</h2>
+     <p class="small muted">Each disc is a place named in at least one record of the period, sized by the number of records and divided by type. ${noTown?`${noTown} records in the period name no single place and are not mapped.`:''} Choose a place for its records.</p>
+     ${comment('map')}
+     <table class="data"><thead><tr><th>Place</th><th class="n">Records</th><th class="n">Last</th></tr></thead><tbody>${by.map(([k,[n,last]])=>`<tr><td><button class="btn" style="padding:1px 8px" data-k="${k}">${esc(townName(k))}</button></td><td class="n">${n}</td><td class="n">${last}</td></tr>`).join('')}</tbody></table>`;
+    P.querySelectorAll('button[data-k]').forEach(b=>b.onclick=()=>{mapSel=b.dataset.k; drawMarkers(); mapPanel()});
+  }
+}
+function typeRow(rs){const c=A.types.map(t=>[t,rs.filter(r=>r.type===t.key).length]).filter(d=>d[1]); return `<div class="lgd" style="margin-bottom:8px">${c.map(([t,n])=>`<span><span class="sw" style="background:var(${t.color})"></span>${esc(t.label)}: ${n}</span>`).join('')}</div>`}
+
+// ---------------------------------------------------------------- HOUSES & RENTS
+const OCOL={henry3:'--c7',condemned:'--c8',expulsion:'--c2',unknown:'--c0'};
+function buildHouses(){
+  const P=A.props;
+  $('#hoBody').innerHTML=`<h1>Houses and rents that were Jews’</h1>
+  <p class="lede">The Exchequer kept charging small rents on houses that had been Jews’, entry by entry, “que fuerunt … Iudei”, “which were … the Jew’s”, long after the community had gone. Glyph Machina returns ${A.gm_counts.escheat_list_total} entries with the formula on rolls dated 1291–1600; ${P.reduce((s,p)=>s+p.n,0)} tags across ten charges could be followed by name.</p>
+  ${comment('houses')}
+  <div class="fig" id="ho-life"></div>
+  <div class="fig" id="ho-heat"></div>
+  <h3 class="lab">The ten charges</h3><div class="cards2" id="ho-cards"></div>`;
+  drawLifelines(); drawHeat();
+  $('#ho-cards').innerHTML=[...P].sort((a,b)=>a.first-b.first).map(p=>`<div class="card" style="--tc:var(${OCOL[p.origin]})"><div class="lab">${esc(A.origins.find(o=>o.key===p.origin).label)}</div><h4>${esc(p.label)}</h4>
+    <div class="small"><span class="num">${p.n}</span> entries, <span class="num">${p.first}–${p.last}</span>. ${esc(p.origin_note)}</div>
+    <div class="ref">${pill('db')} Latest: <a href="${esc(p.hits[p.hits.length-1].url)}" target="_blank" rel="noopener">${esc(p.hits[p.hits.length-1].ref)}</a></div>
+    <div class="quote">${esc(p.hits[p.hits.length-1].line)}</div></div>`).join('');
+  RESIZE.houses=()=>{drawLifelines(); drawHeat()};
+}
+function drawLifelines(){
+  const el=$('#ho-life'); const P=[...A.props].sort((a,b)=>(a.origin_year||a.first)-(b.origin_year||b.first)||a.first-b.first);
+  const fig=figure(el,'Ten charges, from their origin to the last entry found',`Each dot is a Glyph Machina entry naming the charge (hover for the roll and the machine-read line; choose a dot to open the image). A diamond marks the origin where the entries give one; a dashed line joins it to the first entry found. Colour is the origin the entries state. The pipe rolls before 1291 were not searched for these charges.`);
+  const W=plotW(fig.plot), M={l:210,r:16,t:22,b:28}, RH=30, h=M.t+P.length*RH+M.b;
+  const svg=d3.select(fig.plot).append('svg').attr('width',W).attr('height',h).attr('role','img').attr('aria-label','Lifelines of ten charges');
+  const x=d3.scaleLinear().domain([1225,1600]).range([M.l,W-M.r]);
+  REIGNS.filter(r=>r[2]>1225).forEach((r,i)=>{const a=x(Math.max(r[1],1225)), b=x(Math.min(r[2],1600)); svg.append('rect').attr('x',a).attr('y',M.t-14).attr('width',Math.max(0,b-a-1)).attr('height',h-M.b-M.t+14).attr('fill',i%2?'var(--bg)':'transparent').attr('opacity',.7);
+    const t=svg.append('text').attr('x',a+3).attr('y',M.t-4).attr('font-size',10.5).text(r[0]); if(t.node().getComputedTextLength()>b-a-6) t.remove()});
+  rule1290(svg,x,M.t-14,h-M.b,false);
+  P.forEach((p,i)=>{const y=M.t+i*RH+RH/2, col=`var(${OCOL[p.origin]})`;
+    svg.append('text').attr('x',0).attr('y',y+4).attr('font-size',12.5).text(p.short).style('fill','var(--ink)');
+    if(p.origin_year){svg.append('line').attr('x1',x(p.origin_year)).attr('x2',x(p.first)).attr('y1',y).attr('y2',y).attr('stroke',col).attr('stroke-dasharray','3 3').attr('stroke-width',1.5);
+      svg.append('path').attr('d',d3.symbol(d3.symbolDiamond,64)()).attr('transform',`translate(${x(p.origin_year)},${y})`).attr('fill',col)
+        .on('mousemove',e=>showTip(`<b>Origin, ${p.origin_year}</b><br>${esc(p.origin_note)}`,e)).on('mouseleave',hideTip)}
+    svg.append('line').attr('x1',x(p.first)).attr('x2',x(p.last)).attr('y1',y).attr('y2',y).attr('stroke',col).attr('stroke-width',2.5).attr('opacity',.55);
+    svg.append('g').selectAll('circle').data(p.hits).join('circle').attr('cx',d=>x(d.y)).attr('cy',y).attr('r',4).attr('fill',col).attr('stroke','var(--surface)').attr('stroke-width',1.2).style('cursor','pointer')
+      .on('mousemove',(e,d)=>showTip(`<b>${d.y}</b> · ${esc(reignOf(d.y))}<br>${esc(d.ref)}<div class="quote">${esc(d.line)}</div>`,e)).on('mouseleave',hideTip)
+      .on('click',(e,d)=>window.open(d.url,'_blank','noopener'));
+    svg.append('text').attr('x',Math.min(x(p.last)+8,W-M.r-30)).attr('y',y-7).attr('font-size',11).attr('class','num').text(p.last);
+  });
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-M.b})`).call(d3.axisBottom(x).ticks(9).tickFormat(d3.format('d')));
+  legend(fig.lgd,A.origins.map(o=>[o.label,`var(${OCOL[o.key]})`]));
+  table(fig.tbl,['Charge','Origin','Entries','First','Last'],P.map(p=>[p.label,(p.origin_year||'')+' '+A.origins.find(o=>o.key===p.origin).label,p.n,p.first,p.last]),[2,3,4]);
+}
+function drawHeat(){
+  const el=$('#ho-heat'); const H=A.records.filter(r=>r.src==='GM'&&r.y>=1291);
+  const towns=d3.rollups(H.filter(r=>r.town),v=>v.length,r=>r.town).sort((a,b)=>b[1]-a[1]).map(d=>d[0]);
+  const fig=figure(el,'Entries with the formula, 1291–1600, by place and decade',`${H.length} Glyph Machina entries, placed by the town or charge named in the matched lines; ${H.filter(r=>!r.town).length} name no place in those lines. Darker cells hold more entries. Bristol’s two charges, copied from roll to roll, account for most of the later entries.`);
+  const decs=d3.range(1290,1600,10); const W=plotW(fig.plot), M={l:96,r:8,t:8,b:26}, ch=18, h=M.t+towns.length*ch+M.b;
+  const svg=d3.select(fig.plot).append('svg').attr('width',W).attr('height',h);
+  const x=d3.scaleBand().domain(decs).range([M.l,W-M.r]).padding(.08);
+  const cnt={}; H.forEach(r=>{if(!r.town) return; const k=r.town+'|'+Math.floor(r.y/10)*10; cnt[k]=(cnt[k]||0)+1});
+  const mx=d3.max(Object.values(cnt))||1; const op=d3.scaleSqrt().domain([0,mx]).range([0,1]);
+  towns.forEach((t,i)=>{const y=M.t+i*ch; svg.append('text').attr('x',M.l-6).attr('y',y+13).attr('text-anchor','end').attr('font-size',12).text(townName(t));
+    decs.forEach(d=>{const n=cnt[t+'|'+d]||0; svg.append('rect').attr('x',x(d)).attr('y',y+1).attr('width',x.bandwidth()).attr('height',ch-2).attr('rx',2)
+      .attr('fill',n?tc('property'):'var(--bg)').attr('fill-opacity',n?Math.max(.15,op(n)):1)
+      .on('mousemove',e=>showTip(`<b>${esc(townName(t))}, ${d}s</b><br><span class="num">${n}</span> entr${n===1?'y':'ies'}`,e)).on('mouseleave',hideTip)})});
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-M.b})`).call(d3.axisBottom(x).tickValues(decs.filter(d=>d%50===0)).tickFormat(d=>d));
+  fig.lgd.innerHTML='';
+  table(fig.tbl,['Place',...decs.map(d=>d+'s')],towns.map(t=>[townName(t),...decs.map(d=>cnt[t+'|'+d]||0)]),decs.map((_,i)=>i+1));
+}
+
+// ---------------------------------------------------------------- HOUSE OF CONVERTS
+function buildDomus(){
+  const D=A.records.filter(r=>r.type==='domus'&&(CONFIG.showUnverified||r.status!=='verify'));
+  const adm=D.filter(r=>r.src==='CPR'&&/convert|Conversi|Rabbi/i.test(r.title)&&!/keeper|Keeper|custody|warden/i.test(r.title));
+  const pet=D.filter(r=>r.src==='TNA'&&/^SC 8/.test(r.ref.replace('TNA ','')));
+  $('#doBody').innerHTML=`<h1>The House of Converts</h1>
+  <p class="lede">Henry III founded the Domus Conversorum in 1232 on what is now Chancery Lane. Eighty converts drew its alms in 1290. From 1377 the house went with the office of Keeper of the Rolls, whose accounts for it run to 1609; Adler counted 48 residents from 1330 to 1608.</p>
+  ${comment('domus')}
+  <div class="fig" id="do-gantt"></div>
+  <div class="grid2"><div class="fig" id="do-gm"></div><div class="fig" id="do-ser"></div></div>
+  <h3 class="lab">Admissions and allowances in the Patent Rolls</h3><div class="cards2">${adm.map(r=>recCard(r,{showTown:false})).join('')}</div>
+  <h3 class="lab">Petitions of the converts and their keepers (TNA SC 8)</h3><div class="cards2">${pet.map(r=>recCard(r,{showTown:false})).join('')}</div>`;
+  drawGantt(); drawDomusGM();
+  RESIZE.domus=()=>{drawGantt(); drawDomusGM()};
+}
+function drawGantt(){
+  const el=$('#do-gantt'); const K=A.keepers, Rs=A.residents;
+  const fig=figure(el,'Keepers and residents, 1232–1610',`Top: keepers. A solid bar spans the years their appointment or surviving accounts (TNA E 101/249–255) are dated; a pale bar runs on to the next keeper’s first date. Below: the 48 residents in Adler’s list (1899), App. XXI, by the years he gives. ${esc(A.residents_note)}`);
+  const W=plotW(fig.plot), M={l:16,r:16,t:26,b:28}, kh=16, rh=8;
+  const lanes=[]; K.forEach(k=>{let l=0; while(lanes[l]&&lanes[l]>k.y0) l++; lanes[l]=Math.max(k.to||k.y1,k.y1)+0.5; k.lane=l});
+  const nl=lanes.length, topH=nl*kh+18, h=M.t+topH+Rs.length*rh+M.b+16;
+  const svg=d3.select(fig.plot).append('svg').attr('width',W).attr('height',h).attr('role','img').attr('aria-label','Keepers and residents of the Domus Conversorum');
+  const x=d3.scaleLinear().domain([1230,1612]).range([M.l,W-M.r]);
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-M.b})`).call(d3.axisBottom(x).ticks(10).tickFormat(d3.format('d')));
+  rule1290(svg,x,M.t-12,h-M.b);
+  const mark=(y,lab)=>{svg.append('line').attr('x1',x(y)).attr('x2',x(y)).attr('y1',M.t-12).attr('y2',h-M.b).attr('stroke','var(--ink-3)').attr('stroke-dasharray','1 3'); svg.append('text').attr('class','rulenote').attr('x',x(y)+4).attr('y',M.t-2).text(lab)};
+  mark(1232,'1232 founded'); mark(1377,'1377 annexed to the Rolls');
+  K.forEach(k=>{const y=M.t+k.lane*kh; const end=k.to||k.y1;
+    if(end>k.y1) svg.append('rect').attr('x',x(k.y1+1)).attr('y',y+2).attr('width',Math.max(0,x(end)-x(k.y1+1))).attr('height',kh-5).attr('fill','var(--accent)').attr('opacity',.18);
+    svg.append('rect').attr('x',x(k.y0)).attr('y',y+2).attr('width',Math.max(3,x(k.y1+1)-x(k.y0))).attr('height',kh-5).attr('rx',2).attr('fill','var(--accent)')
+      .on('mousemove',e=>showTip(`<b>${esc(k.name)}</b><br>${k.y0===k.y1?k.y0:k.y0+'–'+k.y1}<br><span class="small">${k.refs.map(esc).join('<br>')}</span>`,e)).on('mouseleave',hideTip)});
+  svg.append('text').attr('x',M.l).attr('y',M.t+8).attr('font-size',11.5).text('Keepers');
+  svg.append('text').attr('x',M.l).attr('y',M.t+topH-3).attr('font-size',11.5).text('Residents (Adler)');
+  const yR=M.t+topH+6;
+  Rs.forEach((r,i)=>{const y=yR+i*rh; const end=r.y1??r.y0+1; svg.append('rect').attr('x',x(r.y0)).attr('y',y).attr('width',Math.max(3,x(end+1)-x(r.y0))).attr('height',rh-2).attr('rx',1.5).attr('fill',r.sex==='f'?'var(--c5)':'var(--c1)')
+    .on('mousemove',e=>showTip(`<b>${esc(r.name)}</b><br>${r.y0}${r.y1==null?'–?':r.y1!==r.y0?'–'+r.y1:''}${r.note?' · '+esc(r.note):''}`,e)).on('mouseleave',hideTip)});
+  legend(fig.lgd,[['Keeper (dated)','var(--accent)','sq'],['Keeper (to the next keeper)','color-mix(in srgb,var(--accent) 22%,transparent)','sq'],['Resident, man','var(--c1)','sq'],['Resident, woman','var(--c5)','sq']]);
+  table(fig.tbl,['Keeper','From','To','Sources'],K.map(k=>[k.name,k.y0,k.y1,k.refs.join('; ')]),[1,2]);
+  fig.tbl.insertAdjacentHTML('beforeend',`<table class="data" style="margin-top:10px"><thead><tr><th>No.</th><th>Resident</th><th>Years</th></tr></thead><tbody>${Rs.map(r=>`<tr><td class="n">${r.n}</td><td>${esc(r.name)}</td><td class="num">${r.y0}${r.y1==null?'–?':r.y1!==r.y0?'–'+r.y1:''}</td></tr>`).join('')}</tbody></table>`);
+}
+function drawDomusGM(){
+  const s=A.gm_series.find(s=>s.key==='domus_conversorum_decade');
+  const f1=figure($('#do-gm'),'“Domus conversorum” in the rolls, by decade',`${s.total} Glyph Machina entries with the phrase. <a href="${esc(s.url)}" target="_blank" rel="noopener">Open the search</a>.`);
+  const W=plotW(f1.plot), M={l:34,r:8,t:8,b:24}, h=190; const svg=d3.select(f1.plot).append('svg').attr('width',W).attr('height',h);
+  const x=d3.scaleLinear().domain([1230,1600]).range([M.l,W-M.r]); const e=Object.entries(s.decades).map(([d,n])=>[+d,n]);
+  const y=d3.scaleLinear().domain([0,d3.max(e,d=>d[1])]).nice().range([h-M.b,M.t]); const bw=Math.max(2,x(1240)-x(1230)-2);
+  svg.append('g').attr('class','gridline').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(4).tickSize(-(W-M.l-M.r)).tickFormat('')).select('.domain').remove();
+  svg.selectAll('rect.b').data(e).join('rect').attr('x',d=>x(d[0])+1).attr('width',bw).attr('y',d=>y(d[1])).attr('height',d=>y(0)-y(d[1])).attr('rx',1.5).attr('fill',tc('domus'))
+    .on('mousemove',(ev,d)=>showTip(`<b>${d[0]}s</b>: <span class="num">${d[1]}</span>`,ev)).on('mouseleave',hideTip);
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-M.b})`).call(d3.axisBottom(x).ticks(6).tickFormat(d3.format('d')));
+  svg.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(4));
+  rule1290(svg,x,M.t,h-M.b); f1.lgd.innerHTML='';
+  table(f1.tbl,['Decade','Entries'],e.map(d=>[d[0]+'s',d[1]]),[1]);
+  const so=A.gm_other.conversorum_series; const ser=Object.entries(so.counts).reduce((m,[k,v])=>{const kk=k.toUpperCase().replace('IND1FORE159','E159 index'); m[kk]=(m[kk]||0)+v; return m},{});
+  const rows=Object.entries(ser).sort((a,b)=>b[1]-a[1]);
+  const SN={E159:'King’s Remembrancer memoranda',E364:'Foreign accounts',E101:'Accounts various',E372:'Pipe rolls',E368:'Lord Treasurer’s Remembrancer memoranda',JUST1:'Eyre rolls',CP40:'Common Pleas',C66:'Patent rolls',E9:'Exchequer of the Jews',C78:'Chancery decree rolls'};
+  const f2=figure($('#do-ser'),'The same entries, by record series',`Exchequer accounts and memoranda carry the house, where the keepers answered for its revenues. <a href="${esc(so.url)}" target="_blank" rel="noopener">Open the search</a>.`);
+  const W2=plotW(f2.plot), M2={l:250,r:40,t:4,b:22}, bh=19, h2=M2.t+rows.length*bh+M2.b; const s2=d3.select(f2.plot).append('svg').attr('width',W2).attr('height',h2);
+  const x2=d3.scaleLinear().domain([0,rows[0][1]]).range([M2.l,W2-M2.r]);
+  rows.forEach(([k,n],i)=>{const y=M2.t+i*bh; s2.append('text').attr('x',M2.l-8).attr('y',y+13).attr('text-anchor','end').attr('font-size',12).text(`${k}${SN[k]?' · '+SN[k]:''}`);
+    s2.append('rect').attr('x',M2.l).attr('y',y+3).attr('width',Math.max(1,x2(n)-M2.l)).attr('height',bh-7).attr('rx',2).attr('fill',tc('domus')); s2.append('text').attr('x',x2(n)+5).attr('y',y+13).attr('font-size',12).attr('class','num').text(n)});
+  f2.lgd.innerHTML=''; table(f2.tbl,['Series','Entries'],rows,[1]);
+}
+
+// ---------------------------------------------------------------- RECORDS
+let recState={q:'',type:'',src:'',status:'',town:'',from:'',to:'',limit:150};
+function buildRecords(){
+  const R=A.records;
+  const towns=Object.entries(TOWN).sort((a,b)=>a[1].name.localeCompare(b[1].name));
+  $('#recBody').innerHTML=`<h1>Records</h1>
+  <p class="lede">Every record in the atlas, in date order. Glyph Machina lines are uncorrected machine transcriptions; Patent Roll quotations are from the calendar’s text, read by machine.</p>
+  <div class="toolbar">
+    <input type="search" id="rq" placeholder="Search names, places, references" aria-label="Search records">
+    <select id="rt" aria-label="Type"><option value="">All types</option>${A.types.map(t=>`<option value="${t.key}">${esc(t.label)}</option>`).join('')}</select>
+    <select id="rs" aria-label="Source"><option value="">All sources</option>${Object.entries(SRCNAME).map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join('')}</select>
+    ${CONFIG.showUnverified?`<select id="rst" aria-label="Status"><option value="">All marks</option>${Object.entries(STATUS).map(([k,v])=>`<option value="${k}">${esc(v[1])}</option>`).join('')}</select>`:''}
+    <select id="rw" aria-label="Place"><option value="">All places</option>${towns.map(([k,t])=>`<option value="${k}">${esc(t.name)}</option>`).join('')}</select>
+    <input type="number" id="rf" placeholder="From" min="1100" max="1700" style="width:84px" aria-label="From year">
+    <input type="number" id="rto" placeholder="To" min="1100" max="1700" style="width:84px" aria-label="To year">
+  </div>
+  <p class="small muted" id="rcount"></p>
+  <div class="tblwrap" style="max-height:none"><table class="data" id="rtab"><thead><tr><th>Date</th><th>Type</th><th>Place</th><th>Record</th><th>Reference</th></tr></thead><tbody></tbody></table></div>
+  <div class="more"><button class="btn" id="rmore">Show more</button></div>`;
+  const bind=(id,k,ev='input')=>{const e=$('#'+id); if(!e) return; e.addEventListener(ev,()=>{recState[k]=e.value; recState.limit=150; drawRecs()})};
+  bind('rq','q'); bind('rt','type','change'); bind('rs','src','change'); bind('rst','status','change'); bind('rw','town','change'); bind('rf','from'); bind('rto','to');
+  $('#rmore').onclick=()=>{recState.limit+=300; drawRecs()};
+  drawRecs();
+}
+function drawRecs(){
+  const s=recState, q=s.q.trim().toLowerCase();
+  const rs=A.records.filter(r=>(CONFIG.showUnverified||r.status!=='verify')&&(!s.type||r.type===s.type)&&(!s.src||r.src===s.src)&&(!s.status||r.status===s.status)&&(!s.town||r.town===s.town)
+    &&(!s.from||(r.y&&r.y>=+s.from))&&(!s.to||(r.y&&r.y<=+s.to))&&(!q||(r.title+' '+r.quote+' '+r.ref+' '+townName(r.town)).toLowerCase().includes(q)));
+  $('#rcount').textContent=`${rs.length.toLocaleString()} of ${A.records.length.toLocaleString()} records`;
+  $('#rtab tbody').innerHTML=rs.slice(0,s.limit).map(r=>`<tr><td class="num" style="white-space:nowrap">${esc(r.date||r.y||'')}</td><td><span class="dot" style="background:${tc(r.type)}"></span>${esc(tlab(r.type))}</td><td>${esc(townName(r.town))}</td>
+    <td style="min-width:260px">${esc(r.title)}${r.quote?`<div class="quote">${esc(r.quote)}</div>`:''}</td><td style="min-width:150px">${linkRef(r)}<br>${pill(r.status)} <span class="small muted">${esc(SRCNAME[r.src]||r.src)}</span></td></tr>`).join('');
+  $('#rmore').hidden=rs.length<=s.limit;
+}
+
+// ---------------------------------------------------------------- SOURCES
+const TNAURL='https://discovery.nationalarchives.gov.uk/';
+const OGL=`Contains public sector information licensed under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" target="_blank" rel="noopener">Open Government Licence v3.0</a>.`;
+function buildSources(){
+  const R=CONFIG.review;
+  $('#srcBody').innerHTML=`<h1>Sources &amp; method</h1>
+  ${comment('sources')}
+  <h3 class="lab">What each view draws on</h3>
+  <div class="tblwrap" style="max-height:none"><table class="data"><thead><tr><th>View</th><th>Sources</th><th>Treatment</th></tr></thead><tbody>
+  <tr><td>Overview</td><td>${A.events.length} dated events (Abrahams 1895; Adler 1899; CPR; TNA; Glyph Machina); ${A.gm_series.length} Glyph Machina formula searches; TNA catalogue of E 9; ${A.cpr_count} Patent Roll entries.</td><td>Formula counts are entries matching the search, uncorrected.</td></tr>
+  <tr><td>1290–93</td><td>Events, Patent Rolls, TNA (E 101/249–250, SC 1, SC 8), Glyph Machina (the account of Hugh de Kendale, E372 roll 139; E101 roll 250; C66 roll 112).</td><td>Date order; day and month as the sources give them.</td></tr>
+  <tr><td>Map</td><td>Every record that names one place.</td><td>Towns placed at their centres (London at Old Jewry). County rolls placed at the county’s main Jewry.</td></tr>
+  <tr><td>Houses &amp; rents</td><td>Glyph Machina, “NEAR(fuerunt iudei, 4)”, rolls dated 1291–1600: ${A.gm_counts.escheat_list_total} entries, all read; charges tagged by name, holder and place with patterns that allow for the transcription’s recurrent misreadings.</td><td>Entries counted once per charge they name; one entry can name several Lincoln charges.</td></tr>
+  <tr><td>House of Converts</td><td>Adler 1899 (residents, App. XXI); TNA E 101/249–255 (keepers’ accounts); CPR appointments and admissions; TNA SC 8; Glyph Machina.</td><td>Keepers merged across spellings (e.g. Ayrmynne/Ayremynne).</td></tr>
+  <tr><td>Records</td><td>All of the above, ${A.records.length} records.</td><td>Searchable; links to Discovery and to the Glyph Machina image pages.</td></tr></tbody></table></div>
+  <h3 class="lab">Marks</h3>
+  <p class="small">${pill('src')} found in a printed source read for this atlas: the Calendar of Patent Rolls (with volume and page), B. L. Abrahams, <i>The Expulsion of the Jews from England in 1290</i> (1895), or M. Adler, <i>History of the “Domus Conversorum” from 1290 to 1891</i> (1899). ${pill('db')} from a database: The National Archives’ catalogue or Glyph Machina’s machine transcription. ${CONFIG.showUnverified?pill('verify')+' reference knowledge, or a claim from the earlier Glyph Machina sweep that was not re-read here.':''}</p>
+  ${R?`<h3 class="lab">Needs your judgment or checking</h3><ul class="checklist small">${A.flags.map(f=>`<li><b>${esc(f.title)}.</b> ${esc(f.text)}</li>`).join('')}</ul>`:''}
+  <div class="fig" id="src-base"></div>
+  ${R?`<h3 class="lab">The earlier Glyph Machina sweep</h3><p class="small muted">Items from the assistant sweep pasted on 8 October 2026. “Matched” means a Glyph Machina hit read for this atlas has the same roll and image.</p>
+  <div class="tblwrap" style="max-height:none"><table class="data"><thead><tr><th>Item</th><th>Reference</th><th>Status</th></tr></thead><tbody>${A.prior.map(p=>`<tr><td>${esc(p.title)}${p.quote?`<div class="quote">${esc(p.quote)}</div>`:''}</td><td>${esc(p.ref)}${p.matched?`<br><a href="${esc(p.matched)}" target="_blank" rel="noopener">${esc(p.matched_ref)}</a>`:''}</td><td>${pill(p.status)}</td></tr>`).join('')}</tbody></table></div>`:''}
+  <h3 class="lab">Glyph Machina searches</h3>
+  <p class="small">${A.gm_log.length} searches, 8 October 2026. The site’s robots file disallows automated access, so use was kept small and spaced, as for the Berwick and Merchant London atlases.</p>
+  <div class="tblwrap"><table class="data"><thead><tr><th>Search</th><th>Mode</th><th>Grouping and filters</th></tr></thead><tbody>${A.gm_log.map(q=>`<tr><td><a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.q)}</a></td><td>${esc(q.mode)}</td><td>${esc([q.group?('by '+q.group):'list',...Object.entries(q.extra||{}).map(([k,v])=>k+' '+v)].join(', '))}</td></tr>`).join('')}</tbody></table></div>
+  <h3 class="lab">Sources and credits</h3>
+  <ul class="small">
+   <li><a href="https://glyphmachina.utsc.utoronto.ca/" target="_blank" rel="noopener">Glyph Machina</a>: searches run through Glyph Machina, with thanks to the Glyph Machina team and to the Anglo-American Legal Tradition project founded by the late Robert Palmer.</li>
+   <li><a href="${TNAURL}" target="_blank" rel="noopener">The National Archives, Discovery</a>: catalogue descriptions of E 101, E 9, SC 8, SC 1 and C 47 (${A.tna_count} records used). ${OGL}</li>
+   <li><i>Calendar of the Patent Rolls</i>, Edward I to Richard III and Edward VI, searchable text editions (Tanner Ritchie and St Andrews), from the London Merchants sources folder.</li>
+   <li>B. Lionel Abrahams, <i>The Expulsion of the Jews from England in 1290</i> (Oxford, 1895; from <i>Jewish Quarterly Review</i> 7); Michael Adler, <i>History of the “Domus Conversorum” from 1290 to 1891</i> (London, 1899; from <i>Transactions of the Jewish Historical Society of England</i> 4). Public-domain texts from the <a href="https://archive.org/" target="_blank" rel="noopener">Internet Archive</a>.</li>
+   <li>Coast and rivers: Natural Earth (public domain). Charts and map: D3.</li>
+  </ul>
+  ${R?'':`<p class="small">Concept: Daniel Davies. Data compilation and interface prepared with Claude (Anthropic).</p>`}
+  <p class="small muted">Built ${esc(A.built)}.</p>`;
+  drawBaseline();
+}
+function drawBaseline(){
+  const o=A.gm_other.baseline_decade; const e=Object.entries(o.counts).filter(([d])=>/^\d+$/.test(d)&&+d<1700).map(([d,n])=>[+d,n]);
+  const fig=figure($('#src-base'),'A warning: every form of “iudeus”, unanchored',`An any-word search for iudeus, iudei, iudeorum, iudeo, iudea, iudee, iudeis and iudeum returns ${o.total.toLocaleString()} entries, rising after 1290. A sample of 25 Common Pleas hits from the 1330s reads “Iudeo” for <i>ideo</i> and the feast of SS Simon and Jude; none clearly names a Jew. <a href="${esc(o.url)}" target="_blank" rel="noopener">Open the search</a>.`);
+  const W=plotW(fig.plot), M={l:44,r:8,t:8,b:24}, h=170; const svg=d3.select(fig.plot).append('svg').attr('width',W).attr('height',h);
+  const x=d3.scaleLinear().domain([1190,1690]).range([M.l,W-M.r]); const y=d3.scaleLinear().domain([0,d3.max(e,d=>d[1])]).nice().range([h-M.b,M.t]); const bw=Math.max(2,x(1200)-x(1190)-2);
+  svg.selectAll('rect').data(e).join('rect').attr('x',d=>x(d[0])+1).attr('width',bw).attr('y',d=>y(d[1])).attr('height',d=>y(0)-y(d[1])).attr('fill','var(--c0)')
+    .on('mousemove',(ev,d)=>showTip(`<b>${d[0]}s</b>: <span class="num">${d[1]}</span>`,ev)).on('mouseleave',hideTip);
+  svg.append('g').attr('class','axis').attr('transform',`translate(0,${h-M.b})`).call(d3.axisBottom(x).ticks(8).tickFormat(d3.format('d')));
+  svg.append('g').attr('class','axis').attr('transform',`translate(${M.l},0)`).call(d3.axisLeft(y).ticks(4));
+  rule1290(svg,x,M.t,h-M.b); fig.lgd.innerHTML='';
+  table(fig.tbl,['Decade','Entries'],e.map(d=>[d[0]+'s',d[1]]),[1]);
+}
+
+// ---------------------------------------------------------------- boot
+const loadCommentary=()=>CONFIG.commentary?fetch(CONFIG.commentary).then(r=>r.ok?r.text():'').then(t=>{ if(!t) return; const d=document.createElement('div'); d.innerHTML=t;
+  d.querySelectorAll('section[data-view]').forEach(sec=>{const html=sec.innerHTML.replace(/<!--[\s\S]*?-->/g,'').trim(); if(html) COMMENTARY[sec.dataset.view]=html})}).catch(()=>{}):Promise.resolve();
+Promise.all([fetch('data/atlas.json').then(r=>r.json()),fetch('data/geo.json').then(r=>r.json()),loadCommentary()]).then(([a,g])=>{
+  A=a; G=g;
+  if(!CONFIG.showUnverified){ A.records=A.records.filter(r=>r.status!=='verify'); A.events=A.events.filter(e=>e.status!=='verify') }
+  A.types.forEach(t=>T[t.key]=t);
+  Object.entries(A.towns).forEach(([k,t])=>TOWN[k]=t);
+  const h=location.hash.slice(1); const v=VIEWS.includes(h)?h:(store('ex-view')||'overview');
+  show(VIEWS.includes(v)?v:'overview');
+}).catch(e=>{document.querySelector('main').innerHTML=`<div class="pagewrap" style="padding:24px"><h1>Could not load the data</h1><p>${esc(e.message)}</p></div>`});
+</script>

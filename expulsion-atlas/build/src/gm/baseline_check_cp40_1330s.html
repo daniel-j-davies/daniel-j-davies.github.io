@@ -1,0 +1,1188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AALT Transcription Search</title>
+<link rel="stylesheet" href="/static/search.css">
+</head>
+<body>
+<header>
+  
+  <span class="title">Anglo-American Legal Tradition &mdash; Transcriptions</span>
+  <span style="font:13px sans-serif">10 million pages of English legal records: browse, transcribe, search</span>
+</header>
+<div class="wrap">
+
+<p class="credit-note">We are thrilled if you find this tool useful. If you
+publish using records you found using our tool, please credit Glyph Machina
+and <a href="/about-us">the team</a> by name when you cite the records you
+  found.
+  This scholarly project would not have been possible without the Anglo-American
+  Legal Tradition, a massive digitization project undertaken by the late Robert
+  Palmer and his family, friends, and students.
+</p>
+
+<div class="cards">
+  <div class="card">
+    <h2><span class="num">1.</span>AALT mirror</h2>
+    <p>Browse the document images and the original AALT site structure
+       (reigns, series, rolls), with the built-in page viewer that overlays
+       each transcribed line on the scan.</p>
+    <a class="go" href="/IndexPri.html">Browse the mirror &rarr;</a>
+  </div>
+  <div class="card">
+    <h2><span class="num">2.</span>Transcription tool</h2>
+    <p>GlyphMachina, the handwritten-text transcription tool used to produce
+       the automatic transcriptions behind this site.</p>
+    <a class="go" href="/custom" target="_blank" rel="noopener">Open GlyphMachina &rarr;</a>
+  </div>
+  <div class="card">
+    <h2><span class="num">3.</span>Search the transcriptions</h2>
+    <p>Full-text search over ~21 million case entries with reign, series and
+       confidence filters, saved formula searches, person tracing &mdash; and an
+       AI assistant for open-ended questions.</p>
+    <a class="go" href="#search">Search below &darr;</a>
+  </div>
+</div>
+
+<div class="sect-h" id="search">Search the transcriptions</div>
+<form class="search" method="get" action="/">
+  <div class="row">
+    <div>
+      <label>Search (Latin text; spelling of u/v, i/j/y is folded automatically)</label>
+      <input class="q" type="text" name="q" value="iudeus iudei iudeorum iudeo iudea iudee iudeis iudeum" placeholder='e.g. nichil dicit, excommunicat*, noctanter'>
+    </div>
+    <div>
+      <label>Also mentions (e.g. a place; spelling variants added)</label>
+      <input type="text" name="extra" value="" size="16" placeholder="e.g. Notingham">
+    </div>
+    <div>
+      <label>Mode <a href="#modes-help" class="help-link">what&rsquo;s this?</a></label>
+      <select name="mode">
+        
+        <option value="phrase" >exact phrase</option>
+        
+        <option value="and" >all words</option>
+        
+        <option value="or" selected>any word</option>
+        
+        <option value="near" >words near each other</option>
+        
+        <option value="fuzzy" >fuzzy (stems + variants)</option>
+        
+        <option value="robust" >robust (HTR-noise tolerant)</option>
+        
+        <option value="raw" >raw FTS5 syntax</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Saved search (formula lexicon)</label>
+      <select name="formula">
+        <option value="">— none —</option>
+        
+        <option value="excommunication" 
+                title="All instances of excommunication (excommunicatus, excommunicacio(n)-, HTR variants with single m / c-t swap, and the abbreviated excoicat- form).">Excommunication</option>
+        
+        <option value="standing_mute" 
+                title="Defendants in felony cases who refused to plead: nihil dicit, tenuit mutam (corpus spells it &#39;se mutum tenet&#39;), peine forte et dure, prison forte et dure (with spelling variants).">Standing mute (refusal to plead)</option>
+        
+        <option value="standing_mute_felony" 
+                title="Standing mute at felony arraignment only: &#39;nihil dicit&#39; co-occurring with arraignment/felony vocabulary in the same entry, or the explicit mute/peine forte et dure formulae.">Standing mute in felony (strict)</option>
+        
+        <option value="night_robbery" 
+                title="Offences committed by night (noctanter) combined with robbery/theft vocabulary (roberia, latrocinium, depredatus, spoliavit, burglaria, furtive).">Robbery/theft at night</option>
+        
+        <option value="by_night" 
+                title="Any offence alleged to have been committed at night.">By night (noctanter)</option>
+        
+        <option value="robbery" 
+                title="Robbery and theft terms regardless of time of day.">Robbery / theft vocabulary</option>
+        
+        <option value="appeal_to_king" 
+                title="Formulae of complaining or petitioning the king (queritur/questus est domino regi, supplicavit, monstravit).">Complaint/petition to the king</option>
+        
+        <option value="housebreaking" 
+                title="Breaking into a house: domum/domos fregit-fregerunt (any word order, within 6 words) and burglaria vocabulary.">Housebreaking (domum fregit)</option>
+        
+        <option value="matricide" 
+                title="A person killing his or her own mother: &#39;matrem suam&#39; near a killing verb (occidit, interfecit, felonice).">Matricide (killing of a mother)</option>
+        
+        <option value="first_finder" 
+                title="Coroner&#39;s-roll &#39;first finder&#39; formula: primus inventor / prima inventrix (with case endings and HTR garbling).">First finder of a body (primus inventor)</option>
+        
+        <option value="first_finder_parent" 
+                title="First finders described as mother/father (mater/pater and genitives) near the inventor formula — candidates for parents finding their own child&#39;s body.">First finder who was a parent</option>
+        
+        <option value="misadventure" 
+                title="Deaths ruled misadventure: per infortunium (and garbled infortun- forms).">Death by misadventure (per infortunium)</option>
+        
+        <option value="drowning" 
+                title="Drownings: submersus/-a/-it and demersus forms.">Drowning (submersus)</option>
+        
+        <option value="attaint" 
+                title="Attaint proceedings reviewing a verdict by a grand jury of 24 knights: &#39;jurata xxiiii militum (de visneto)...&#39;, &#39;venit recognitura si juratores...&#39;.">Writ of attaint (jury of 24)</option>
+        
+      </select>
+    </div>
+    <div><button class="go" type="submit">Search</button></div>
+  </div>
+  <div class="row">
+    <div>
+      <label>Reign from</label>
+      <select name="mfrom">
+        <option value="">—</option>
+        
+        <option value="John" >John (1199–1216)</option>
+        
+        <option value="Henry III" >Henry III (1216–1272)</option>
+        
+        <option value="Edward I" >Edward I (1272–1307)</option>
+        
+        <option value="Edward II" >Edward II (1307–1327)</option>
+        
+        <option value="Edward III" >Edward III (1327–1377)</option>
+        
+        <option value="Richard II" >Richard II (1377–1399)</option>
+        
+        <option value="Henry IV" >Henry IV (1399–1413)</option>
+        
+        <option value="Henry V" >Henry V (1413–1422)</option>
+        
+        <option value="Henry VI" >Henry VI (1422–1461)</option>
+        
+        <option value="Edward IV" >Edward IV (1461–1483)</option>
+        
+        <option value="Edward V" >Edward V (1483–1483)</option>
+        
+        <option value="Richard III" >Richard III (1483–1485)</option>
+        
+        <option value="Henry VII" >Henry VII (1485–1509)</option>
+        
+        <option value="Henry VIII" >Henry VIII (1509–1547)</option>
+        
+        <option value="Edward VI" >Edward VI (1547–1553)</option>
+        
+        <option value="Mary" >Mary (1553–1558)</option>
+        
+        <option value="Elizabeth I" >Elizabeth I (1558–1603)</option>
+        
+        <option value="James I" >James I (1603–1625)</option>
+        
+        <option value="Charles I" >Charles I (1625–1649)</option>
+        
+        <option value="Commonwealth" >Commonwealth (1649–1660)</option>
+        
+        <option value="Charles II" >Charles II (1660–1685)</option>
+        
+        <option value="James II" >James II (1685–1688)</option>
+        
+        <option value="William and Mary" >William and Mary (1689–1694)</option>
+        
+        <option value="William III" >William III (1694–1702)</option>
+        
+        <option value="Anne" >Anne (1702–1714)</option>
+        
+        <option value="George I" >George I (1714–1727)</option>
+        
+        <option value="George II" >George II (1727–1760)</option>
+        
+        <option value="George III" >George III (1760–1820)</option>
+        
+        <option value="George IV" >George IV (1820–1830)</option>
+        
+        <option value="William IV" >William IV (1830–1837)</option>
+        
+        <option value="Victoria" >Victoria (1837–1901)</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Reign to</label>
+      <select name="mto">
+        <option value="">—</option>
+        
+        <option value="John" >John (1199–1216)</option>
+        
+        <option value="Henry III" >Henry III (1216–1272)</option>
+        
+        <option value="Edward I" >Edward I (1272–1307)</option>
+        
+        <option value="Edward II" >Edward II (1307–1327)</option>
+        
+        <option value="Edward III" >Edward III (1327–1377)</option>
+        
+        <option value="Richard II" >Richard II (1377–1399)</option>
+        
+        <option value="Henry IV" >Henry IV (1399–1413)</option>
+        
+        <option value="Henry V" >Henry V (1413–1422)</option>
+        
+        <option value="Henry VI" >Henry VI (1422–1461)</option>
+        
+        <option value="Edward IV" >Edward IV (1461–1483)</option>
+        
+        <option value="Edward V" >Edward V (1483–1483)</option>
+        
+        <option value="Richard III" >Richard III (1483–1485)</option>
+        
+        <option value="Henry VII" >Henry VII (1485–1509)</option>
+        
+        <option value="Henry VIII" >Henry VIII (1509–1547)</option>
+        
+        <option value="Edward VI" >Edward VI (1547–1553)</option>
+        
+        <option value="Mary" >Mary (1553–1558)</option>
+        
+        <option value="Elizabeth I" >Elizabeth I (1558–1603)</option>
+        
+        <option value="James I" >James I (1603–1625)</option>
+        
+        <option value="Charles I" >Charles I (1625–1649)</option>
+        
+        <option value="Commonwealth" >Commonwealth (1649–1660)</option>
+        
+        <option value="Charles II" >Charles II (1660–1685)</option>
+        
+        <option value="James II" >James II (1685–1688)</option>
+        
+        <option value="William and Mary" >William and Mary (1689–1694)</option>
+        
+        <option value="William III" >William III (1694–1702)</option>
+        
+        <option value="Anne" >Anne (1702–1714)</option>
+        
+        <option value="George I" >George I (1714–1727)</option>
+        
+        <option value="George II" >George II (1727–1760)</option>
+        
+        <option value="George III" >George III (1760–1820)</option>
+        
+        <option value="George IV" >George IV (1820–1830)</option>
+        
+        <option value="William IV" >William IV (1830–1837)</option>
+        
+        <option value="Victoria" >Victoria (1837–1901)</option>
+        
+      </select>
+    </div>
+    <div>
+      <label>Series (e.g. CP40, KB27, JUST%)</label>
+      <input type="text" name="series" value="CP40" size="10">
+    </div>
+    <div>
+      <label>Year from <a href="#modes-help" class="help-link" title="Calendar years extracted from the entries' own regnal-year datings; approximate for undated entries (roll-side median)">?</a></label>
+      <input type="text" name="yfrom" value="1330" size="5" placeholder="1300">
+    </div>
+    <div>
+      <label>Year to</label>
+      <input type="text" name="yto" value="1339" size="5" placeholder="1350">
+    </div>
+    <div>
+      <label>Min. mean confidence</label>
+      <input type="text" name="minconf" value="" size="4" placeholder="e.g. 50">
+    </div>
+    <div>
+      <label>Sort</label>
+      <select name="order">
+        <option value="chrono" selected>chronological</option>
+        <option value="rank" >relevance</option>
+      </select>
+    </div>
+    <div>
+      <label>Group results (count table)</label>
+      <select name="group">
+        <option value="">— list hits —</option>
+        
+        <option value="reign" >by reign</option>
+        
+        <option value="decade" >by decade</option>
+        
+        <option value="year" >by year</option>
+        
+        <option value="series" >by series</option>
+        
+        <option value="roll" >by roll</option>
+        
+      </select>
+    </div>
+    <div class="checks">
+      <label>&nbsp;</label>
+      <input type="checkbox" name="person" value="1" id="person" >
+      <label for="person" style="display:inline">person trace (&ldquo;Forename Surname&rdquo;)</label>
+    </div>
+  </div>
+  
+  <details class="modes-help" id="modes-help">
+    <summary>What do the search modes mean?</summary>
+    <p class="mh-intro">All modes search <em>case entries</em> (individual
+      records), and fold spelling automatically (u/v, i/j/y). Pick a mode by
+      how your words should relate:</p>
+    <dl>
+      
+      <dt>exact phrase</dt><dd>The words must appear together, in the order you typed them. <b>nichil dicit</b> finds the phrase &ldquo;nichil dicit&rdquo; but not &ldquo;nichil&rdquo; and &ldquo;dicit&rdquo; apart. Best when you know the exact wording of a formula.</dd>
+      
+      <dt>all words</dt><dd>Every word must appear somewhere in the same case entry, in any order and any distance apart. <b>excommunicatus rex</b> finds entries containing both words. Best for narrowing to entries that mention several things at once.</dd>
+      
+      <dt>any word</dt><dd>At least one of the words must appear. <b>roberia latrocinium furtum</b> finds entries with any of those theft terms. Best for gathering synonyms or spelling variants of one idea.</dd>
+      
+      <dt>words near each other</dt><dd>All the words must appear within about 10 words of one another in the same entry. <b>noctanter domum</b> finds them close together (a house entered by night), not merely somewhere in the same long entry. Best when the words must relate to each other.</dd>
+      
+      <dt>fuzzy (stems + variants)</dt><dd>Like &ldquo;all words&rdquo;, but each word is shortened to its stem and common medieval spelling variants are added automatically, so you catch inflected endings and scribal/HTR spellings. <b>spoliavit</b> also matches spoliaverunt, spoliatus, etc. Best when you are unsure of the exact ending or spelling.</dd>
+      
+      <dt>robust (HTR-noise tolerant)</dt><dd>Like fuzzy, but each word additionally matches every spelling in the corpus within one typo of it (two for longer words) &mdash; including errors in the FIRST letters, which fuzzy&rsquo;s stems cannot catch. <b>Chaucer</b> also matches Ehaucer, Thaucer, Chauce&hellip; Best for names and rare words, where transcription errors would otherwise hide hits. Broader than fuzzy: expect some false matches from genuinely similar words.</dd>
+      
+      <dt>raw FTS5 syntax</dt><dd>You write the query yourself using SQLite FTS5 operators (<code>AND OR NOT NEAR() &quot;phrase&quot; prefix*</code>). <b>noctanter AND (roberia* OR latrocin*)</b>. For power users; this is what the saved formulae use under the hood.</dd>
+      
+    </dl>
+    <p class="mh-intro">Add <code>*</code> to any word to match its
+      continuations (<b>excommunicat*</b> &rarr; excommunicatus,
+      excommunicacionem&hellip;). The <b>saved searches</b> dropdown runs
+      expert queries for common topics without needing any of this.</p>
+    <p class="mh-intro"><b>Years</b>: calendar years are extracted from the
+      entries&rsquo; own regnal-year datings (&ldquo;anno regni Regis nunc
+      xxxv&rdquo;); entries without one are dated approximately (shown as
+      &ldquo;c.&nbsp;1352&rdquo;) from their roll side. The <b>year
+      from/to</b> boxes filter on these, so questions like &ldquo;between
+      1300 and 1350&rdquo; or &ldquo;before 1300&rdquo; work directly.
+      <b>Group results</b> turns the hit list into a count table (by reign,
+      decade, year, series or roll) with drill-down links &mdash; e.g.
+      robbery with housebreaking, grouped by decade. <b>Also mentions</b>
+      requires an extra word (a town, a person) to appear in the same entry,
+      with spelling variants added automatically &mdash; combine it with the
+      person trace to find e.g. every <i>Roger</i> in entries mentioning
+      <i>Nottingham</i>. NB a place term also matches toponymic surnames
+      (&ldquo;Johannes de Notingham&rdquo; living elsewhere).</p>
+  </details>
+</form>
+
+<details class="ask" id="ask-panel" >
+<summary style="cursor:pointer; font: bold 15px Georgia, serif; color:#3b2f23">
+  Ask the AI assistant (chat)</summary>
+<p class="note" style="margin:8px 0 6px">
+  A conversation with Claude Code on the server: it can run the search tools
+  over the corpus and reads the noisy transcriptions for you. Follow-up
+  questions stay in the same conversation. Answers stream in and can take a
+  few minutes for hard questions.</p>
+<div id="chat-log"></div>
+<textarea id="ask-q" placeholder="e.g. Were there any cases of women standing mute in felony trials under Edward III?"></textarea>
+<div class="row2">
+  <button id="ask-go" type="button">Send</button>
+  <button id="ask-stop" type="button">Stop</button>
+  <button id="ask-new" type="button" style="background:#7a6a4d;color:#fff">New conversation</button>
+  <button id="ask-dl" type="button">Download transcript</button>
+  <label class="note" id="ask-ctx-row" style="display:none; cursor:pointer">
+    <input type="checkbox" id="ask-ctx" checked>
+    give the assistant my current search (query, filters, result count)
+  </label>
+  <span class="note" id="ask-status"></span>
+</div>
+</details>
+
+
+<script type="application/json" id="search-ctx">{"extra": "", "formula": "", "group": "", "mfrom": "", "minconf": "", "mode": "or", "mto": "", "order": "chrono", "page": 1, "person": "", "q": "iudeus iudei iudeorum iudeo iudea iudee iudeis iudeum", "series": "CP40", "total": "64", "yfrom": "1330", "yto": "1339"}</script>
+<script src="/static/search.js" defer></script>
+
+
+
+
+<p class="summary">
+  <b>64</b> matching entries
+   &mdash; query: <code>&#34;iudeus&#34; OR &#34;iudei&#34; OR &#34;iudeorum&#34; OR &#34;iudeo&#34; OR &#34;iudea&#34; OR &#34;iudee&#34; OR &#34;iudeis&#34; OR &#34;iudeum&#34;</code>
+  &mdash; page 1 of 3
+  
+  <button id="analyze-btn" type="button" style="font: bold 12px sans-serif;
+    margin-left: 10px; padding: 3px 12px; background: #7a2c2c; color: #fff;
+    border: 0; border-radius: 4px; cursor: pointer;">Analyze with AI</button>
+  
+</p>
+
+
+
+
+  <div class="group-h">Edward III — CP40 roll 283</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1330</span> &middot;
+      <a href="/AALT2/E3/CP40no283/aCP40no283fronts/IMG_0399.htm">CP40 roll 283 fronts, image 0399</a>
+      &middot; entry of 30 lines &middot;
+      <span class="badge b-high">conf 86</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">79</span>injuriam quando etc. Et dicunt quod predictus prior habet quendam causum in Bilsynton
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>quod est <mark>Iudeis</mark> ecclesie predicti Prioris beate Marie de Bilfynton quem predicti prior et alii
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">70</span>intraverunt et arbores ibidem succiderunt prout predicto priori bene licuit etc Et
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 288</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1330</span> &middot;
+      <a href="/AALT2/E3/CP40no288/aCP40no288fronts/IMG_0406.htm">CP40 roll 288 fronts, image 0406</a>
+      &middot; entry of 5 lines &middot;
+      <span class="badge b-mid">conf 69</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">55</span>et ecclesie injuste detinuerunt contra eadem et plegiis etc Et ipse non venit Et preceptum fuit
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">52</span>vicecomiti quod attachiaret eos etc Et suo non misit breve <mark>Iudeo</mark> sicut pluries preceptum est vicecomiti quod ad
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">71</span>eos quod sit hic in octabis Sancte Trinicaliis etc Et vicecomes sit etc
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 291</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1330</span> &middot;
+      <a href="/AALT1/E3/CP40no291/aCP40no291fronts/IMG_0277.htm">CP40 roll 291 fronts, image 0277</a>
+      &middot; entry of 6 lines &middot;
+      <span class="badge b-high">conf 74</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">83</span>placito quod uter eorum reddit ei centum manas quas ei debent et iniuste detinent etc Et
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">77</span>ipsi non veniunt Et preceptum fuit vicecomiti quod atterhit eos etc et vicecomes non misit breve <mark>Iudeo</mark> sicut
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">75</span>prius preceptum est vicecomiti quod attachiaret eos quod sint vicecomes in orctistino Sancti Martini etc Et vices
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 313</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1330</span> &middot;
+      <a href="/AALT1/E3/CP40no313/bCP40no313dorses/IMG_0425.htm">CP40 roll 313 dorses, image 0425</a>
+      &middot; entry of 10 lines &middot;
+      <span class="badge b-mid">conf 59</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">30</span>breve sui sicut pluries preceptum est vicecomiti quod venit factas hic in octibbus Sancte Trinitatis per Iusticia xii etc Ad recognoscendum
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">9</span>in forma predicta etc. Ad quem diem veniunt partes etc Et vicecomes non nostras libere <mark>Iudeo</mark> sicut pluries preceptum est vice venit preceptum hic in crastino
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">57</span>tarum xii etc ad recognoscendum in forma predicta in
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 290</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1331</span> &middot;
+      <a href="/AALT1/E3/CP40no290/bCP40no290dorses/IMG_0675.htm">CP40 roll 290 dorses, image 0675</a>
+      &middot; entry of 11 lines &middot;
+      <span class="badge b-high">conf 72</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">87</span>ei non dum etc Et qualiter etc scire faceret hic ad hunc diem scilicet a die Pasche
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">85</span>in xv dies etc Et vicecomes nichil inde fent set mandat quod mortuus est etc <mark>Iudeo</mark> fiet
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">51</span>habere de soltutoec Et qualiter etc sire faciat hic in Octabis Sancti Michaelis etc Et ene etc
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 292</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1331</span> &middot;
+      <a href="/AALT1/E3/CP40no292/bCP40no292dorses/IMG_0704.htm">CP40 roll 292 dorses, image 0704</a>
+      &middot; entry of 5 lines &middot;
+      <span class="badge b-high">conf 75</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">86</span>librarum quas eis iniuste detinent etc Et ipsi non veniunt Et sicut plurie preceptum fuit vicecomiti
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">58</span>quod distringat eos etc et vicecomes non misit breve <mark>Iudeo</mark> sint pluries preceptum est vicecomiti quod distringat
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">73</span>eos etc Et quod habeat corpora eorum vica ad prefatum terminum etc et ecclesias sit etc
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1331</span> &middot;
+      <a href="/AALT1/E3/CP40no292/aCP40no292fronts/IMG_0691.htm">CP40 roll 292 fronts, image 0691</a>
+      &middot; entry of 17 lines &middot;
+      <span class="badge b-high">conf 77</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">63</span>Purificacionis beate Marie predictos Rogerum et Robertum clericos suos etc per iusticiarios etc. ad qui eidern
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">20</span>ne coram misit breve <mark>Iudeis</mark> ponit prius mandati est ei quod venire faciat hic a die Pasche in tres supetimanas Rericardis
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>suos etc
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 293</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1331</span> &middot;
+      <a href="/AALT1/E3/CP40no293/aCP40no293fronts/IMG_0070.htm">CP40 roll 293 fronts, image 0070</a>
+      &middot; entry of 9 lines &middot;
+      <span class="badge b-mid">conf 63</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">82</span>Et quod de exitibus etc et quod de exitibus etc et quod habeat corpus eius hic a die Pasche in xv di
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">66</span>per Johannes de Shard etc Et vicecomes sit etc Ad quem diem vicecomes nichil inde fecit ita brevi nis <mark>Iudeo</mark> sicut
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">33</span>pluries preceptum est vicecomitibus ad distringat eum etc et quod de extra et quod habent corpus eius hic a die noti
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 407</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1331</span> &middot;
+      <a href="/AALT4/E3/CP40no407/aCP40no407fronts/IMG_0084.htm">CP40 roll 407 fronts, image 0084</a>
+      &middot; entry of 49 lines &middot;
+      <span class="badge b-mid">conf 70</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">51</span>nec sicut ad habebit inde breve per statutis etc Et qualiter etc vicecomiti scire faciat
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">57</span>Sancti Trueta etc Ad meis diem vicecomes non misit breve quod sicut plurie habeant <mark>iudeo</mark> breve per
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">22</span>retornavunt has in Grasduo niarum etc Ad quem diem vessmus non is habere que sicut plures habeat inde bra
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 445</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1331</span> &middot;
+      <a href="/AALT4/E3/CP40no445/bCP40no445dorses/IMG_1085.htm">CP40 roll 445 dorses, image 1085</a>
+      &middot; entry of 27 lines &middot;
+      <span class="badge b-mid">conf 65</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">87</span>et Diapere Eboracensi de placito quod reddat ei viginti libras quas ei debet et iniuste detinet
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">29</span>etc et ipso non venit et vicecomes modo mandat <mark>Iudeo</mark> ad comitatum centum campum lo ei me
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">57</span>proximo post festum Sancti Martini in seme anno regni domini regis nunc Auglie quatuor raresim
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 294</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1332</span> &middot;
+      <a href="/AALT1/E3/CP40no294/aCP40no294fronts/IMG_0123.htm">CP40 roll 294 fronts, image 0123</a>
+      &middot; entry of 16 lines &middot;
+      <span class="badge b-high">conf 79</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>Sancti Michaelis Idem dies datus est predicte Johanne per Thomam le Uyneter attornatum suum ibidem etc.
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">71</span>Et dictum est attornatum predictorum Johannis <mark>Iudeis</mark> sequate suo periculo etc.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 296</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1332</span> &middot;
+      <a href="/AALT1/E3/CP40no296/bCP40no296dorses/IMG_0259.htm">CP40 roll 296 dorses, image 0259</a>
+      &middot; entry of 10 lines &middot;
+      <span class="badge b-high">conf 84</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">81</span>inde fecit nec breue misit Ideo sicut pluries preceptum est vicecomiti quod capiat eum si etc et eum salvo etc Ita quod
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>habeat corpus eius hic in octabis Sancti Hillarii Et vicecomites sit etc. Ad quem diem vicecomes non misit breve <mark>Iudeo</mark> sicut
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">77</span>pluries preceptum est vicecomiti quod capiat eum si etc. et salvo etc Ita quod habeat corpus eius hic moctalius Sancte Trinitatis
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1332</span> &middot;
+      <a href="/AALT1/E3/CP40no296/aCP40no296fronts/IMG_0906.htm">CP40 roll 296 fronts, image 0906</a>
+      &middot; entry of 37 lines &middot;
+      <span class="badge b-high">conf 83</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">83</span>eadem villa quas clamant in dotem etc Et ipsi non veniunt Et preceptum fuit vicecomitis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">86</span>quod summoneret eos quod essent hic ad hunc diem etc audituris repoderat et <mark>iudeum</mark> suum de
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">78</span>loquelis que fuerunt in caria domini regis nunc apud Westmonasterium meprdabi Katerinam petit
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 297</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1332</span> &middot;
+      <a href="/AALT1/E3/CP40no297/aCP40no297fronts/IMG_0309.htm">CP40 roll 297 fronts, image 0309</a>
+      &middot; entry of 8 lines &middot;
+      <span class="badge b-high">conf 82</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">77</span>mandat quod non habet tras seu tenementa ne habuit die et anno supradictis Et testatum est hic quod satis habuit predictis
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">83</span>die et anno <mark>Iudeis</mark> sicut pluries preceptum est vicecomiti quod distringat eum per terras et tenementa que tenuit die et anno supradictis Et
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>de exitibus etc et quod habeat corpus eius hic in octabis Sancte Trinitatis etc Et vicecomites sit
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 299</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1332</span> &middot;
+      <a href="/AALT1/E3/CP40no299/aCP40no299fronts/IMG_0183.htm">CP40 roll 299 fronts, image 0183</a>
+      &middot; entry of 12 lines &middot;
+      <span class="badge b-high">conf 73</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>Ideo sicut pluries preceptum est vicecomiti quod capiat eos si etc et salvo etc ita quod habeat corpora eorum hic
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">36</span>a die Sancti Michaelis in xv dies per iusticiarios etc Et vicecomites sit etc Ad quam die sicut capte misit breve <mark>Iudeo</mark> sicut presen
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">-19</span>distringat . Ea vixerit Hallum corpora eorum habui a die Sancti illa in xv dies etc.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 304</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1332</span> &middot;
+      <a href="/AALT1/E3/CP40no304/aCP40no304fronts/IMG_0901.htm">CP40 roll 304 fronts, image 0901</a>
+      &middot; entry of 16 lines &middot;
+      <span class="badge b-high">conf 80</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">88</span>¶Preceptum fuit vicecomiti cum Robertus de Batlofecumbe in curia Regis apud Westmonasterium die Veneris
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">84</span>proximo post festum Apostolorum Simonis et <mark>Iudeis</mark> anno regni Regis nunc sexto cognoscit se debere Willelmo de
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">92</span>Notton triginta et sex libras vnde reddidisse debuit ad festum Pasche tnnc proximo sequenti decem
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 395</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1332</span> &middot;
+      <a href="/E3/CP40no395/bCP40no395dorses/IMG_3704.htm">CP40 roll 395 dorses, image 3704</a>
+      &middot; entry of 71 lines &middot;
+      <span class="badge b-mid">conf 68</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">63</span>reddat ei racionabilem compotum suis de tempore quo fuit balliuus suus in la Sele Dedi
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">69</span>Brembre et Amyngdon et receptor denariorum ipsius prioris Et ipse non venit Et summoneatur <mark>Iudeis</mark>
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">63</span>attachiat quod ut hic in Octabis Sancti Michaelis per iusticiarios etc.
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 433</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1332</span> &middot;
+      <a href="/AALT4/E3/CP40no433/bCP40no433dorses/IMG_1021.htm">CP40 roll 433 dorses, image 1021</a>
+      &middot; entry of 23 lines &middot;
+      <span class="badge b-mid">conf 64</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">49</span>pacem Regis Et modo vidit predictus Johannes per attornatum suum quam preiecttus
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">2</span>per insti pre etc <mark>Iudeis</mark> sicut prius Rei est ici quod venire
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">91</span>Henricus per attornatum suum etc
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 460</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1332</span> &middot;
+      <a href="/AALT4/E3/CP40no460/bCP40no460dorses/IMG_1613.htm">CP40 roll 460 dorses, image 1613</a>
+      &middot; entry of 75 lines &middot;
+      <span class="badge b-mid">conf 68</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">69</span>etc Et vnde idem Ricardus per Edium Carletn suum querentem qudcum predictus Willelmus
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">70</span>simil err in festo apelatore Simonis <mark>Iudeo</mark> anno recdni domini Nicendig.
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">72</span>Anglie quadra esio septimo vi et armis sclicet gladus arcubus sacituis clausum
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 300</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1333</span> &middot;
+      <a href="/AALT1/E3/CP40no300/bCP40no300dorses/IMG_0584.htm">CP40 roll 300 dorses, image 0584</a>
+      &middot; entry of 16 lines &middot;
+      <span class="badge b-high">conf 77</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">66</span>et Isolda ad warantum etc. Idem dies datus est predicte pristine petit per Iohannem de Alvyngton attornatum suum
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">64</span>hic in banco etc. Ad quem diem vicecomes non misit breve. <mark>Iudeo</mark> sicut prius capiatur in manum domini regis de terra predictorum Willelmi et culistie ad masentiam etc. pro
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">47</span>porcione etc. et Simarter de terra predictarum Margerie Sase Isolde in custodia ad valenciam etc. Et inde etc. et diem etc. Et ipsi Simone quod sua hic a die
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 301</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1333</span> &middot;
+      <a href="/AALT1/E3/CP40no301/CP40no301dorses/IMG_0113.htm">CP40 roll 301 dorses, image 0113</a>
+      &middot; entry of 9 lines &middot;
+      <span class="badge b-mid">conf 55</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">74</span>¶ Johannes de Hansted per Thomam de Toch attornatum suum aptuldse quarto die versus Magistrum Johannem de Tonge
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-low">30</span>Wik de placito quare de communi consilio regni Rispnis sit <mark>Iudeo</mark> ix liceat alique vastum cendicione
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-low">28</span>seu destruitionem facere de terris domibus boscis seu obitus simus sibi dimissis ad trium
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1333</span> &middot;
+      <a href="/AALT1/E3/CP40no301/CP40no301dorses/IMG_0237.htm">CP40 roll 301 dorses, image 0237</a>
+      &middot; entry of 7 lines &middot;
+      <span class="badge b-high">conf 79</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-high">83</span>fuit vicecomiti quod distringat eum etc Et vicecomes modo mandate quod nichil habet etc Ideo preceptum est vicecomiti quod papiate
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">59</span>tenementi si etc et salvo etc Ita quod habeat corpus eius hic a die Pasche in tres septimanas per <mark>Iudeis</mark>
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">94</span>Shard et unde etc.
+      </div>
+      
+    
+  </div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1333</span> &middot;
+      <a href="/AALT1/E3/CP40no301/CP40no301dorses/IMG_0369.htm">CP40 roll 301 dorses, image 0369</a>
+      &middot; entry of 12 lines &middot;
+      <span class="badge b-high">conf 80</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">69</span>Sancti Michaelis in xv dies etc Et vnde etc Ad quem diem vicecomes non misit breue
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">56</span>Ideo preceptum est vicecomiti <mark>iudeo</mark> de nono exigi faciet eum de comitatu in comitatum quousque secundum le te
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">88</span>etc utlagetur si non comperuit Et si etc tunc eum capiat et salvo etc Ita quod habeat
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 305</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="estimated from the roll side&#39;s dated entries">c. 1333</span> &middot;
+      <a href="/AALT1/E3/CP40no305/bCP40no305dorses/IMG_0397.htm">CP40 roll 305 dorses, image 0397</a>
+      &middot; entry of 4 lines &middot;
+      <span class="badge b-high">conf 74</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-low">48</span>etc Et ipse non venit. Et fuit attachiatus per Willelmum Brun et Bron Fulk Ideo ipsi in misericordia Et preceptum est vicecomiti quod distrinxit
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-mid">68</span>et omnes terras etc et quod de exitibus etc et quod habeat corpus eius hic a die Pasche in tres septimanas per <mark>Iudeis</mark>
+      </div>
+      
+    
+  </div>
+  
+
+  <div class="group-h">Edward III — CP40 roll 315</div>
+  
+  <div class="hit">
+    <div class="meta">
+      <span class="mon">Edward III</span>
+      &middot; <span class="yr" title="year parsed from the entry&#39;s own regnal-year dating">1333</span> &middot;
+      <a href="/AALT1/E3/CP40no315/aCP40no315fronts/IMG_0491.htm">CP40 roll 315 fronts, image 0491</a>
+      &middot; entry of 36 lines &middot;
+      <span class="badge b-high">conf 74</span>
+    </div>
+    
+      
+      <div class="line ">
+        <span class="conf score-mid">66</span>Et vicecomes modo mandat quod sire fecerunt predicto Radulfo quod esset hic adhuc diem scilicet a die Sancte Toni
+      </div>
+      
+    
+      
+      <div class="line matched">
+        <span class="conf score-high">90</span>tatis in xv dies ostensurus in forma predicta per Thomam de Lageham et Rogerum Wilarn Et <mark>iudeo</mark>
+      </div>
+      
+    
+      
+      <div class="line ">
+        <span class="conf score-high">93</span>veniunt tam predicti Thomas et Margareta per Johannem de Suthwalsham attornatum suum quam predictus Radulphus
+      </div>
+      
+    
+  </div>
+  
+
+
+<div class="pager">
+  
+  <a href="/?q=iudeus+iudei+iudeorum+iudeo+iudea+iudee+iudeis+iudeum&amp;extra=&amp;mode=or&amp;formula=&amp;mfrom=&amp;mto=&amp;series=CP40&amp;yfrom=1330&amp;yto=1339&amp;minconf=&amp;order=chrono&amp;group=&amp;page=2">next &rarr;</a>
+</div>
+
+</div>
+</body>
+</html>
