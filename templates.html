@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Templates - Daniel Davies</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <script src="assets/site.js"></script>
+    <main class="container" id="main">
+        <h1 class="page-title">Page Templates</h1>
+        <p class="page-description">
+            Copy-and-paste blocks for updating the site. Each shows a live preview and the exact HTML.
+            Click <strong>Copy HTML</strong>, paste it into the right page, then replace the ALL-CAPS placeholders.
+            This page is not linked from the menu and is hidden from search engines.
+        </p>
+
+        <section class="section">
+            <h2 class="section-title">How things are organised</h2>
+            <ul class="research-details">
+                <li><strong>Look and feel:</strong> <code>assets/style.css</code> (one file for every page).</li>
+                <li><strong>Menu and footer:</strong> <code>assets/site.js</code>. Edit the <code>PAGES</code> list to add a page; the footer year updates itself.</li>
+                <li><strong>Homepage updates:</strong> keep exactly <strong>five</strong> items, newest first. Paste the new one on top and delete the oldest.</li>
+                <li><strong>New page:</strong> copy an existing page, change the <code>&lt;title&gt;</code>, description, canonical/og URLs and content, add it to <code>PAGES</code> in <code>site.js</code> and to <code>sitemap.xml</code>.</li>
+                <li><strong>Publications:</strong> newest first inside each section.</li>
+            </ul>
+        </section>
+
+        <div id="templates"></div>
+    </main>
+
+    <!-- ===== Templates. Edit the HTML inside each <template>; the preview and code box above are generated from it. ===== -->
+
+    <template data-title="Homepage update (index.html)" data-note="Goes inside the Latest Updates section, at the top. Keep five items in total. Use a date like 2026-12-01 in datetime and the readable form in the text. Types used so far: Publication, Research Update, Media, Project Update.">
+<article class="update-item">
+    <div class="update-meta">
+        <time datetime="YYYY-MM-DD">MONTH D, YYYY</time>
+        <span class="separator" aria-hidden="true">•</span>
+        <span>Publication</span>
+    </div>
+    <h3 class="update-title">TITLE</h3>
+    <p class="update-description">
+        One or two sentences with a <a href="URL" target="_blank" rel="noopener noreferrer">link</a>.
+    </p>
+</article>
+    </template>
+
+    <template data-title="Publication card (publications.html)" data-note="Journal articles, chapters, notes, public writing, reviews. Use class italic on the journal name. Delete the link if there is none. For forthcoming items write 'forthcoming' in the details line.">
+<div class="publication-card">
+    <h3 class="publication-title">TITLE</h3>
+    <p class="publication-details"><span class="italic">JOURNAL OR OUTLET</span>, VOLUME (YEAR): PAGES</p>
+    <a href="URL" class="publication-link" target="_blank" rel="noopener noreferrer">
+        <span>View Publication</span>
+        <svg class="external-link-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+        </svg>
+    </a>
+</div>
+    </template>
+
+    <template data-title="Book card (publications.html)" data-note="Same as a publication card, with the book styling. Use in the Books section.">
+<div class="publication-card book-card">
+    <h3 class="publication-title book-title">BOOK TITLE</h3>
+    <p class="publication-details">PUBLISHER, YEAR</p>
+    <a href="URL" class="publication-link" target="_blank" rel="noopener noreferrer">
+        <span>View Publication</span>
+    </a>
+</div>
+    </template>
+
+    <template data-title="Op-ed / public writing card (publications.html)" data-note="Goes at the top of the Public Writing section. Put the month and year, and co-authors, in the details line.">
+<div class="publication-card">
+    <h3 class="publication-title">HEADLINE</h3>
+    <p class="publication-details"><span class="italic">NEWSPAPER</span>, MONTH YYYY (with CO-AUTHOR)</p>
+    <a href="URL" class="publication-link" target="_blank" rel="noopener noreferrer">
+        <span>View Publication</span>
+    </a>
+</div>
+    </template>
+
+    <template data-title="Card with two links (publications.html)" data-note="For an item with, e.g., an issue page and an open-access introduction.">
+<div class="publication-card">
+    <h3 class="publication-title">TITLE</h3>
+    <p class="publication-details"><span class="italic">JOURNAL</span>, VOLUME (YEAR)</p>
+    <div class="publication-links">
+        <a href="URL1" class="publication-link" target="_blank" rel="noopener noreferrer"><span>View Issue</span></a>
+        <a href="URL2" class="publication-link" target="_blank" rel="noopener noreferrer"><span>Read Introduction</span></a>
+    </div>
+</div>
+    </template>
+
+    <template data-title="Research project card (research.html)" data-note="Status badge classes: status-current (blue), status-upcoming, status-completed. Change the badge text to match: In Progress, Upcoming, Published, Recently Completed.">
+<div class="research-card">
+    <div class="research-card-header">
+        <h3 class="research-card-title">PROJECT TITLE</h3>
+        <span class="status-badge status-current">In Progress</span>
+    </div>
+    <p class="research-card-description">
+        One paragraph describing the project.
+    </p>
+    <ul class="research-details">
+        <li>Detail one</li>
+        <li>Detail two</li>
+    </ul>
+</div>
+    </template>
+
+    <template data-title="Homepage 'Current Research' card (index.html)" data-note="Keep to two or three cards.">
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">TITLE</h3>
+        <span class="badge">Forthcoming</span>
+    </div>
+    <p class="card-text">
+        One sentence description.
+    </p>
+</div>
+    </template>
+
+    <template data-title="Teaching course card (teaching.html)" data-note="Badge classes: category-graduate, category-senior-seminar, category-introduction, category-writing-seminar, category-survey. Put it under the right level heading.">
+<div class="course-card">
+    <div class="course-header">
+        <h3 class="course-title">COURSE TITLE</h3>
+        <span class="course-category category-survey">Survey</span>
+    </div>
+    <p class="course-description">
+        Course description.
+    </p>
+</div>
+    </template>
+
+    <script>
+    (function () {
+      var host = document.getElementById('templates');
+      document.querySelectorAll('template').forEach(function (t, i) {
+        var html = t.innerHTML.replace(/^\n+|\s+$/g, '');
+        var sec = document.createElement('section');
+        sec.className = 'section';
+        var h = document.createElement('h2'); h.className = 'section-title'; h.textContent = t.dataset.title;
+        var note = document.createElement('p'); note.textContent = t.dataset.note || '';
+        var prev = document.createElement('div'); prev.className = 'template-preview'; prev.innerHTML = html;
+        prev.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
+        var pre = document.createElement('pre'); pre.className = 'template-code';
+        var code = document.createElement('code'); code.textContent = html; pre.appendChild(code);
+        var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'copy-button'; btn.textContent = 'Copy HTML';
+        btn.addEventListener('click', function () {
+          var done = function () { btn.textContent = 'Copied!'; setTimeout(function () { btn.textContent = 'Copy HTML'; }, 1500); };
+          if (navigator.clipboard) navigator.clipboard.writeText(html).then(done); else { var r = document.createRange(); r.selectNodeContents(code); var s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); done(); }
+        });
+        sec.append(h, note, prev, pre, btn);
+        host.appendChild(sec);
+      });
+    })();
+    </script>
+</body>
+</html>

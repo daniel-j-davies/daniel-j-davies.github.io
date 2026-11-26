@@ -7,338 +7,21 @@
     <meta name="keywords" content="Daniel Davies, medieval research, siege warfare, manuscript studies, archive studies, Chaucer">
     
     <title>Research - Daniel Davies</title>
-    
-    <style>
-        :root {
-            --primary-blue: #2563eb;
-            --primary-blue-hover: #1d4ed8;
-            --slate-50: #f8fafc;
-            --slate-100: #f1f5f9;
-            --slate-200: #e2e8f0;
-            --slate-600: #475569;
-            --slate-700: #334155;
-            --slate-900: #0f172a;
-            --green-100: #dcfce7;
-            --green-800: #166534;
-            --amber-100: #fef3c7;
-            --amber-800: #92400e;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--slate-700);
-            background-color: white;
-        }
-
-        /* Navigation styles */
-        .nav-container {
-            background: white;
-            border-bottom: 1px solid var(--slate-200);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--slate-900);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--slate-700);
-            font-weight: 500;
-            padding: 0.5rem 0;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
-
-        .nav-links a.active {
-            color: var(--primary-blue);
-        }
-
-        .mobile-menu-button {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--slate-700);
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 1rem;
-                border-top: 1px solid var(--slate-200);
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-button {
-                display: block;
-            }
-        }
-
-        /* Research page styles */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 3rem 1rem;
-        }
-
-        .page-header {
-            margin-bottom: 3rem;
-        }
-
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--slate-900);
-            margin-bottom: 1rem;
-        }
-
-        .page-description {
-            font-size: 1.125rem;
-            color: var(--slate-600);
-            line-height: 1.7;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--slate-900);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--slate-200);
-        }
-
-        /* Research project cards */
-        .research-grid {
-            display: grid;
-            gap: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .research-grid {
-                grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            }
-        }
-
-        .research-card {
-            border: 1px solid var(--slate-200);
-            border-radius: 0.75rem;
-            padding: 2rem;
-            background: white;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .research-card:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .research-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .research-card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--slate-900);
-        }
-
-        .status-badge {
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.025em;
-        }
-
-        .status-current {
-            background-color: var(--green-100);
-            color: var(--green-800);
-        }
-
-        .status-upcoming {
-            background-color: var(--amber-100);
-            color: var(--amber-800);
-        }
-
-        .status-completed {
-            background-color: var(--slate-100);
-            color: var(--slate-700);
-        }
-
-        .research-card-description {
-            color: var(--slate-600);
-            margin-bottom: 1.5rem;
-        }
-
-        .research-details {
-            list-style: none;
-            color: var(--slate-600);
-            font-size: 0.9rem;
-        }
-
-        .research-details li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .research-details li:before {
-            content: '•';
-            color: var(--primary-blue);
-            font-weight: bold;
-        }
-
-        /* Book project section */
-        .book-project {
-            background: linear-gradient(135deg, var(--slate-50) 0%, white 100%);
-            border: 1px solid var(--slate-200);
-            border-radius: 1rem;
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .book-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--slate-900);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .book-description {
-            font-size: 1.1rem;
-            color: var(--slate-700);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .book-status {
-            font-size: 0.9rem;
-            color: var(--slate-600);
-            font-weight: 500;
-        }
-
-        /* Research interests section */
-        .interests-grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        .interest-item {
-            padding: 1.5rem;
-            background: var(--slate-50);
-            border-radius: 0.5rem;
-            border-left: 4px solid var(--primary-blue);
-        }
-
-        .interest-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--slate-900);
-            margin-bottom: 0.5rem;
-        }
-
-        .interest-description {
-            color: var(--slate-600);
-            font-size: 0.9rem;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: var(--slate-50);
-            border-top: 1px solid var(--slate-200);
-            margin-top: 4rem;
-            padding: 2rem 0;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            text-align: center;
-            color: var(--slate-600);
-        }
-    </style>
+    <link rel="canonical" href="https://danieldavies.co/research.html">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/style.css">
+    <meta property="og:title" content="Research - Daniel Davies">
+    <meta property="og:description" content="Daniel Davies - Research in late-medieval literature, siege warfare, manuscript studies, and digital humanities">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://danieldavies.co/research.html">
+    <meta property="og:image" content="https://danieldavies.co/dd-profile.jpg">
+    <meta name="twitter:card" content="summary">
 </head>
 <body>
-    <!-- Navigation Header -->
-    <nav class="nav-container">
-        <div class="nav-content">
-            <a href="index.html" class="nav-brand">Daniel Davies</a>
-            
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="bio.html">Bio</a></li>
-                <li><a href="research.html" class="active">Research</a></li>
-                <li><a href="teaching.html">Teaching</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="resources.html">Resources</a></li>
-                <li><a href="cv.html">CV</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-
-            <button class="mobile-menu-button" id="mobileMenuButton" aria-label="Toggle navigation menu">
-                ☰
-            </button>
-        </div>
-    </nav>
+    <script src="assets/site.js"></script>
 
     <!-- Main Content -->
-    <main class="container">
+    <main class="container" id="main">
         <!-- Page Header -->
         <header class="page-header">
             <h1 class="page-title">Research</h1>
@@ -352,8 +35,9 @@
             <div class="book-project">
                 <h2 class="book-title">Under Siege: Perpetual Warfare and Late Medieval English Literature</h2>
                 <p class="book-description">
-                    This book examines how late medieval English literature responded to and shaped contemporary understandings of perpetual warfare. Through close readings of texts by Geoffrey Chaucer, Thomas Hoccleve, and their contemporaries, I argue that the experience of perpetual warfare during the Hundred Years War fundamentally altered literary representations of conflict, community, and belonging. Forthcoming from the University of Pennsylvania Press.
+                    This book examines how late medieval English literature responded to and shaped contemporary understandings of perpetual warfare. Through close readings of texts by Geoffrey Chaucer, Thomas Hoccleve, and their contemporaries, I argue that the experience of perpetual warfare during the Hundred Years War fundamentally altered literary representations of conflict, community, and belonging. Forthcoming from the University of Pennsylvania Press in February 2027.
                 </p>
+                <p><a href="https://www.pennpress.org/9781512830729/under-siege/" class="publication-link" target="_blank" rel="noopener noreferrer"><span>Pre-order from Penn Press</span></a></p>
             </div>
         </section>
 
@@ -363,11 +47,11 @@
             <div class="research-grid">
                 <div class="research-card">
                     <div class="research-card-header">
-                        <h3 class="research-card-title">Epistemologies of the Archive</h3>
-                        <span class="status-badge status-current">In Progress</span>
+                        <h3 class="research-card-title"><a href="https://read.dukeupress.edu/jmems/issue/56/3" target="_blank" rel="noopener noreferrer">Epistemologies of the Archive</a></h3>
+                        <span class="status-badge status-completed">Published</span>
                     </div>
                     <p class="research-card-description">
-                        A special issue of <em>The Journal of Medieval and Early Modern Studies</em> (56.3, September 2026) examining premodern conceptions of the archive.
+                        A special issue of <em>The Journal of Medieval and Early Modern Studies</em> (56.3, September 2026) examining premodern conceptions of the archive. The introduction is <a href="https://read.dukeupress.edu/jmems/article/doi/10.1215/10829636-12559199/412602/Epistemologies-of-the-Archive?guestAccessKey=e15053d8-83d1-429b-b614-c9163e8941e7" target="_blank" rel="noopener noreferrer">available open access</a>.
                     </p>
                     <ul class="research-details">
                         <li>Eight essays from scholars of late-antique, late-medieval, and early modern literature, history, and art history</li>
@@ -378,34 +62,67 @@
 
                 <div class="research-card">
                     <div class="research-card-header">
-                        <h3 class="research-card-title">The Chaucer Lab</h3>
+                        <h3 class="research-card-title">The Chaucer Lab: Making Middle English in the American Century</h3>
                         <span class="status-badge status-upcoming">Upcoming</span>
                     </div>
                     <p class="research-card-description">
-                        Book project investigating how Chaucer Studies became a major field in American academia through studying major infrastructural scholarly projects, from the history of cryptography to innovations in federal funding and the sociology of literary societies.
+                        Monograph in preparation investigating how Chaucer Studies became a major field in American academia through studying major infrastructural scholarly projects, from the history of cryptography to innovations in federal funding and the sociology of literary societies.
                     </p>
                     <ul class="research-details">
                         <li>Disciplinary history of American Chaucer Studies</li>
-                        <li>Studying the creation of scholarly editions, biographical criticism, and scholalry societies</li>
+                        <li>Studying the creation of scholarly editions, biographical criticism, and scholarly societies</li>
                         <li>Offers a history of the discipline centered on material and archival history rather than the history of ideas</li>
                     </ul>
                 </div>
 
                 <div class="research-card">
                     <div class="research-card-header">
-                        <h3 class="research-card-title">Merchants and Medieval London</h3>
-                        <span class="status-badge status-current">Upcoming</span>
+                        <h3 class="research-card-title">Merchants, Commodities, and the Romance of Trade</h3>
+                        <span class="status-badge status-upcoming">Upcoming</span>
                     </div>
                     <p class="research-card-description">
-                        Book chapter examing the role of merchants in medieval London literary culture.
+                        Solicited chapter examining the role of merchants in medieval London literary culture.
                     </p>
                     <ul class="research-details">
                         <li>Archival research in literary ties of London merchants</li>
-                        <li>Part of<em>The Cambridge History of London Literature</em></li>
+                        <li>For <em>The Cambridge History of London Literature</em>, Volume 1, ed. Stephanie Elsky and Sebastian Sobecki (Cambridge University Press)</li>
                         <li>Focus on transnational networks of merchants</li>
+                        <li>Companion resource: <a href="merchant-london/">Merchant London 1300–1460</a>, an interactive atlas</li>
                     </ul>
                 </div>
 
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title">Premodern Poetics: Poetry, Reception, and Literary History</h3>
+                        <span class="status-badge status-upcoming">Under Contract</span>
+                    </div>
+                    <p class="research-card-description">
+                        A volume in <em>Cambridge Elements in Poetry and Poetics</em> (series editor Eric Falci), under contract with Cambridge University Press.
+                    </p>
+                </div>
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title">Border, March, Berwick</h3>
+                        <span class="status-badge status-upcoming">Upcoming</span>
+                    </div>
+                    <p class="research-card-description">
+                        Chapter in <em>Associational Form in Late Medieval England</em>, ed. Elizaveta Strakhov and Rosemary O’Neill (Boydell &amp; Brewer), in preparation.
+                    </p>
+                    <ul class="research-details">
+                        <li>Related resource: <a href="berwick/">Berwick upon Tweed 1100–1500</a>, an interactive companion</li>
+                    </ul>
+                </div>
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title">Essays in Preparation</h3>
+                        <span class="status-badge status-upcoming">Upcoming</span>
+                    </div>
+                    <ul class="research-details">
+                        <li>“Masculinity and the Hundred Years War,” with R.D. Perry, for <em>The Oxford Handbook of Late-Medieval English Sexuality</em>, ed. Holly Crocker</li>
+                        <li>“The History of the New Chaucer Society,” for <em>Studies in the Age of Chaucer</em> 50 (2028)</li>
+                        <li>“Chevauchée: Environcide and Medieval Warfare,” <em>Studies in the Age of Chaucer</em>, accepted with revisions</li>
+                    </ul>
+                </div>
                 <div class="research-card">
                     <div class="research-card-header">
                         <h3 class="research-card-title"><a href="https://www.spacecitymedieval.com" target="_blank" rel="noopener noreferrer">Space City Medievalism</a></h3>
@@ -415,14 +132,41 @@
                         Public Humanities project catalyzing new medieval poetry in Houston through collaboration with local arts organizations and UH graduate students.
                     </p>
                     <ul class="research-details">
-                        <li>Supported by the Medieval Academy of America and Houston Arts Alliance</em></li>
-                        <li>Included workshop at the Menil Collection</em></li>
+                        <li>Supported by the Medieval Academy of America and Houston Arts Alliance</li>
+                        <li>Included workshop at the Menil Collection</li>
                         <li>Imagines new forms of critical-creative collaboration</li>
                     </ul>
                 </div>
             </div>
         </section>
 
+                <!-- Digital Projects -->
+        <section class="section">
+            <h2 class="section-title">Interactive Projects</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title"><a href="berwick/">Berwick upon Tweed 1100–1500</a></h3>
+                        <span class="status-badge status-current">Interactive</span>
+                    </div>
+                    <p class="research-card-description">An interactive companion to a study of Berwick-upon-Tweed: the town and its sieges, the March, who held and governed it, its port and sea links, the garrison, petitions to the crown, and the books and manuscripts that place it.</p>
+                </div>
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title"><a href="expulsion-atlas/">The Expulsion of 1290</a></h3>
+                        <span class="status-badge status-current">Interactive</span>
+                    </div>
+                    <p class="research-card-description">Records of the dissolution of England's Jewish community, 1275–1600: the expulsion of 1290, the disposal of houses and bonds, the House of Converts, and the charges that outlived the community.</p>
+                </div>
+                <div class="research-card">
+                    <div class="research-card-header">
+                        <h3 class="research-card-title"><a href="merchant-london/">Merchant London 1300–1460</a></h3>
+                        <span class="status-badge status-current">Interactive</span>
+                    </div>
+                    <p class="research-card-description">An interactive atlas of London merchants: where they are recorded, the books they owned and left, alien merchants, and the ships of the port.</p>
+                </div>
+            </div>
+        </section>
         <!-- Research Interests -->
         <section class="section">
             <h2 class="section-title">Research Interests</h2>
@@ -471,48 +215,5 @@
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2025 Daniel Davies. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.getElementById('mobileMenuButton');
-            const navLinks = document.getElementById('navLinks');
-
-            mobileMenuButton.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                
-                if (navLinks.classList.contains('active')) {
-                    mobileMenuButton.textContent = '✕';
-                    mobileMenuButton.setAttribute('aria-label', 'Close navigation menu');
-                } else {
-                    mobileMenuButton.textContent = '☰';
-                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
-                }
-            });
-
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.nav-content')) {
-                    navLinks.classList.remove('active');
-                    mobileMenuButton.textContent = '☰';
-                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
-                }
-            });
-
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) {
-                    navLinks.classList.remove('active');
-                    mobileMenuButton.textContent = '☰';
-                    mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
